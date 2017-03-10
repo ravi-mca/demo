@@ -1,0 +1,45 @@
+# Created by .ignore support plugin (hsz.mobi)
+#-------------------------------
+# Spring/Java Ignores
+#-------------------------------
+*.pydevproject
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+target/
+.classpath
+.project
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+/*.iml
+/oauth2/target
+/.idea
+/framework/target
+/framework/*.iml
+/oauth2/*.iml
+/demo/*.iml
+*.iml
+target
+
+/connectors/eis/eis.iml
+
+/connectors/email/email.iml
+
+/connectors/email/mandrill/mandrill.iml
+
+/connectors/security/oauth2/oauth2.iml
+
+.DS_Store
