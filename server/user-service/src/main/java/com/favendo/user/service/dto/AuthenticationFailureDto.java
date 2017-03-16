@@ -6,16 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AuthenticationSuccessDto {
+public class AuthenticationFailureDto {
 
 	@JsonProperty("accessToken")
-	private String accessToken;
+	private String errorMesesag;
 
-	public String getAccessToken() {
-		return accessToken;
+	public String getErrorMesesag() {
+		return errorMesesag;
 	}
 
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
+	public void setErrorMesesag(String errorMesesag) {
+		this.errorMesesag = errorMesesag;
 	}
 }

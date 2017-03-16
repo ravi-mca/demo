@@ -9,9 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @ComponentScan({"com.favendo.portal.*"})
-@PropertySource("classpath:application.properties")
 @Import({SecurityContextConfig.class, UserServiceContextConfig.class, DataSourceContextConfig.class,
-        CommonsContextConfig.class})
+        CommonsContextConfig.class,PropertySourceContextConfig.class})
 public class ApplicationContext extends WebMvcConfigurerAdapter {
 
     @Bean
