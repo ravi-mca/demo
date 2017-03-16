@@ -1,5 +1,6 @@
 package com.favendo.portal.security;
 
+import com.favendo.portal.filter.StorecastAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,11 +11,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import static com.favendo.commons.utils.Routes.*;
+import static com.favendo.commons.utils.Routes.LOGIN_REQUEST;
 import static com.favendo.commons.utils.StringConstants.FORWARD_SLASH;
-import static com.favendo.user.service.domain.StorecastUser.PASSWORD;
-import static com.favendo.user.service.domain.StorecastUser.USERNAME;
+import static com.favendo.user.service.constsant.StorecastUserConstant.PASSWORD;
+import static com.favendo.user.service.constsant.StorecastUserConstant.USERNAME;
 
 @Configuration
 @EnableWebSecurity
@@ -74,5 +76,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+        http.authorizeRequests().anyRequest().authenticated();
+        http.addFilterBefore(new StorecastAuthenticationFilter(), BasicAuthenticationFilter.class);
     }
 }

@@ -8,11 +8,6 @@ import java.util.List;
 @Table(name = "fv_user", uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
 public class StorecastUser implements Serializable {
 
-    @Transient
-    public static final String USERNAME = "username";
-
-    public static final String PASSWORD = "password";
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long user_id;

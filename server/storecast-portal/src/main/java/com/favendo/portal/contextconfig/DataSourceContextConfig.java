@@ -13,7 +13,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import java.util.Properties;
 
 @Configuration
-@Import({PropertySourceConfiguration.class})
 public class DataSourceContextConfig {
 
     private static final String PERSISTENCE_XML_LOCATION = "classpath*:META-INF/persistence.xml";
