@@ -30,7 +30,7 @@
       background-color: #40444e !important;
       border-radius: 0px !important;
       text-allign: text-center !important;
-      font-family: Source San pro regular;
+      font-family: 'Source Sans Pro' !important;
       font-size: 18px;
     }
     .navbar-inverse {
@@ -47,6 +47,7 @@
     .navbar-inverse .navbar-nav > .active > a:focus {
       color: #fff !important;
       background-color: #292e35 !important;
+      font-family: 'Source Sans Pro' !important;
     }
 
     .container-fluid {
