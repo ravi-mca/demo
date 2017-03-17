@@ -1,5 +1,6 @@
 import React from "react";
 import  'react-bootstrap';
+import Footer from './footer/Footer';
 
 export default class Layout extends React.Component {
   constructor() {
@@ -7,8 +8,9 @@ export default class Layout extends React.Component {
   }
   render() {
     return (
-      <div class="col-md-4 col-md-offset-4">
-        <h1>Welcome to Favendo-sc</h1>
+      <div>
+        {this.props.children}
+        <Footer/>
       </div>
     );
   }
