@@ -1,5 +1,7 @@
 package com.favendo.portal.security;
 
+import com.favendo.commons.exception.ErrorKey;
+import com.favendo.commons.exception.StorecastApiException;
 import com.favendo.user.service.service.StorecastUserDetailsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,11 @@ public class StorecastAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
+
+        if(StringUtils.isEmpty(username)){
+            throw new StorecastApiException(ErrorKey.BAD_REQUEST,"Username cannot be null");
+        }
+
         UserDetails userDetails = getAndValidateUserDetails(username, password);
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
         return new UsernamePasswordAuthenticationToken(userDetails, password, authorities);

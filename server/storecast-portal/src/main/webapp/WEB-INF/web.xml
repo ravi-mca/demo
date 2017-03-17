@@ -41,6 +41,7 @@
         <init-param>
             <param-name>jersey.config.server.provider.classnames</param-name>
             <param-value>
+                com.favendo.merchant.rest.endpoint,
                 org.glassfish.jersey.media.multipart.MultiPartFeature
             </param-value>
         </init-param>
