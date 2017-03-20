@@ -1,7 +1,7 @@
 import React from "react";
 import  'react-bootstrap';
 
-export default class Dataportals extends React.Component {
+export default class Dataportal extends React.Component {
   constructor() {
     super();
   }
@@ -10,7 +10,7 @@ export default class Dataportals extends React.Component {
       <div>
         <div class="container-fluid">
           <div class="row content">  
-            <h1>Data Portals</h1>
+            <h1>Data Portal</h1>
           </div>
         </div>   
       </div>

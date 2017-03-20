@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.css';
-import Home from "./components/home/Home";
-import Merchands from "./components/merchands/Merchands";
-import Dataportals from "./components/Data-Portals/Dataportals";
+import Admins from "./components/admins/Admins";
+import Merchants from "./components/merchants/Merchants";
+import Dataportal from "./components/Data-Portal/Dataportal";
 
 import Layout from "./components/Layout";
 
@@ -16,9 +16,9 @@ ReactDOM.render((
   <Router history = {browserHistory}>
       <Route path = "/" component = {Layout}>
          <IndexRoute  component = {Layout} />
-         <Route path = "/home" component = {Home} />
-         <Route path = "/merchands" component = {Merchands} />
-         <Route path = "/dataportals" component = {Dataportals} />
+         <Route path = "/admins" component = {Admins} />
+         <Route path = "/merchants" component = {Merchants} />
+         <Route path = "/dataportal" component = {Dataportal} />
       </Route>
    </Router>
 ), app);

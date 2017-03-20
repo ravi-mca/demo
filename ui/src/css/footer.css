@@ -3,13 +3,14 @@
     background-color: #32373f;
     color: #dedede;
     padding: 10px;
-    font-family: Source Sans Pro !important;
-    font-size: 18px;
+    font-family: Source Sans Pro  !important;
+    font-size: 12px;
+    height: 40px;
   }
 
   footer p {
     font-family: Source Sans Pro !important;
-    font-size: 18px;
+    font-size: 12px;
   }
 
   /* link */
@@ -40,7 +41,7 @@
   }
 
   p {
-    margin: 0 !important;
+      margin: 0 25px 10px !important;
   }
 
   .flex-container {
@@ -48,12 +49,12 @@
     display: flex;
     width: 100%;
     margin-left: 8px;
-}
+  }
 
-.flex-item {
-    width: 100%; 
-}
+  .flex-item {
+      width: 100%; 
+  }
 
-.right-text {
-  text-align: right;
-}
+  .right-text {
+    text-align: right;
+  } 

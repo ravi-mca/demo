@@ -1,7 +1,7 @@
 import React from "react";
 import  'react-bootstrap';
 
-export default class Merchands extends React.Component {
+export default class Merchants extends React.Component {
   constructor() {
     super();
   }
@@ -10,7 +10,7 @@ export default class Merchands extends React.Component {
       <div>
         <div class="container-fluid">
           <div class="row content">  
-          <h1>Merchands</h1>
+          <h1>Merchants</h1>
           </div>
         </div>   
       </div>
