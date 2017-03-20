@@ -1,6 +1,10 @@
 import React from "react";
 import  'react-bootstrap';
+<<<<<<< .mine
 import Header from './header/Header';
+=======
+import Footer from './footer/Footer';
+>>>>>>> .theirs
 
 export default class Layout extends React.Component {
   constructor() {
@@ -8,9 +12,15 @@ export default class Layout extends React.Component {
   }
   render() {
     return (
+<<<<<<< .mine
       <div>
         <Header/>
             {this.props.children}
+=======
+      <div>
+        {this.props.children}
+        <Footer/>
+>>>>>>> .theirs
       </div>
     );
   }
