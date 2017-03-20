@@ -63,3 +63,7 @@ input.active:invalid {
 .pull-right {
     float: right;
 }
+
+.no-padding {
+    padding: 0px!important;
+}

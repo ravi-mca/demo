@@ -27,26 +27,24 @@ export default class Login extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        console.log('component state', this.state);
-
         if (!this.showFormErrors()) {
             console.log('form is invalid: do not submit');
         } else {
             console.log('form is valid: submit');
-             $.ajax({
+            $.ajax({
                 type: 'POST',
-                url: "http://localhost:8080/storecast/api/admin/login",
+                url: 'http://localhost:8080/storecast/api/admin/login',
                 dataType: 'json',
                 ContentType: 'application/x-www-form-urlencoded',
                 data: this.state,
                 cache: false,
-            success: function(data) {
-            console.log('status',data);
-        }.bind(this),
-            error: function(xhr, status, err) {
-                console.log('err',status);
-        }.bind(this)
-    });
+                success: function(data) {
+                    console.log('status',data);
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    console.log('err',err);
+                }.bind(this)
+            });
         }
     }
 
@@ -121,13 +119,13 @@ export default class Login extends React.Component {
                         <button type="submit" class="btn btn-primary btn-lg full-width font-18" onClick={ this.handleSubmit }>LOGIN</button>
                     </div>
                     <div class="form-group font-18 text-gray">
-                    <div class="col-md-6">
-                        <span class=""> Forgot Password? </span>
+                        <div class="col-md-6 col-xs-6 no-padding">
+                            <span class=""> Forgot Password? </span>
+                        </div>
+                        <div class="col-md-6 col-xs-6 no-padding">
+                            <span class="pull-right"> Create an account </span>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <span class="pull-right"> Create an account </span>
-                    </div>
-                </div>
                 </form>
             </div>
         );
