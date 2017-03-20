@@ -2,6 +2,7 @@ package com.favendo.portal.security;
 
 import com.favendo.commons.utils.JsonMapper;
 import com.favendo.user.service.builder.AuthenticationBuilder;
+import com.favendo.user.service.domain.StorecastUser;
 import com.favendo.user.service.dto.AuthenticationSuccessDto;
 import com.favendo.user.service.jwt.TokenGenerator;
 import com.favendo.user.service.utils.StorecastUserContextHolder;
@@ -34,7 +35,8 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
     }
 
     private AuthenticationSuccessDto getAuthenticationSuccessDto() {
-        return authenticationBuilder.buildAuthenticationSuccess(tokenGenerator.generateToken(StorecastUserContextHolder
-                .getLoggedInUser()));
+        StorecastUser storecastUser = StorecastUserContextHolder.getLoggedInUser();
+        return authenticationBuilder.buildAuthenticationSuccess(storecastUser.getRoles(),
+                tokenGenerator.generateToken(storecastUser));
     }
 }
