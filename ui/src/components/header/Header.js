@@ -2,13 +2,12 @@ import React from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router'
 
 export default class Header extends React.Component {
-    displayName = 'Header component wrapper'
 
     render() {
         return (
         	<div>
 			<nav class="navbar navbar-inverse fixed-top">
-			  <div class="container-fluid">
+			  <div class="row">
 			    <div class="col-sm-3 navbar-header">
 			      <a href=""><div class="logo"></div></a>
 			    </div>
@@ -19,8 +18,8 @@ export default class Header extends React.Component {
 			      <li><Link to="/dataportals" activeClassName="active">Data Portal</Link></li> 
 			    </ul>
 			    </div>
-			    <div class="">
-			    <ul class="nav navbar-nav pull-right">
+			    <div>
+			    <ul class="pull-nav">
 			    	<li class="dropdown">
 				        <a class="dropdown-toggle" data-toggle="dropdown">Account
 				        <span class="caret"></span></a>

@@ -3,7 +3,12 @@
     background-color: #32373f;
     color: #dedede;
     padding: 10px;
-    font-family: Source San pro regular;
+    font-family: Source Sans Pro !important;
+    font-size: 18px;
+  }
+
+  footer p {
+    font-family: Source Sans Pro !important;
     font-size: 18px;
   }
 
@@ -37,3 +42,18 @@
   p {
     margin: 0 !important;
   }
+
+  .flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    margin-left: 8px;
+}
+
+.flex-item {
+    width: 100%; 
+}
+
+.right-text {
+  text-align: right;
+}
