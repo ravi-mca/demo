@@ -15,6 +15,11 @@
     <name>Merchant web service rest API</name>
 
     <dependencies>
+        <dependency>
+            <groupId>com.storecast.server</groupId>
+            <artifactId>commons</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 

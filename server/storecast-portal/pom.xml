@@ -12,10 +12,6 @@
     <packaging>war</packaging>
     <name>Storecast Application</name>
 
-    <properties>
-        <jdk.version>1.8</jdk.version>
-    </properties>
-
     <build>
         <finalName>storecast</finalName>
         <plugins>
