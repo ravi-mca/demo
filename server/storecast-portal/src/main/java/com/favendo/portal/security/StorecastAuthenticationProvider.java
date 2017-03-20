@@ -31,11 +31,6 @@ public class StorecastAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-
-        if(StringUtils.isEmpty(username)){
-            throw new StorecastApiException(ErrorKey.BAD_REQUEST,"Username cannot be null");
-        }
-
         UserDetails userDetails = getAndValidateUserDetails(username, password);
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
         return new UsernamePasswordAuthenticationToken(userDetails, password, authorities);

@@ -18,7 +18,7 @@ public class StorecastExceptionMapper extends GenericExceptionMapper {
 
     private static final String INTERNAL_SERVER_ERROR = "something went wrong";
 
-    private static final String ACCESS_FORBIDDEN = "access to specified resource is forbidden";
+    private static final String ACCESS_FORBIDDEN = "access to specified resource is forbidd en";
 
     @Override
     public Response toResponse(Exception exception) {

@@ -15,11 +15,11 @@ public class DateFactory {
         return new Date(getTokenExpirationInMillis(milliseconds));
     }
 
-    private Long getTokenExpirationInMillis(Long milliseconds) {
-        return getCurrentTimeMilliseconds() + milliseconds;
+    public Long getCurrentTimeMilliseconds() {
+        return System.currentTimeMillis();
     }
 
-    private Long getCurrentTimeMilliseconds() {
-        return System.currentTimeMillis();
+    private Long getTokenExpirationInMillis(Long milliseconds) {
+        return getCurrentTimeMilliseconds() + milliseconds;
     }
 }
