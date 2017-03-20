@@ -28,7 +28,7 @@ public class TokenGenerator {
                 .setIssuer(storecastUser.getUsername())
                 .setIssuedAt(dateFactory.getDateByMilliseconds())
                 .setExpiration(dateFactory.getDateByMilliseconds(expirationTime))
-                .setClaims(tokenUtils.getClaims(storecastUser))
+                .setClaims(tokenUtils.getClaims(storecastUser,dateFactory.getDateByMilliseconds(expirationTime)))
                 .signWith(SignatureAlgorithm.HS256, tokenUtils.getApiSecretKey());
         return builder.compact();
     }
@@ -38,7 +38,7 @@ public class TokenGenerator {
         Claims claims = Jwts.parser()
                 .setSigningKey(tokenUtils.getApiSecretKey())
                 .parseClaimsJws(token).getBody();
-        return tokenUtils.validateUser(storecastUser, claims);
+        return tokenUtils.validateToken(claims, storecastUser);
     }
 }
 
