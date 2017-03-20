@@ -15,8 +15,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import static com.favendo.commons.utils.Routes.LOGIN_REQUEST;
 import static com.favendo.commons.utils.StringConstants.FORWARD_SLASH;
-import static com.favendo.user.service.constsant.StorecastUserConstant.PASSWORD;
-import static com.favendo.user.service.constsant.StorecastUserConstant.USERNAME;
+import static com.favendo.user.service.constant.StorecastUserConstant.PASSWORD;
+import static com.favendo.user.service.constant.StorecastUserConstant.USERNAME;
 
 @Configuration
 @EnableWebSecurity

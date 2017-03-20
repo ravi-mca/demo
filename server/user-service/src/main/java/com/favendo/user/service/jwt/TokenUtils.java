@@ -11,12 +11,12 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.favendo.user.service.constant.StorecastUserConstant.*;
+
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
-
-import static com.favendo.user.service.constsant.StorecastUserConstant.*;
 
 @Component
 public class TokenUtils {
