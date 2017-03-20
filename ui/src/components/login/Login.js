@@ -35,13 +35,13 @@ export default class Login extends React.Component {
             console.log('form is valid: submit');
              $.ajax({
                 type: 'POST',
-                url: "http://20.20.1.38:8080/storecast/api/admin/login",
+                url: "http://localhost:8080/storecast/api/admin/login",
                 dataType: 'json',
                 ContentType: 'application/x-www-form-urlencoded',
                 data: this.state,
                 cache: false,
             success: function(data) {
-            //this.setState({data: data});
+            console.log('status',data);
         }.bind(this),
             error: function(xhr, status, err) {
                 console.log('err',status);
