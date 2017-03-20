@@ -33,7 +33,7 @@ public class TokenGenerator {
         return builder.compact();
     }
 
-    public Boolean validateToken(String token) {
+    public Boolean validateToken(String token) throws Exception {
         StorecastUser storecastUser = StorecastUserContextHolder.getLoggedInUser();
         Claims claims = Jwts.parser()
                 .setSigningKey(tokenUtils.getApiSecretKey())

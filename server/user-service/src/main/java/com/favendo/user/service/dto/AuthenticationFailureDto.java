@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthenticationFailureDto {
 
-	@JsonProperty("accessToken")
+	@JsonProperty("errorMesesag")
 	private String errorMesesag;
 
 	public String getErrorMesesag() {

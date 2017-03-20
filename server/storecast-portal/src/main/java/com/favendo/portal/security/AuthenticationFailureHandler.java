@@ -3,6 +3,7 @@ package com.favendo.portal.security;
 import com.favendo.commons.utils.JsonMapper;
 import com.favendo.user.service.builder.AuthenticationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,9 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 @Component
 public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
+    @Value("${invalid.user.credential.error.message}")
+    private String invalidUserCredentialErrorMessage;
+
     @Autowired
     private AuthenticationBuilder authenticationBuilder;
 
@@ -28,6 +32,6 @@ public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailure
         httpServletResponse.setContentType(APPLICATION_JSON);
         httpServletResponse.setStatus(UNAUTHORIZED.getStatusCode());
         httpServletResponse.getWriter().write(JsonMapper.objectToJSON((authenticationBuilder
-                .buildAuthenticationFailure())));
+                .buildAuthenticationFailure(invalidUserCredentialErrorMessage))));
     }
 }

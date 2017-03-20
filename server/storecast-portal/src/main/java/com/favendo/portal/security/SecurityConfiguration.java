@@ -1,6 +1,6 @@
 package com.favendo.portal.security;
 
-import com.favendo.portal.filter.StorecastAuthenticationFilter;
+import com.favendo.portal.filter.StorecastRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -77,6 +77,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
         http.authorizeRequests().anyRequest().authenticated();
-        http.addFilterBefore(new StorecastAuthenticationFilter(), BasicAuthenticationFilter.class);
+        http.addFilterBefore(new StorecastRequestFilter(), BasicAuthenticationFilter.class);
     }
 }

@@ -1,15 +1,16 @@
 package com.favendo.user.service.builder;
 
+import com.favendo.commons.exception.ErrorKey;
+import com.favendo.commons.utils.JsonMapper;
 import com.favendo.user.service.dto.AuthenticationFailureDto;
 import com.favendo.user.service.dto.AuthenticationSuccessDto;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Component
 public class AuthenticationBuilder {
-
-    @Value("${invalid.user.credential.error.message}")
-    private String invalidUserCredentialErrorMessage;
 
     public AuthenticationSuccessDto buildAuthenticationSuccess(String token) {
         AuthenticationSuccessDto authenticationSuccessDTO = new AuthenticationSuccessDto();
@@ -17,9 +18,14 @@ public class AuthenticationBuilder {
         return authenticationSuccessDTO;
     }
 
-    public AuthenticationFailureDto buildAuthenticationFailure(){
+    public AuthenticationFailureDto buildAuthenticationFailure(String errorMessage) {
         AuthenticationFailureDto authenticationFailureDto = new AuthenticationFailureDto();
-        authenticationFailureDto.setErrorMesesag(invalidUserCredentialErrorMessage);
+        authenticationFailureDto.setErrorMesesag(errorMessage);
         return authenticationFailureDto;
+    }
+
+    public void buildAuthenticationFailure(HttpServletResponse httpServletResponse, String errorMessage,Integer statusCode) throws IOException {
+        httpServletResponse.setStatus(statusCode);
+        httpServletResponse.getWriter().write(JsonMapper.objectToJSON(buildAuthenticationFailure(errorMessage)));
     }
 }
