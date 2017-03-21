@@ -6,6 +6,7 @@ import javax.ws.rs.core.Response;
 
 public enum ErrorKey {
 
+    ALREADY_EXISTS("already_exists", Response.Status.CONFLICT),
     FORBIDDEN("forbidden", Response.Status.FORBIDDEN),
     UNAUTHORIZED("unauthorized", Response.Status.UNAUTHORIZED),
     SERVER_ERROR("server_error", Response.Status.INTERNAL_SERVER_ERROR),

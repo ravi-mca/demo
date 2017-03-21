@@ -8,21 +8,21 @@ import java.util.List;
 
 public class StorecastUserDetails implements UserDetails {
 
-    private StorecastUser storecastUser;
+    private User user;
 
     private List<GrantedAuthority> authorities;
 
-    public StorecastUserDetails(StorecastUser storecastUser, List<GrantedAuthority> authorities) {
-        this.storecastUser = storecastUser;
+    public StorecastUserDetails(User user, List<GrantedAuthority> authorities) {
+        this.user = user;
         this.authorities = authorities;
     }
 
-    public StorecastUser getStorecastUser() {
-        return storecastUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setStorecastUser(StorecastUser storecastUser) {
-        this.storecastUser = storecastUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setAuthorities(List<GrantedAuthority> authorities) {
@@ -31,12 +31,12 @@ public class StorecastUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return storecastUser.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return storecastUser.getUsername();
+        return user.getUsername();
     }
 
     @Override

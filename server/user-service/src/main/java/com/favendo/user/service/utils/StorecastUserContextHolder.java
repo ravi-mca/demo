@@ -1,20 +1,20 @@
 package com.favendo.user.service.utils;
 
-import com.favendo.user.service.domain.StorecastUser;
 import com.favendo.user.service.domain.StorecastUserDetails;
+import com.favendo.user.service.domain.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Objects;
 
 public class StorecastUserContextHolder {
 
-    public static StorecastUser getLoggedInUser() {
+    public static User getLoggedInUser() {
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if (principal == null) {
                 return null;
             } else {
-                return ((StorecastUserDetails) principal).getStorecastUser();
+                return ((StorecastUserDetails) principal).getUser();
             }
         } else {
             return null;
@@ -28,7 +28,7 @@ public class StorecastUserContextHolder {
                 return null;
             } else {
                 if (principal instanceof StorecastUserDetails) {
-                    return ((StorecastUserDetails) principal).getStorecastUser().getUser_id();
+                    return ((StorecastUserDetails) principal).getUser().getUser_id();
                 } else {
                     return null;
                 }
@@ -45,7 +45,7 @@ public class StorecastUserContextHolder {
                 return null;
             } else {
                 if (principal instanceof StorecastUserDetails) {
-                    return ((StorecastUserDetails) principal).getStorecastUser().getUsername();
+                    return ((StorecastUserDetails) principal).getUser().getUsername();
                 } else {
                     return null;
                 }

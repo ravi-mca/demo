@@ -1,7 +1,7 @@
 package com.favendo.user.service.jwt;
 
 import com.favendo.commons.utils.DateFactory;
-import com.favendo.user.service.domain.StorecastUser;
+import com.favendo.user.service.domain.User;
 import com.favendo.user.service.utils.StorecastUserContextHolder;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
@@ -23,22 +23,22 @@ public class TokenGenerator {
     @Autowired
     private TokenUtils tokenUtils;
 
-    public String generateToken(StorecastUser storecastUser) {
+    public String generateToken(User user) {
         JwtBuilder builder = Jwts.builder().setId(tokenUtils.getGeneratedUUID())
-                .setIssuer(storecastUser.getUsername())
+                .setIssuer(user.getUsername())
                 .setIssuedAt(dateFactory.getDateByMilliseconds())
                 .setExpiration(dateFactory.getDateByMilliseconds(expirationTime))
-                .setClaims(tokenUtils.getClaims(storecastUser,dateFactory.getDateByMilliseconds(expirationTime)))
+                .setClaims(tokenUtils.getClaims(user, dateFactory.getDateByMilliseconds(expirationTime)))
                 .signWith(SignatureAlgorithm.HS256, tokenUtils.getApiSecretKey());
         return builder.compact();
     }
 
     public Boolean validateToken(String token) throws Exception {
-        StorecastUser storecastUser = StorecastUserContextHolder.getLoggedInUser();
+        User user = StorecastUserContextHolder.getLoggedInUser();
         Claims claims = Jwts.parser()
                 .setSigningKey(tokenUtils.getApiSecretKey())
                 .parseClaimsJws(token).getBody();
-        return tokenUtils.validateToken(claims, storecastUser);
+        return tokenUtils.validateToken(claims, user);
     }
 }
 

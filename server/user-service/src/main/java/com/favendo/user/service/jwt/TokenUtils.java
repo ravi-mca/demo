@@ -1,7 +1,7 @@
 package com.favendo.user.service.jwt;
 
 import com.favendo.commons.utils.DateFactory;
-import com.favendo.user.service.domain.StorecastUser;
+import com.favendo.user.service.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -36,7 +36,7 @@ public class TokenUtils {
         return Base64.getEncoder().encodeToString(secretBytes);
     }
 
-    public Claims getClaims(StorecastUser storecastUser, Date expirationTime) {
+    public Claims getClaims(User storecastUser, Date expirationTime) {
         Claims claims = Jwts.claims();
         claims.put(USER_ID, storecastUser.getUser_id());
         claims.put(USERNAME, storecastUser.getUsername());
@@ -44,7 +44,7 @@ public class TokenUtils {
         return claims;
     }
 
-    public Boolean validateToken(Claims claims, StorecastUser storecastUser) {
+    public Boolean validateToken(Claims claims, User storecastUser) {
         if (isTokenExpired(NumberUtils.toLong(claims.get(EXPIRATION_TIME).toString()))) {
             return false;
         }
@@ -58,7 +58,7 @@ public class TokenUtils {
         return dateFactory.getCurrentTimeMilliseconds() > expirationTime ? true : false;
     }
 
-    private Boolean isValidUser(Claims claims, StorecastUser storecastUser) {
+    private Boolean isValidUser(Claims claims, User storecastUser) {
         Boolean isValid = false;
         if (StringUtils.equals(claims.get(USER_ID).toString(), String.valueOf(storecastUser.getUser_id()))) {
             isValid = true;

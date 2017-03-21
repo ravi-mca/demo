@@ -1,9 +1,9 @@
 package com.favendo.user.service.service;
 
 
-import com.favendo.user.service.domain.StorecastUser;
+import com.favendo.user.service.domain.User;
 
 public interface UserService {
 
-    StorecastUser getUserByUsername(String username);
+    User getUserByUsername(String username);
 }
