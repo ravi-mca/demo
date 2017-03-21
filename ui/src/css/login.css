@@ -1,5 +1,6 @@
 body {
 	background-color: #40444e !important;
+  font-family: Source Sans Pro !important; 
 }
 
 .login-content {
@@ -45,11 +46,11 @@ input.active:invalid {
 }
 
 .font-16 {
-    font-size: 16px;
+    font-size: 16px !important;
 }
 
 .font-18 {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .text-gray {
@@ -65,5 +66,10 @@ input.active:invalid {
 }
 
 .no-padding {
-    padding: 0px!important;
+    padding: 0px !important;
 }
+
+.font-bold {
+  font-weight: bold !important;
+}
+

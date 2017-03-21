@@ -1,5 +1,7 @@
 import React from "react";
+import Moment from 'react-moment';
 import $ from 'jquery';
+import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -40,6 +42,7 @@ export default class Login extends React.Component {
                 cache: false,
                 success: function(data) {
                     console.log('status',data);
+                    browserHistory.push('/admins');
                 }.bind(this),
                 error: function(xhr, status, err) {
                     console.log('err',err);
@@ -86,6 +89,7 @@ export default class Login extends React.Component {
 
     render() {
         return (
+            <div>
             <div class="login-content">
                 <div class="logo"></div>
                 <form class="form-horizontal" noValidate>
@@ -116,18 +120,30 @@ export default class Login extends React.Component {
                         <div class="error" id="passwordError" />
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg full-width font-18" onClick={ this.handleSubmit }>LOGIN</button>
+                        <button type="submit" class="btn btn-primary btn-lg full-width font-18 font-bold" onClick={ this.handleSubmit }>LOGIN</button>
                     </div>
                     <div class="form-group font-18 text-gray">
                         <div class="col-md-6 col-xs-6 no-padding">
-                            <span class=""> Forgot Password? </span>
+                            <span class="">Forgot Password?</span>
                         </div>
                         <div class="col-md-6 col-xs-6 no-padding">
-                            <span class="pull-right"> Create an account </span>
+                            <span class="pull-right">Create an account</span>
                         </div>
                     </div>
                 </form>
-            </div>
+                 <div class="fixed-bottom">
+                        <div class="col-md-6">
+                          <div class="col-md-4 col-xs-6 col-sm-6 login-footer">
+                          <p>© <Moment format="YYYY"/> Aussio, Inc</p>
+                          </div>
+                          <div class="col-md-4 col-xs-6 col-sm-6">
+                                <a href="www.storecast-io.com/terms-of-services" target="_blank">Terms of Service</a>
+                          </div>
+                        </div>  
+                    </div>
+               </div>
+                   
+                </div>
         );
     }
 }
