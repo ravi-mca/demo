@@ -12,10 +12,6 @@
     <packaging>war</packaging>
     <name>Storecast Application</name>
 
-    <properties>
-        <jdk.version>1.8</jdk.version>
-    </properties>
-
     <build>
         <finalName>storecast</finalName>
         <plugins>
@@ -80,6 +76,11 @@
         <dependency>
             <groupId>com.storecast.server</groupId>
             <artifactId>user-ws-rest</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.storecast.server</groupId>
+            <artifactId>merchant-service</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

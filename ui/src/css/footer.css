@@ -1,0 +1,63 @@
+ /* Set black background color, white text and some padding */
+  footer {
+    background-color: #32373f;
+    color: #dedede;
+    padding: 10px;
+    font-family: Source Sans Pro  !important;
+    font-size: 12px;
+    height: 40px;
+  }
+
+  footer p {
+    font-family: Source Sans Pro !important;
+    font-size: 12px;
+  }
+
+  /* link */
+  footer a {
+     color: white;
+  }
+
+  /* visited link */
+  footer a:visited {
+      color: white;
+  }
+
+  /* mouse over link */
+  footer a:hover {
+      color: white;
+  }
+
+  /* selected link */
+  footer a:active {
+      color: white;
+  }
+
+  /* Fixed position */
+  .fixed-bottom {
+    position: fixed !important;
+    bottom: 0 !important;
+    width: 100% !important; 
+    font-family: Source Sans Pro !important;
+    font-size: 12px !important;
+    color: white !important;
+  }
+
+  p {
+      margin: 0 25px 10px !important;
+  }
+
+  .flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    margin-left: 8px;
+  }
+
+  .flex-item {
+      width: 100%; 
+  }
+
+  .right-text {
+    text-align: right;
+  } 

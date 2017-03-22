@@ -1,0 +1,73 @@
+body {
+	background-color: #40444e !important;
+  font-family: Source Sans Pro !important; 
+}
+
+.login-content {
+   margin: 0px auto;
+   margin-top: 80px;
+   max-width: 400px;
+   z-index: 100;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.input-group-addon {
+	background-color: #ffffff !important;
+    padding: 6px 18px !important;
+}
+
+.logo {
+	text-align:  center;
+    min-height: 60px;
+    margin-bottom: 50px;
+}
+
+input.active:valid {
+    box-shadow: 0 0 5px 1px green;
+}
+
+input.active:invalid {
+    box-shadow: 0 0 5px 1px red;
+}
+
+.input-lg {
+    border-radius: 10px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.font-16 {
+    font-size: 16px !important;
+}
+
+.font-18 {
+    font-size: 18px;
+}
+
+.text-gray {
+   color: #727b89;
+}
+
+.text-gray-dark {
+    color: #c4c6cc;
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+
+.mb-10 {
+   margin-bottom: 10px;
+}
+
+.font-bold {
+  font-weight: bold !important;
+}
+

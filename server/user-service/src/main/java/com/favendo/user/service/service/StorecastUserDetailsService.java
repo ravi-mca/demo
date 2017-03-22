@@ -1,0 +1,45 @@
+package com.favendo.user.service.service;
+
+import com.favendo.user.service.domain.Role;
+import com.favendo.user.service.domain.User;
+import com.favendo.user.service.domain.StorecastUserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+@Service
+public class StorecastUserDetailsService implements UserDetailsService {
+
+    @Autowired
+    private UserService userService;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = getAndValidateUser(username);
+        return new StorecastUserDetails(user, getUserAuthorities(user.getRoles()));
+    }
+
+    private User getAndValidateUser(String username) {
+        User user = userService.getUserByUsername(username);
+        if (Objects.isNull(user)) {
+            throw new UsernameNotFoundException("Invalid Username or Password");
+        }
+        return user;
+    }
+
+    private List<GrantedAuthority> getUserAuthorities(List<Role> roles) {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        roles.forEach(role -> {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+        });
+        return grantedAuthorities;
+    }
+}
