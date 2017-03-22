@@ -4,6 +4,7 @@ import com.favendo.user.service.domain.Role;
 import com.favendo.user.service.domain.User;
 import com.favendo.user.service.domain.StorecastUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,9 @@ public class StorecastUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
+    @Value("${invalid.user.credential.error.message}")
+    private String invalidUserCredentialErrorMessage;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = getAndValidateUser(username);
@@ -28,9 +32,9 @@ public class StorecastUserDetailsService implements UserDetailsService {
     }
 
     private User getAndValidateUser(String username) {
-        User user = userService.getUserByUsername(username);
+        User user = userService.getByUsername(username);
         if (Objects.isNull(user)) {
-            throw new UsernameNotFoundException("Invalid Username or Password");
+            throw new UsernameNotFoundException(invalidUserCredentialErrorMessage);
         }
         return user;
     }
