@@ -1,7 +1,13 @@
 var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
+
+var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+    template: __dirname +'/src/index.html',
+    filename: 'index.html'
+});
 
 module.exports = {
   context: path.join(__dirname, "src"),
@@ -62,13 +68,12 @@ module.exports = {
   },
 
   output: {
-    path: __dirname + "/src/",
+    path: __dirname + "/dist/",
     filename: "main.js"
   },
 
-  plugins: debug ? [] : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+  plugins: debug ? [HtmlWebpackPluginConfig] : [
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
   ],
 };

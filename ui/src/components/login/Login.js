@@ -1,5 +1,9 @@
 import React from "react";
 import $ from 'jquery';
+import Service from "../Service";
+import Config from "../../index.config";
+
+import Background from '../../images/favendo-logo.png';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -7,7 +11,8 @@ export default class Login extends React.Component {
 
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            showResults: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -31,20 +36,15 @@ export default class Login extends React.Component {
             console.log('form is invalid: do not submit');
         } else {
             console.log('form is valid: submit');
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:8080/storecast/api/admin/login',
-                dataType: 'json',
-                ContentType: 'application/x-www-form-urlencoded',
-                data: this.state,
-                cache: false,
-                success: function(data) {
-                    console.log('status',data);
-                }.bind(this),
-                error: function(xhr, status, err) {
-                    console.log('err',err);
-                }.bind(this)
-            });
+            Service.login(Config.login,this.state, function(data) {
+                this.setState({ showResults: false });
+                   console.log('status',data);
+               }.bind(this), function(xhr, status, err) {
+                this.setState({ showResults: true });
+                   console.log('err',err);
+               }.bind(this));
+
+
         }
     }
 
@@ -70,6 +70,7 @@ export default class Login extends React.Component {
         const isPassword = refName.indexOf('password') !== -1;
 
         if (!validity.valid) {
+            this.setState({ showResults: false });
             if (validity.valueMissing) {
                 error.textContent = `${label} is a required field`;
             } else if (validity.typeMismatch) {
@@ -87,8 +88,11 @@ export default class Login extends React.Component {
     render() {
         return (
             <div class="login-content">
-                <div class="logo"></div>
+                <div class="logo mb-10"> <img src={ Background }/></div>
                 <form class="form-horizontal" noValidate>
+                <div class="error">
+                    {this.state.showResults ? 'Invalid username or password' : ''}
+                </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -120,7 +124,7 @@ export default class Login extends React.Component {
                     </div>
                     <div class="form-group font-18 text-gray">
                         <div class="col-md-6 col-xs-6 no-padding">
-                            <span class=""> Forgot Password? </span>
+                            <span class=""> Forgot password? </span>
                         </div>
                         <div class="col-md-6 col-xs-6 no-padding">
                             <span class="pull-right"> Create an account </span>

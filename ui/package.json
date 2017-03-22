@@ -29,9 +29,11 @@
     "webpack": "^2.2.0",
     "webpack-dev-server": "^1.14.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "html-webpack-plugin": "^2.28.0"
+  },
   "scripts": {
-    "dev": "webpack-dev-server --content-base src --inline --hot",
+    "dev": "webpack-dev-server --content-base dist --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
