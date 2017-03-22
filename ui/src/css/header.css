@@ -3,6 +3,10 @@
       height: 800px;
       padding: 50px;
     }
+
+    .col-form-label {
+      text-align: right !important;
+    }
     
     .container-fluid {
       background-color: #fff !important;
