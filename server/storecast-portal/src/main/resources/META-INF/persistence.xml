@@ -5,13 +5,13 @@
 
     <persistence-unit name="storecastPersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.favendo.user.service.domain.StorecastUser</class>
+        <class>com.favendo.user.service.domain.User</class>
         <class>com.favendo.user.service.domain.Role</class>
         <exclude-unlisted-classes/>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>
             <property name="hibernate.format_sql" value="true" />
-            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.cache.use_second_level_cache" value="false" />
             <property name="hibernate.cache.use_query_cache" value="false" />
