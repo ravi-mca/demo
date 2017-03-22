@@ -5,8 +5,11 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "fv_user", uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
-public class StorecastUser implements Serializable {
+@Table(name="fv_user",  uniqueConstraints={
+        @UniqueConstraint(columnNames={"username"}),
+        @UniqueConstraint(columnNames={"account_name"})
+})
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,7 +18,7 @@ public class StorecastUser implements Serializable {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password",nullable = true)
     private String password;
 
     @Column(name = "firstName")
@@ -113,7 +116,7 @@ public class StorecastUser implements Serializable {
 
     @Override
     public String toString() {
-        return "StorecastUser{" +
+        return "User{" +
                 "user_id=" + user_id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +

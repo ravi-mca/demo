@@ -4,13 +4,13 @@ import static com.favendo.user.service.constant.StorecastUserConstant.*;
 
 import java.util.Arrays;
 
+import com.favendo.user.service.domain.User;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.favendo.user.service.dao.UserDao;
 import com.favendo.user.service.domain.Role;
-import com.favendo.user.service.domain.StorecastUser;
 
 @Component
 public class InitBean implements InitializingBean {
@@ -21,7 +21,7 @@ public class InitBean implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         if (userDao.count() <= 0 ) {
-            StorecastUser user = new StorecastUser();
+            User user = new User();
             user.setAccountName(DEFAULT_ACCOUNT_NAME);
             user.setFirstName(DEFAULT_FIRSTNAME);
             user.setLastName(DEFAULT_LASTAME);

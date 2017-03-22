@@ -1,7 +1,7 @@
 package com.favendo.user.service.service.impl;
 
 import com.favendo.user.service.dao.UserDao;
-import com.favendo.user.service.domain.StorecastUser;
+import com.favendo.user.service.domain.User;
 import com.favendo.user.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public StorecastUser getUserByUsername(String username) {
+    public User getUserByUsername(String username) {
         return userDao.findByUsername(username);
     }
 }

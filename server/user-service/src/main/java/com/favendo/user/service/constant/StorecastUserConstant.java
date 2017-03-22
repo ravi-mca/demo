@@ -8,6 +8,16 @@ public class StorecastUserConstant {
 
     public static final String PASSWORD = "password";
 
+    public static final String EMAIL = "email";
+
+    public static final String PHONE = "phone";
+
+    public static final String FIRSTNAME = "firstName";
+
+    public static final String LASTNAME = "lastName";
+
+    public static final String ACCOUNTNAME = "accountName";
+
     public static final String EXPIRATION_TIME = "expiration";
 
     public static final String DEFAULT_FIRSTNAME = "Storecast";
