@@ -5,5 +5,9 @@ import com.favendo.user.service.domain.User;
 
 public interface UserService {
 
-    User getUserByUsername(String username);
+    User getByUsername(String username);
+
+    User getByUsernameOrAccountName(String username,String accountName);
+
+    void save(User user);
 }

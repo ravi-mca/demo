@@ -1,11 +1,13 @@
 package com.favendo.merchant.service.service.impl;
 
+import com.favendo.commons.enums.RoleEnum;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.merchant.service.dto.MerchantDto;
 import com.favendo.merchant.service.helper.MerchantHelper;
 import com.favendo.merchant.service.service.MerchantService;
 import com.favendo.merchant.service.validator.MerchantValidator;
-import com.favendo.user.service.dao.UserDao;
+import com.favendo.user.service.service.RoleService;
+import com.favendo.user.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class MerchantServiceImpl implements MerchantService {
 
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Autowired
     private MerchantHelper merchantHelper;
@@ -26,8 +31,8 @@ public class MerchantServiceImpl implements MerchantService {
     @Transactional
     public void save(MerchantDto merchantDto) throws BusinessException {
         merchantValidator.validateMerchantRequest(merchantDto);
-        merchantValidator.validateDuplicateMerchant(merchantDto, userDao.findByUsernameOrAccountName(merchantDto
+        merchantValidator.validateDuplicateMerchant(merchantDto, userService.getByUsernameOrAccountName(merchantDto
                 .getEmail(), merchantDto.getAccountName()));
-        userDao.save(merchantHelper.buildMerchant(merchantDto));
+        userService.save(merchantHelper.buildMerchant(merchantDto,roleService.getByName(RoleEnum.MERCHANT.getRole())));
     }
 }
