@@ -18,6 +18,8 @@ public class StorecastUserConstant {
 
     public static final String ACCOUNTNAME = "accountName";
 
+    public static final String ACCOUNT_NO = "accountNo";
+
     public static final String EXPIRATION_TIME = "expiration";
 
     public static final String DEFAULT_FIRSTNAME = "Storecast";
@@ -28,7 +30,9 @@ public class StorecastUserConstant {
 
     public static final String DEFAULT_PASSWORD = "$2a$10$ldk1bJIFOVkoTA5ktL9k6OJWbOwVrehsEq6K2G8OQhGpx.CtUzHYu";
 
-    public static final String DEFAULT_ROLE_NAME = "Admin";
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
 
-    public static final String DEFAULT_USER_NAME = "admin@favendo.com";
+    public static final String DEFAULT_USER_NAME = "admin@storecast.io";
+
+    public static final String DEFAULT_ACCOUNT_NO = "c36c9073-0fa4-451e-b685-dc67c7ba1710";
 }

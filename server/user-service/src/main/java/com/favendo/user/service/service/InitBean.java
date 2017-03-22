@@ -22,6 +22,7 @@ public class InitBean implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         if (userDao.count() <= 0 ) {
             User user = new User();
+            user.setAccountNo(DEFAULT_ACCOUNT_NO);
             user.setAccountName(DEFAULT_ACCOUNT_NAME);
             user.setFirstName(DEFAULT_FIRSTNAME);
             user.setLastName(DEFAULT_LASTAME);
@@ -29,7 +30,7 @@ public class InitBean implements InitializingBean {
             user.setUsername(DEFAULT_USER_NAME);
             Role role = new Role();
             role.setRoleId(1l);
-            role.setRoleName(DEFAULT_ROLE_NAME);
+            role.setRoleName(ROLE_ADMIN);
             user.setRoles(Arrays.asList(role));
             userDao.save(user);
         }
