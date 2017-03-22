@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 public class MerchantHelper {
 
     public User buildMerchant(MerchantDto merchantDto){
-        User storecastUser = new User();
-        storecastUser.setFirstName(merchantDto.getFirstName());
-        storecastUser.setLastName(merchantDto.getLastName());
-        storecastUser.setUsername(merchantDto.getEmail());
-        storecastUser.setPhone(merchantDto.getPhone());
-        storecastUser.setAccountNo(UniqueIdGenerator.generateUUID());
-        storecastUser.setAccountName(merchantDto.getAccountName());
-        return storecastUser;
+        User user = new User();
+        user.setFirstName(merchantDto.getFirstName());
+        user.setLastName(merchantDto.getLastName());
+        user.setUsername(merchantDto.getEmail());
+        user.setPhone(merchantDto.getPhone());
+        user.setAccountNo(UniqueIdGenerator.generateUUID());
+        user.setAccountName(merchantDto.getAccountName());
+        return user;
     }
 }
