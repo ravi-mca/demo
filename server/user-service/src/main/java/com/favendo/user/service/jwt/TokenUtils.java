@@ -11,7 +11,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.favendo.user.service.constant.StorecastUserConstant.*;
+import static com.favendo.user.service.constant.UserConstant.*;
 
 import java.security.Key;
 import java.util.Base64;
