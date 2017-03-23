@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.favendo.user.service.constant.UserConstant.*;
 
@@ -44,16 +45,19 @@ public class InitBean implements InitializingBean {
             user = userDao.save(user);
             return user;
         }
+
         return null;
     }
 
     @Transactional
     private void setUserole(User user) {
-        List<Role> roles = new ArrayList<>();
-        Role role = roleDao.findByName(RoleEnum.MERCHANT.getRole());
-        roles.add(role);
-        user.setRoles(roles);
-        userDao.save(user);
+        if(Objects.nonNull(user)){
+            List<Role> roles = new ArrayList<>();
+            Role role = roleDao.findByName(RoleEnum.MERCHANT.getRole());
+            roles.add(role);
+            user.setRoles(roles);
+            userDao.save(user);
+        }
     }
 
     @Transactional

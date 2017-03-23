@@ -2,7 +2,7 @@ package com.favendo.user.service.jwt;
 
 import com.favendo.commons.utils.DateFactory;
 import com.favendo.user.service.domain.User;
-import com.favendo.user.service.utils.StorecastUserContextHolder;
+import com.favendo.user.service.utils.UserContextHolder;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -34,7 +34,7 @@ public class TokenGenerator {
     }
 
     public Boolean validateToken(String token) throws Exception {
-        User user = StorecastUserContextHolder.getLoggedInUser();
+        User user = UserContextHolder.getLoggedInUser();
         Claims claims = Jwts.parser()
                 .setSigningKey(tokenUtils.getApiSecretKey())
                 .parseClaimsJws(token).getBody();
