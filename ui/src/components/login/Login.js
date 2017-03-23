@@ -6,9 +6,13 @@ import Service from "../Service";
 import Config from "../../index.config";
 import Background from '../../images/favendo-logo.png';
 
+import Store from '../../Store';
+import ControlActions from '../../ControlActions';
+
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 
 export default class Login extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -42,6 +46,7 @@ export default class Login extends React.Component {
 
             Service.login(Config.login,this.state, function(data) {
                 this.setState({ showResults: false });
+                   ControlActions.login(data);
                    browserHistory.push('/admins');
                    console.log('status',data);
                }.bind(this), function(xhr, status, err) {
@@ -141,7 +146,7 @@ export default class Login extends React.Component {
                           <p>© <Moment format="YYYY"/> Aussio, Inc</p>
                           </div>
                           <div class="col-md-4 col-xs-6 col-sm-6">
-                                <a href="www.storecast-io.com/terms-of-services" target="_blank">Terms of Service</a>
+                                <a href="www.storecast-io.com/terms-of-services" target="_blank" class="text-white">Terms of Service</a>
                           </div>
                         </div>
                     </div>

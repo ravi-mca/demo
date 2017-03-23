@@ -14,7 +14,7 @@ module.exports = {
   devtool: debug ? "inline-sourcemap" : null,
   entry: "./main.js",
   resolve: {
-    extensions: ['.js', '.css', '.scss']
+    extensions: ['.json', '.js', '.css', '.scss']
   },
   module: {
     loaders: [
@@ -54,6 +54,11 @@ module.exports = {
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, 
         loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+      },
+
+      {
+        test: /\.json$/, 
+        loader: 'json-loader'
       }
     ]
   },

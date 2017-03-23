@@ -1,8 +1,10 @@
 package com.favendo.user.service.constant;
 
-public class StorecastUserConstant {
+public class UserConstant {
 
     public static final String USER_ID = "user_id";
+
+    public static final String MERCHANT_ID = "merchantId";
 
     public static final String USERNAME = "username";
 

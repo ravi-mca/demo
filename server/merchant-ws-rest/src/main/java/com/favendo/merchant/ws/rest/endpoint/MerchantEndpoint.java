@@ -1,29 +1,21 @@
 package com.favendo.merchant.ws.rest.endpoint;
 
-import static com.favendo.commons.utils.Routes.MERCHANT;
-
-import java.util.List;
-
-import javax.annotation.security.PermitAll;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.ErrorKey;
 import com.favendo.commons.exception.StorecastApiException;
-import com.favendo.merchant.ws.rest.dto.converter.MerchantAccountDtoConverter;
 import com.favendo.merchant.service.dto.MerchantDto;
 import com.favendo.merchant.service.service.MerchantService;
-import com.favendo.user.service.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.annotation.security.PermitAll;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import static com.favendo.commons.utils.Routes.*;
+import static javax.ws.rs.core.Response.Status;
 
 @Component
 @Path(MERCHANT)
@@ -34,12 +26,9 @@ public class MerchantEndpoint {
     @Autowired
     private MerchantService merchantService;
 
-    @Autowired
-    private MerchantAccountDtoConverter merchantAccountDtoConverter;
-
     @POST
     @PermitAll
-    public Response save(MerchantDto merchantDto) {
+    public Response save(@RequestBody MerchantDto merchantDto) {
         try {
             merchantService.save(merchantDto);
             return Response.status(Status.CREATED).build();
@@ -48,12 +37,13 @@ public class MerchantEndpoint {
         }
     }
 
-    @GET
+    @PUT
+    @Path(PATH_PARAM_MERCHANT_ID)
     @PermitAll
-    public Response getListOfMerchants() {
+    public Response update(@RequestBody MerchantDto merchantDto, @PathParam(MERCHANT_ID) Long merchantId) {
         try {
-            List<User> merchants =  merchantService.getListOFMerchants();
-            return Response.status(Status.ACCEPTED).entity(merchantAccountDtoConverter.convert(merchants)).build();
+            merchantService.update(merchantDto, merchantId);
+            return Response.status(Status.OK).build();
         } catch (BusinessException exception) {
             throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
         }
