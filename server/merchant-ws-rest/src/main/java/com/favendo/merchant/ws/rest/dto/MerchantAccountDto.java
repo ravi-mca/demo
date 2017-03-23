@@ -1,6 +1,6 @@
 package com.favendo.merchant.ws.rest.dto;
 
-public class MerchantDto {
+public class MerchantAccountDto {
 
     private Long userId;
     private String firstname;
@@ -8,12 +8,13 @@ public class MerchantDto {
     private String accountNo;
     private String phone;
     private String username;
+    private String accountName;
 
-    public MerchantDto() {
+    public MerchantAccountDto() {
         super();
     }
 
-    public MerchantDto(Long userId, String firstname, String lastname, String accountNo, String phone, String username) {
+    public MerchantAccountDto(Long userId, String firstname, String lastname, String accountNo, String phone, String username, String accountName) {
         super();
         this.userId = userId;
         this.firstname = firstname;
@@ -21,6 +22,7 @@ public class MerchantDto {
         this.accountNo = accountNo;
         this.phone = phone;
         this.username = username;
+        this.accountName = accountName;
     }
 
     public Long getUserId() {
@@ -70,10 +72,18 @@ public class MerchantDto {
     public void setUsername(String username) {
         this.username = username;
     }
+    
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
 
     @Override
     public String toString() {
         return "MerchantDto [userId=" + userId + ", firstname=" + firstname + ", lastname=" + lastname + ", accountNo="
-                + accountNo + ", phone=" + phone + ", username=" + username + "]";
+                + accountNo + ", phone=" + phone + ", username=" + username + ", accountName=" + accountName + "]";
     }
 }

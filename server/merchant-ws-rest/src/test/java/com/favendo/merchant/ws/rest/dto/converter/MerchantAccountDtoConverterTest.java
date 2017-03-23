@@ -10,16 +10,16 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.favendo.merchant.ws.rest.dto.MerchantDto;
+import com.favendo.merchant.ws.rest.dto.MerchantAccountDto;
 import com.favendo.user.service.domain.User;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MerchantDtoConverterTest {
+public class MerchantAccountDtoConverterTest {
 
     private List<User> merchantList;
 
     @InjectMocks
-    private MerchantDtoConverter merchantDtoConverter;
+    private MerchantAccountDtoConverter merchantDtoConverter;
 
     private static final String MERCHANT1_FIRSTNAME = "Storecast";
     private static final String MERCHANT1_LASNAME = "Admin";
@@ -27,12 +27,14 @@ public class MerchantDtoConverterTest {
     private static final Long MERCHANT1_USERID = 1l;
     private static final String MERCHANT1_ACCOUNT_NO = "ABCD1234";
     private static final String MERCHANT1_PHONE = "12345676";
+    private static final String MERCHANT1_ACCOUNT_NAME = "Merchant1-Account";
     private static final String MERCHANT2_FIRSTNAME = "Storecast1";
     private static final String MERCHANT2_LASNAME = "Admin1";
     private static final String MERCHANT2_USERNAME = "test-admin2@storecast.io";
     private static final Long MERCHANT2_USERID = 2l;
     private static final String MERCHANT2_ACCOUNT_NO = "ABCD1235";
     private static final String MERCHANT2_PHONE = "12345676";
+    private static final String MERCHANT2_ACCOUNT_NAME = "Merchant2-Account";
 
 
     @Before
@@ -42,7 +44,7 @@ public class MerchantDtoConverterTest {
 
     @Test
     public void testMerchantDtoConverter() {
-        List<MerchantDto> merchantDtoList = merchantDtoConverter.convert(merchantList);
+        List<MerchantAccountDto> merchantDtoList = merchantDtoConverter.convert(merchantList);
         Assert.assertNotNull(merchantDtoList);
         Assert.assertEquals(2, merchantDtoList.size());
         Assert.assertEquals("test-admin1@storecast.io", merchantDtoList.get(0).getUsername());
@@ -60,6 +62,7 @@ public class MerchantDtoConverterTest {
         merchant1.setFirstName(MERCHANT1_FIRSTNAME);
         merchant1.setLastName(MERCHANT1_LASNAME);
         merchant1.setPhone(MERCHANT1_PHONE);
+        merchant1.setAccountName(MERCHANT1_ACCOUNT_NAME);
 
         User merchant2 = new User();
         merchant2.setAccountNo(MERCHANT2_ACCOUNT_NO);
@@ -68,6 +71,7 @@ public class MerchantDtoConverterTest {
         merchant2.setFirstName(MERCHANT2_FIRSTNAME);
         merchant2.setLastName(MERCHANT2_LASNAME);
         merchant2.setPhone(MERCHANT2_PHONE);
+        merchant2.setAccountName(MERCHANT2_ACCOUNT_NAME);
 
         merchants.add(merchant1);
         merchants.add(merchant2);

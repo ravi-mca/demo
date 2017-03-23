@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.ErrorKey;
 import com.favendo.commons.exception.StorecastApiException;
-import com.favendo.merchant.ws.rest.dto.converter.MerchantDtoConverter;
+import com.favendo.merchant.ws.rest.dto.converter.MerchantAccountDtoConverter;
 import com.favendo.merchant.service.dto.MerchantDto;
 import com.favendo.merchant.service.service.MerchantService;
 import com.favendo.user.service.domain.User;
@@ -35,7 +35,7 @@ public class MerchantEndpoint {
     private MerchantService merchantService;
 
     @Autowired
-    private MerchantDtoConverter merchantDtoConverter;
+    private MerchantAccountDtoConverter merchantAccountDtoConverter;
 
     @POST
     @PermitAll
@@ -53,7 +53,7 @@ public class MerchantEndpoint {
     public Response getListOfMerchants() {
         try {
             List<User> merchants =  merchantService.getListOFMerchants();
-            return Response.status(Status.ACCEPTED).entity(merchantDtoConverter.convert(merchants)).build();
+            return Response.status(Status.ACCEPTED).entity(merchantAccountDtoConverter.convert(merchants)).build();
         } catch (BusinessException exception) {
             throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
         }

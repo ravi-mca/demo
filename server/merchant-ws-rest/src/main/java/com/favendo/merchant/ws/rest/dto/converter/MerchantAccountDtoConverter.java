@@ -5,17 +5,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.favendo.merchant.ws.rest.dto.MerchantDto;
+import com.favendo.merchant.ws.rest.dto.MerchantAccountDto;
 import com.favendo.user.service.domain.User;
 
 @Component
-public class MerchantDtoConverter {
+public class MerchantAccountDtoConverter {
 
-    public List<MerchantDto> convert(List<User> merchants) {
+    public List<MerchantAccountDto> convert(List<User> merchants) {
         if (merchants != null) {
-            final List<MerchantDto> results = new ArrayList<>(merchants.size());
+            final List<MerchantAccountDto> results = new ArrayList<>(merchants.size());
             merchants.stream().forEach(merchant-> {
-                MerchantDto result = convertMerchant(merchant);
+                MerchantAccountDto result = convertMerchant(merchant);
                 if (result != null) {
                     results.add(result);
                 }
@@ -27,17 +27,18 @@ public class MerchantDtoConverter {
         return null;
     }
 
-    public MerchantDto convertMerchant (User merchant) {
+    public MerchantAccountDto convertMerchant (User merchant) {
         if (merchant == null) {
             throw new IllegalArgumentException("Argument merchant cannot be null");
         }
-        MerchantDto merchantDto = new MerchantDto();
+        MerchantAccountDto merchantDto = new MerchantAccountDto();
         merchantDto.setUserId(merchant.getUser_id());
         merchantDto.setFirstname(merchant.getFirstName());
         merchantDto.setLastname(merchant.getLastName());
         merchantDto.setAccountNo(merchant.getAccountNo());
         merchantDto.setPhone(merchant.getPhone());
         merchantDto.setUsername(merchant.getUsername());
+        merchantDto.setAccountName(merchant.getAccountName());
         return merchantDto;
     }
 }
