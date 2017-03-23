@@ -12,4 +12,8 @@ public class Routes {
 
 	public static final String MERCHANT = "/merchant";
 
+	public static final String MERCHANT_ID = "merchantId";
+
+	public static final String PATH_PARAM_MERCHANT_ID = "/{merchantId}";
+
 }

@@ -3,6 +3,7 @@ package com.favendo.merchant.service.validator;
 import com.favendo.commons.validator.*;
 import com.favendo.merchant.service.dto.MerchantDto;
 import com.favendo.user.service.domain.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,7 @@ import java.util.Objects;
 
 import static com.favendo.commons.exception.ErrorKey.ALREADY_EXISTS;
 import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
-import static com.favendo.user.service.constant.StorecastUserConstant.*;
+import static com.favendo.user.service.constant.UserConstant.*;
 
 @Component
 public class MerchantValidator {
@@ -61,7 +62,7 @@ public class MerchantValidator {
     @Value("${duplicate.merchant.accountName.error.message}")
     private String duplicateMerchantAccountNameErrorMessage;
 
-    public void validateMerchantRequest(MerchantDto merchantDto) {
+    public void validateRequest(MerchantDto merchantDto) {
         emptyOrNullValidator.validateIfNull(merchantDto, BAD_REQUEST, invalidMerchantRequestErrorMessage);
         emptyOrNullValidator.validateFieldIfNull(merchantDto.getFirstName(), BAD_REQUEST,
                 emptyMerchantFirstNameErrorMessage, FIRSTNAME);
@@ -73,17 +74,25 @@ public class MerchantValidator {
                 emptyMerchantEmailErrorMessage, EMAIL);
         emptyOrNullValidator.validateFieldIfNull(merchantDto.getAccountName(), BAD_REQUEST,
                 emptyMerchantAccountNameErrorMessage, ACCOUNTNAME);
-        booleanValidator.validateIfFalse(emailValidator.validateEmail(merchantDto.getEmail()), BAD_REQUEST,
-                invalidMerchantEmailErrorMessage, EMAIL);
-        booleanValidator.validateIfFalse(phoneValidator.validatePhone(merchantDto.getPhone()), BAD_REQUEST,
-                invalidMerchantPhoneErrorMessage, PHONE);
+        validateContactDetails(merchantDto.getEmail(), merchantDto.getPhone());
     }
 
-    public void validateDuplicateMerchant(MerchantDto merchantDto, User storecastUser) {
-        if (Objects.nonNull(storecastUser)) {
-            equalsValidator.validateIfEquals(merchantDto.getEmail(), storecastUser.getUsername(), ALREADY_EXISTS,
+    public void validateContactDetails(String email, String phone) {
+        if (StringUtils.isNotEmpty(email)) {
+            booleanValidator.validateIfFalse(emailValidator.validateEmail(email), BAD_REQUEST,
+                    invalidMerchantEmailErrorMessage, EMAIL);
+        }
+        if (StringUtils.isNotEmpty(phone)) {
+            booleanValidator.validateIfFalse(phoneValidator.validatePhone(phone), BAD_REQUEST,
+                    invalidMerchantPhoneErrorMessage, PHONE);
+        }
+    }
+
+    public void validateDuplication(MerchantDto merchantDto, User user) {
+        if (Objects.nonNull(user)) {
+            equalsValidator.validateIfEquals(merchantDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
                     duplicateMerchantEmailErrorMessage);
-            equalsValidator.validateIfEquals(merchantDto.getAccountName(), storecastUser.getAccountName(), ALREADY_EXISTS,
+            equalsValidator.validateIfEquals(merchantDto.getAccountName(), user.getAccountName(), ALREADY_EXISTS,
                     duplicateMerchantAccountNameErrorMessage);
         }
     }

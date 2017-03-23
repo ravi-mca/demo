@@ -4,6 +4,7 @@ import com.favendo.commons.utils.UniqueIdGenerator;
 import com.favendo.merchant.service.dto.MerchantDto;
 import com.favendo.user.service.domain.Role;
 import com.favendo.user.service.domain.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -21,6 +22,25 @@ public class MerchantHelper {
         user.setAccountNo(UniqueIdGenerator.generateUUID());
         user.setAccountName(merchantDto.getAccountName());
         user.setRoles(buildRoles(role));
+        return user;
+    }
+
+    public User buildMerchant(MerchantDto merchantDto, User user) {
+        if (StringUtils.isNotEmpty(merchantDto.getFirstName())) {
+            user.setFirstName(merchantDto.getFirstName());
+        }
+        if (StringUtils.isNotEmpty(merchantDto.getLastName())) {
+            user.setLastName(merchantDto.getLastName());
+        }
+        if (StringUtils.isNotEmpty(merchantDto.getEmail())) {
+            user.setUsername(merchantDto.getEmail());
+        }
+        if (StringUtils.isNotEmpty(merchantDto.getPhone())) {
+            user.setPhone(merchantDto.getPhone());
+        }
+        if (StringUtils.isNotEmpty(merchantDto.getAccountName())) {
+            user.setAccountName(merchantDto.getAccountName());
+        }
         return user;
     }
 

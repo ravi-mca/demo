@@ -6,16 +6,17 @@ import Header from '../header/Header';
 import Footer from '../footer/Footer';
 
 export default class Dashboard extends React.Component {
-  constructor() {
-    super();
-  }
-  render() {
-    return (
-      <div>
-        <Header/>
-            <div> {this.props.children} </div>
-        <Footer/>
-      </div>  
-    );
-  }
+    constructor() {
+        super();
+    }
+
+    render() {
+        return (
+            <div>
+                <Header/>
+                <div> {this.props.children} </div>
+                <Footer/>
+            </div>
+        );
+    }
 }
