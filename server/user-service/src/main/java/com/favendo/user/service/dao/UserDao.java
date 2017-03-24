@@ -20,4 +20,7 @@ public interface UserDao extends JpaRepository<User, Long> {
     
     @Query("select user from User as user join user.roles as role where role.roleName = 'ROLE_MERCHANT' ORDER BY user.firstName ASC")
     List<User> getListOfMerchants();
+    
+    @Query("select user from User user where user.accountNo = :accountNo")
+    User findByAccountNo(@Param("accountNo") String accountNo);
 }

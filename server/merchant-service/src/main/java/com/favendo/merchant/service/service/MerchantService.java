@@ -10,4 +10,5 @@ public interface MerchantService {
 
     void save(MerchantDto merchantDto) throws BusinessException;
     List<User> getListOFMerchants();
+    User findByAccountNo(String accountNo);
 }

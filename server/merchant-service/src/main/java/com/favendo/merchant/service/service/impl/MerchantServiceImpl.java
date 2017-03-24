@@ -44,4 +44,10 @@ public class MerchantServiceImpl implements MerchantService {
         List<User> merchants = userService.getListOfMerchants(); 
         return merchants;
     }
+
+    @Override
+    public User findByAccountNo(String accountNo) throws BusinessException {
+        User user = userService.getUserByAccountNo(accountNo);
+        return user;
+    }
 }

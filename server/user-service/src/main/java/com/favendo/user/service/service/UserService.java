@@ -9,4 +9,5 @@ public interface UserService {
 
     User getUserByUsername(String username);
     List<User> getListOfMerchants();
+    User getUserByAccountNo(String accountNo);
 }

@@ -11,5 +11,7 @@ public class Routes {
 	public static final String LOGIN_REQUEST =  ROOT + ADMIN + LOGIN;
 
 	public static final String MERCHANT = "/merchant";
+	
+	public static final String ACCOUNTNO = "/{accountNo}";
 
 }
