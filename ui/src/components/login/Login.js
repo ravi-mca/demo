@@ -46,14 +46,20 @@ export default class Login extends React.Component {
 
             Service.login(Config.login,this.state, function(data) {
                 this.setState({ showResults: false });
-                   ControlActions.login(data);
-                   browserHistory.push('/admins');
+                   //ControlActions.login(data);
+                   this.setAuthToken(data.accessToken);
+                   browserHistory.push('/merchants');
                    console.log('status',data);
                }.bind(this), function(xhr, status, err) {
                 this.setState({ showResults: true });
                    console.log('err',err);
                }.bind(this));
         }
+
+    }
+
+    setAuthToken(token) {
+        Service.setToken(token);
     }
 
     showFormErrors() {

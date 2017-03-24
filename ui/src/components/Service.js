@@ -1,5 +1,9 @@
 import $ from 'jquery';
 
+import Store from '../Store';
+import ControlActions from '../ControlActions';
+
+
 const Service = {
 
     login(url,data,successHandler, errorHandler) {
@@ -14,7 +18,20 @@ const Service = {
             success: successHandler,
             error:errorHandler
         });
+    },
+
+    setToken(token) {
+        localStorage.setItem("accessToken", token);
+    },
+
+    getToken() {
+        return localStorage.accessToken;
+    },
+
+    deleteToken() {
+        localStorage.removeItem("accessToken");
     }
+
 };
 
 export default Service;

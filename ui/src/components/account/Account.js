@@ -5,6 +5,7 @@ import  'react-bootstrap';
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 
 import Login from "../login/Login";
+import Service from "../Service";
 import Store from '../../Store';
 import ControlActions from '../../ControlActions';
 
@@ -15,7 +16,8 @@ export default class Account extends React.Component {
   }
 
     handleClick () {
-        ControlActions.logout();
+        //ControlActions.logout();
+        Service.deleteToken();
         browserHistory.push('/');
     }
 
