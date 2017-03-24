@@ -9,6 +9,11 @@ import com.favendo.user.service.domain.User;
 public interface MerchantService {
 
     void save(MerchantDto merchantDto) throws BusinessException;
-    List<User> getListOFMerchants();
-    User findByAccountNo(String accountNo);
+
+    void update(MerchantDto merchantDto,Long merchantId) throws BusinessException;
+    
+    List<User> getListOFMerchants() throws BusinessException;
+    
+    User findByAccountNo(String accountNo) throws BusinessException;
 }
+   

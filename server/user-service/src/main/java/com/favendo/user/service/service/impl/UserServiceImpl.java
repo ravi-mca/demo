@@ -17,11 +17,30 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User getUserByUsername(String username) {
+    public void save(User user){
+        userDao.save(user);
+    }
+
+    @Override
+    public User getByUserId(Long userId){
+        return userDao.findOne(userId);
+    }
+
+    @Override
+    public User getByUsername(String username) {
         return userDao.findByUsername(username);
     }
 
     @Override
+    public User getByUsernameOrAccountName(String username,String accountName) {
+        return userDao.findByUsernameOrAccountName(username,accountName);
+    }
+
+    @Override
+    public User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId){
+        return userDao.findByUsernameOrAccountNameAndUserId(username,accountName,userId);
+    }
+
     public List<User> getListOfMerchants() throws BusinessException {
         List<User> users = userDao.getListOfMerchants();
         return users;

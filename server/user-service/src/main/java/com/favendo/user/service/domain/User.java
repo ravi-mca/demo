@@ -2,6 +2,7 @@ package com.favendo.user.service.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,11 +37,11 @@ public class User implements Serializable {
     @Column(name = "phone")
     private String phone;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "fv_user_role",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
-    List<Role> roles;
+    List<Role> roles = new ArrayList<>();
 
     public Long getUser_id() {
         return user_id;
