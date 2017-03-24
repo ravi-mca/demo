@@ -1,4 +1,5 @@
 import $ from 'jquery';
+var newToken;
 
 const Service = {
 
@@ -12,9 +13,35 @@ const Service = {
             data: data,
             cache: false,
             success: successHandler,
-            error:errorHandler
+            error:errorHandler,
         });
-    }
+    },
+
+    createMerchant(url, data, successHandler, errorHandler) {
+
+        console.log(data);
+        console.log(localStorage.accessToken);
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            contentType: "application/json",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+localStorage.accessToken,
+            },
+            data: JSON.stringify(data),
+            cache: false,
+            success: successHandler,
+            error: errorHandler,
+        });
+    },
+
+    setVariable(tokn) {
+       newToken = tokn;
+       console.log('newToken',newToken);
+   },
 };
 
 export default Service;
