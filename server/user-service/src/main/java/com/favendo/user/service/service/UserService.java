@@ -1,6 +1,8 @@
 package com.favendo.user.service.service;
 
 
+import java.util.List;
+
 import com.favendo.user.service.domain.User;
 
 public interface UserService {
@@ -14,5 +16,7 @@ public interface UserService {
    User getByUsernameOrAccountName(String username,String accountName);
 
    User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId);
+   
+   List<User> getListOfMerchants();
 
 }

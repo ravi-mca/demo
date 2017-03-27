@@ -1,6 +1,12 @@
 package com.favendo.portal.security;
 
-import com.favendo.portal.filter.StorecastRequestFilter;
+import static com.favendo.commons.utils.Routes.LOGIN_REQUEST;
+import static com.favendo.commons.utils.StringConstants.FORWARD_SLASH;
+import static com.favendo.user.service.constant.UserConstant.PASSWORD;
+import static com.favendo.user.service.constant.UserConstant.USERNAME;
+
+import javax.ws.rs.HttpMethod;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,10 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import static com.favendo.commons.utils.Routes.LOGIN_REQUEST;
-import static com.favendo.commons.utils.StringConstants.FORWARD_SLASH;
-import static com.favendo.user.service.constant.UserConstant.PASSWORD;
-import static com.favendo.user.service.constant.UserConstant.USERNAME;
+import com.favendo.portal.filter.StorecastRequestFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -58,6 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
+                .authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().and()
                 .authorizeRequests()
                 .antMatchers(FORWARD_SLASH).permitAll()
                 .anyRequest().authenticated()
