@@ -8,11 +8,9 @@ export default class Merchants extends React.Component {
   render() {
     return (
       <div>
-        <div class="container-fluid">
-          <div class="row content">  
-          <h1>Merchants</h1>
-          </div>
-        </div>   
+        <div class="dashboard-container" id="main">
+            <h4>Merchants</h4>
+        </div>
       </div>
     );
   }

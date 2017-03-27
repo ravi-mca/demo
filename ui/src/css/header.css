@@ -7,14 +7,9 @@
     .col-form-label {
       text-align: right !important;
     }
-    
+
     .container-fluid {
       background-color: #fff !important;
-    }
-
-    .container-fluid .jumbotron {
-      padding-right: 0px !important;
-      padding-left: 0px !important;
     }
 
     /* selected link */
@@ -29,7 +24,6 @@
       background-color: #40444e;
       height: 100%;
       top: 52px;
-      margin-left: 8px;
       font-family: Source Sans Pro Semibold;
       font-size: 18px ;
     }
@@ -45,7 +39,7 @@
     .navbar-inverse {
       background-color: #40444e !important;
       border-color: none !important;
-      border-color: #40444e !important;      
+      border-color: #40444e !important;
     }
     .navbar-header {
       background-color: #272b33 !important;
@@ -65,16 +59,11 @@
       color: rgba(0, 0, 0, .0001) !important;
     }
 
-    .container-fluid {
-      padding-right: 15px !important;
-      padding-left: 0px !important;  
-    }
-
     .headerLogo {
       text-align: center;
       min-height: 50px;
     }
-    
+
     /* Fixed position */
     .fixed-top {
       position: fixed !important;
@@ -104,7 +93,7 @@
         height: auto;
         padding: 15px;
       }
-      .row.content {height: auto;} 
+      .row.content {height: auto;}
     }
 
      @media screen and (max-width: 773px) {

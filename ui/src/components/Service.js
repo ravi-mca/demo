@@ -1,9 +1,5 @@
 import $ from 'jquery';
 
-import Store from '../Store';
-import ControlActions from '../ControlActions';
-
-
 const Service = {
 
     login(url,data,successHandler, errorHandler) {
@@ -30,6 +26,21 @@ const Service = {
 
     deleteToken() {
         localStorage.removeItem("accessToken");
+    },
+
+    getListOfMerchants(url, successHandler, errorHandler) {
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'json',
+            ContentType: 'application/json',
+            headers: {
+                "Authorization": 'Bearer'+ localStorage.accessToken
+            },
+            cache: false,
+            success: successHandler,
+            error:errorHandler
+        });
     }
 
 };
