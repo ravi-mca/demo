@@ -35,9 +35,8 @@ const Service = {
             dataType: 'json',
             ContentType: 'application/json',
             headers: {
-                "Authorization": 'Bearer'+ localStorage.accessToken
+                "Authorization": 'Bearer'+' '+ localStorage.accessToken
             },
-            cache: false,
             success: successHandler,
             error:errorHandler
         });

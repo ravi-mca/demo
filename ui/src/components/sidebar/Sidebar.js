@@ -3,42 +3,24 @@ import  'react-bootstrap';
 import Service from "../Service";
 import Config from "../../index.config";
 
-var listOfMerchants;
 
 export default class Sidebar extends React.Component {
     constructor() {
         super();
         this.state = {
             selected :'',
-            users: [
-                {
-                    "userId":"1",
-                    "accountNo":"A012424",
-                    "firstname":"Merchant1",
-                    "lastname":"Merchant1",
-                    "username":"merchant1@gmail.com",
-                    "phone": "9898102525"
-                },
-                {
-                    "userId":"2",
-                    "accountNo":"A012467",
-                    "firstname":"Merchant2",
-                    "lastname":"Merchant2",
-                    "username":"merchant2@gmail.com",
-                    "phone": "9898202020"
-                }
-            ]
+            merchantList: []
     };
 
     this.getListOfMerchant();
   }
 
     getListOfMerchant() {
-        Service.getListOfMerchants(Config.getMerchantList, function(data) {
-                   console.log('status',data);
+        Service.getListOfMerchants(Config.getMerchantList, function(response) {
+                   console.log('status in sidebar',response);
+                   this.state.merchantList = response;
         }.bind(this), function(xhr, status, err) {
-            this.setState({ showResults: true });
-                console.log('err',err);
+                console.log('sidebar',err);
         }.bind(this));
     }
 
@@ -51,7 +33,7 @@ export default class Sidebar extends React.Component {
     }
 
   render() {
-    let showList =  this.state.users.map(function(user, i) {
+    let showList =  this.state.merchantList.map(function(user, i) {
         return (
             <li  key={i} className={this.isActive(user.firstname)} onClick={this.setFilter.bind(this, user.firstname)}><div class="list-padding">{user.firstname} </div></li>
         );
