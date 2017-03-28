@@ -2,20 +2,6 @@ import $ from 'jquery';
 
 const Service = {
 
-    login(url,data,successHandler, errorHandler) {
-
-        $.ajax({
-            type: 'POST',
-            url: url,
-            dataType: 'json',
-            ContentType: 'application/x-www-form-urlencoded',
-            data: data,
-            cache: false,
-            success: successHandler,
-            error:errorHandler
-        });
-    },
-
     setToken(token) {
         localStorage.setItem("accessToken", token);
     },
@@ -28,20 +14,37 @@ const Service = {
         localStorage.removeItem("accessToken");
     },
 
-    getListOfMerchants(url, successHandler, errorHandler) {
-        $.ajax({
-            type: 'GET',
+    setAuthHeader(headers) {
+        headers = headers || {};
+        if(localStorage.accessToken) {
+            headers.Authorization  = 'Bearer'+' '+ localStorage.accessToken;
+        }
+        return headers;
+    },
+
+    buildRequestdata(url, type, data, headers) {
+        var reqData = {
+            type: type,
             url: url,
             dataType: 'json',
-            ContentType: 'application/json',
-            headers: {
-                "Authorization": 'Bearer'+' '+ localStorage.accessToken
-            },
-            success: successHandler,
-            error:errorHandler
-        });
-    }
+            ContentType: 'application/json'
+        };
 
+        if(data) {
+            reqData.data = data;
+        }
+
+        reqData.headers = this.setAuthHeader(headers);
+
+        return reqData;
+    },
+
+    executeRequest(reqData, successHandler, errorHandler) {
+        reqData.success = successHandler,
+        reqData.error = errorHandler
+
+        $.ajax(reqData);
+    }
 };
 
 export default Service;

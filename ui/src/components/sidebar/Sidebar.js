@@ -11,13 +11,16 @@ export default class Sidebar extends React.Component {
         this.state = {
             selected :'',
             merchantList: []
-    };
+        };
+    }
 
-    this.getListOfMerchant();
-  }
+    componentDidMount() {
+        this.getListOfMerchant();
+    }
 
     getListOfMerchant() {
-        Service.getListOfMerchants(Config.getMerchantList, function(response) {
+        var reqData = Service.buildRequestdata(Config.getMerchantList, 'GET');
+        Service.executeRequest(reqData, function(response) {
             this.setState({merchantList: response});
         }.bind(this), function(xhr, status, err) {
                 console.log(err);
@@ -25,7 +28,7 @@ export default class Sidebar extends React.Component {
     }
 
     setFilter(filter) {
-        this.setState({selected  : filter})
+        this.setState({selected  : filter});
     }
 
     isActive(value) {
@@ -42,19 +45,19 @@ export default class Sidebar extends React.Component {
     return (
         <div class="nav-side-menu">
             <div class="input-group pad-15">
-            <input type="text" class="form-control" placeholder="Search" />
-        <span class="input-group-btn">
-         <button class="btn btn-default" type="button">
-           <span class="glyphicon glyphicon-search"></span>
-         </button>
-       </span>
-     </div>
-    <div class="menu-list">
-        <ul id="menu-content">
-            {showList}
-        </ul>
-    </div>
-</div>
+                <input type="text" class="form-control" placeholder="Search" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+            <div class="menu-list">
+                <ul id="menu-content">
+                    {showList}
+                </ul>
+            </div>
+        </div>
     );
   }
 }
