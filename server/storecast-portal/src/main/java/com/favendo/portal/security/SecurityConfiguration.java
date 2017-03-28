@@ -64,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().and()
                 .authorizeRequests()
                 .antMatchers(FORWARD_SLASH).permitAll()
-                .anyRequest().authenticated()
+                //.anyRequest().authenticated()
                 .and()
                 .authenticationProvider(storecastAuthenticationProvider)
                 .exceptionHandling()
@@ -80,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
-        http.authorizeRequests().anyRequest().authenticated();
+        //http.authorizeRequests().anyRequest().authenticated();
         http.addFilterBefore(new StorecastRequestFilter(), BasicAuthenticationFilter.class);
     }
 }

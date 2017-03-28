@@ -43,3 +43,5 @@ target
 /connectors/security/oauth2/oauth2.iml
 
 .DS_Store
+
+.idea/
