@@ -1,8 +1,8 @@
 package com.favendo.user.service.service;
 
 import com.favendo.user.service.domain.Role;
-import com.favendo.user.service.domain.User;
 import com.favendo.user.service.domain.StorecastUserDetails;
+import com.favendo.user.service.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class StorecastUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserService userService;
