@@ -16,6 +16,25 @@ const Service = {
         });
     },
 
+    createMerchant(url, data, successHandler, errorHandler) {
+        
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            contentType: "application/json",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+localStorage.accessToken,
+            },
+            data: JSON.stringify(data),
+            cache: false,
+            success: successHandler,
+            error: errorHandler,
+        });
+    },
+    
     setToken(token) {
         localStorage.setItem("accessToken", token);
     },
@@ -26,22 +45,8 @@ const Service = {
 
     deleteToken() {
         localStorage.removeItem("accessToken");
-    },
-
-    getListOfMerchants(url, successHandler, errorHandler) {
-        $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'json',
-            ContentType: 'application/json',
-            headers: {
-                "Authorization": 'Bearer'+' '+ localStorage.accessToken
-            },
-            success: successHandler,
-            error:errorHandler
-        });
     }
-
+    
 };
 
 export default Service;

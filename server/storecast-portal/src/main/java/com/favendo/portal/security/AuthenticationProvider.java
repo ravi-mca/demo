@@ -1,10 +1,9 @@
 package com.favendo.portal.security;
 
-import com.favendo.user.service.service.StorecastUserDetailsService;
+import com.favendo.user.service.service.CustomUserDetailsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,13 +17,13 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Component
-public class StorecastAuthenticationProvider implements AuthenticationProvider {
+public class AuthenticationProvider implements org.springframework.security.authentication.AuthenticationProvider {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private StorecastUserDetailsService storecastUserDetailsService;
+    private CustomUserDetailsService storecastUserDetailsService;
 
     @Value("${invalid.user.credential.error.message}")
     private String invalidUserCredentialErrorMessage;

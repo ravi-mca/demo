@@ -29,7 +29,7 @@ public class InitBean implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         setRole();
         User user = setUser();
-        setUserole(user);
+        setUserRole(user);
     }
 
     @Transactional
@@ -50,7 +50,7 @@ public class InitBean implements InitializingBean {
     }
 
     @Transactional
-    private void setUserole(User user) {
+    private void setUserRole(User user) {
         if(Objects.nonNull(user)){
             List<Role> roles = new ArrayList<>();
             Role role = roleDao.findByName(RoleEnum.MERCHANT.getRole());
