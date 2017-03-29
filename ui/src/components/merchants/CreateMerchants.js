@@ -80,7 +80,7 @@ export default class MerchantForm extends React.Component {
   }
   
   showFormErrors() {
-    const inputs = document.querySelectorAll('input');
+    const inputs = document.querySelectorAll('#panel input');
     let isFormValid = true;
     
     inputs.forEach(input => {
@@ -122,7 +122,7 @@ export default class MerchantForm extends React.Component {
 
   render() {
     return (
-      <div className='layout-page'>
+      <div className='layout-page' id="panel">
         <main className='layout-main'>
           <div className='container'>
             <button className='btn btn-primary' onClick={this.openModal}>

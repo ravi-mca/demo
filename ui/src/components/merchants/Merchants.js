@@ -11,9 +11,8 @@ export default class Merchants extends React.Component {
   }
   render() {
     return (
-      <div>
-        <div class="dashboard-container" id="main">
-          
+         <div class="dashboard-container" id="main">
+          <div class="row content">  
           <h1>Merchants</h1>
           <div><CreateMerchants/></div>
           </div>
@@ -34,7 +33,8 @@ export default class Merchants extends React.Component {
               </div>
             </div>
           </div>
-      </div>
+          </div>
+
     );
   }
 }
