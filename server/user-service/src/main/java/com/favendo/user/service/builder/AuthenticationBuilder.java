@@ -28,11 +28,6 @@ public class AuthenticationBuilder {
         return authenticationFailureDto;
     }
 
-    public void buildAuthenticationFailure(HttpServletResponse httpServletResponse, String errorMessage, Integer statusCode) throws IOException {
-        httpServletResponse.setStatus(statusCode);
-        httpServletResponse.getWriter().write(JsonMapper.objectToJSON(buildAuthenticationFailure(errorMessage)));
-    }
-
     private RoleDto buildRoles(Role roles) {
         RoleDto roleDto = new RoleDto();
         roleDto.setRole(roles.getRoleName());

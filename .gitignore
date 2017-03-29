@@ -36,6 +36,8 @@ target
 
 /connectors/eis/eis.iml
 
+.idea/
+
 /connectors/email/email.iml
 
 /connectors/email/mandrill/mandrill.iml

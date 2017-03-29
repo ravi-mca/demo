@@ -44,16 +44,15 @@ export default class Login extends React.Component {
         } else {
             console.log('form is valid: submit');
             var reqData = Service.buildRequestdata(Config.login, 'POST', this.state);
-
             Service.executeRequest(reqData, function(data) {
-                   this.setState({ showResults: false });
-                   this.setAuthToken(data.accessToken);
-                   browserHistory.push('/merchants');
-                   console.log('status',data);
-            }.bind(this), function(xhr, status, err) {
-                this.setState({ showResults: true });
-                   console.log('err',err);
-            }.bind(this));
+                  this.setState({ showResults: false });
+                  this.setAuthToken(data.accessToken);
+                  browserHistory.push('/merchants');
+                  console.log('status',data);
+           }.bind(this), function(xhr, status, err) {
+               this.setState({ showResults: true });
+                  console.log('err',err);
+           }.bind(this));
         }
     }
 

@@ -21,6 +21,27 @@ const Service = {
         }
         return headers;
     },
+	
+	createMerchant(url, data, successHandler, errorHandler) {
+
+        console.log(data);
+        console.log(localStorage.accessToken);
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            contentType: "application/json",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+localStorage.accessToken,
+            },
+            data: JSON.stringify(data),
+            cache: false,
+            success: successHandler,
+            error: errorHandler,
+        });
+    },
 
     buildRequestdata(url, type, data, headers) {
         var reqData = {

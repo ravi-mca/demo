@@ -2,6 +2,12 @@ package com.favendo.commons.utils;
 
 public class Routes {
 
+	public static final String ALL_REQUEST = "/**";
+
+	public static final String ADMIN_REQUEST = "/api/admin/*";
+
+	public static final String MERCHANT_REQUEST = "/api/merchant/*";
+
 	public static final String ROOT = "/api";
 	
 	public static final String ADMIN = "/admin";

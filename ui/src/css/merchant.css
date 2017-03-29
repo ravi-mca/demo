@@ -1,0 +1,29 @@
+.modal-header{
+  border-bottom: 0px !important;
+  padding: 30px !important;
+}
+
+.modal-title {
+  font-weight: bold;
+}
+
+.modal-content {
+    margin: 80px 100px auto 0px !important;
+}
+.modal-body{
+	//padding: 0px  !important;
+}
+
+.modal-footer {
+	padding: 0px 11px 16px 16px !important;
+    text-align: right !important;
+    margin: 0 50px !important;
+    border-top: 0px solid #e5e5e5;
+}
+
+.modal-footer-hr {
+	margin: 0px 51px !important;
+    margin-bottom: 20px !important;
+    border: 0 !important;
+    border-top: 3px solid #eee !important;
+}
