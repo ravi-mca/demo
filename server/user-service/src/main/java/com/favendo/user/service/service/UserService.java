@@ -6,6 +6,8 @@ import java.util.List;
 import com.favendo.user.service.domain.User;
 
 public interface UserService {
+    
+    List<User> getListOfMerchants();
 
     void save(User user);
 
@@ -15,9 +17,7 @@ public interface UserService {
 
     User getByUsernameOrAccountName(String username,String accountName);
 
-    User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId);
-    
-    List<User> getListOfMerchants();
-    
     User getUserByAccountNo(String accountNo);
+    
+    User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId);
 }

@@ -1,6 +1,7 @@
 body {
 	background-color: #40444e !important;
-  font-family: Source Sans Pro !important; 
+  font-family: Source Sans Pro !important;
+  overflow: hidden;
 }
 
 .login-content {
@@ -77,4 +78,12 @@ input.active:invalid {
 
 .text-red {
   color: red;
+}
+
+.pad-15 {
+  padding: 15px;
+}
+
+.list-padding {
+  padding: 5px 15px 5px 15px;
 }

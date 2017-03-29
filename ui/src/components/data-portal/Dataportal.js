@@ -8,11 +8,9 @@ export default class Dataportal extends React.Component {
   render() {
     return (
       <div>
-        <div class="container-fluid">
-          <div class="row content">  
-            <h1>Data Portal</h1>
-          </div>
-        </div>   
+        <div class="dashboard-container" id="main">
+            <h4>Data Portal</h4>
+        </div>
       </div>
     );
   }

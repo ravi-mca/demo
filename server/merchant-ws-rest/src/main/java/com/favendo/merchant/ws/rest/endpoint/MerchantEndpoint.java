@@ -1,7 +1,6 @@
 package com.favendo.merchant.ws.rest.endpoint;
 
 import static com.favendo.commons.utils.Routes.*;
-
 import java.util.List;
 
 import javax.annotation.security.PermitAll;
@@ -43,13 +42,16 @@ public class MerchantEndpoint {
 
     @Autowired
     private MerchantAccountValidator merchantAccountValidator;
-
+    
     @GET
     @PermitAll
     public Response getListOfMerchants() {
         try {
             List<User> merchants =  merchantService.getListOFMerchants();
-            return Response.status(Status.ACCEPTED).entity(merchantAccountDtoConverter.convert(merchants)).build();
+            if (merchants != null && merchants.size() > 0) {
+                return Response.status(Status.OK).entity(merchantAccountDtoConverter.convert(merchants)).build();
+            }
+            return Response.status(Response.Status.NOT_FOUND).build(); 
         } catch (BusinessException exception) {
             throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
         }

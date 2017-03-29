@@ -41,6 +41,12 @@ public class MerchantServiceImpl implements MerchantService {
     private String merchantNotFoundErrorMessage;
 
     @Override
+    public List<User> getListOFMerchants() throws BusinessException {
+        List<User> merchants = userService.getListOfMerchants(); 
+        return merchants;
+    }
+
+    @Override
     @Transactional
     public void save(MerchantDto merchantDto) throws BusinessException {
         merchantValidator.validateRequest(merchantDto);
@@ -57,12 +63,6 @@ public class MerchantServiceImpl implements MerchantService {
         merchantValidator.validateDuplication(merchantDto, userService.getByUsernameOrAccountNameAndUserId(merchantDto
                 .getEmail(), merchantDto.getAccountName(), user.getUser_id()));
         userService.save(merchantHelper.buildMerchant(merchantDto, user));
-    }
-
-    @Override
-    public List<User> getListOFMerchants() throws BusinessException {
-        List<User> merchants = userService.getListOfMerchants(); 
-        return merchants;
     }
 
     @Override
