@@ -76,7 +76,7 @@
       width: 100% !important; 
     }
 
-		a {
+		.navbar a {
 			color: white !important; 
 		}
 
@@ -145,10 +145,6 @@
 			position: fixed !important;
 			width: 100% !important; 
 		}
-
-		a {
-      color: white !important;
-    }
 
 		@media screen and (max-width: 784px) {
       .sidenav {
