@@ -8,8 +8,8 @@ import 'font-awesome/css/font-awesome.min.css';
 import './css/login.css';
 import './css/footer.css';
 import './css/header.css';
-import './css/merchant.css';
 import './css/sidebar.css';
+import './css/merchant.css';
 import './fonts/fonts.css';
 
 import Layout from "./components/Layout";

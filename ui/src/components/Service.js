@@ -21,11 +21,8 @@ const Service = {
         }
         return headers;
     },
-	
-	createMerchant(url, data, successHandler, errorHandler) {
 
-        console.log(data);
-        console.log(localStorage.accessToken);
+    createMerchant(url, data, successHandler, errorHandler) {
         $.ajax({
             type: 'POST',
             url: url,
@@ -66,6 +63,7 @@ const Service = {
 
         $.ajax(reqData);
     }
+
 };
 
 export default Service;
