@@ -8,6 +8,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import './css/login.css';
 import './css/footer.css';
 import './css/header.css';
+import './css/merchant.css';
 import './fonts/fonts.css';
 
 import Layout from "./components/Layout";
@@ -26,9 +27,9 @@ ReactDOM.render((
       <Route path = "/" component = {Layout}>
 		<IndexRoute  component = {Login} />
 		<Route path = "/" component = {Dashboard} >
-			<IndexRoute component = {Admins} />
-			<Route path="/admins" component={Admins} />
+			<IndexRoute component = {Merchants} />			
 			<Route path="/merchants" component={Merchants} />
+			<Route path="/admins" component={Admins} />
 			<Route path="/dataportal" component={Dataportal} />
 			<Route path="/account" component={Account} />
 		</Route>

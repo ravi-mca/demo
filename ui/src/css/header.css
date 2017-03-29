@@ -1,114 +1,202 @@
- /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {
-      height: 800px;
-      padding: 50px;
-    }
 
-    .col-form-label {
-      text-align: right !important;
-    }
-    
-    .container-fluid {
-      background-color: #fff !important;
-    }
+		.row.content {
+			height: 800px;
+			padding: 50px;
+		}
 
-    .container-fluid .jumbotron {
-      padding-right: 0px !important;
-      padding-left: 0px !important;
-    }
+		.col-form-label {
+			text-align: right !important;
+		}
+		
+		.container-fluid {
+			background-color: #fff !important;
+		}
 
-    /* selected link */
-    .active {
-     background-color: #292e35 !important;
-     color: #ffffff !important;
-    }
+		.container-fluid .jumbotron {
+			padding-right: 0px !important;
+			padding-left: 0px !important;
+		}
 
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #40444e;
-      height: 100%;
-      top: 52px;
-      margin-left: 8px;
-      font-family: Source Sans Pro Semibold;
-      font-size: 18px ;
-    }
+		/* selected link */
+		.navbar .active {
+		 background-color: #292e35 !important;
+		 color: #ffffff !important;
+		}
 
-    .navbar {
-      background-color: #40444e !important;
-      border-radius: 0px !important;
-      text-align: text-center !important;
-      font-family: 'Source Sans Pro' !important;
-      font-size: 18px !important;
-    }
+		/* Set gray background color and 100% height */
+		.sidenav {
+			padding-top: 20px;
+			background-color: #40444e;
+			height: 100%;
+			top: 52px;
+			margin-left: 8px;
+			font-family: Source Sans Pro Semibold;
+			font-size: 18px ;
+		}
 
-    .navbar-inverse {
-      background-color: #40444e !important;
-      border-color: none !important;
-      border-color: #40444e !important;      
-    }
-    .navbar-header {
-      background-color: #272b33 !important;
-      height: 50px !important;
-    }
+		.navbar {
+			background-color: #40444e !important;
+			border-radius: 0px !important;
+			text-align: text-center !important;
+			font-family: 'Source Sans Pro' !important;
+			font-size: 18px !important;
+		}
 
-    .navbar-inverse .navbar-nav > .active > a,
-    .navbar-inverse .navbar-nav > .active > a:hover,
-    .navbar-inverse .navbar-nav > .active > a:focus {
-      color: #fff !important;
-      background-color: #292e35 !important;
-      font-family: 'Source Sans Pro' !important;
-      font-size: 18px !important;
-    }
+		.navbar-inverse {
+			background-color: #40444e !important;
+			border-color: none !important;
+			border-color: #40444e !important;      
+		}
+		.navbar-header {
+			background-color: #272b33 !important;
+			height: 50px !important;
+		}
 
-    li {
-      color: rgba(0, 0, 0, .0001) !important;
-    }
+		.navbar-inverse .navbar-nav > .active > a,
+		.navbar-inverse .navbar-nav > .active > a:hover,
+		.navbar-inverse .navbar-nav > .active > a:focus {
+			color: #fff !important;
+			background-color: #292e35 !important;
+			font-family: 'Source Sans Pro' !important;
+			font-size: 18px !important;
+		}
 
-    .container-fluid {
-      padding-right: 15px !important;
-      padding-left: 0px !important;  
-    }
+		li {
+			color: rgba(0, 0, 0, .0001) !important;
+		}
 
-    .headerLogo {
-      text-align: center;
-      min-height: 50px;
-    }
-    
-    /* Fixed position */
-    .fixed-top {
-      position: fixed !important;
-      top: 0 !important;
-      width: 100% !important; 
-    }
+		.container-fluid {
+			padding-right: 15px !important;
+			padding-left: 0px !important;  
+		}
 
-    .fixed {
-      position: fixed !important;
-      width: 100% !important; 
-    }
+		.logo {
+			background-image: url("/images/Logo.png"); 
+			background-repeat: no-repeat;
+			background-position: center;
+			min-height: 50px;
+		}
+		
+		/* Fixed position */
+		.fixed-top {
+			position: fixed !important;
+			top: 0 !important;
+			width: 100% !important; 
+		}
 
-    .pull-nav {
-        float: right;
-        padding: 0px;
-        margin-right: 45px;
-        margin-top: 10px;
-        list-style: none;
-    }
+		.fixed {
+			position: fixed !important;
+			width: 100% !important; 
+		}
 
-    .text-white {
-      color: white !important;
-    }
+		a {
+			color: white !important; 
+		}
 
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height: auto;} 
-    }
+		@media screen and (max-width: 767px) {
+			.sidenav {
+				height: auto;
+				padding: 15px;
+			}
+			.row.content {height: auto;} 
+		}
 
-     @media screen and (max-width: 773px) {
-      .pull-right {
-        float: left !important;
-      }
-    }
+		 @media screen and (max-width: 773px) {
+			
+			.pull-right {
+				float: left !important;
+			}
+		}
+		
+		.navbar {
+			background-color: #40444e !important;
+			border-radius: 0px !important;
+			text-align: text-center !important;
+		}
+		.navbar-inverse {
+			background-color: #40444e !important;
+			border-color: none !important;
+			border-color: #40444e !important;      
+		}
+		.navbar-header {
+			background-color: #272b33 !important;
+		}
+
+		.navbar-inverse .navbar-nav > .active > a,
+		.navbar-inverse .navbar-nav > .active > a:hover,
+		.navbar-inverse .navbar-nav > .active > a:focus {
+			color: #fff !important;
+			background-color: #292e35 !important;
+		}
+
+		.pull-nav {
+				float: right;
+				padding: 0px;
+				margin-right: 45px;
+				margin-top: 10px;
+		}
+
+		.nav > li > a {
+			position: relative;
+			display: block;
+			padding: 15px 27px !important;
+		}
+
+		.container-fluid {
+			padding-right: 15px !important;
+			padding-left: 0px !important;  
+		}
+
+		.headerLogo {
+			text-align: center;
+			margin-top:7px;
+		}
+		
+		/* Fixed position */
+		.fixed-top {
+			position: fixed !important;
+			top: 0 !important;
+			width: 100% !important; 
+		}
+
+		.fixed {
+			position: fixed !important;
+			width: 100% !important; 
+		}
+
+		a {
+			color: white !important; 
+		}
+
+		@media screen and (max-width: 784px) {
+			.sidenav {
+				height: auto;
+				padding: 15px;
+			}
+			.navbar-nav {
+				margin: 3px !important; 
+			}
+			.row.content {height: auto;} 
+
+			.footer-align {
+				float: left !important;
+			}
+
+			.pull-nav {
+				float: left;
+				margin-left: 30px;
+			}
+
+			.container-fluid {
+
+				margin-top: 140px !important;
+			}
+		}
+
+		@media (min-width: 768px) and (max-width: 991px) {
+
+			.footer-align {
+				float: right !important;
+			}
+		}
+

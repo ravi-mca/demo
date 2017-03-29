@@ -2,8 +2,6 @@ package com.favendo.user.service.jwt;
 
 import com.favendo.commons.utils.DateFactory;
 import com.favendo.user.service.domain.User;
-import com.favendo.user.service.utils.StorecastUserContextHolder;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -20,10 +18,8 @@ public class TokenGenerator {
     @Autowired
     private DateFactory dateFactory;
 
-    @Autowired
-    private TokenUtils tokenUtils;
-
     public String generateToken(User user) {
+        TokenUtils tokenUtils = new TokenUtils();
         JwtBuilder builder = Jwts.builder().setId(tokenUtils.getGeneratedUUID())
                 .setIssuer(user.getUsername())
                 .setIssuedAt(dateFactory.getDateByMilliseconds())
@@ -31,14 +27,6 @@ public class TokenGenerator {
                 .setClaims(tokenUtils.getClaims(user, dateFactory.getDateByMilliseconds(expirationTime)))
                 .signWith(SignatureAlgorithm.HS256, tokenUtils.getApiSecretKey());
         return builder.compact();
-    }
-
-    public Boolean validateToken(String token) throws Exception {
-        User user = StorecastUserContextHolder.getLoggedInUser();
-        Claims claims = Jwts.parser()
-                .setSigningKey(tokenUtils.getApiSecretKey())
-                .parseClaimsJws(token).getBody();
-        return tokenUtils.validateToken(claims, user);
     }
 }
 

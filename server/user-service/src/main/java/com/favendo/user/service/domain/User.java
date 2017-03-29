@@ -6,20 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="fv_user",  uniqueConstraints={
-        @UniqueConstraint(columnNames={"username"}),
-        @UniqueConstraint(columnNames={"account_name"})
+@Table(name = "fv_user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"username"}),
+        @UniqueConstraint(columnNames = {"account_name"})
 })
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private Long user_id;
 
     @Column(name = "username")
     private String username;
 
-    @Column(name = "password",nullable = true)
+    @Column(name = "password", nullable = true)
     private String password;
 
     @Column(name = "firstName")
