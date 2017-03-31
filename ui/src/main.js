@@ -5,6 +5,7 @@ import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
+import './css/variable.css';
 import './css/login.css';
 import './css/footer.css';
 import './css/header.css';
@@ -28,7 +29,7 @@ ReactDOM.render((
       <Route path = "/" component = {Layout}>
 		<IndexRoute  component = {Login} />
 		<Route path = "/" component = {Dashboard} >
-			<IndexRoute component = {Merchants} />			
+			<IndexRoute component = {Merchants} />
 			<Route path="/merchants" component={Merchants} />
 			<Route path="/admins" component={Admins} />
 			<Route path="/dataportal" component={Dataportal} />

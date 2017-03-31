@@ -1,41 +1,38 @@
 import React from "react";
 import  'react-bootstrap';
 
-
 import CreateMerchants from "./CreateMerchants";
 import Service from "../Service";
 
 export default class Merchants extends React.Component {
-  constructor() {
-    super();
-  }
+    constructor(props) {
+	    super(props);
+    }
+
   render() {
-    return (
-        <div>
-            <div class="dashboard-container" id="main">
-          <div class="row content">  
-          <h1>Merchants</h1>
-          <div><CreateMerchants/></div>
-          </div>
-          <div className="modal fade">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 className="modal-title">Modal title</h4>
-                </div>
-                <div className="modal-body">
-                  <p>One fine body&hellip;</p>
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" className="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-      </div>
-    );
+	let showAccountInfo;
+	if(this.props.data) {
+		showAccountInfo = (
+			<div class="col-md-12 mt-10 mb-20 acc-border">
+				<div class="col-md-6 col-xs-6 auto-div no-padding">
+					<div class="acc-heading">{this.props.data.firstname} </div>
+					<div class="acc-info">Account#: {this.props.data.accountNo}</div>
+					<div class="acc-info">{this.props.data.phone}</div>
+					<div class="acc-info mb-20">{this.props.data.username}</div>
+				</div>
+				<div class="col-md-6 col-xs-6">
+					<i class="fa fa-pencil"></i>
+				</div>
+			</div>
+	  	)
+ 	}
+
+	  return (
+		<div>
+			<div class="dashboard-container" id="main">
+			   {showAccountInfo}
+			</div>
+		</div>
+	);
   }
 }

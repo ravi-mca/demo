@@ -1,4 +1,4 @@
-.modal-header{
+.modal-header {
   border-bottom: 0px !important;
   padding: 30px !important;
 }
@@ -26,4 +26,26 @@
     margin-bottom: 20px !important;
     border: 0 !important;
     border-top: 3px solid #eee !important;
+}
+
+/* Account-info css*/
+.acc-heading {
+    font-size: 20px;
+    font-family: 'Source Sans Pro Bold';
+    color: #4e4e4e;
+}
+
+.acc-info {
+    font-size: 15px;
+    font-family: Source Sans Pro;
+    color: #4e4e4e;
+}
+
+.acc-border {
+    border-bottom: 0.5px solid #40444e;
+}
+
+.auto-div {
+    display: inline-block;
+    width: auto;
 }
