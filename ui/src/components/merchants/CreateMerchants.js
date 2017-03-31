@@ -39,20 +39,6 @@ export default class MerchantForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  addAlert = this.addAlert.bind(this);
-  clearAlert = this.clearAlert.bind(this);
-
-  addAlert() {
-    this.refs.container.success(`hi! Now is ${new Date()}`, `///title\\\\\\`, {
-      closeButton: true,
-    });
-  }
-
-  clearAlert() {
-    this.refs.container.clear();
-  }
-
-
   openModal = () => {
     this.setState({
       isOpen: true
@@ -74,8 +60,6 @@ export default class MerchantForm extends React.Component {
     $("#phoneError").html("");
     $("#accountNameError").html("");
     $("input").removeClass("active");
-
-
   };
 
   handleChange(e) {
@@ -89,24 +73,30 @@ export default class MerchantForm extends React.Component {
   }
 
   handleSubmit(e) {    
-    e.preventDefault();
-    
-    //console.log('component state', JSON.stringify(this.state));
-    
-    if (!this.showFormErrors()) {
-      console.log('form is invalid: do not submit');
-    } else {
-      console.log('form is valid: submit');
+    e.preventDefault();    
+    if (this.showFormErrors()) {
 
       Service.createMerchant(Config.createMerchant,this.state, function(data) {
        
         this.successAlert();        
-        this.hideModal();
-       
+        this.hideModal();       
       }.bind(this), function(xhr, status, err) {
-        
-        this.openModal();
+      
         this.errorAlert();
+        var statusObj = xhr;
+        var obj=JSON.parse(xhr.responseText);
+
+        const error = document.getElementById(`emailError`);
+        const accountNameError = document.getElementById(`accountNameError`);
+
+        if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
+          
+          error.textContent = `Merchant with email address already exist`;          
+        } else if(obj["error_description"] == "Merchant with account name already exist. Please provide different account name.") {
+
+          accountNameError.textContent = `Merchant with account name already exist`;
+        }
+
       }.bind(this));
     }
   }
@@ -115,8 +105,8 @@ export default class MerchantForm extends React.Component {
     this.refs.container.success(
       "Success!!",
       "Merchant created successfully.", {
-      timeOut: 5000,
-      extendedTimeOut: 1000
+      timeOut: 50000,
+      extendedTimeOut: 10000
     });
   }
 
@@ -124,8 +114,8 @@ export default class MerchantForm extends React.Component {
     this.refs.container.error(
       "Error!!",
       "Something is wrong.", {
-      timeOut: 5000,
-      extendedTimeOut: 1000
+      timeOut: 50000,
+      extendedTimeOut: 10000
     });
   }
   
@@ -155,7 +145,7 @@ export default class MerchantForm extends React.Component {
   
    
     const isNumber = refName.indexOf('phone') !== -1;
-    //console.log(isNumber);
+
      error.textContent = '';
 
         if (!validity.valid) {
@@ -163,13 +153,11 @@ export default class MerchantForm extends React.Component {
             if (validity.valueMissing) {
                 error.textContent = `Please enter ${label}`;
             } else if (validEmail && validity.patternMismatch) {
-              console.log("Email");
+              
               error.textContent = `Please enter valid ${label} address`;
             } else if (isNumber && validity.patternMismatch) {
-              console.log("number");
+            
               error.textContent = `Please enter valid number`;
-            } else {
-              console.log("number");
             }
           }
    
@@ -181,7 +169,7 @@ export default class MerchantForm extends React.Component {
       <div id="panel">
             <div class="btn-padding">
               <button className='btn bottom-btn btn-block' onClick={this.openModal}>
-              <i class="fa fa-user-plus"> </i>  New Merchant Account
+              <i class="fa fa-user margin-right-11"> </i>   New Merchant Account
               </button>
             </div>            
             <div>

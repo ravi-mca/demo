@@ -26,14 +26,13 @@ const Service = {
 
         delete data.isOpen;
         delete data.showResults;
-        var jsonData = JSON.stringify(data);
 
         $.ajax({
             type: 'POST',
             url: url,
             dataType : "text",
             contentType: "application/json",
-            data: jsonData,
+            data: JSON.stringify(data),
             headers: {
                 'Authorization': 'Bearer '+localStorage.accessToken,
             },
