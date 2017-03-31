@@ -1,12 +1,14 @@
 import React from "react";
 import  'react-bootstrap';
 import ReactDOM from "react-dom";
+import SearchInput, {createFilter} from 'react-search-input'
 
 import Service from "../Service";
 import Config from "../../index.config";
 
 import $ from 'jquery';
 
+const KEYS_TO_FILTERS = ['user.firstname', 'user.accountNo'];
 
 export default class Sidebar extends React.Component {
     constructor(props) {
