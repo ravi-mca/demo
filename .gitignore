@@ -36,6 +36,8 @@ target
 
 /connectors/eis/eis.iml
 
+.idea/
+
 /connectors/email/email.iml
 
 /connectors/email/mandrill/mandrill.iml
@@ -43,3 +45,4 @@ target
 /connectors/security/oauth2/oauth2.iml
 
 .DS_Store
+

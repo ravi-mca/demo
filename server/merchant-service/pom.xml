@@ -12,7 +12,7 @@
     <artifactId>merchant-service</artifactId>
     <packaging>jar</packaging>
 
-    <name>Application Configuration</name>
+    <name>merchant-service</name>
 
     <dependencies>
         <dependency>

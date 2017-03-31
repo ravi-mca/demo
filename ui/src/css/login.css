@@ -1,6 +1,7 @@
 body {
 	background-color: #40444e !important;
-  font-family: Source Sans Pro !important; 
+  font-family: Source Sans Pro !important;
+  overflow: hidden;
 }
 
 .login-content {
@@ -42,32 +43,3 @@ input.active:invalid {
     font-size: 12px;
     margin-top: 5px;
 }
-
-.font-16 {
-    font-size: 16px !important;
-}
-
-.font-18 {
-    font-size: 18px;
-}
-
-.text-gray {
-   color: #727b89;
-}
-
-.text-gray-dark {
-    color: #c4c6cc;
-}
-
-.no-padding {
-    padding: 0px !important;
-}
-
-.mb-10 {
-   margin-bottom: 10px;
-}
-
-.font-bold {
-  font-weight: bold !important;
-}
-

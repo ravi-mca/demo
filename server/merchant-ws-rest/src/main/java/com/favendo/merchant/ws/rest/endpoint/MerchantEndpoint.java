@@ -1,21 +1,32 @@
 package com.favendo.merchant.ws.rest.endpoint;
 
+import static com.favendo.commons.utils.Routes.*;
+import java.util.List;
+
+import javax.annotation.security.PermitAll;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.ErrorKey;
 import com.favendo.commons.exception.StorecastApiException;
 import com.favendo.merchant.service.dto.MerchantDto;
 import com.favendo.merchant.service.service.MerchantService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import javax.annotation.security.PermitAll;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import static com.favendo.commons.utils.Routes.*;
-import static javax.ws.rs.core.Response.Status;
+import com.favendo.merchant.ws.rest.dto.converter.MerchantAccountDtoConverter;
+import com.favendo.merchant.ws.rest.endpoint.validator.MerchantAccountValidator;
+import com.favendo.user.service.domain.User;
 
 @Component
 @Path(MERCHANT)
@@ -25,6 +36,42 @@ public class MerchantEndpoint {
 
     @Autowired
     private MerchantService merchantService;
+
+    @Autowired
+    private MerchantAccountDtoConverter merchantAccountDtoConverter;
+
+    @Autowired
+    private MerchantAccountValidator merchantAccountValidator;
+    
+    @GET
+    @PermitAll
+    public Response getListOfMerchants() {
+        try {
+            List<User> merchants =  merchantService.getListOFMerchants();
+            if (merchants != null && merchants.size() > 0) {
+                return Response.status(Status.OK).entity(merchantAccountDtoConverter.convert(merchants)).build();
+            }
+            return Response.status(Response.Status.NOT_FOUND).build(); 
+        } catch (BusinessException exception) {
+            throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    @GET
+    @Path(PATH_PARAM_ACCOUNT_NO)
+    @PermitAll
+    public Response findByAccountNo(@PathParam(ACCOUNT_NO) final String accountNo) {
+        try {
+            merchantAccountValidator.validateMerchantAccountNo(accountNo);
+            User user = merchantService.findByAccountNo(accountNo);
+            if (user != null) {
+                return Response.status(Status.ACCEPTED).entity(merchantAccountDtoConverter.convertMerchant(user)).build(); 
+            }
+            return Response.status(Status.NOT_FOUND).build();
+        } catch (BusinessException exception) {
+            throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
+        }
+    }
 
     @POST
     @PermitAll

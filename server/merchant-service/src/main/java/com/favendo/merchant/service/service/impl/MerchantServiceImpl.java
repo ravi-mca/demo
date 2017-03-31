@@ -1,5 +1,15 @@
 package com.favendo.merchant.service.service.impl;
 
+import static com.favendo.user.service.constant.UserConstant.MERCHANT_ID;
+
+import java.util.List;
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.favendo.commons.enums.RoleEnum;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.ErrorKey;
@@ -11,14 +21,6 @@ import com.favendo.merchant.service.validator.MerchantValidator;
 import com.favendo.user.service.domain.User;
 import com.favendo.user.service.service.RoleService;
 import com.favendo.user.service.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Objects;
-
-import static com.favendo.user.service.constant.UserConstant.MERCHANT_ID;
 
 @Service("merchantService")
 public class MerchantServiceImpl implements MerchantService {
@@ -39,6 +41,12 @@ public class MerchantServiceImpl implements MerchantService {
     private String merchantNotFoundErrorMessage;
 
     @Override
+    public List<User> getListOFMerchants() throws BusinessException {
+        List<User> merchants = userService.getListOfMerchants(); 
+        return merchants;
+    }
+
+    @Override
     @Transactional
     public void save(MerchantDto merchantDto) throws BusinessException {
         merchantValidator.validateRequest(merchantDto);
@@ -55,6 +63,12 @@ public class MerchantServiceImpl implements MerchantService {
         merchantValidator.validateDuplication(merchantDto, userService.getByUsernameOrAccountNameAndUserId(merchantDto
                 .getEmail(), merchantDto.getAccountName(), user.getUser_id()));
         userService.save(merchantHelper.buildMerchant(merchantDto, user));
+    }
+
+    @Override
+    public User findByAccountNo(String accountNo) throws BusinessException {
+        User user = userService.getUserByAccountNo(accountNo);
+        return user;
     }
 
     private User getAndValidateUserByMerchantId(Long merchantId) {

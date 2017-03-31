@@ -14,24 +14,19 @@ export default class Header extends React.Component {
 			    </div>
 			    <div class="col-sm-offset-5 col-md-offset-5 col-lg-offset-5">
 			    <ul class="nav navbar-nav ">
-			      <li><Link to="/admins" activeClassName="active">ADMINS</Link></li>
-			      <li><Link to="/merchants" activeClassName="active">MERCHANTS</Link></li>
-			      <li><Link to="/dataportal" activeClassName="active">DATA PORTAL</Link></li> 
+			      <li><Link to="/admins" activeClassName="active" class="text-white">ADMINS</Link></li>
+			      <li><Link to="/merchants" activeClassName="active" class="text-white">MERCHANTS</Link></li>
+			      <li><Link to="/dataportal" activeClassName="active" class="text-white">DATA PORTAL</Link></li> 
 			    </ul>
 			    </div>
 			    <div>
 			    <ul class="pull-nav">
-			    	<li class="dropdown">
-				        <a class="dropdown-toggle" data-toggle="dropdown">ACCOUNT</a>
-				        <ul class="dropdown-menu">
-				          <li><a href="">Logout</a></li>
-				        </ul>
-				    </li>
+			    	<li><Link to="/account" activeClassName="active" class="text-white">ACCOUNT</Link></li> 
 			    </ul>
 			    </div>
 			  </div>
-			</nav>	
-          	</div>	
+			</nav>
+          	</div>
         );
     }
 }

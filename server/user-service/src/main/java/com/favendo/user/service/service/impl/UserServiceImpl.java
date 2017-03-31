@@ -1,11 +1,14 @@
 package com.favendo.user.service.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.favendo.commons.exception.BusinessException;
 import com.favendo.user.service.dao.UserDao;
 import com.favendo.user.service.domain.User;
 import com.favendo.user.service.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -36,5 +39,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId){
         return userDao.findByUsernameOrAccountNameAndUserId(username,accountName,userId);
+    }
+
+    public List<User> getListOfMerchants() throws BusinessException {
+        List<User> users = userDao.getListOfMerchants();
+        return users;
+    }
+
+    @Override
+    public User getUserByAccountNo(String accountNo) throws BusinessException {
+        return userDao.findByAccountNo(accountNo);
     }
 }

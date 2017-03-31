@@ -5,15 +5,14 @@ export default class Admins extends React.Component {
   constructor() {
     super();
   }
+
   render() {
     return (
         <div>
-        <div class="container-fluid">
-          <div class="row content">  
-          <h1>Admins</h1>
-          </div>
-        </div>   
-      </div>
+            <div class="dashboard-container" id="main">
+            <h4>Admin</h4>
+        </div>
+        </div>
     );
   }
 }
