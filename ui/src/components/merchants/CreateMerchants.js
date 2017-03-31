@@ -167,7 +167,7 @@ export default class MerchantForm extends React.Component {
               error.textContent = `Please enter valid ${label} address`;
             } else if (isNumber && validity.patternMismatch) {
               console.log("number");
-              error.textContent = `Please enter valid number.;
+              error.textContent = `Please enter valid number`;
             } else {
               console.log("number");
             }
