@@ -52,6 +52,10 @@ input.active:invalid {
     font-size: 18px;
 }
 
+.font-20 {
+    font-size: 20px;
+}
+
 .text-gray {
    color: #727b89;
 }

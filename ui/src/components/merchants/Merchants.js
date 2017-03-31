@@ -15,7 +15,7 @@ export default class Merchants extends React.Component {
             <div class="dashboard-container" id="main">
           <div class="row content">  
           <h1>Merchants</h1>
-          <div><CreateMerchants/></div>
+         
           </div>
           <div className="modal fade">
             <div className="modal-dialog">

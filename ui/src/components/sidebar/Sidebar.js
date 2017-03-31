@@ -3,6 +3,7 @@ import  'react-bootstrap';
 
 import Service from "../Service";
 import Config from "../../index.config";
+import CreateMerchants from "../merchants/CreateMerchants";
 
 
 export default class Sidebar extends React.Component {
@@ -56,6 +57,9 @@ export default class Sidebar extends React.Component {
                 <ul id="menu-content">
                     {showList}
                 </ul>
+                <div>
+                    <CreateMerchants/>
+                </div>
             </div>
         </div>
     );

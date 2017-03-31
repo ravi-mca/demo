@@ -21,20 +21,22 @@ const Service = {
         }
         return headers;
     },
-
+    
     createMerchant(url, data, successHandler, errorHandler) {
+
+        delete data.isOpen;
+        delete data.showResults;
+        var jsonData = JSON.stringify(data);
+
         $.ajax({
             type: 'POST',
             url: url,
-            dataType: 'json',
+            dataType : "text",
             contentType: "application/json",
+            data: jsonData,
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
                 'Authorization': 'Bearer '+localStorage.accessToken,
             },
-            data: JSON.stringify(data),
-            cache: false,
             success: successHandler,
             error: errorHandler,
         });
