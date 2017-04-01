@@ -52,6 +52,37 @@
   color: #c91c49 !important;
 }
 
+/*Search-addon */
+
+.right-inner-addon {
+    position: relative;
+}
+
+.right-inner-addon input {
+    padding-right: 30px;
+}
+
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 4px 21px;
+    pointer-events: none;
+}
+
+.nav-side-menu input {
+    background: none;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-width: 1px;
+    width: 100%;
+}
+
+.nav-side-menu input:focus {
+    outline-width: 0;
+}
+
 ::-webkit-scrollbar {
     width: 12px;
 }

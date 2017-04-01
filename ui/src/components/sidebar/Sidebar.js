@@ -5,16 +5,19 @@ import Service from "../Service";
 import Config from "../../index.config";
 
 import $ from 'jquery';
+import SearchInput, {createFilter} from 'react-search-input';
 
-const KEYS_TO_FILTERS = ['user.firstname', 'user.accountNo'];
+const KEYS_TO_FILTERS = ['firstname','accountNo'];
 
 export default class Sidebar extends React.Component {
     constructor(props) {
         super();
         this.state = {
             selected :'',
+            selectedTerm:'',
             merchantList: []
         };
+        this.searchUpdated = this.searchUpdated.bind(this);
     }
 
     componentDidMount() {
@@ -49,8 +52,13 @@ export default class Sidebar extends React.Component {
         }
     }
 
+    searchUpdated (term) {
+        this.setState({selectedTerm: term});
+    }
+
     render() {
-        let showList =  this.state.merchantList.map(function(user, i) {
+        const filteredList = this.state.merchantList.filter(createFilter(this.state.selectedTerm, KEYS_TO_FILTERS));
+        let showList =  filteredList.map(function(user, i) {
             return (
                 <li  key={i} className={this.isActive(user.firstname)} onClick={this.setFilter.bind(this, user.firstname,user)}>
                 <div class="list-padding">{user.firstname} </div></li>
@@ -59,13 +67,9 @@ export default class Sidebar extends React.Component {
 
     return (
         <div class="nav-side-menu">
-            <div class="input-group pad-15">
-                <input type="text" class="form-control" placeholder="Search" />
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
+           <div class="right-inner-addon pad-15">
+                <i class="fa fa-search"></i>
+                    <SearchInput class="search-box" placeholder="Search" onChange={this.searchUpdated} />
             </div>
             <div class="menu-list">
                 <ul id="menu-content">
