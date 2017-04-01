@@ -115,8 +115,8 @@ export default class MerchantForm extends React.Component {
     this.refs.container.success(
       "Success!!",
       "Merchant created successfully.", {
-      timeOut: 50000,
-      extendedTimeOut: 10000
+      timeOut: 2000,
+      extendedTimeOut: 1000
     });
   }
 
@@ -124,8 +124,8 @@ export default class MerchantForm extends React.Component {
     this.refs.container.error(
       "Error!!",
       "Something is wrong.", {
-      timeOut: 50000,
-      extendedTimeOut: 10000
+      timeOut: 2000,
+      extendedTimeOut: 1000
     });
   }
   
