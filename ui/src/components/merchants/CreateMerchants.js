@@ -63,17 +63,24 @@ export default class MerchantForm extends React.Component {
   };
 
   handleChange(e) {
+    
     e.target.classList.add('active');
     
     this.setState({
       [e.target.name]: e.target.value
+
     });
-    
-    this.showInputError(e.target.name);
+
+    this.showInputError(e.target.name);  
+    this.setState({
+      isOpen: true
+    });        
   }
 
   handleSubmit(e) {    
-    e.preventDefault();    
+    e.preventDefault();   
+    let isFormValid = true;
+
     if (this.showFormErrors()) {
 
       Service.createMerchant(Config.createMerchant,this.state, function(data) {
@@ -90,12 +97,15 @@ export default class MerchantForm extends React.Component {
         const accountNameError = document.getElementById(`accountNameError`);
 
         if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
-          
-          error.textContent = `Merchant with email address already exist`;          
-        } else if(obj["error_description"] == "Merchant with account name already exist. Please provide different account name.") {
 
+          error.textContent = `Merchant with email address already exist`;          
+         
+         } else if(obj["error_description"] == "Merchant with account name already exist. Please provide different account name.") {
+          
           accountNameError.textContent = `Merchant with account name already exist`;
         }
+
+        isFormValid = false;
 
       }.bind(this));
     }
@@ -120,15 +130,15 @@ export default class MerchantForm extends React.Component {
   }
   
   showFormErrors() {
-    const inputs = document.querySelectorAll('#panel input');
-    let isFormValid = true;
     
+    const inputs = document.querySelectorAll('#panel input');
+
+    let isFormValid = true;
     inputs.forEach(input => {
       input.classList.add('active');
-      
       const isInputValid = this.showInputError(input.name);
       
-      if (!isInputValid) {
+      if (!isInputValid && isFormValid ) {
         isFormValid = false;
       }
     });
@@ -137,31 +147,35 @@ export default class MerchantForm extends React.Component {
   }
   
   showInputError(refName) {
+   
+    var isControlValid = true;
     const validity = this.refs[refName].validity;
     const label = document.getElementById(`${refName}Label`).textContent;
     const error = document.getElementById(`${refName}Error`);
 
-    const validEmail = refName.indexOf('email') !== -1;
-  
-   
+    const validEmail = refName.indexOf('email') !== -1;     
     const isNumber = refName.indexOf('phone') !== -1;
 
      error.textContent = '';
 
         if (!validity.valid) {
-            this.setState({ showResults: false });
-            if (validity.valueMissing) {
-                error.textContent = `Please enter ${label}`;
-            } else if (validEmail && validity.patternMismatch) {
-              
-              error.textContent = `Please enter valid ${label} address`;
-            } else if (isNumber && validity.patternMismatch) {
+          
+          isControlValid = false;            
+          this.setState({ showResults: false });  
+
+          if (validity.valueMissing) {
+             
+            error.textContent = `Please enter ${label}`;
+          } else if (validEmail && validity.patternMismatch) {
             
-              error.textContent = `Please enter valid number`;
-            }
+            error.textContent = `Please enter valid ${label} address`;
+          } else if (isNumber && validity.patternMismatch) {
+          
+            error.textContent = `Please enter valid number`;
           }
+        }
    
-    return true;
+    return isControlValid;
   }
 
   render() {
@@ -182,7 +196,7 @@ export default class MerchantForm extends React.Component {
               <div class="modal-header">
                 <h4 class="modal-title font-20">Create New Merchant</h4>
               </div>
-              <form id="myform" method="post" noValidate>
+              <form id="myform" method="post" noValidate onSubmit="">
               <ModalBody>
                 <FormGroup row>
                   <Label id="firstNameLabel" class="form-label" for="firstName" sm={3}>First Name </Label><span></span>
