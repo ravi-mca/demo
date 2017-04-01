@@ -41,6 +41,25 @@ const Service = {
         });
     },
 
+    editMerchant(url, data, successHandler, errorHandler) {
+
+        delete data.isOpen;
+        delete data.showResults;
+
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            dataType : "text",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            headers: {
+                'Authorization': 'Bearer '+localStorage.accessToken,
+            },
+            success: successHandler,
+            error: errorHandler,
+        });
+    },
+
     buildRequestdata(url, type, data, headers) {
         var reqData = {
             type: type,

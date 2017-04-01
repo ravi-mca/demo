@@ -92,3 +92,7 @@
     display: inline-block;
     width: auto;
 }
+
+.bgColor {
+  background: white !important;
+}

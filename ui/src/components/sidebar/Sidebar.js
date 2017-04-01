@@ -16,6 +16,7 @@ export default class Sidebar extends React.Component {
             selected :'',
             merchantList: []
         };
+        this.getListOfMerchant = this.getListOfMerchant.bind(this);
     }
 
     componentDidMount() {
@@ -71,10 +72,10 @@ export default class Sidebar extends React.Component {
             <div class="menu-list">
                 <ul id="menu-content">
                     {showList}
-                </ul>
-                <div>
-                    <CreateMerchants/>
-                </div>
+                </ul>                
+            </div>
+            <div>
+               <CreateMerchants onUpdateList={this.getListOfMerchant}/>
             </div>
         </div>
     );
