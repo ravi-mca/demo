@@ -5,7 +5,7 @@ import com.favendo.user.service.builder.AuthenticationBuilder;
 import com.favendo.user.service.domain.User;
 import com.favendo.user.service.dto.AuthenticationSuccessDto;
 import com.favendo.user.service.jwt.TokenGenerator;
-import com.favendo.user.service.utils.StorecastUserContextHolder;
+import com.favendo.user.service.utils.UserContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -35,7 +35,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
     }
 
     private AuthenticationSuccessDto getAuthenticationSuccessDto() {
-        User storecastUser = StorecastUserContextHolder.getLoggedInUser();
+        User storecastUser = UserContextHolder.getLoggedInUser();
         return authenticationBuilder.buildAuthenticationSuccess(storecastUser.getRoles(),
                 tokenGenerator.generateToken(storecastUser));
     }

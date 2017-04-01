@@ -2,7 +2,7 @@ package com.favendo.user.service.jwt;
 
 import com.favendo.commons.utils.DateFactory;
 import com.favendo.user.service.domain.User;
-import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Claims;import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,7 @@ public class TokenGenerator {
                 .setClaims(tokenUtils.getClaims(user, dateFactory.getDateByMilliseconds(expirationTime)))
                 .signWith(SignatureAlgorithm.HS256, tokenUtils.getApiSecretKey());
         return builder.compact();
-    }
-}
+    }    }
 
 
 

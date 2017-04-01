@@ -6,7 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Objects;
 
-public class StorecastUserContextHolder {
+public class UserContextHolder {
 
     public static User getLoggedInUser() {
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
