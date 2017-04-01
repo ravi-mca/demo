@@ -2,16 +2,16 @@
 .dashboard-container {
     background-color: #fff !important;
     max-height: calc(100% - 120px);
-    overflow-y: scroll;
-    padding: 0px 3% !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0px 2% !important;
     margin-top: 52px !important;
     height: 550px;
 }
 
 .nav-side-menu {
-  font-family: Source Sans Pro;
-  font-size: 18px ;
-  font-weight: 200;
+  font-family: Source Sans Pro Semibold;
+  font-size: 15px ;
   position: fixed;
   top: 51px;
   width: 275px;
@@ -22,10 +22,11 @@
 .list-nav  {
   color: #fff !important;
 }
+
 .activeList {
-    border-left: 6px solid red !important;
+  border-left: 6px solid #c91c49 !important;
   background-color: #eBecef !important;
-  color: red !important;
+  color: #c91c49 !important;
 }
 
 
@@ -46,11 +47,10 @@
 }
 
 .nav-side-menu li:hover {
-  border-left: 6px solid red;
+  border-left: 6px solid #c91c49;
   background-color: #eBecef;
-  color: red !important;
+  color: #c91c49 !important;
 }
-
 
 ::-webkit-scrollbar {
     width: 12px;
@@ -81,7 +81,12 @@
     width: 100%;
     margin-bottom: 10px;
     height: 200px;
+    overflow-y: auto; 
   }
+
+   .nav-side-menu .menu-list {
+        height: 200px;
+    }
 }
 
 @media (min-width: 767px) {
@@ -90,7 +95,7 @@
 }
 
 #main {
-    width:calc(100% - 270px);
+    width:calc(100% - 275px);
     float: right;
   }
 }

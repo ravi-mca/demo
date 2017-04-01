@@ -65,6 +65,12 @@ public class MerchantServiceImpl implements MerchantService {
         userService.save(merchantHelper.buildMerchant(merchantDto, user));
     }
 
+    @Override
+    public User findByAccountNo(String accountNo) throws BusinessException {
+        User user = userService.getUserByAccountNo(accountNo);
+        return user;
+    }
+
     private User getAndValidateUserByMerchantId(Long merchantId) {
         User user = userService.getByUserId(merchantId);
         if (Objects.isNull(user)) {

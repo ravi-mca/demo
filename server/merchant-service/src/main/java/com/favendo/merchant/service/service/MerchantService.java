@@ -13,4 +13,6 @@ public interface MerchantService {
    void update(MerchantDto merchantDto,Long merchantId) throws BusinessException;
    
    List<User> getListOFMerchants();
+   
+   User findByAccountNo(String accountNo) throws BusinessException;
 }

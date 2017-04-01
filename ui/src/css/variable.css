@@ -1,0 +1,62 @@
+/* font-size */
+.font-15 {
+    font-size: 15px !important;
+}
+.font-16 {
+    font-size: 16px !important;
+}
+
+.font-18 {
+    font-size: 18px !important;
+}
+
+.font-20 {
+    font-size: 20px !important;
+}
+
+.font-bold {
+  font-weight: bold !important;
+}
+
+/* text-colors */
+.text-gray {
+   color: #727b89;
+}
+
+.text-gray-dark {
+  color: #c4c6cc;
+}
+
+.text-red {
+  color: red;
+}
+
+/* set-padding */
+.no-padding {
+    padding: 0px !important;
+}
+
+.pad-15 {
+  padding: 15px;
+}
+
+.list-padding {
+  padding: 5px 15px 5px 15px;
+}
+
+/* set-margin */
+.mb-10 {
+   margin-bottom: 10px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mt-lg-20 {
+  margin-top: 20px;
+}

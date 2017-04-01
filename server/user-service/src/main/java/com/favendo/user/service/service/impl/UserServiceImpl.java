@@ -45,4 +45,9 @@ public class UserServiceImpl implements UserService {
         List<User> users = userDao.getListOfMerchants();
         return users;
     }
+
+    @Override
+    public User getUserByAccountNo(String accountNo) throws BusinessException {
+        return userDao.findByAccountNo(accountNo);
+    }
 }

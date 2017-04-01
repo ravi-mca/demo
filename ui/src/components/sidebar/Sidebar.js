@@ -1,13 +1,16 @@
 import React from "react";
 import  'react-bootstrap';
-
+import ReactDOM from "react-dom";
 import Service from "../Service";
 import Config from "../../index.config";
 import CreateMerchants from "../merchants/CreateMerchants";
 
+import $ from 'jquery';
+
+const KEYS_TO_FILTERS = ['user.firstname', 'user.accountNo'];
 
 export default class Sidebar extends React.Component {
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
             selected :'',
@@ -19,6 +22,13 @@ export default class Sidebar extends React.Component {
         this.getListOfMerchant();
     }
 
+    componentDidUpdate() {
+        if(this.state.selected == '') {
+            $('#menu-content li').first().addClass('activeList');
+            $('#menu-content li' ).first().trigger('click');
+        }
+    }
+
     getListOfMerchant() {
         var reqData = Service.buildRequestdata(Config.getMerchantList, 'GET');
         Service.executeRequest(reqData, function(response) {
@@ -28,18 +38,23 @@ export default class Sidebar extends React.Component {
         }.bind(this));
     }
 
-    setFilter(filter) {
+    setFilter(filter,user) {
         this.setState({selected  : filter});
+        this.props.onSelectList(user);
     }
 
     isActive(value) {
-        return ((value===this.state.selected) ?'activeList':'list-nav');
+        if(this.state.selected !== '') {
+            $('#menu-content li').first().addClass('list-nav');
+            return ((value===this.state.selected) ?'activeList':'list-nav');
+        }
     }
 
     render() {
         let showList =  this.state.merchantList.map(function(user, i) {
             return (
-                <li  key={i} className={this.isActive(user.firstname)} onClick={this.setFilter.bind(this, user.firstname)}><div class="list-padding">{user.firstname} </div></li>
+                <li  key={i} className={this.isActive(user.firstname)} onClick={this.setFilter.bind(this, user.firstname,user)}>
+                <div class="list-padding">{user.firstname} </div></li>
            );
         }, this);
 

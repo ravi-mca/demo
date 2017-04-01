@@ -1,9 +1,6 @@
 package com.favendo.merchant.ws.rest.endpoint;
 
-import static com.favendo.commons.utils.Routes.MERCHANT;
-import static com.favendo.commons.utils.Routes.MERCHANT_ID;
-import static com.favendo.commons.utils.Routes.PATH_PARAM_MERCHANT_ID;
-
+import static com.favendo.commons.utils.Routes.*;
 import java.util.List;
 
 import javax.annotation.security.PermitAll;
@@ -28,6 +25,7 @@ import com.favendo.commons.exception.StorecastApiException;
 import com.favendo.merchant.service.dto.MerchantDto;
 import com.favendo.merchant.service.service.MerchantService;
 import com.favendo.merchant.ws.rest.dto.converter.MerchantAccountDtoConverter;
+import com.favendo.merchant.ws.rest.endpoint.validator.MerchantAccountValidator;
 import com.favendo.user.service.domain.User;
 
 @Component
@@ -41,6 +39,39 @@ public class MerchantEndpoint {
 
     @Autowired
     private MerchantAccountDtoConverter merchantAccountDtoConverter;
+
+    @Autowired
+    private MerchantAccountValidator merchantAccountValidator;
+    
+    @GET
+    @PermitAll
+    public Response getListOfMerchants() {
+        try {
+            List<User> merchants =  merchantService.getListOFMerchants();
+            if (merchants != null && merchants.size() > 0) {
+                return Response.status(Status.OK).entity(merchantAccountDtoConverter.convert(merchants)).build();
+            }
+            return Response.status(Response.Status.NOT_FOUND).build(); 
+        } catch (BusinessException exception) {
+            throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    @GET
+    @Path(PATH_PARAM_ACCOUNT_NO)
+    @PermitAll
+    public Response findByAccountNo(@PathParam(ACCOUNT_NO) final String accountNo) {
+        try {
+            merchantAccountValidator.validateMerchantAccountNo(accountNo);
+            User user = merchantService.findByAccountNo(accountNo);
+            if (user != null) {
+                return Response.status(Status.ACCEPTED).entity(merchantAccountDtoConverter.convertMerchant(user)).build(); 
+            }
+            return Response.status(Status.NOT_FOUND).build();
+        } catch (BusinessException exception) {
+            throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
+        }
+    }
 
     @POST
     @PermitAll
@@ -60,20 +91,6 @@ public class MerchantEndpoint {
         try {
             merchantService.update(merchantDto, merchantId);
             return Response.status(Status.OK).build();
-        } catch (BusinessException exception) {
-            throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
-        }
-    }
-
-    @GET
-    @PermitAll
-    public Response getListOfMerchants() {
-        try {
-            List<User> merchants =  merchantService.getListOFMerchants();
-            if (merchants != null && merchants.size() > 0) {
-                return Response.status(Status.OK).entity(merchantAccountDtoConverter.convert(merchants)).build();
-            }
-            return Response.status(Response.Status.NOT_FOUND).build(); 
         } catch (BusinessException exception) {
             throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
         }
