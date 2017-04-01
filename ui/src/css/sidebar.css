@@ -76,7 +76,32 @@
     border-left: none;
     border-right: none;
     border-width: 1px;
+    border-color: #5f6a77;
     width: 100%;
+}
+
+.nav-side-menu input::-webkit-input-placeholder {
+    font-size: 13px !important;
+    color: #abb0b7;
+    font-family : Source Sans Pro Italic;
+}
+
+.nav-side-menu input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   font-size: 13px !important;
+    color: #abb0b7;
+    font-family : Source Sans Pro Italic;
+}
+
+.nav-side-menu input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-size: 13px !important;
+    color: #abb0b7;
+    font-family : Source Sans Pro Italic;
+}
+
+.nav-side-menu input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-size: 13px !important;
+    color: #abb0b7;
+    font-family : Source Sans Pro Italic;
 }
 
 .nav-side-menu input:focus {
