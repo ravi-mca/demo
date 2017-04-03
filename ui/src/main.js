@@ -11,7 +11,10 @@ import './css/footer.css';
 import './css/header.css';
 import './css/sidebar.css';
 import './css/merchant.css';
+import './css/toastr.min.css';
 import './fonts/fonts.css';
+import 'animate.css/animate.min.css';
+
 
 import Layout from "./components/Layout";
 import Login from "./components/login/Login";

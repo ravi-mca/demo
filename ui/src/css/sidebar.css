@@ -16,7 +16,9 @@
   top: 51px;
   width: 275px;
   height: 100%;
-  background-color: #40444e;
+  //background-color: #40444e;
+  opacity: 1;
+  z-index: 999;
 }
 
 .list-nav  {
@@ -69,7 +71,7 @@
     pointer-events: none;
 }
 
-.nav-side-menu input {
+.right-inner-addon input {
     background: none;
     color: white;
     border-top: none;

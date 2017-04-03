@@ -23,20 +23,21 @@ import {
   ModalFooter
 } from 'react-modal-bootstrap';
 
-export default class MerchantForm extends React.Component {
+export default class EditMerchant extends React.Component {
     constructor(props) {
     super(props);
 
     this.state = {
-      firstName: '',
-      lastName: '',      
-      email: '',      
-      phone: '',
-      accountName: '',
+      firstName: this.props.data.firstname,
+      lastName: this.props.data.lastname,      
+      email: this.props.data.username,      
+      phone: this.props.data.phone,
+      accountName: this.props.data.accountName,
     };
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.showEditForm = this.showEditForm.bind(this);
   }
 
   openModal = () => {
@@ -48,11 +49,11 @@ export default class MerchantForm extends React.Component {
   hideModal = () => {
     this.setState({
       isOpen: false, 
-      firstName: '',
-      lastName: '',      
-      email: '',      
-      phone: '',
-      accountName: '',
+      firstName: this.props.data.firstname,
+      lastName: this.props.data.lastname,      
+      email: this.props.data.username,      
+      phone: this.props.data.phone,
+      accountName: this.props.data.accountName,
     }); 
     $("#firstNameError").html("");
     $("#lastNameError").html("");
@@ -71,31 +72,34 @@ export default class MerchantForm extends React.Component {
 
     });
 
-    this.showInputError(e.target.name);  
-    this.setState({
-      isOpen: true
-    });        
+    this.showInputError(e.target.name);    
+
   }
 
   handleSubmit(e) {    
     e.preventDefault();   
     let isFormValid = true;
+    var merchantId = this.props.data.userId;
+    console.log(Config.editMerchant+merchantId);
 
     if (this.showFormErrors()) {
 
-      Service.createMerchant(Config.createMerchant,this.state, function(data) {
+      Service.editMerchant(Config.editMerchant+merchantId,this.state, function(data) {
        
         this.successAlert();        
-        this.hideModal();   
-        this.props.onUpdateList();    
+        this.hideModal(); 
+        this.props.onUpdateAccount();      
       }.bind(this), function(xhr, status, err) {
       
         this.errorAlert();
         var statusObj = xhr;
         var obj=JSON.parse(xhr.responseText);
+        console.log(xhr);
 
         const error = document.getElementById(`emailError`);
         const accountNameError = document.getElementById(`accountNameError`);
+
+        console.log(obj["error_description"]);
 
         if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
 
@@ -146,6 +150,15 @@ export default class MerchantForm extends React.Component {
     
     return isFormValid;
   }
+
+  showEditForm() {
+
+    this.setState({
+      isOpen: true
+    });   
+
+    console.log(this.props.data);
+  }
   
   showInputError(refName) {
    
@@ -183,9 +196,9 @@ export default class MerchantForm extends React.Component {
     return (
       <div id="panel">
             <div class="btn-padding">
-              <button className='btn bottom-btn btn-block' onClick={this.openModal}>
-              <i class="fa fa-user margin-right-11"> </i>   New Merchant Account
-              </button>
+            <div class="col-md-6 col-xs-6">
+              <i class="fa fa-pencil" onClick={this.showEditForm}></i>  
+            </div>
             </div>            
             <div>
               <ToastContainer ref="container"
@@ -194,9 +207,9 @@ export default class MerchantForm extends React.Component {
             </div>           
             <Modal isOpen={this.state.isOpen}>
               <div class="modal-header">
-                <h4 class="modal-title font-20">Create New Merchant</h4>
+                <h4 class="modal-title font-20">Edit New Merchant</h4>
               </div>
-              <form id="myform" method="post" noValidate onSubmit="">
+              <form id="editMerchant" method="post" noValidate onSubmit="">
               <ModalBody>
                 <FormGroup row>
                   <Label id="firstNameLabel" class="form-label" for="firstName" sm={3}>First Name </Label><span></span>
@@ -218,7 +231,7 @@ export default class MerchantForm extends React.Component {
                     type="lastName"
                     name="lastName"
                     ref="lastName"
-                    value={ this.state.lastName } 
+                    value={this.state.lastName} 
                     onChange={ this.handleChange }
                     required />
                   <div className="error" id="lastNameError" />
@@ -270,7 +283,7 @@ export default class MerchantForm extends React.Component {
               <hr class="modal-footer-hr"/>
               <ModalFooter>
                 <button type="submit" class="btn btn-blue" onClick={ this.handleSubmit }>
-                  Save Merchant Account
+                  Save Merchant Update
                 </button>
                 <button type="button" className='btn btn-blue' onClick={this.hideModal} formNoValidate>
                   Cancel

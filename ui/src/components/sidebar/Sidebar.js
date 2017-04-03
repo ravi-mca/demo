@@ -3,6 +3,7 @@ import  'react-bootstrap';
 import ReactDOM from "react-dom";
 import Service from "../Service";
 import Config from "../../index.config";
+import CreateMerchants from "../merchants/CreateMerchants";
 
 import $ from 'jquery';
 import SearchInput, {createFilter} from 'react-search-input';
@@ -17,7 +18,9 @@ export default class Sidebar extends React.Component {
             selectedTerm:'',
             merchantList: []
         };
+
         this.searchUpdated = this.searchUpdated.bind(this);
+        this.getListOfMerchant = this.getListOfMerchant.bind(this);
     }
 
     componentDidMount() {
@@ -75,6 +78,9 @@ export default class Sidebar extends React.Component {
                 <ul id="menu-content">
                     {showList}
                 </ul>
+            </div>
+            <div>
+               <CreateMerchants onUpdateList={this.getListOfMerchant}/>
             </div>
         </div>
     );

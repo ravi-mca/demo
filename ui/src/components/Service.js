@@ -21,20 +21,40 @@ const Service = {
         }
         return headers;
     },
-
+    
     createMerchant(url, data, successHandler, errorHandler) {
+
+        delete data.isOpen;
+        delete data.showResults;
+
         $.ajax({
             type: 'POST',
             url: url,
-            dataType: 'json',
+            dataType : "text",
             contentType: "application/json",
+            data: JSON.stringify(data),
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
                 'Authorization': 'Bearer '+localStorage.accessToken,
             },
+            success: successHandler,
+            error: errorHandler,
+        });
+    },
+
+    editMerchant(url, data, successHandler, errorHandler) {
+
+        delete data.isOpen;
+        delete data.showResults;
+
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            dataType : "text",
+            contentType: "application/json",
             data: JSON.stringify(data),
-            cache: false,
+            headers: {
+                'Authorization': 'Bearer '+localStorage.accessToken,
+            },
             success: successHandler,
             error: errorHandler,
         });
