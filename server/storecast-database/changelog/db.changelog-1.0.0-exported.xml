@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd">
+    <changeSet author="kunjan.s (generated)" id="1490707648491-1">
+        <createSequence sequenceName="hibernate_sequence"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1490707648491-2">
+        <createTable tableName="sc_role">
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1490707648491-3">
+        <createTable tableName="sc_user">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_name" type="VARCHAR(255)"/>
+            <column name="account_no" type="VARCHAR(255)"/>
+            <column name="firstname" type="VARCHAR(255)"/>
+            <column name="lastname" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="phone" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1490707648491-4">
+        <createTable tableName="sc_user_role">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1490707648491-5">
+        <addPrimaryKey columnNames="role_id" constraintName="sc_role_pkey" tableName="sc_role"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1490707648491-6">
+        <addPrimaryKey columnNames="user_id" constraintName="sc_user_pkey" tableName="sc_user"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1490707648491-7">
+        <addUniqueConstraint columnNames="account_name" constraintName="uk_4diyspmye0i6lt5jdct05lmd1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="sc_user"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1490707648491-8">
+        <addUniqueConstraint columnNames="username" constraintName="uk_5xrwmfdbgnb9o2bvpoqn9sj1a" deferrable="false" disabled="false" initiallyDeferred="false" tableName="sc_user"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1490707648491-9">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="sc_user_role" constraintName="fk_9ev9ps11nsra8k0l37gegl185" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="sc_user"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1490707648491-10">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="sc_user_role" constraintName="fk_pxxhrs907acwa1mps336dfpqm" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="role_id" referencedTableName="sc_role"/>
+    </changeSet>
+</databaseChangeLog>
