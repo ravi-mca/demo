@@ -9,7 +9,7 @@ export default class Admins extends React.Component {
   render() {
     return (
         <div>
-            <div class="dashboard-container" id="main">
+            <div class="dashboard-container" id="mainDash">
             <h4>Admin</h4>
         </div>
         </div>

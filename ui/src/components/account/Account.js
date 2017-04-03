@@ -24,7 +24,7 @@ export default class Account extends React.Component {
   render() {
     return (
       <div>
-      <div class="dashboard-container" id="main">
+      <div class="dashboard-container" id="mainDash">
             <div class="font-18 mt-lg-20">
                 <Link to="" onClick={ this.handleClick } class="text-red">Signout</Link>
             </div>

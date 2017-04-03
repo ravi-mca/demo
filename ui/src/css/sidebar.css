@@ -132,7 +132,9 @@
 ::-webkit-scrollbar-thumb:window-inactive {
     background: #A9A9A9;
 }
-
+#mainDash {
+  width:100%;
+}
 @media (max-width: 767px) {
   .nav-side-menu {
     position: relative;
