@@ -1,14 +1,14 @@
 package com.favendo.user.service.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.user.service.dao.UserDao;
 import com.favendo.user.service.domain.User;
 import com.favendo.user.service.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -17,12 +17,13 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public void save(User user){
+    @Transactional
+    public void save(User user) {
         userDao.save(user);
     }
 
     @Override
-    public User getByUserId(Long userId){
+    public User getByUserId(Long userId) {
         return userDao.findOne(userId);
     }
 
@@ -32,22 +33,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByUsernameOrAccountName(String username,String accountName) {
-        return userDao.findByUsernameOrAccountName(username,accountName);
+    public User getByUsernameOrAccountName(String username, String accountName) {
+        return userDao.findByUsernameOrAccountName(username, accountName);
     }
 
     @Override
-    public User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId){
-        return userDao.findByUsernameOrAccountNameAndUserId(username,accountName,userId);
+    public User getByUsernameOrAccountNameAndUserId(String username, String accountName, Long userId) {
+        return userDao.findByUsernameOrAccountNameAndUserId(username, accountName, userId);
     }
 
-    public List<User> getListOfMerchants() throws BusinessException {
-        List<User> users = userDao.getListOfMerchants();
-        return users;
+    public List<User> getAll() throws BusinessException {
+        return userDao.findAll();
     }
 
     @Override
-    public User getUserByAccountNo(String accountNo) throws BusinessException {
+    public User getByAccountNo(String accountNo) throws BusinessException {
         return userDao.findByAccountNo(accountNo);
     }
 }

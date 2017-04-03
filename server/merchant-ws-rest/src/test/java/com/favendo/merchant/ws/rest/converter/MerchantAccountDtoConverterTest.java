@@ -1,8 +1,8 @@
-package com.favendo.merchant.ws.rest.dto.converter;
+package com.favendo.merchant.ws.rest.converter;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.favendo.merchant.ws.rest.convertor.MerchantDtoConverter;
+import com.favendo.merchant.ws.rest.dto.MerchantDto;
+import com.favendo.user.service.domain.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,8 +10,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.favendo.merchant.ws.rest.dto.MerchantAccountDto;
-import com.favendo.user.service.domain.User;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MerchantAccountDtoConverterTest {
@@ -19,7 +19,7 @@ public class MerchantAccountDtoConverterTest {
     private List<User> merchantList;
 
     @InjectMocks
-    private MerchantAccountDtoConverter merchantDtoConverter;
+    private MerchantDtoConverter merchantDtoConverter;
 
     private static final String MERCHANT1_FIRSTNAME = "Storecast";
     private static final String MERCHANT1_LASNAME = "Admin";
@@ -36,7 +36,6 @@ public class MerchantAccountDtoConverterTest {
     private static final String MERCHANT2_PHONE = "12345676";
     private static final String MERCHANT2_ACCOUNT_NAME = "Merchant2-Account";
 
-
     @Before
     public void startup(){
         merchantList = buildMerchantList();
@@ -44,10 +43,10 @@ public class MerchantAccountDtoConverterTest {
 
     @Test
     public void testMerchantDtoConverter() {
-        List<MerchantAccountDto> merchantDtoList = merchantDtoConverter.convert(merchantList);
+        List<MerchantDto> merchantDtoList = merchantDtoConverter.convertMerchants(merchantList);
         Assert.assertNotNull(merchantDtoList);
         Assert.assertEquals(2, merchantDtoList.size());
-        Assert.assertEquals("test-admin1@storecast.io", merchantDtoList.get(0).getUsername());
+        Assert.assertEquals("test-admin1@storecast.io", merchantDtoList.get(0).getEmail());
         Assert.assertEquals("ABCD1234", merchantDtoList.get(0).getAccountNo());
         Assert.assertEquals(2, merchantDtoList.get(1).getUserId().longValue());
         Assert.assertEquals("12345676", merchantDtoList.get(1).getPhone());

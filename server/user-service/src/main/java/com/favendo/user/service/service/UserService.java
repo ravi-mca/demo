@@ -7,7 +7,7 @@ import com.favendo.user.service.domain.User;
 
 public interface UserService {
     
-    List<User> getListOfMerchants();
+    List<User> getAll();
 
     void save(User user);
 
@@ -17,7 +17,7 @@ public interface UserService {
 
     User getByUsernameOrAccountName(String username,String accountName);
 
-    User getUserByAccountNo(String accountNo);
+    User getByAccountNo(String accountNo);
     
     User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId);
 }

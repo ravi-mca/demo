@@ -1,8 +1,7 @@
 package com.favendo.merchant.service.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.favendo.user.service.domain.User;
+import com.favendo.user.service.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,11 +11,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.favendo.user.service.domain.User;
-import com.favendo.user.service.service.UserService;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TestMerchantServiceImpl {
+public class MerchantServiceTest {
 
     private List<User> merchantList;
 
@@ -42,14 +41,14 @@ public class TestMerchantServiceImpl {
     private static final String MERCHANT2_ACCOUNT_NAME = "Merchant2-Account";
 
     @Before
-    public void startup(){
+    public void startup() {
         merchantList = buildMerchantList();
     }
 
     @Test
     public void testGetMerchantList() {
-        Mockito.when(userService.getListOfMerchants()).thenReturn(merchantList);
-        List<User> users = merchantService.getListOFMerchants();
+        Mockito.when(userService.getAll()).thenReturn(merchantList);
+        List<User> users = merchantService.getAll();
         Assert.assertNotNull(users);
         Assert.assertEquals(2, users.size());
         Assert.assertEquals("test-admin1@storecast.io", users.get(0).getUsername());
@@ -57,11 +56,11 @@ public class TestMerchantServiceImpl {
 
     @Test
     public void testGetMerchantAccountInfo() {
-        Mockito.when(userService.getUserByAccountNo(MERCHANT1_ACCOUNT_NO)).thenReturn(buildFirstMerchant());
-        User merchant = userService.getUserByAccountNo(MERCHANT1_ACCOUNT_NO);
+        Mockito.when(userService.getByAccountNo(MERCHANT1_ACCOUNT_NO)).thenReturn(buildFirstMerchant());
+        User merchant = userService.getByAccountNo(MERCHANT1_ACCOUNT_NO);
         Assert.assertNotNull(merchant);
         Assert.assertEquals("test-admin1@storecast.io", merchant.getUsername());
-        Assert.assertEquals("12345676", merchant.getPhone()); 
+        Assert.assertEquals("12345676", merchant.getPhone());
     }
 
     private List<User> buildMerchantList() {
