@@ -119,7 +119,7 @@ export default class EditMerchant extends React.Component {
   successAlert () {
     this.refs.container.success(
       "Success!!",
-      "Merchant created successfully.", {
+      "Merchant Updated successfully.", {
       timeOut: 2000,
       extendedTimeOut: 1000
     });
