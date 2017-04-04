@@ -4,7 +4,8 @@ const Config = {
     createMerchant : BaseUrl +'/storecast/api/merchant',
     editMerchant : BaseUrl +'/storecast/api/merchant/',
     login : BaseUrl +'/storecast/api/admin/login',
-    getMerchantList: BaseUrl + '/storecast/api/merchant'
+    getMerchantList: BaseUrl + '/storecast/api/merchant',
+    getMerchant: BaseUrl + '/storecast/api/merchant/',
 };
 
 export default Config;

@@ -26,12 +26,12 @@ import {
 export default class EditMerchant extends React.Component {
     constructor(props) {
     super(props);
-
     this.state = {
       firstName: this.props.data.firstname,
       lastName: this.props.data.lastname,      
       email: this.props.data.username,      
       phone: this.props.data.phone,
+      accountNo: this.props.data.accountNo,
       accountName: this.props.data.accountName,
     };
     
@@ -42,7 +42,7 @@ export default class EditMerchant extends React.Component {
 
   openModal = () => {
     this.setState({
-      isOpen: true
+      isOpen: true,
     });
   };
 
@@ -53,13 +53,14 @@ export default class EditMerchant extends React.Component {
       lastName: this.props.data.lastname,      
       email: this.props.data.username,      
       phone: this.props.data.phone,
+      accountNo: this.props.data.accountNo,
       accountName: this.props.data.accountName,
     }); 
-    $("#firstNameError").html("");
-    $("#lastNameError").html("");
-    $("#emailError").html("");
-    $("#phoneError").html("");
-    $("#accountNameError").html("");
+    $("#editFirstNameError").html("");
+    $("#editLastNameError").html("");
+    $("#editEmailError").html("");
+    $("#editPhoneError").html("");
+    $("#editAccountNameError").html("");
     $("input").removeClass("active");
   };
 
@@ -76,30 +77,39 @@ export default class EditMerchant extends React.Component {
 
   }
 
+  updateMerchantState(info){
+
+     this.setState({
+      firstName: info.firstName,
+      lastName: info.lastName,      
+      email: info.email,      
+      phone: info.phone,
+      accountName: info.accountName,
+      accountNo: info.accountNo,
+    }); 
+  }
+
   handleSubmit(e) {    
     e.preventDefault();   
     let isFormValid = true;
     var merchantId = this.props.data.userId;
-    console.log(Config.editMerchant+merchantId);
 
     if (this.showFormErrors()) {
 
       Service.editMerchant(Config.editMerchant+merchantId,this.state, function(data) {
        
+        this.props.onUpdateAccount(this.state);  
         this.successAlert();        
-        this.hideModal(); 
-        this.props.onUpdateAccount();      
+        this.hideModal();
+
       }.bind(this), function(xhr, status, err) {
       
         this.errorAlert();
         var statusObj = xhr;
         var obj=JSON.parse(xhr.responseText);
-        console.log(xhr);
 
         const error = document.getElementById(`emailError`);
         const accountNameError = document.getElementById(`accountNameError`);
-
-        console.log(obj["error_description"]);
 
         if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
 
@@ -154,10 +164,14 @@ export default class EditMerchant extends React.Component {
   showEditForm() {
 
     this.setState({
-      isOpen: true
+      isOpen: true,
+      firstName: this.props.data.firstname,
+      lastName: this.props.data.lastname,      
+      email: this.props.data.username,      
+      phone: this.props.data.phone,
+      accountNo: this.props.data.accountNo,
+      accountName: this.props.data.accountName,
     });   
-
-    console.log(this.props.data);
   }
   
   showInputError(refName) {

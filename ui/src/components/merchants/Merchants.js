@@ -25,8 +25,17 @@ export default class Merchants extends React.Component {
         });
     }
 
-    getMerchantAccounts() {
-		this.props.updateInfo();
+    getMerchantAccounts(info) {
+
+		this.refs.child.getListOfMerchant(info);
+
+		var accountNo = info.accountNo;
+    	var reqData = Service.buildRequestdata(Config.getMerchant+accountNo, 'GET');
+        Service.executeRequest(reqData, function(response) {
+           this.setState({userInfo: response});            
+        }.bind(this), function(xhr, status, err) {
+           console.log(err);
+        }.bind(this));
     }
 
   render() {
@@ -41,14 +50,14 @@ export default class Merchants extends React.Component {
 					<div class="acc-info mb-20">{this.state.userInfo.username}</div>
 				</div>
 
-				<EditMerchants data={this.state.userInfo} onUpdateAccount={this.getMerchantAccounts}/>				
+				<EditMerchants ref="editMerchantChild" data={this.state.userInfo} onUpdateAccount={this.getMerchantAccounts} />				
 			</div>
 	  	)
  	}
 
 	  return (
 		<div>
-		<Sidebar ref= "child" onSelectList={this.setSelectList} />
+		<Sidebar ref="child" onSelectList={this.setSelectList} />
 			<div class="dashboard-container" id="main">
 			   {showAccountInfo}
 			</div>

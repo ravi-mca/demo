@@ -34,12 +34,18 @@ export default class Sidebar extends React.Component {
         }
     }
 
-    getListOfMerchant() {
+    getListOfMerchant(info) {
+
         var reqData = Service.buildRequestdata(Config.getMerchantList, 'GET');
         Service.executeRequest(reqData, function(response) {
-            this.setState({merchantList: response});
+           this.setState({merchantList: response});  
+           
+           if( (info !== undefined) && (info !== null) ) {   
+               this.setState({selected  : info.firstName});             
+           }   
+
         }.bind(this), function(xhr, status, err) {
-                console.log(err);
+           console.log(err);
         }.bind(this));
     }
 
@@ -49,10 +55,11 @@ export default class Sidebar extends React.Component {
     }
 
     isActive(value) {
+
         if(this.state.selected !== '') {
             $('#menu-content li').first().addClass('list-nav');
-            return ((value===this.state.selected) ?'activeList':'list-nav');
-        }
+            return ((value==this.state.selected) ?'activeList':'list-nav');
+        }  
     }
 
     searchUpdated (term) {
@@ -63,7 +70,7 @@ export default class Sidebar extends React.Component {
         const filteredList = this.state.merchantList.filter(createFilter(this.state.selectedTerm, KEYS_TO_FILTERS));
         let showList =  filteredList.map(function(user, i) {
             return (
-                <li  key={i} className={this.isActive(user.firstname)} onClick={this.setFilter.bind(this, user.firstname,user)}>
+                <li key={i} className={this.isActive(user.firstname)} onClick={this.setFilter.bind(this, user.firstname,user)}>
                 <div class="list-padding">{user.firstname} </div></li>
            );
         }, this);
