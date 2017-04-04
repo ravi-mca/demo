@@ -1,11 +1,11 @@
 var BaseUrl = 'http://localhost:8080';
 
 const Config = {
-    createMerchant : BaseUrl +'/storecast/api/merchant',
-    editMerchant : BaseUrl +'/storecast/api/merchant/',
+    createMerchant : BaseUrl +'/storecast/api/admin/merchant',
+    editMerchant : BaseUrl +'/storecast/api/admin/merchant',
     login : BaseUrl +'/storecast/api/admin/login',
-    getMerchantList: BaseUrl + '/storecast/api/merchant',
-    getMerchant: BaseUrl + '/storecast/api/merchant/',
+    getMerchantList: BaseUrl + '/storecast/api/admin/merchant',
+    getMerchant: BaseUrl + '/storecast/api/admin/merchant',
 };
 
 export default Config;
