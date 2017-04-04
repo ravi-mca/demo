@@ -41,7 +41,7 @@ export default class Sidebar extends React.Component {
            this.setState({merchantList: response});  
            
            if( (info !== undefined) && (info !== null) ) {   
-               this.setState({selected  : info.firstName});             
+               this.setState({selected  : info.editFirstName});             
            }   
 
         }.bind(this), function(xhr, status, err) {
