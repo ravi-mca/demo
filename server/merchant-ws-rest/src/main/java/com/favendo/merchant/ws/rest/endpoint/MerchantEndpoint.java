@@ -3,8 +3,9 @@ package com.favendo.merchant.ws.rest.endpoint;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.ErrorKey;
 import com.favendo.commons.exception.StorecastApiException;
-import com.favendo.merchant.ws.rest.dto.MerchantDto;
-import com.favendo.merchant.ws.rest.helper.MerchantHelper;
+import com.favendo.merchant.service.dto.MerchantDto;
+import com.favendo.merchant.service.service.MerchantService;
+import com.favendo.merchant.ws.rest.convertor.MerchantDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,12 +25,35 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 public class MerchantEndpoint {
 
     @Autowired
-    private MerchantHelper merchantHelper;
+    private MerchantService merchantService;
+
+    @Autowired
+    private MerchantDtoConverter merchantDtoConverter;
+
+    @GET
+    public Response getAll() {
+        try {
+            return Response.ok().entity(merchantDtoConverter.convertMerchants(merchantService.getAll())).build();
+        } catch (BusinessException exception) {
+            throw new StorecastApiException(SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    @GET
+    @Path(PATH_PARAM_ACCOUNT_NO)
+    public Response getByAccountNo(@PathParam(ACCOUNT_NO) String accountNo) {
+        try {
+            return Response.ok().entity(merchantDtoConverter.convertMerchant(merchantService
+                    .getByAccountNo(accountNo))).build();
+        } catch (BusinessException exception) {
+            throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
+        }
+    }
 
     @POST
     public Response save(@RequestBody MerchantDto merchantDto) {
         try {
-            merchantHelper.save(merchantDto);
+            merchantService.save(merchantDto);
             return Response.status(Status.CREATED).build();
         } catch (BusinessException exception) {
             throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
@@ -40,27 +64,8 @@ public class MerchantEndpoint {
     @Path(PATH_PARAM_MERCHANT_ID)
     public Response update(@RequestBody MerchantDto merchantDto, @PathParam(MERCHANT_ID) Long merchantId) {
         try {
-            merchantHelper.update(merchantDto, merchantId);
+            merchantService.update(merchantDto, merchantId);
             return Response.status(Status.OK).build();
-        } catch (BusinessException exception) {
-            throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
-        }
-    }
-
-    @GET
-    public Response getAll() {
-        try {
-            return Response.ok().entity(merchantHelper.getAll()).build();
-        } catch (BusinessException exception) {
-            throw new StorecastApiException(SERVER_ERROR, exception.getMessage());
-        }
-    }
-
-    @GET
-    @Path(PATH_PARAM_ACCOUNT_NO)
-    public Response getByAccountNo(@PathParam(ACCOUNT_NO) String accountNo) {
-        try {
-            return Response.ok().entity(merchantHelper.getByAccountNo(accountNo)).build();
         } catch (BusinessException exception) {
             throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
         }

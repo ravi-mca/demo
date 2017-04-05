@@ -1,5 +1,6 @@
-package com.favendo.merchant.service.service.impl;
+package com.favendo.merchant.service.service;
 
+import com.favendo.merchant.service.service.impl.MerchantServiceImpl;
 import com.favendo.user.service.domain.User;
 import com.favendo.user.service.service.UserService;
 import org.junit.Assert;

@@ -1,7 +1,7 @@
-package com.favendo.merchant.ws.rest.builder;
+package com.favendo.merchant.service.builder;
 
 import com.favendo.commons.utils.UniqueIdGenerator;
-import com.favendo.merchant.ws.rest.dto.MerchantDto;
+import com.favendo.merchant.service.dto.MerchantDto;
 import com.favendo.user.service.domain.Role;
 import com.favendo.user.service.domain.User;
 import org.mockito.InjectMocks;
@@ -18,7 +18,6 @@ import static org.hamcrest.Matchers.is;
 
 @Listeners(MockitoTestNGListener.class)
 public class MerchantBuilderTest {
-
     @InjectMocks
     private MerchantBuilder subject;
 
