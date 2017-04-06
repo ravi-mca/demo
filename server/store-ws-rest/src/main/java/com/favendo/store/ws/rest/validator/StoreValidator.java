@@ -135,8 +135,6 @@ public class StoreValidator {
         emptyOrNullValidator.validateFieldIfNull(storeDto.getName(), BAD_REQUEST, emptyStoreNameErrorMessage, STORE_NAME);
         emptyOrNullValidator.validateFieldIfNull(storeDto.getNickName(), BAD_REQUEST, emptyStoreNickNameErrorMessage,
                 STORE_NICKNAME);
-        emptyOrNullValidator.validateFieldIfNull(storeDto.getBrandId(), BAD_REQUEST, emptyStoreBrandIdErrorMessage,
-                STORE_BRAND_ID);
         emptyOrNullValidator.validateFieldIfNull(storeDto.getManagerOrPOC(), BAD_REQUEST,
                 emptyStoreManagerOrPOCErrorMessage, STORE_MANAGER_OR_POC);
     }
