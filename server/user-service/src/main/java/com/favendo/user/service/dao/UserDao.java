@@ -1,13 +1,12 @@
 package com.favendo.user.service.dao;
 
-import java.util.List;
-
+import com.favendo.commons.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.favendo.user.service.domain.User;
+import java.util.List;
 
 @Repository
 public interface UserDao extends JpaRepository<User, Long> {
@@ -23,7 +22,7 @@ public interface UserDao extends JpaRepository<User, Long> {
             String accountName, @Param("userId") Long userId);
     
     @Query("select user from User as user join user.roles as role where role.roleName = 'ROLE_MERCHANT' ORDER BY user.firstName ASC")
-    List<User> getListOfMerchants();
+    List<User> findAll();
     
     @Query("select user from User user where user.accountNo = :accountNo")
     User findByAccountNo(@Param("accountNo") String accountNo);

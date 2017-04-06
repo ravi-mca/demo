@@ -6,16 +6,20 @@ import Config from "../../index.config";
 import CreateMerchants from "../merchants/CreateMerchants";
 
 import $ from 'jquery';
+import SearchInput, {createFilter} from 'react-search-input';
 
-const KEYS_TO_FILTERS = ['user.firstname', 'user.accountNo'];
+const KEYS_TO_FILTERS = ['firstname','accountNo'];
 
 export default class Sidebar extends React.Component {
     constructor(props) {
         super();
         this.state = {
             selected :'',
+            selectedTerm:'',
             merchantList: []
         };
+
+        this.searchUpdated = this.searchUpdated.bind(this);
         this.getListOfMerchant = this.getListOfMerchant.bind(this);
     }
 
@@ -30,12 +34,18 @@ export default class Sidebar extends React.Component {
         }
     }
 
-    getListOfMerchant() {
+    getListOfMerchant(info) {
+
         var reqData = Service.buildRequestdata(Config.getMerchantList, 'GET');
         Service.executeRequest(reqData, function(response) {
-            this.setState({merchantList: response});
+           this.setState({merchantList: response});  
+           
+           if( (info !== undefined) && (info !== null) ) {   
+               this.setState({selected  : info.editFirstName});             
+           }   
+
         }.bind(this), function(xhr, status, err) {
-                console.log(err);
+           console.log(err);
         }.bind(this));
     }
 
@@ -47,32 +57,33 @@ export default class Sidebar extends React.Component {
     isActive(value) {
         if(this.state.selected !== '') {
             $('#menu-content li').first().addClass('list-nav');
-            return ((value===this.state.selected) ?'activeList':'list-nav');
-        }
+            return ((value==this.state.selected) ?'activeList':'list-nav');
+        }  
+    }
+
+    searchUpdated (term) {
+        this.setState({selectedTerm: term});
     }
 
     render() {
-        let showList =  this.state.merchantList.map(function(user, i) {
+        const filteredList = this.state.merchantList.filter(createFilter(this.state.selectedTerm, KEYS_TO_FILTERS));
+        let showList =  filteredList.map(function(user, i) {
             return (
-                <li  key={i} className={this.isActive(user.firstname)} onClick={this.setFilter.bind(this, user.firstname,user)}>
-                <div class="list-padding">{user.firstname} </div></li>
+                <li  key={i} className={this.isActive(user.firstName)} onClick={this.setFilter.bind(this, user.firstName,user)}>
+                <div class="list-padding">{user.firstName} </div></li>
            );
         }, this);
 
     return (
         <div class="nav-side-menu">
-            <div class="input-group pad-15">
-                <input type="text" class="form-control" placeholder="Search" />
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
+           <div class="right-inner-addon pad-15">
+                <i class="fa fa-search"></i>
+                    <SearchInput class="search-box" placeholder="Search" onChange={this.searchUpdated} />
             </div>
             <div class="menu-list">
                 <ul id="menu-content">
                     {showList}
-                </ul>                
+                </ul>
             </div>
             <div>
                <CreateMerchants onUpdateList={this.getListOfMerchant}/>

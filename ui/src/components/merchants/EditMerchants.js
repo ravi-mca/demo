@@ -26,13 +26,13 @@ import {
 export default class EditMerchant extends React.Component {
     constructor(props) {
     super(props);
-
     this.state = {
-      firstName: this.props.data.firstname,
-      lastName: this.props.data.lastname,      
-      email: this.props.data.username,      
-      phone: this.props.data.phone,
-      accountName: this.props.data.accountName,
+      editFirstName: this.props.data.firstName,
+      editLastName: this.props.data.lastName,      
+      editEmail: this.props.data.email,      
+      editPhone: this.props.data.phone,
+      editAccountName: this.props.data.accountName,
+      accountNo: this.props.data.accountNo,
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -42,24 +42,36 @@ export default class EditMerchant extends React.Component {
 
   openModal = () => {
     this.setState({
-      isOpen: true
-    });
+      isOpen: true,editFirstName: this.props.data.firstname,
+      editLastName: this.props.data.lastname,      
+      editEmail: this.props.data.username,      
+      editPhone: this.props.data.phone,
+      editAccountName: this.props.data.accountName,
+      accountNo: this.props.data.accountNo,
+    }); 
+    $("#editFirstNameError").html("");
+    $("#editLastNameError").html("");
+    $("#editEmailError").html("");
+    $("#editPhoneError").html("");
+    $("#editAccountNameError").html("");
+    $("input").removeClass("active");
   };
 
   hideModal = () => {
     this.setState({
       isOpen: false, 
-      firstName: this.props.data.firstname,
-      lastName: this.props.data.lastname,      
-      email: this.props.data.username,      
-      phone: this.props.data.phone,
-      accountName: this.props.data.accountName,
+      editFirstName: this.props.data.firstname,
+      editLastName: this.props.data.lastname,      
+      editEmail: this.props.data.username,      
+      editPhone: this.props.data.phone,
+      editAccountName: this.props.data.accountName,
+      accountNo: this.props.data.accountNo,
     }); 
-    $("#firstNameError").html("");
-    $("#lastNameError").html("");
-    $("#emailError").html("");
-    $("#phoneError").html("");
-    $("#accountNameError").html("");
+    $("#editFirstNameError").html("");
+    $("#editLastNameError").html("");
+    $("#editEmailError").html("");
+    $("#editPhoneError").html("");
+    $("#editAccountNameError").html("");
     $("input").removeClass("active");
   };
 
@@ -76,44 +88,62 @@ export default class EditMerchant extends React.Component {
 
   }
 
-  handleSubmit(e) {    
-    e.preventDefault();   
-    let isFormValid = true;
-    var merchantId = this.props.data.userId;
-    console.log(Config.editMerchant+merchantId);
+  updateMerchantState(info){
 
+     this.setState({
+      firstName: info.firstName,
+      lastName: info.lastName,      
+      email: info.email,      
+      phone: info.phone,
+      accountName: info.accountName,
+      accountNo: info.accountNo,
+    }); 
+  }
+
+  handleSubmit(e) {    
+    e.preventDefault();  
+
+    let isFormValid = true;
+    if (this.showFormErrors()) {
+    var merchantId = this.props.data.userId;
+
+    var newData = {};
+    newData.firstName = this.state.editFirstName;
+    newData.lastName = this.state.editLastName;
+    newData.phone = this.state.editPhone;
+    newData.accountName = this.state.editAccountName;
+    newData.email = this.state.editEmail;
     if (this.showFormErrors()) {
 
-      Service.editMerchant(Config.editMerchant+merchantId,this.state, function(data) {
+      Service.editMerchant(Config.editMerchant+merchantId,newData, function(data) {
        
+        this.props.onUpdateAccount(this.state);  
         this.successAlert();        
-        this.hideModal(); 
-        this.props.onUpdateAccount();      
+        this.hideModal();
+
       }.bind(this), function(xhr, status, err) {
       
         this.errorAlert();
         var statusObj = xhr;
         var obj=JSON.parse(xhr.responseText);
-        console.log(xhr);
 
-        const error = document.getElementById(`emailError`);
-        const accountNameError = document.getElementById(`accountNameError`);
-
-        console.log(obj["error_description"]);
+        const editEmailError = document.getElementById(`editEmailError`);
+        const editAccountNameError = document.getElementById(`editAccountNameError`);
 
         if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
 
-          error.textContent = `Merchant with email address already exist`;          
+          editEmailError.textContent = `Merchant with email address already exist`;          
          
          } else if(obj["error_description"] == "Merchant with account name already exist. Please provide different account name.") {
           
-          accountNameError.textContent = `Merchant with account name already exist`;
+          editAccountNameError.textContent = `Merchant with account name already exist`;
         }
 
         isFormValid = false;
 
       }.bind(this));
     }
+  }
   }
 
   successAlert () {
@@ -136,7 +166,7 @@ export default class EditMerchant extends React.Component {
   
   showFormErrors() {
     
-    const inputs = document.querySelectorAll('#panel input');
+    const inputs = document.querySelectorAll('#editpanel input');
 
     let isFormValid = true;
     inputs.forEach(input => {
@@ -154,10 +184,14 @@ export default class EditMerchant extends React.Component {
   showEditForm() {
 
     this.setState({
-      isOpen: true
+      isOpen: true,
+      editFirstName: this.props.data.firstname,
+      editLastName: this.props.data.lastname,      
+      editEmail: this.props.data.username,      
+      editPhone: this.props.data.phone,
+      editAccountName: this.props.data.accountName,
+      accountNo: this.props.data.accountNo,
     });   
-
-    console.log(this.props.data);
   }
   
   showInputError(refName) {
@@ -167,8 +201,8 @@ export default class EditMerchant extends React.Component {
     const label = document.getElementById(`${refName}Label`).textContent;
     const error = document.getElementById(`${refName}Error`);
 
-    const validEmail = refName.indexOf('email') !== -1;     
-    const isNumber = refName.indexOf('phone') !== -1;
+    const validEmail = refName.indexOf('editEmail') !== -1;     
+    const isNumber = refName.indexOf('editPhone') !== -1;
 
      error.textContent = '';
 
@@ -194,7 +228,7 @@ export default class EditMerchant extends React.Component {
 
   render() {
     return (
-      <div id="panel">
+      <div id="editpanel">
             <div class="btn-padding">
             <div class="col-md-6 col-xs-6">
               <i class="fa fa-pencil" onClick={this.showEditForm}></i>  
@@ -209,73 +243,73 @@ export default class EditMerchant extends React.Component {
               <div class="modal-header">
                 <h4 class="modal-title font-20">Edit New Merchant</h4>
               </div>
-              <form id="editMerchant" method="post" noValidate onSubmit="">
+              <form id="editMerchant" method="post" noValidate>
               <ModalBody>
                 <FormGroup row>
-                  <Label id="firstNameLabel" class="form-label" for="firstName" sm={3}>First Name </Label><span></span>
+                  <Label id="editFirstNameLabel" class="form-label" for="editFirstName" sm={3}>First Name </Label><span></span>
                   <Col sm={8} class="col-padding">
                      <input className="form-control"
-                    type="firstName"
-                    name="firstName"
-                    ref="firstName"
-                    value={ this.state.firstName } 
+                    type="editFirstName"
+                    name="editFirstName"
+                    ref="editFirstName"
+                    value={ this.state.editFirstName } 
                     onChange={ this.handleChange }
                     required />
-                  <div className="error" id="firstNameError" />
+                  <div className="error" id="editFirstNameError" />
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="lastNameLabel" class="form-label" for="lastName" sm={3}>Last Name </Label>
+                  <Label id="editLastNameLabel" class="form-label" for="editLastName" sm={3}>Last Name </Label>
                    <Col sm={8} class="col-padding">
                      <input className="form-control"
-                    type="lastName"
-                    name="lastName"
-                    ref="lastName"
-                    value={this.state.lastName} 
+                    type="editLastName"
+                    name="editLastName"
+                    ref="editLastName"
+                    value={this.state.editLastName} 
                     onChange={ this.handleChange }
                     required />
-                  <div className="error" id="lastNameError" />
+                  <div className="error" id="editLastNameError" />
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="accountNameLabel" class="form-label" for="accountName" sm={3}>Account Name </Label>
+                  <Label id="editAccountNameLabel" class="form-label" for="editAccountName" sm={3}>Account Name </Label>
                    <Col sm={8} class="col-padding">
                      <input className="form-control"
-                    type="accountName"
-                    name="accountName"
-                    ref="accountName"
-                    value={ this.state.accountName } 
+                    type="editAccountName"
+                    name="editAccountName"
+                    ref="editAccountName"
+                    value={ this.state.editAccountName } 
                     onChange={ this.handleChange }
                     required />
-                  <div className="error" id="accountNameError" />
+                  <div className="error" id="editAccountNameError" />
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="phoneLabel" class="form-label" for="phone" sm={3}>Phone </Label>
+                  <Label id="editPhoneLabel" class="form-label" for="editPhone" sm={3}>Phone </Label>
                    <Col sm={8} class="col-padding">
                      <input className="form-control"
                     type="text"
-                    name="phone"
-                    ref="phone"
-                    value={ this.state.phone } 
+                    name="editPhone"
+                    ref="editPhone"
+                    value={ this.state.editPhone } 
                     onChange={ this.handleChange }
                     pattern="[0-9]{6,10}"
                     required />
-                  <div className="error" id="phoneError" />
+                  <div className="error" id="editPhoneError" />
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="emailLabel" class="form-label" for="email" sm={3}>Email </Label>
+                  <Label id="editEmailLabel" class="form-label" for="editEmail" sm={3}>Email </Label>
                   <Col sm={8} class="col-padding">
                      <input className="form-control"
-                    type="email"
-                    name="email"
-                    ref="email"
+                    type="editEmail"
+                    name="editEmail"
+                    ref="editEmail"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-                    value={ this.state.email } 
+                    value={ this.state.editEmail } 
                     onChange={ this.handleChange }
                     required />
-                  <div className="error" id="emailError" />
+                  <div className="error" id="editEmailError" />
                   </Col>
                 </FormGroup>
               </ModalBody>

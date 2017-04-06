@@ -8,6 +8,7 @@ public enum ErrorKey {
 
     ALREADY_EXISTS("already_exists", Response.Status.CONFLICT),
     FORBIDDEN("forbidden", Response.Status.FORBIDDEN),
+    NOT_FOUND("not_found", Response.Status.NOT_FOUND),
     UNAUTHORIZED("unauthorized", Response.Status.UNAUTHORIZED),
     SERVER_ERROR("server_error", Response.Status.INTERNAL_SERVER_ERROR),
     BAD_REQUEST("bad_request", Response.Status.BAD_REQUEST);
