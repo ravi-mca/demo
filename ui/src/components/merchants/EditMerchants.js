@@ -27,9 +27,9 @@ export default class EditMerchant extends React.Component {
     constructor(props) {
     super(props);
     this.state = {
-      editFirstName: this.props.data.firstname,
-      editLastName: this.props.data.lastname,      
-      editEmail: this.props.data.username,      
+      editFirstName: this.props.data.firstName,
+      editLastName: this.props.data.lastName,      
+      editEmail: this.props.data.email,      
       editPhone: this.props.data.phone,
       editAccountName: this.props.data.accountName,
       accountNo: this.props.data.accountNo,

@@ -1,13 +1,15 @@
-package com.favendo.merchant.service.dto;
+package com.favendo.merchant.ws.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.beans.factory.annotation.Value;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MerchantDto {
+
+    @JsonProperty("userId")
+    private Long userId;
 
     @JsonProperty("firstName")
     private String firstName;
@@ -26,6 +28,14 @@ public class MerchantDto {
 
     @JsonProperty("email")
     private String email;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -75,5 +85,3 @@ public class MerchantDto {
         this.email = email;
     }
 }
-
-

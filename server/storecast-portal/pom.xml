@@ -78,10 +78,5 @@
             <artifactId>user-ws-rest</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>com.storecast.server</groupId>
-            <artifactId>merchant-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 </project>

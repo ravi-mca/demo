@@ -1,25 +1,30 @@
-package com.favendo.merchant.ws.rest.dto.converter;
+package com.favendo.merchant.service.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.favendo.merchant.service.service.impl.MerchantServiceImpl;
+import com.favendo.user.service.domain.User;
+import com.favendo.user.service.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.favendo.merchant.ws.rest.dto.MerchantAccountDto;
-import com.favendo.user.service.domain.User;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MerchantAccountDtoConverterTest {
+public class MerchantServiceTest {
 
     private List<User> merchantList;
 
+    @Mock
+    private UserService userService;
+
     @InjectMocks
-    private MerchantAccountDtoConverter merchantDtoConverter;
+    private MerchantServiceImpl merchantService;
 
     private static final String MERCHANT1_FIRSTNAME = "Storecast";
     private static final String MERCHANT1_LASNAME = "Admin";
@@ -36,25 +41,39 @@ public class MerchantAccountDtoConverterTest {
     private static final String MERCHANT2_PHONE = "12345676";
     private static final String MERCHANT2_ACCOUNT_NAME = "Merchant2-Account";
 
-
     @Before
-    public void startup(){
+    public void startup() {
         merchantList = buildMerchantList();
     }
 
     @Test
-    public void testMerchantDtoConverter() {
-        List<MerchantAccountDto> merchantDtoList = merchantDtoConverter.convert(merchantList);
-        Assert.assertNotNull(merchantDtoList);
-        Assert.assertEquals(2, merchantDtoList.size());
-        Assert.assertEquals("test-admin1@storecast.io", merchantDtoList.get(0).getUsername());
-        Assert.assertEquals("ABCD1234", merchantDtoList.get(0).getAccountNo());
-        Assert.assertEquals(2, merchantDtoList.get(1).getUserId().longValue());
-        Assert.assertEquals("12345676", merchantDtoList.get(1).getPhone());
+    public void testGetMerchantList() {
+        Mockito.when(userService.getAll()).thenReturn(merchantList);
+        List<User> users = merchantService.getAll();
+        Assert.assertNotNull(users);
+        Assert.assertEquals(2, users.size());
+        Assert.assertEquals("test-admin1@storecast.io", users.get(0).getUsername());
+    }
+
+    @Test
+    public void testGetMerchantAccountInfo() {
+        Mockito.when(userService.getByAccountNo(MERCHANT1_ACCOUNT_NO)).thenReturn(buildFirstMerchant());
+        User merchant = userService.getByAccountNo(MERCHANT1_ACCOUNT_NO);
+        Assert.assertNotNull(merchant);
+        Assert.assertEquals("test-admin1@storecast.io", merchant.getUsername());
+        Assert.assertEquals("12345676", merchant.getPhone());
     }
 
     private List<User> buildMerchantList() {
         List<User> merchants = new ArrayList<>();
+        User merchant1 = buildFirstMerchant();
+        User merchant2 = buildSecondMerchant();
+        merchants.add(merchant1);
+        merchants.add(merchant2);
+        return merchants;
+    }
+
+    private User buildFirstMerchant() {
         User merchant1 = new User();
         merchant1.setAccountNo(MERCHANT1_ACCOUNT_NO);
         merchant1.setUser_id(MERCHANT1_USERID);
@@ -63,7 +82,10 @@ public class MerchantAccountDtoConverterTest {
         merchant1.setLastName(MERCHANT1_LASNAME);
         merchant1.setPhone(MERCHANT1_PHONE);
         merchant1.setAccountName(MERCHANT1_ACCOUNT_NAME);
+        return merchant1;
+    }
 
+    private User buildSecondMerchant() {
         User merchant2 = new User();
         merchant2.setAccountNo(MERCHANT2_ACCOUNT_NO);
         merchant2.setUser_id(MERCHANT2_USERID);
@@ -72,9 +94,6 @@ public class MerchantAccountDtoConverterTest {
         merchant2.setLastName(MERCHANT2_LASNAME);
         merchant2.setPhone(MERCHANT2_PHONE);
         merchant2.setAccountName(MERCHANT2_ACCOUNT_NAME);
-
-        merchants.add(merchant1);
-        merchants.add(merchant2);
-        return merchants;
+        return merchant2;
     }
 }

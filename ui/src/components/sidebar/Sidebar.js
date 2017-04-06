@@ -55,7 +55,6 @@ export default class Sidebar extends React.Component {
     }
 
     isActive(value) {
-
         if(this.state.selected !== '') {
             $('#menu-content li').first().addClass('list-nav');
             return ((value==this.state.selected) ?'activeList':'list-nav');
@@ -70,8 +69,8 @@ export default class Sidebar extends React.Component {
         const filteredList = this.state.merchantList.filter(createFilter(this.state.selectedTerm, KEYS_TO_FILTERS));
         let showList =  filteredList.map(function(user, i) {
             return (
-                <li key={i} className={this.isActive(user.firstname)} onClick={this.setFilter.bind(this, user.firstname,user)}>
-                <div class="list-padding">{user.firstname} </div></li>
+                <li  key={i} className={this.isActive(user.firstName)} onClick={this.setFilter.bind(this, user.firstName,user)}>
+                <div class="list-padding">{user.firstName} </div></li>
            );
         }, this);
 

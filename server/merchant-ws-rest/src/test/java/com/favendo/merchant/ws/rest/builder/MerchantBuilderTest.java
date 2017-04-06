@@ -1,7 +1,7 @@
-package com.favendo.merchant.service.helper;
+package com.favendo.merchant.ws.rest.builder;
 
 import com.favendo.commons.utils.UniqueIdGenerator;
-import com.favendo.merchant.service.dto.MerchantDto;
+import com.favendo.merchant.ws.rest.dto.MerchantDto;
 import com.favendo.user.service.domain.Role;
 import com.favendo.user.service.domain.User;
 import org.mockito.InjectMocks;
@@ -10,17 +10,13 @@ import org.mockito.testng.MockitoTestNGListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @Listeners(MockitoTestNGListener.class)
-public class MerchantHelperTest {
-
+public class MerchantBuilderTest {
     @InjectMocks
-    private MerchantHelper subject;
+    private MerchantBuilder subject;
 
     @Mock
     private UniqueIdGenerator uniqueIdGenerator;
@@ -34,12 +30,6 @@ public class MerchantHelperTest {
         String accountNo = "ABCD-EFGH-IJCK-LMOP";
         String accountName = "storecast_account_name";
 
-        Long roleId = 2L;
-        String roleName = "ROLE_MERCHANT";
-        Role role = createRole(roleId, roleName);
-        List<Role> roles = new ArrayList<>();
-        roles.add(role);
-
         MerchantDto merchantDto = new MerchantDto();
         merchantDto.setFirstName(firstName);
         merchantDto.setLastName(lastName);
@@ -48,8 +38,8 @@ public class MerchantHelperTest {
         merchantDto.setAccountNo(accountNo);
         merchantDto.setAccountName(accountName);
 
-        User result = subject.buildMerchant(merchantDto, role);
-        User expected = createMerchant(firstName, lastName, accountNo, accountName, phone, email, roles);
+        User result = subject.buildMerchant(merchantDto);
+        User expected = createMerchant(firstName, lastName, accountNo, accountName, phone, email);
 
         assertThat(result.getFirstName(), is(expected.getFirstName()));
         assertThat(result.getLastName(), is(expected.getLastName()));
@@ -98,7 +88,7 @@ public class MerchantHelperTest {
     }
 
     private User createMerchant(String firstName, String lastName, String accountNo, String accountName,
-                                String phone, String email, List<Role> roles) {
+                                String phone, String email) {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -106,7 +96,6 @@ public class MerchantHelperTest {
         user.setPhone(phone);
         user.setAccountNo(accountNo);
         user.setAccountName(accountName);
-        user.setRoles(roles);
         return user;
     }
 
