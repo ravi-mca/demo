@@ -26,4 +26,10 @@ public class Routes {
 	
 	public static final String PATH_PARAM_ACCOUNT_NO = "/{accountNo}";
 
+	public static final String STORE = "/store";
+
+	public static final String STORE_ID = "storeId";
+
+	public static final String PATH_PARAM_STORE_ID = "/{storeId}";
+
 }

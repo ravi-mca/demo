@@ -1,9 +1,9 @@
 package com.favendo.user.service.service;
 
 
-import java.util.List;
+import com.favendo.commons.domain.User;
 
-import com.favendo.user.service.domain.User;
+import java.util.List;
 
 public interface UserService {
     

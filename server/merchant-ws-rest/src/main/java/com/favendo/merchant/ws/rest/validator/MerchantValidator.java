@@ -1,8 +1,8 @@
 package com.favendo.merchant.ws.rest.validator;
 
+import com.favendo.commons.domain.User;
 import com.favendo.commons.validator.*;
 import com.favendo.merchant.ws.rest.dto.MerchantDto;
-import com.favendo.user.service.domain.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

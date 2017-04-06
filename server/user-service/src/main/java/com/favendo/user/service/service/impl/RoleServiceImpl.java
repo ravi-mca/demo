@@ -1,7 +1,7 @@
 package com.favendo.user.service.service.impl;
 
+import com.favendo.commons.domain.Role;
 import com.favendo.user.service.dao.RoleDao;
-import com.favendo.user.service.domain.Role;
 import com.favendo.user.service.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

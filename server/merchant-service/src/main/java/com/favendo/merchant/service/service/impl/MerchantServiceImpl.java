@@ -1,11 +1,11 @@
 package com.favendo.merchant.service.service.impl;
 
+import com.favendo.commons.domain.Role;
+import com.favendo.commons.domain.User;
 import com.favendo.commons.enums.RoleEnum;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.StorecastApiException;
 import com.favendo.merchant.service.service.MerchantService;
-import com.favendo.user.service.domain.Role;
-import com.favendo.user.service.domain.User;
 import com.favendo.user.service.service.RoleService;
 import com.favendo.user.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

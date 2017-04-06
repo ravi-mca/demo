@@ -1,7 +1,7 @@
 package com.favendo.merchant.service.service;
 
+import com.favendo.commons.domain.User;
 import com.favendo.commons.exception.BusinessException;
-import com.favendo.user.service.domain.User;
 
 import java.util.List;
 

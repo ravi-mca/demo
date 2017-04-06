@@ -7,4 +7,6 @@ public final class ValidationPatternConstant {
     public static final String EMAIL_PATTERN = "^[\\w!#$%&'*+/\\\\=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 
     public static final String PHONE_PATTERN = "[0-9 +]+";
+
+    public static final String ZIPCODE_PATTERN = "\\d{5}(-\\d{4})?";
 }

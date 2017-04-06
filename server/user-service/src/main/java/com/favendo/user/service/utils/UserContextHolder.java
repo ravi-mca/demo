@@ -1,7 +1,7 @@
 package com.favendo.user.service.utils;
 
+import com.favendo.commons.domain.User;
 import com.favendo.user.service.domain.StorecastUserDetails;
-import com.favendo.user.service.domain.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Objects;

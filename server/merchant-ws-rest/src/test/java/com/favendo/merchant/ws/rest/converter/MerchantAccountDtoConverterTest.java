@@ -1,8 +1,8 @@
 package com.favendo.merchant.ws.rest.converter;
 
+import com.favendo.commons.domain.User;
 import com.favendo.merchant.ws.rest.convertor.MerchantDtoConverter;
 import com.favendo.merchant.ws.rest.dto.MerchantDto;
-import com.favendo.user.service.domain.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

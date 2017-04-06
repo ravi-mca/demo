@@ -1,7 +1,7 @@
 package com.favendo.user.service.service;
 
 
-import com.favendo.user.service.domain.Role;
+import com.favendo.commons.domain.Role;
 
 public interface RoleService {
 

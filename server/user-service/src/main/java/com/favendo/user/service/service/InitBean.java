@@ -1,10 +1,10 @@
 package com.favendo.user.service.service;
 
+import com.favendo.commons.domain.Role;
+import com.favendo.commons.domain.User;
 import com.favendo.commons.enums.RoleEnum;
 import com.favendo.user.service.dao.RoleDao;
 import com.favendo.user.service.dao.UserDao;
-import com.favendo.user.service.domain.Role;
-import com.favendo.user.service.domain.User;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

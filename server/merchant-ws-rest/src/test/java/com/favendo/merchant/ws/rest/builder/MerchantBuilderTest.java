@@ -1,9 +1,9 @@
 package com.favendo.merchant.ws.rest.builder;
 
+import com.favendo.commons.domain.Role;
+import com.favendo.commons.domain.User;
 import com.favendo.commons.utils.UniqueIdGenerator;
 import com.favendo.merchant.ws.rest.dto.MerchantDto;
-import com.favendo.user.service.domain.Role;
-import com.favendo.user.service.domain.User;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.testng.MockitoTestNGListener;

@@ -1,4 +1,4 @@
-package com.favendo.user.service.domain;
+package com.favendo.commons.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,6 +43,9 @@ public class User implements Serializable {
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
     List<Role> roles = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "merchant", cascade = CascadeType.ALL)
+    private List<Store> stores;
 
     public Long getUser_id() {
         return user_id;
@@ -116,18 +119,11 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "user_id=" + user_id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", accountNo='" + accountNo + '\'' +
-                ", accountName='" + accountName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", roles=" + roles +
-                '}';
+    public List<Store> getStores() {
+        return stores;
+    }
+
+    public void setStores(List<Store> stores) {
+        this.stores = stores;
     }
 }
