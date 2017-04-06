@@ -1,8 +1,12 @@
 package com.favendo.store.ws.rest.convertor;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Component;
+
 import com.favendo.commons.domain.Store;
 import com.favendo.store.ws.rest.dto.StoreDto;
-import org.springframework.stereotype.Component;
 
 @Component
 public class StoreDtoConverter {
@@ -14,6 +18,18 @@ public class StoreDtoConverter {
         buildControllerInformation(store, storeDto);
         buildCategoryInformation(store, storeDto);
         buildOtherInformation(store, storeDto);
+        return storeDto;
+    }
+    
+    public List<StoreDto> convertStores(List<Store> stores) {
+        return stores.stream().map(this::convertStore).collect(Collectors.toList());
+    }
+
+    private StoreDto convertStore(Store store) {
+        StoreDto storeDto = new StoreDto();
+        storeDto.setId(store.getId());
+        storeDto.setStoreId(store.getStoreId());
+        storeDto.setName(store.getName());
         return storeDto;
     }
 
