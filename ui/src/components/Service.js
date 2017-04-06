@@ -21,7 +21,7 @@ const Service = {
         }
         return headers;
     },
-    
+
     createMerchant(url, data, successHandler, errorHandler) {
 
         delete data.isOpen;
@@ -65,7 +65,7 @@ const Service = {
             type: type,
             url: url,
             dataType: 'json',
-            ContentType: 'application/json'
+            contentType: 'application/json'
         };
 
         if(data) {
@@ -80,7 +80,6 @@ const Service = {
     executeRequest(reqData, successHandler, errorHandler) {
         reqData.success = successHandler,
         reqData.error = errorHandler
-
         $.ajax(reqData);
     }
 
