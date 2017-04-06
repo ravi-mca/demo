@@ -48,9 +48,5 @@ if [ ! "$?" -eq "0" ]; then
     exit
 fi
 
-echo "Running ${change_log_file} through a couple of filters"
-
-echo "Changing JSONB types"
-sed -i "s/JSONB[(][0-9]*[)]/JSONB/g" $change_log_file
 
 
