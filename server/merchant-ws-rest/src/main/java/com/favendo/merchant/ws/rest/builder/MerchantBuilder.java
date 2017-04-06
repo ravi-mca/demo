@@ -1,7 +1,7 @@
-package com.favendo.merchant.service.builder;
+package com.favendo.merchant.ws.rest.builder;
 
 import com.favendo.commons.utils.UniqueIdGenerator;
-import com.favendo.merchant.service.dto.MerchantDto;
+import com.favendo.merchant.ws.rest.dto.MerchantDto;
 import com.favendo.user.service.domain.Role;
 import com.favendo.user.service.domain.User;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class MerchantBuilder {
 
-    public User buildMerchant(MerchantDto merchantDto, Role role) {
+    public User buildMerchant(MerchantDto merchantDto) {
         User user = new User();
         user.setFirstName(merchantDto.getFirstName());
         user.setLastName(merchantDto.getLastName());
@@ -21,7 +21,6 @@ public class MerchantBuilder {
         user.setPhone(merchantDto.getPhone());
         user.setAccountNo(UniqueIdGenerator.generateUUID());
         user.setAccountName(merchantDto.getAccountName());
-        user.setRoles(buildRoles(role));
         return user;
     }
 

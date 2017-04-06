@@ -1,10 +1,7 @@
-package com.favendo.merchant.service.validator;
-
-import static com.favendo.commons.exception.ErrorKey.ALREADY_EXISTS;
-import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
+package com.favendo.merchant.ws.rest.validator;
 
 import com.favendo.commons.validator.*;
-import com.favendo.merchant.service.dto.MerchantDto;
+import com.favendo.merchant.ws.rest.dto.MerchantDto;
 import com.favendo.user.service.domain.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+import static com.favendo.commons.exception.ErrorKey.ALREADY_EXISTS;
+import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
 import static com.favendo.user.service.constant.UserConstant.*;
 
 @Component
@@ -62,7 +61,7 @@ public class MerchantValidator {
 
     @Value("${duplicate.merchant.accountName.error.message}")
     private String duplicateMerchantAccountNameErrorMessage;
-    
+
     @Value("${invalid.merchant.accountNo.error.message}")
     private String invalidMerchantAccountNumberErrorMessage;
 

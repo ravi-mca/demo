@@ -1,4 +1,4 @@
-package com.favendo.merchant.service.dto;
+package com.favendo.merchant.ws.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

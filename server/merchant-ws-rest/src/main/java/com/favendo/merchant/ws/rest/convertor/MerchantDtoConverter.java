@@ -1,6 +1,6 @@
 package com.favendo.merchant.ws.rest.convertor;
 
-import com.favendo.merchant.service.dto.MerchantDto;
+import com.favendo.merchant.ws.rest.dto.MerchantDto;
 import com.favendo.user.service.domain.User;
 import org.springframework.stereotype.Component;
 
