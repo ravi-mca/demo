@@ -318,7 +318,7 @@ export default class EditStore extends React.Component {
                     ref="editStoreId"
                     value={ this.state.editStoreId } 
                     onChange={ this.handleChange }
-                    required />
+                    required disabled />
                   <div className="error" id="editStoreIdError" />
                   </Col>
                 </FormGroup>
