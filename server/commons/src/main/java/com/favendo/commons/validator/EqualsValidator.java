@@ -16,6 +16,12 @@ public class EqualsValidator {
         }
     }
 
+    public void validateIfEqualsIgnoreCase(String value1, String value2, ErrorKey errorKey, String message) {
+        if (StringUtils.endsWithIgnoreCase(value1, value2)) {
+            throw new StorecastApiException(errorKey, message);
+        }
+    }
+
     public void validateIfNotEquals(String value1, String value2, ErrorKey errorKey, String message) {
         if (!StringUtils.equals(value1, value2)) {
             throw new StorecastApiException(errorKey, message);

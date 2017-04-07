@@ -93,9 +93,9 @@ public class MerchantValidator {
 
     public void validateDuplication(MerchantDto merchantDto, User user) {
         if (Objects.nonNull(user)) {
-            equalsValidator.validateIfEquals(merchantDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
+            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
                     duplicateMerchantEmailErrorMessage);
-            equalsValidator.validateIfEquals(merchantDto.getAccountName(), user.getAccountName(), ALREADY_EXISTS,
+            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getAccountName(), user.getAccountName(), ALREADY_EXISTS,
                     duplicateMerchantAccountNameErrorMessage);
         }
     }
