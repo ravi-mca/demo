@@ -9,10 +9,17 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StoreDao extends JpaRepository<Store, Long> {
 
-    @Query("select store from Store store where store.name = :name OR store.nickName = :nickName")
+    @Query("select store " +
+            "from Store store " +
+            "where upper(store.name) = upper(:name) OR " +
+            "upper(store.nickName) = upper(:nickName) ")
     Store findByNameOrNickName(@Param("name") String name, @Param("nickName") String nickName);
 
-    @Query("select store from Store store where (store.name = :name OR store.nickName = :nickName) AND store.id <> :id")
+    @Query("select store " +
+            "from Store store " +
+            "where (upper(store.name) = upper(:name) OR " +
+            "upper(store.nickName) = upper(:nickName)) AND " +
+            "store.id <> :id")
     Store findByNameOrNickNameAndId(@Param("name") String username, @Param("nickName")
             String accountName, @Param("id") Long id);
 }

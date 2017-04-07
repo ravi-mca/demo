@@ -117,9 +117,9 @@ public class StoreValidator {
 
     public void validateDuplication(StoreDto storeDto, Store store) {
         if (Objects.nonNull(store)) {
-            equalsValidator.validateIfEquals(storeDto.getName(), store.getName(), ALREADY_EXISTS,
+            equalsValidator.validateIfEqualsIgnoreCase(storeDto.getName(), store.getName(), ALREADY_EXISTS,
                     duplicateStoreNameErrorMessage);
-            equalsValidator.validateIfEquals(storeDto.getNickName(), store.getNickName(), ALREADY_EXISTS,
+            equalsValidator.validateIfEqualsIgnoreCase(storeDto.getNickName(), store.getNickName(), ALREADY_EXISTS,
                     duplicateStoreNickNameErrorMessage);
         }
     }
@@ -135,8 +135,6 @@ public class StoreValidator {
         emptyOrNullValidator.validateFieldIfNull(storeDto.getName(), BAD_REQUEST, emptyStoreNameErrorMessage, STORE_NAME);
         emptyOrNullValidator.validateFieldIfNull(storeDto.getNickName(), BAD_REQUEST, emptyStoreNickNameErrorMessage,
                 STORE_NICKNAME);
-        emptyOrNullValidator.validateFieldIfNull(storeDto.getBrandId(), BAD_REQUEST, emptyStoreBrandIdErrorMessage,
-                STORE_BRAND_ID);
         emptyOrNullValidator.validateFieldIfNull(storeDto.getManagerOrPOC(), BAD_REQUEST,
                 emptyStoreManagerOrPOCErrorMessage, STORE_MANAGER_OR_POC);
     }
