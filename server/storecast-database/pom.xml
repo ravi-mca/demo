@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.storecast.server</groupId>
+        <artifactId>storecast-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>storecast-database</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Storecast database</name>
+    <properties>
+        <encoding>UTF-8</encoding>
+        <org.postgresql.postgresql.version>9.4-1201-jdbc4</org.postgresql.postgresql.version>
+		<org.liquibase.version>3.4.2</org.liquibase.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+			<version>${org.liquibase.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>3.4.2</version>
+                    <configuration>
+                        <propertyFile>liquibase.properties</propertyFile>
+                        <changeLogFile>changelog/db.changelog-master.xml</changeLogFile>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.postgresql</groupId>
+                            <artifactId>postgresql</artifactId>
+                            <version>${org.postgresql.postgresql.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

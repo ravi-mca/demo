@@ -74,7 +74,7 @@ export default class MerchantForm extends React.Component {
     this.showInputError(e.target.name);  
     this.setState({
       isOpen: true
-    });        
+    });
   }
 
   handleSubmit(e) {    

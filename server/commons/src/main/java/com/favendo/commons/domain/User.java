@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "fv_user", uniqueConstraints = {
+@Table(name = "sc_user", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"username"}),
         @UniqueConstraint(columnNames = {"account_name"})
 })
@@ -39,7 +39,7 @@ public class User implements Serializable {
     private String phone;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "fv_user_role",
+    @JoinTable(name = "sc_user_role",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
     List<Role> roles = new ArrayList<>();

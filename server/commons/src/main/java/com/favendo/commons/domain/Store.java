@@ -3,7 +3,7 @@ package com.favendo.commons.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "fv_store")
+@Table(name = "sc_store")
 public class Store {
 
     @Id
