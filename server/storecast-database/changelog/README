@@ -1,0 +1,4 @@
+* Run "./db_drop.sh" to delete database and role
+* Run "./db_create.sh" to create database and role
+
+* For creating a database and populating database with default data, delete database and Run a "./db_reset.sh" command. This will recreate the database, the storecast user and populate db with default data.

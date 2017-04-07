@@ -42,7 +42,8 @@ export default class EditMerchant extends React.Component {
 
   openModal = () => {
     this.setState({
-      isOpen: true,editFirstName: this.props.data.firstname,
+      isOpen: true,
+      editFirstName: this.props.data.firstname,
       editLastName: this.props.data.lastname,      
       editEmail: this.props.data.username,      
       editPhone: this.props.data.phone,

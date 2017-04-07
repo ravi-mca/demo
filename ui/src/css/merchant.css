@@ -96,3 +96,38 @@
 .bgColor {
   background: white !important;
 }
+
+/* Add store */
+.storebtn {
+    font-family: Source Sans Pro Semibold;
+    font-size: 15px;
+}
+
+select.active:valid {
+    box-shadow: 0 0 5px 1px green;
+}
+
+select.active:invalid {
+    box-shadow: 0 0 5px 1px red;
+}
+
+
+.storeMargin {
+  margin-left: -15px !important;
+  font-family: 'Source Sans Pro Bold';
+}
+
+.nav-pills-custom{
+  background-color: #f2f3f4 !important;
+  font-family: 'Source Sans Pro' !important;
+  font-size: 15px !important;
+  border-radius: 5px;
+}
+
+.nav-pills{
+  margin-top: 30px !important;
+}
+
+.nav-pills-custom a {
+  color: #4e4e4e !important;
+}
