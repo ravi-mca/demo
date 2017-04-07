@@ -45,6 +45,23 @@ export default class EditStore extends React.Component {
       editPriceCategory : "",
       editPosSystem : "",
       editStoreCastAdminName : "",
+      /*
+      editName : this.props.name,
+      editNickname : this.props.nickName,
+      editManagerPoc : this.props.managerOrPOC,
+      editPhoneNo : this.props.phone,
+      editCountry : this.props.country,
+      editState : this.props.state,
+      editCity : this.props.city,
+      editZipCode : this.props.zipCode,
+      editStreetAddress : this.props.street,
+      editControllerNo : this.props.controllerNumber,
+      editControllerPlacement : this.props.controllerPlacement,
+      editStoreCategory : this.props.category,
+      editStoreSubCategory : this.props.subCategory,
+      editPriceCategory : this.props.priceCategory,
+      editPosSystem : this.props.posSystem,
+      editStoreCastAdminName : this.props.storecastAdminName,*/
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -116,21 +133,7 @@ export default class EditStore extends React.Component {
       [e.target.name]: e.target.value
 
     });
-
     this.showInputError(e.target.name);    
-
-  }
-
-  updateMerchantState(info){
-
-     this.setState({
-      editStoreName: info.name,
-      /*lastName: info.lastName,      
-      email: info.email,      
-      phone: info.phone,
-      accountName: info.accountName,
-      accountNo: info.accountNo,*/
-    }); 
   }
 
   handleEditStoreSubmit(e) {    
@@ -143,7 +146,6 @@ export default class EditStore extends React.Component {
     var updateStoreData = {
     "name": this.state.editName,
     "nickName": this.state.editNickname,
-    "brandId": "N/A",
     "managerOrPOC": this.state.editManagerPoc,
     "phone": this.state.editPhoneNo,
     "street": this.state.editStreetAddress,
@@ -162,18 +164,14 @@ export default class EditStore extends React.Component {
     
     if (this.showFormErrors()) {
 
-      Service.editStore(Config.editStore,updateStoreData, function(data) {
-       
-        //this.props.onUpdateAccount(this.state);  
+      Service.editStore(Config.editStore+storeId,updateStoreData, function(data) {
         this.successAlert();        
         this.hideModal();
-
-      }.bind(this), function(xhr, status, err) {
-      
+      }.bind(this), function(xhr, status, err) {      
         this.errorAlert();
         var statusObj = xhr;
         var obj=JSON.parse(xhr.responseText);
-        
+
         const editNameError = document.getElementById(`editNameError`);
         const editNicknameError = document.getElementById(`editNicknameError`);
         var editNameErrorMessage = "Store with name already exist. Please provide different store name.";
@@ -244,18 +242,6 @@ export default class EditStore extends React.Component {
       isOpen: true,
     });   
   }
-
-  /*function handleSelect(selectedKey) {
-  alert('selected ' + selectedKey);
-  }
-
-  const navInstance = (
-    <Nav bsStyle="pills" activeKey={1} onSelect={handleSelect}>
-      <NavItem eventKey={1} href="/home">NavItem 1 content</NavItem>
-      <NavItem eventKey={2} title="Item">NavItem 2 content</NavItem>
-      <NavItem eventKey={3} disabled>NavItem 3 content</NavItem>
-    </Nav>
-  );*/
   
   showInputError(refName, type) {
    
