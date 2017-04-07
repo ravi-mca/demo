@@ -127,33 +127,38 @@ export default class AddStore extends React.Component {
     			posSystem: this.state.posSystem,
     			storecastAdminName: this.state.storecastAdminName
   			};
-			var reqData = Service.buildRequestdata(Config.addStore + this.props.data, 'POST', storeData);
-			console.log('reqData',reqData);
+
+      		var requestData = {
+      			url: Config.addStore + this.props.data,
+      			type: 'POST',
+      			data: JSON.stringify(storeData),
+      			dataType: 'text',
+      			contentType: 'application/json'
+     		};
+
+            var reqData = Service.buildRequestdata(requestData);
+
 			Service.executeRequest(reqData, function(data) {
 				this.successAlert();
 				this.hideModal();
 			}.bind(this), function(xhr, status, err) {
 				this.errorAlert();
 				var statusObj = xhr;
-				//var obj = JSON.parse(xhr.responseText);
-				//console.log('obj',obj);
-				console.log('statusObj',statusObj);
+				if(statusObj.status == 409) {
+					var errorStatus= JSON.parse(statusObj.responseText);
+				    const storeNameError = document.getElementById(`storeNameError`);
+			 	    const nickNameError = document.getElementById(`nickNameError`);
 
-
-				/*const storeNameError = document.getElementById(`storeNameError`);
-				const nickNameError = document.getElementById(`nickNameError`);
-
-				if(obj["error_description"] == "Store with name already exist. Please provide different name.") {
-					storeNameError.textContent = `Store name already exist`;
-				} else if(obj["error_description"] == "Store with nick name already exist. Please provide different nick name.") {
-					nickNameError.textContent = `Store nick name already exist`;
-				}*/
+			 	   if(errorStatus["error_description"] == "Store with name already exist. Please provide different store name.") {
+						storeNameError.textContent = `Store name already exist`;
+					} else if(errorStatus["error_description"] == "Store with nickname already exist. Please provide different store nickname.") {
+						nickNameError.textContent = `Store nick name already exist`;
+					}
+				}
 				isFormValid = false;
 			}.bind(this));
-
 		}
 	}
-
 
 	showFormErrors() {
 		const inputs = document.querySelectorAll('#storepanel input');
@@ -211,7 +216,7 @@ export default class AddStore extends React.Component {
 	successAlert () {
 		this.refs.container.success(
 			"",
-			"Merchant created successfully.", {
+			"Store created successfully.", {
 				timeOut: 2000,
 				extendedTimeOut: 1000
 		});
@@ -464,7 +469,7 @@ export default class AddStore extends React.Component {
 											type="text"
 											name="storecastAdminName"
 											ref="storecastAdminName"
-											value={ this.state.adminName}
+											value={ this.state.storecastAdminName}
 											onChange={ this.inputChange } />
 									<div className="error" id="storecastAdminNameError" />
 				  				</Col>

@@ -60,30 +60,16 @@ const Service = {
         });
     },
 
-    login(url,data,successHandler, errorHandler) {
-
-        $.ajax({
-            type: 'POST',
-            url: url,
-            dataType: 'json',
-            ContentType: 'application/x-www-form-urlencoded',
-            data: data,
-            cache: false,
-            success: successHandler,
-            error:errorHandler
-        });
-    },
-
-    buildRequestdata(url, type, data, headers) {
+    buildRequestdata(reqInfo, headers) {
         var reqData = {
-            type: type,
-            url: url,
-            dataType: 'json',
-            contentType: 'application/json'
+            type: reqInfo.type,
+            url: reqInfo.url,
+            dataType: reqInfo.dataType,
+            contentType: reqInfo.contentType
         };
 
-        if(data) {
-            reqData.data = data;
+        if(reqInfo.data) {
+            reqData.data = reqInfo.data;
         }
 
         reqData.headers = this.setAuthHeader(headers);
