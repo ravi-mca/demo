@@ -43,16 +43,17 @@ export default class Login extends React.Component {
             console.log('form is invalid: do not submit');
         } else {
             console.log('form is valid: submit');
-            var reqData = Service.buildRequestdata(Config.login, 'POST', this.state);
-            Service.executeRequest(reqData, function(data) {
-                  this.setState({ showResults: false });
-                  this.setAuthToken(data.accessToken);
-                  browserHistory.push('/merchants');
-                  console.log('status',data);
-           }.bind(this), function(xhr, status, err) {
-               this.setState({ showResults: true });
+
+             Service.login(Config.login,this.state, function(data) {
+                this.setState({ showResults: false });
+                this.setState({ showResults: false });
+                this.setAuthToken(data.accessToken);
+                browserHistory.push('/merchants');
+
+               }.bind(this), function(xhr, status, err) {
+                this.setState({ showResults: true });
                   console.log('err',err);
-           }.bind(this));
+               }.bind(this))
         }
     }
 

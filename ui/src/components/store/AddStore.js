@@ -36,10 +36,10 @@ export default class AddStore extends React.Component {
 	getInitialState() {
 		this.state = {
 			isOpen: false,
-			name : "",
+			storeName : "",
 			nickName : "",
 			managerOrPOC : "",
-			phone : "",
+			storePhone : "",
 			country : "",
 			state : "",
 			street : "",
@@ -74,10 +74,10 @@ export default class AddStore extends React.Component {
 		this.getInitialState();
 
 	   //Clear error fields
-		$("#nameError").html("");
+		$("#storeNameError").html("");
 		$("#nickNameError").html("");
 		$("#managerOrPOCError").html("");
-		$("#phoneError").html("");
+		$("#storePhoneError").html("");
 		$("#countryError").html("");
 		$("#stateError").html("");
 		$("#cityError").html("");
@@ -108,8 +108,27 @@ export default class AddStore extends React.Component {
 		let isFormValid = true;
 
 		if (this.showFormErrors()) {
-			console.log('state',this.state);
-			var reqData = Service.buildRequestdata(Config.addStore + this.props.data, 'POST', this.state);
+
+			var storeData = {
+    			name: this.state.storeName,
+    			nickName: this.state.nickName,
+    			managerOrPOC: this.state.managerOrPOC,
+    			phone: this.state.storePhone,
+    			street: this.state.street,
+    			city: this.state.city,
+   				state: this.state.state,
+    			country: this.state.country,
+    			zipCode: this.state.zipCode,
+    			controllerNumber: this.state.controllerNumber,
+    			controllerPlacement: this.state.controllerPlacement,
+    			category: this.state.category,
+   				subCategory: this.state.subCategory,
+    			priceCategory: this.state.priceCategory,
+    			posSystem: this.state.posSystem,
+    			storecastAdminName: this.state.storecastAdminName
+  			};
+			var reqData = Service.buildRequestdata(Config.addStore + this.props.data, 'POST', storeData);
+			console.log('reqData',reqData);
 			Service.executeRequest(reqData, function(data) {
 				this.successAlert();
 				this.hideModal();
@@ -235,16 +254,16 @@ export default class AddStore extends React.Component {
 					<form id="addStoreForm" method="post" onSubmit="" noValidate>
 						<ModalBody>
 							<FormGroup row>
-								<Label id="nameLabel" class="form-label" for="name" sm={4}>Store Name </Label>
+								<Label id="storeNameLabel" class="form-label" for="storeName" sm={4}>Store Name </Label>
 								<Col sm={7} class="col-padding">
 									<input className="form-control"
 											type="text"
-											name="name"
-											ref="name"
-											value={ this.state.name }
+											name="storeName"
+											ref="storeName"
+											value={ this.state.storeName }
 											onChange={ this.inputChange }
 											required />
-									<div className="error" id="nameError" />
+									<div className="error" id="storeNameError" />
 								</Col>
 							</FormGroup>
 							<FormGroup row>
@@ -274,17 +293,17 @@ export default class AddStore extends React.Component {
 								</Col>
 							</FormGroup>
 							<FormGroup row>
-								<Label id="phoneLabel" class="form-label" for="phone" sm={4}>Store Phone number</Label>
+								<Label id="storePhoneLabel" class="form-label" for="storePhone" sm={4}>Store Phone number</Label>
 								<Col sm={7} class="col-padding">
 									<input className="form-control"
 										    type="text"
-											name="phone"
-											ref="phone"
-											value={ this.state.phone }
+											name="storePhone"
+											ref="storePhone"
+											value={ this.state.storePhone }
 											onChange={ this.inputChange }
 											pattern="[0-9]{6,10}"
 											required />
-									<div className="error" id="phoneError" />
+									<div className="error" id="storePhoneError" />
 								</Col>
 							</FormGroup>
 							<FormGroup row>
@@ -348,7 +367,7 @@ export default class AddStore extends React.Component {
 											ref="zipCode"
 											value={ this.state.zipCode }
 											onChange={ this.inputChange }
-											pattern="[a-zA-Z0-9]{6}"
+											pattern="[a-zA-Z0-9]{5}"
 											required />
 				  					<div className="error" id="zipCodeError" />
 				 				</Col>
