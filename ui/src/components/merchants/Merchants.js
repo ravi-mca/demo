@@ -8,6 +8,7 @@ import Sidebar from '../sidebar/Sidebar';
 import AddStore from '../store/AddStore';
 import Service from "../Service";
 import Config from "../../index.config";
+import EditStore from "../store/EditStore";
 
 export default class Merchants extends React.Component {
     constructor(props) {
@@ -63,7 +64,8 @@ export default class Merchants extends React.Component {
 			<div class="dashboard-container" id="main">
 			   	{showAccountInfo}
 			   	<AddStore data={this.state.userInfo.userId}/>
-			</div>
+	            <EditStore/>
+	        </div>
 		</div>
 	);
   }

@@ -28,7 +28,7 @@ const Service = {
         delete data.showResults;
 
         $.ajax({
-            type: 'POST',
+            type: "POST",
             url: url,
             dataType : "text",
             contentType: "application/json",
@@ -42,6 +42,25 @@ const Service = {
     },
 
     editMerchant(url, data, successHandler, errorHandler) {
+
+        delete data.isOpen;
+        delete data.showResults;
+
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            dataType : "text",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            headers: {
+                'Authorization': 'Bearer '+localStorage.accessToken,
+            },
+            success: successHandler,
+            error: errorHandler,
+        });
+    },
+
+    editStore(url, data, successHandler, errorHandler) {
 
         delete data.isOpen;
         delete data.showResults;
