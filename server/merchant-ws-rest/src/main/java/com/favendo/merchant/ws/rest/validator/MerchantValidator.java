@@ -1,8 +1,8 @@
 package com.favendo.merchant.ws.rest.validator;
 
+import com.favendo.commons.domain.User;
 import com.favendo.commons.validator.*;
 import com.favendo.merchant.ws.rest.dto.MerchantDto;
-import com.favendo.user.service.domain.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -93,9 +93,9 @@ public class MerchantValidator {
 
     public void validateDuplication(MerchantDto merchantDto, User user) {
         if (Objects.nonNull(user)) {
-            equalsValidator.validateIfEquals(merchantDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
+            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
                     duplicateMerchantEmailErrorMessage);
-            equalsValidator.validateIfEquals(merchantDto.getAccountName(), user.getAccountName(), ALREADY_EXISTS,
+            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getAccountName(), user.getAccountName(), ALREADY_EXISTS,
                     duplicateMerchantAccountNameErrorMessage);
         }
     }

@@ -1,7 +1,6 @@
 package com.favendo.user.service.dao;
 
-import com.favendo.user.service.domain.Role;
-import com.favendo.user.service.domain.User;
+import com.favendo.commons.domain.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

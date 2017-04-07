@@ -1,5 +1,6 @@
 package com.favendo.user.service.domain;
 
+import com.favendo.commons.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

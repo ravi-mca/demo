@@ -1,8 +1,8 @@
 package com.favendo.user.service.service;
 
-import com.favendo.user.service.domain.Role;
+import com.favendo.commons.domain.Role;
+import com.favendo.commons.domain.User;
 import com.favendo.user.service.domain.StorecastUserDetails;
-import com.favendo.user.service.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;

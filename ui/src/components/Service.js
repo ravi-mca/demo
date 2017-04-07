@@ -21,7 +21,7 @@ const Service = {
         }
         return headers;
     },
-    
+
     createMerchant(url, data, successHandler, errorHandler) {
 
         delete data.isOpen;
@@ -60,16 +60,16 @@ const Service = {
         });
     },
 
-    buildRequestdata(url, type, data, headers) {
+    buildRequestdata(reqInfo, headers) {
         var reqData = {
-            type: type,
-            url: url,
-            dataType: 'json',
-            ContentType: 'application/json'
+            type: reqInfo.type,
+            url: reqInfo.url,
+            dataType: reqInfo.dataType,
+            contentType: reqInfo.contentType
         };
 
-        if(data) {
-            reqData.data = data;
+        if(reqInfo.data) {
+            reqData.data = reqInfo.data;
         }
 
         reqData.headers = this.setAuthHeader(headers);
@@ -80,7 +80,6 @@ const Service = {
     executeRequest(reqData, successHandler, errorHandler) {
         reqData.success = successHandler,
         reqData.error = errorHandler
-
         $.ajax(reqData);
     }
 

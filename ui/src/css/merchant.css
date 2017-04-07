@@ -96,3 +96,17 @@
 .bgColor {
   background: white !important;
 }
+
+/* Add store */
+.storebtn {
+    font-family: Source Sans Pro Semibold;
+    font-size: 15px;
+}
+
+select.active:valid {
+    box-shadow: 0 0 5px 1px green;
+}
+
+select.active:invalid {
+    box-shadow: 0 0 5px 1px red;
+}

@@ -1,5 +1,6 @@
 package com.favendo.merchant.ws.rest.endpoint;
 
+import com.favendo.commons.domain.User;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.ErrorKey;
 import com.favendo.commons.exception.StorecastApiException;
@@ -8,7 +9,6 @@ import com.favendo.merchant.ws.rest.builder.MerchantBuilder;
 import com.favendo.merchant.ws.rest.convertor.MerchantDtoConverter;
 import com.favendo.merchant.ws.rest.dto.MerchantDto;
 import com.favendo.merchant.ws.rest.validator.MerchantValidator;
-import com.favendo.user.service.domain.User;
 import com.favendo.user.service.service.RoleService;
 import com.favendo.user.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

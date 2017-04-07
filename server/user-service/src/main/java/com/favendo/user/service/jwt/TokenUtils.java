@@ -1,6 +1,6 @@
 package com.favendo.user.service.jwt;
 
-import com.favendo.user.service.domain.User;
+import com.favendo.commons.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

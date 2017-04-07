@@ -35,14 +35,20 @@ export default class Sidebar extends React.Component {
     }
 
     getListOfMerchant(info) {
+        var requestData = {
+            url: Config.getMerchantList,
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json'
+        };
 
-        var reqData = Service.buildRequestdata(Config.getMerchantList, 'GET');
+        var reqData = Service.buildRequestdata(requestData);
         Service.executeRequest(reqData, function(response) {
-           this.setState({merchantList: response});  
-           
-           if( (info !== undefined) && (info !== null) ) {   
-               this.setState({selected  : info.editFirstName});             
-           }   
+           this.setState({merchantList: response});
+
+           if( (info !== undefined) && (info !== null) ) {
+               this.setState({selected  : info.editFirstName});
+           }
 
         }.bind(this), function(xhr, status, err) {
            console.log(err);
@@ -58,7 +64,7 @@ export default class Sidebar extends React.Component {
         if(this.state.selected !== '') {
             $('#menu-content li').first().addClass('list-nav');
             return ((value==this.state.selected) ?'activeList':'list-nav');
-        }  
+        }
     }
 
     searchUpdated (term) {

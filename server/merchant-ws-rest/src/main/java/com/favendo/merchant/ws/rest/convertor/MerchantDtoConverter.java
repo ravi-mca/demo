@@ -1,7 +1,7 @@
 package com.favendo.merchant.ws.rest.convertor;
 
+import com.favendo.commons.domain.User;
 import com.favendo.merchant.ws.rest.dto.MerchantDto;
-import com.favendo.user.service.domain.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class MerchantDtoConverter {
     }
 
     private void convertAccountInformation(User merchant, MerchantDto merchantDto) {
-        merchantDto.setAccountNo(merchant.getUsername());
+        merchantDto.setAccountNo(merchant.getAccountNo());
         merchantDto.setAccountName(merchant.getAccountName());
     }
 }

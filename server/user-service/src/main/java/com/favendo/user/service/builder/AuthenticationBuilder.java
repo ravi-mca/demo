@@ -1,14 +1,11 @@
 package com.favendo.user.service.builder;
 
-import com.favendo.commons.utils.JsonMapper;
-import com.favendo.user.service.domain.Role;
+import com.favendo.commons.domain.Role;
 import com.favendo.user.service.dto.AuthenticationFailureDto;
 import com.favendo.user.service.dto.AuthenticationSuccessDto;
 import com.favendo.user.service.dto.RoleDto;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
