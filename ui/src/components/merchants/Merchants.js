@@ -49,23 +49,9 @@ export default class Merchants extends React.Component {
         }.bind(this));
     }
 
-<<<<<<< HEAD
-  render() {
-	let showAccountInfo;
-	let showStoreTabs;
-	if(this.state.userInfo) {
-		showAccountInfo = (
-			<div class="col-md-12 mt-10 mb-20 acc-border no-padding">
-				<div class="col-md-6 col-xs-6 auto-div no-padding">
-					<div class="acc-heading">{this.state.userInfo.firstName} </div>
-					<div class="acc-info">Account#: {this.state.userInfo.accountNo}</div>
-					<div class="acc-info">{this.state.userInfo.phone}</div>
-					<div class="acc-info mb-20">{this.state.userInfo.email}</div>
-				</div>
-
-=======
   	render() {
 		let showAccountInfo;
+		let showStoreTabs;
 		if(this.state.userInfo) {
 			showAccountInfo = (
 				<div class="col-md-12 mt-10 mb-20 acc-border no-padding">
@@ -75,48 +61,42 @@ export default class Merchants extends React.Component {
 						<div class="acc-info">{this.state.userInfo.phone}</div>
 						<div class="acc-info mb-20">{this.state.userInfo.email}</div>
 					</div>
->>>>>>> 390a7a266b19e953d97a9a461b86f07ba0aa8e8d
-				<EditMerchants ref="editMerchantChild" data={this.state.userInfo} onUpdateAccount={this.getMerchantAccounts} />				
-			</div>
-	  	);
-	  	showStoreTabs = (
-			<Tab.Container id="storeInfo" defaultActiveKey="storeInfoTab" >
-    			<Row className="clearfix">
-      				<Col sm={12}>
-       					<Nav bsStyle="pills">
-          					<NavItem eventKey="storeInfoTab" class="pad-right-10">STORE INFO</NavItem>
-          					<NavItem eventKey="storeDataTab" disabled>STORE DATA</NavItem>
-        				</Nav>
-      				</Col>
-      				<Col sm={12} class="no-padding">
-        				<Tab.Content animation class="mt-20">
-          					<Tab.Pane eventKey="storeInfoTab">
-           						<StoreInfo data={this.state.storeList}/>
-          					</Tab.Pane>
-          					<Tab.Pane eventKey="storeDataTab">
-          					</Tab.Pane>
-        				</Tab.Content>
-      				</Col>
-    			</Row>
-  			</Tab.Container>
-	  	)
- 	}
+					<EditMerchants ref="editMerchantChild" data={this.state.userInfo} onUpdateAccount={this.getMerchantAccounts} />				
+				</div>
+	  		);
+
+	  		showStoreTabs = (
+				<Tab.Container id="storeInfo" defaultActiveKey="storeInfoTab" >
+    				<Row className="clearfix">
+      					<Col sm={12}>
+       						<Nav bsStyle="pills">
+          						<NavItem eventKey="storeInfoTab" class="pad-right-10">STORE INFO</NavItem>
+          						<NavItem eventKey="storeDataTab" disabled>STORE DATA</NavItem>
+        					</Nav>
+      					</Col>
+      					<Col sm={12} class="no-padding">
+        					<Tab.Content animation class="mt-20">
+          						<Tab.Pane eventKey="storeInfoTab">
+           							<StoreInfo data={this.state.storeList}/>
+          						</Tab.Pane>
+          						<Tab.Pane eventKey="storeDataTab">
+          						</Tab.Pane>
+        					</Tab.Content>
+      					</Col>
+    				</Row>
+  				</Tab.Container>
+	  		)
+ 		}
 
 	return (
 		<div>
 			<Sidebar ref= "child" onSelectList={this.setSelectList} />
-
 			<div class="dashboard-container" id="main">
-<<<<<<< HEAD
-			   {showAccountInfo}
-			   {showStoreTabs}
-			</div>
-=======
 			   	{showAccountInfo}
 			   	<AddStore data={this.state.userInfo.userId}/>
 	            <EditStore/>
+	            {showStoreTabs}
 	        </div>
->>>>>>> 390a7a266b19e953d97a9a461b86f07ba0aa8e8d
 		</div>
 	);
   }
