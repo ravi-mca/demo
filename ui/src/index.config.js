@@ -6,6 +6,7 @@ const Config = {
     login : BaseUrl +'/storecast/api/admin/login',
     getMerchantList: BaseUrl + '/storecast/api/admin/merchant',
     getMerchant: BaseUrl + '/storecast/api/admin/merchant',
+    getStoreInfo:  BaseUrl + '/storecast/api/admin/store/'
 };
 
 export default Config;

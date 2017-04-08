@@ -40,6 +40,10 @@
   padding: 15px;
 }
 
+.pad-right-10 {
+  padding-right: 10px;
+}
+
 .list-padding {
   padding: 5px 15px 5px 15px;
 }
@@ -51,6 +55,10 @@
 
 .mt-10 {
   margin-top: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
 }
 
 .mb-20 {

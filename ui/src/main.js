@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,6 +15,7 @@ import './css/merchant.css';
 import './css/toastr.min.css';
 import './fonts/fonts.css';
 import 'animate.css/animate.min.css';
+import './css/store.css';
 
 
 import Layout from "./components/Layout";

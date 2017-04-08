@@ -1,0 +1,12 @@
+#storeInfo .nav-pills > li.active > a {
+  background: #f2f3f4;
+  border-bottom: 6px solid #79879b;
+}
+
+#storeInfo .nav-pills > li > a {
+	padding: 7px 27px !important;
+	background: #f2f3f4;
+	font-size: 15px;
+    font-family: Source Sans Pro;
+    color: #4e4e4e;
+}
