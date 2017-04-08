@@ -24,7 +24,7 @@ var ToastMessageFactory = React.createFactory(ReactToastr.ToastMessage.animation
 export default class AddStore extends React.Component {
 	constructor(props) {
 		super(props);
-
+		console.log("ghhgfgh", this.props.data);
 		this.getInitialState = this.getInitialState.bind(this);
 		this.addStore = this.addStore.bind(this);
 		this.inputChange = this.inputChange.bind(this);
@@ -240,13 +240,6 @@ export default class AddStore extends React.Component {
 	render() {
 		return (
 			<div id="storepanel">
-				<div class="btn-padding">
-					<div class="col-md-6 col-xs-6">
-						<button type="button" class="btn btn-primary storebtn" onClick={this.addStore}>
-							<i class="fa fa-plus"> Add Store</i>
-						</button>
-					</div>
-				</div>
 				<div>
 					<ToastContainer ref="container"
 							  toastMessageFactory={ToastMessageFactory}
