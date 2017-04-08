@@ -284,17 +284,6 @@ export default class EditStore extends React.Component {
             
             <div class="storeMargin">
               <span>Store #: A3382910 </span> <i class="fa fa-pencil ml-10" onClick={this.showEditForm}></i>  
-              
-              <nav class="pills">
-                  <ul class="nav nav-pills">
-                    <li class="nav-pills-custom">
-                      <a>STORE INFO</a>
-                    </li>
-                    <li class="nav-pills-custom">
-                      <a>STORE DATA</a>
-                    </li>
-                  </ul>
-              </nav>
             </div>
 
             </div>            
