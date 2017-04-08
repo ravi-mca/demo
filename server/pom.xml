@@ -26,6 +26,7 @@
         <mokito.version>1.10.19</mokito.version>
         <junit.version>4.11</junit.version>
         <postgresql.version>9.4-1201-jdbc4</postgresql.version>
+		<org.liquibase.version>3.4.2</org.liquibase.version>
     </properties>
 
     <build>
@@ -72,6 +73,7 @@
         <module>user-ws-rest</module>
         <module>store-ws-rest</module>
         <module>storecast-portal</module>
+		<module>storecast-database</module>
     </modules>
 
     <dependencies>

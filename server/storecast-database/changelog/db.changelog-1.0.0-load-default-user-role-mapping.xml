@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd  
+                    	http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd">
+
+    <changeSet author="kunjan" id="1.0.0-load-default-user-role-mapping">
+        <loadData file="changelog/db.changelog-1.0.0-default-user-role-mapping.csv"
+                  tableName="sc_user_role"
+                  quotchar="&apos;"
+                  separator=",">
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

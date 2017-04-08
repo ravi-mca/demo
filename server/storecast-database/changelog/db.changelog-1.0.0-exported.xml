@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="kunjan.s (generated)" id="1491483737837-1">
+        <createSequence sequenceName="hibernate_sequence"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-2">
+        <createTable tableName="sc_role">
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-3">
+        <createTable tableName="sc_store">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="brandid" type="VARCHAR(255)"/>
+            <column name="category" type="VARCHAR(255)"/>
+            <column name="city" type="VARCHAR(255)"/>
+            <column name="controllernumber" type="VARCHAR(255)"/>
+            <column name="controllerplacement" type="VARCHAR(255)"/>
+            <column name="country" type="VARCHAR(255)"/>
+            <column name="loyaltyprogram" type="VARCHAR(255)"/>
+            <column name="managerorpoc" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="nickname" type="VARCHAR(255)"/>
+            <column name="othersystem" type="VARCHAR(255)"/>
+            <column name="phone" type="VARCHAR(255)"/>
+            <column name="possystem" type="VARCHAR(255)"/>
+            <column name="pricecategory" type="VARCHAR(255)"/>
+            <column name="state" type="VARCHAR(255)"/>
+            <column name="storeid" type="VARCHAR(255)"/>
+            <column name="storecastadminname" type="VARCHAR(255)"/>
+            <column name="street" type="VARCHAR(255)"/>
+            <column name="subcategory" type="VARCHAR(255)"/>
+            <column name="wifiname" type="VARCHAR(255)"/>
+            <column name="wifipassword" type="VARCHAR(255)"/>
+            <column name="zipcode" type="VARCHAR(255)"/>
+            <column name="merchant_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-4">
+        <createTable tableName="sc_user">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_name" type="VARCHAR(255)"/>
+            <column name="account_no" type="VARCHAR(255)"/>
+            <column name="firstname" type="VARCHAR(255)"/>
+            <column name="lastname" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="phone" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-5">
+        <createTable tableName="sc_user_role">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-6">
+        <addPrimaryKey columnNames="role_id" constraintName="sc_role_pkey" tableName="sc_role"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-7">
+        <addPrimaryKey columnNames="id" constraintName="sc_store_pkey" tableName="sc_store"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-8">
+        <addPrimaryKey columnNames="user_id" constraintName="sc_user_pkey" tableName="sc_user"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-9">
+        <addUniqueConstraint columnNames="account_name" constraintName="uk_5y3pce1d3c6y2uh08b2r8civ" tableName="sc_user"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-10">
+        <addUniqueConstraint columnNames="username" constraintName="uk_go1t547rwvn83f9b2iqcexdbj" tableName="sc_user"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-11">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="sc_user_role" constraintName="fk_390h8k5qklutporgyul3rxstv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="role_id" referencedTableName="sc_role"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-12">
+        <addForeignKeyConstraint baseColumnNames="merchant_id" baseTableName="sc_store" constraintName="fk_80w7yk55k6c283dch5erdwjom" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="sc_user"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-13">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="sc_user_role" constraintName="fk_hwcw90gc4uc8ka1xffu8lomdj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="sc_user"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,22 +1,27 @@
 package com.favendo.user.service.service;
 
-import com.favendo.commons.domain.Role;
-import com.favendo.commons.domain.User;
-import com.favendo.commons.enums.RoleEnum;
-import com.favendo.user.service.dao.RoleDao;
-import com.favendo.user.service.dao.UserDao;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+import static com.favendo.user.service.constant.UserConstant.DEFAULT_ACCOUNT_NAME;
+import static com.favendo.user.service.constant.UserConstant.DEFAULT_ACCOUNT_NO;
+import static com.favendo.user.service.constant.UserConstant.DEFAULT_FIRSTNAME;
+import static com.favendo.user.service.constant.UserConstant.DEFAULT_LASTAME;
+import static com.favendo.user.service.constant.UserConstant.DEFAULT_PASSWORD;
+import static com.favendo.user.service.constant.UserConstant.DEFAULT_USER_NAME;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static com.favendo.user.service.constant.UserConstant.*;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
-@Component
+import com.favendo.commons.domain.Role;
+import com.favendo.commons.domain.User;
+import com.favendo.commons.enums.RoleEnum;
+import com.favendo.user.service.dao.RoleDao;
+import com.favendo.user.service.dao.UserDao;
+
+//@Component
 public class InitBean implements InitializingBean {
 
     @Autowired

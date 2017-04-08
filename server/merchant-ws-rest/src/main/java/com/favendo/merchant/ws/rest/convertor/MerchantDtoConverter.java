@@ -30,7 +30,7 @@ public class MerchantDtoConverter {
     }
 
     private void convertAccountInformation(User merchant, MerchantDto merchantDto) {
-        merchantDto.setAccountNo(merchant.getUsername());
+        merchantDto.setAccountNo(merchant.getAccountNo());
         merchantDto.setAccountName(merchant.getAccountName());
     }
 }

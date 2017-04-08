@@ -117,9 +117,9 @@ public class StoreValidator {
 
     public void validateDuplication(StoreDto storeDto, Store store) {
         if (Objects.nonNull(store)) {
-            equalsValidator.validateIfEquals(storeDto.getName(), store.getName(), ALREADY_EXISTS,
+            equalsValidator.validateIfEqualsIgnoreCase(storeDto.getName(), store.getName(), ALREADY_EXISTS,
                     duplicateStoreNameErrorMessage);
-            equalsValidator.validateIfEquals(storeDto.getNickName(), store.getNickName(), ALREADY_EXISTS,
+            equalsValidator.validateIfEqualsIgnoreCase(storeDto.getNickName(), store.getNickName(), ALREADY_EXISTS,
                     duplicateStoreNickNameErrorMessage);
         }
     }
