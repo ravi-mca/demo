@@ -8,5 +8,5 @@ public final class ValidationPatternConstant {
 
     public static final String PHONE_PATTERN = "[0-9 +]+";
 
-    public static final String ZIPCODE_PATTERN = "\\d{5}(-\\d{4})?";
+    public static final String ZIPCODE_PATTERN = "\\d{4,6}(-\\d{4})?";
 }

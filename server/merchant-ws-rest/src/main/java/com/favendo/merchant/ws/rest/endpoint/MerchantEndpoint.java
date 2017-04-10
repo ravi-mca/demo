@@ -83,7 +83,7 @@ public class MerchantEndpoint {
         try {
             merchantValidator.validateRequest(merchantDto);
             merchantValidator.validateDuplication(merchantDto, userService.getByUsernameOrAccountName(merchantDto.
-                    getEmail(), merchantDto.getAccountName()));
+                    getEmail(), merchantDto.getAccountName(), merchantDto.getFirstName()));
             merchantService.save(merchantBuilder.buildMerchant(merchantDto));
             return Response.status(Status.CREATED).build();
         } catch (BusinessException exception) {
@@ -98,7 +98,7 @@ public class MerchantEndpoint {
             User user = getAndValidateUserByMerchantId(merchantId);
             merchantValidator.validateContactDetails(merchantDto.getEmail(), merchantDto.getPhone());
             merchantValidator.validateDuplication(merchantDto, userService.getByUsernameOrAccountNameAndUserId(merchantDto
-                    .getEmail(), merchantDto.getAccountName(), user.getUser_id()));
+                    .getEmail(), merchantDto.getAccountName(), user.getUser_id(), merchantDto.getFirstName()));
             merchantService.update(merchantBuilder.buildMerchant(merchantDto, user));
             return Response.status(Status.OK).build();
         } catch (BusinessException exception) {

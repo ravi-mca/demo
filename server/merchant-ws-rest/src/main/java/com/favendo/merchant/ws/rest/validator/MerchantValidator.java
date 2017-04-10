@@ -62,6 +62,9 @@ public class MerchantValidator {
     @Value("${duplicate.merchant.accountName.error.message}")
     private String duplicateMerchantAccountNameErrorMessage;
 
+    @Value("${duplicate.merchant.firstName.error.message}")
+    private String duplicateMerchantFirstNameErrorMessage;
+
     @Value("${invalid.merchant.accountNo.error.message}")
     private String invalidMerchantAccountNumberErrorMessage;
 
@@ -93,6 +96,8 @@ public class MerchantValidator {
 
     public void validateDuplication(MerchantDto merchantDto, User user) {
         if (Objects.nonNull(user)) {
+            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getFirstName(), user.getFirstName(), ALREADY_EXISTS,
+                    duplicateMerchantFirstNameErrorMessage);
             equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
                     duplicateMerchantEmailErrorMessage);
             equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getAccountName(), user.getAccountName(), ALREADY_EXISTS,

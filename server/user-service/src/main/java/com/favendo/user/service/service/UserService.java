@@ -13,11 +13,11 @@ public interface UserService {
 
     User getByUserId(Long userId);
 
+    User getByAccountNo(String accountNo);
+
     User getByUsername(String username);
 
-    User getByUsernameOrAccountName(String username,String accountName);
-
-    User getByAccountNo(String accountNo);
+    User getByUsernameOrAccountName(String username,String accountName,String firstName);
     
-    User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId);
+    User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId,String firstName);
 }
