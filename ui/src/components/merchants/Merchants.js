@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/lib/Col';
 import Nav from 'react-bootstrap/lib/Nav';
 import $ from 'jquery';
 
-import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+
 
 import CreateMerchants from "./CreateMerchants";
 import EditMerchants from "./EditMerchants";
