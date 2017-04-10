@@ -1,5 +1,7 @@
 package com.favendo.store.service.service;
 
+import java.util.List;
+
 import com.favendo.commons.domain.Store;
 
 public interface StoreService {
@@ -11,4 +13,6 @@ public interface StoreService {
     Store getByNameOrNickName(String name,String nickName);
 
     Store getByNameOrNickNameAndId(String name,String nickName,Long id);
+    
+    List<Store> getAllByMerchantId(Long storeId);
 }

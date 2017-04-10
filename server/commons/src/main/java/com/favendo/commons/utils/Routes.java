@@ -31,5 +31,7 @@ public class Routes {
 	public static final String STORE_ID = "storeId";
 
 	public static final String PATH_PARAM_STORE_ID = "/{storeId}";
+	
+	public static final String LIST = "/list";
 
 }

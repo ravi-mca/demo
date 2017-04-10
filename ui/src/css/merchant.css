@@ -131,3 +131,7 @@ select.active:invalid {
 .nav-pills-custom a {
   color: #4e4e4e !important;
 }
+
+.selectedFont {
+  font-weight: bold !important;
+}

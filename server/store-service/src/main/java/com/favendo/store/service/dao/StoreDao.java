@@ -1,10 +1,13 @@
 package com.favendo.store.service.dao;
 
-import com.favendo.commons.domain.Store;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import com.favendo.commons.domain.Store;
 
 @Repository
 public interface StoreDao extends JpaRepository<Store, Long> {
@@ -22,4 +25,7 @@ public interface StoreDao extends JpaRepository<Store, Long> {
             "store.id <> :id")
     Store findByNameOrNickNameAndId(@Param("name") String username, @Param("nickName")
             String accountName, @Param("id") Long id);
+    
+    @Query("select store from Store as store join store.merchant as merchant where merchant.user_id = :merchantId ORDER BY store.name ASC")
+    List<Store> findAllByMerchantId(@Param("merchantId") Long merchantId);
 }
