@@ -93,4 +93,14 @@
     <changeSet author="kunjan.s (generated)" id="1491483737837-13">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="sc_user_role" constraintName="fk_hwcw90gc4uc8ka1xffu8lomdj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="sc_user"/>
     </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-14">
+        <addUniqueConstraint columnNames="firstname" constraintName="uk_sc_user_first_name" tableName="sc_user"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-15">
+        <addUniqueConstraint columnNames="name" constraintName="uk_sc_store_name" tableName="sc_store"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1491483737837-16">
+        <addUniqueConstraint columnNames="nickname" constraintName="uk_sc_store_nick_name" tableName="sc_store"/>
+    </changeSet>
+
 </databaseChangeLog>
