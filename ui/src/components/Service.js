@@ -97,7 +97,6 @@ const Service = {
 
     buildRequestdata(reqInfo, headers) {
 
-        console.log("reqInfo", JSON.stringify(reqInfo));
         var reqData = {
             type: reqInfo.type,
             url: reqInfo.url,

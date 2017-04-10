@@ -40,6 +40,10 @@
   padding: 15px;
 }
 
+.pad-top-10 {
+  padding-top: 10px !important;
+}
+
 .list-padding {
   padding: 5px 15px 5px 15px;
 }

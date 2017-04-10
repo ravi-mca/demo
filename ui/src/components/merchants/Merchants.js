@@ -19,10 +19,14 @@ export default class Merchants extends React.Component {
             selected :'',
             userInfo:'',
             storeInfo: '',
-            merchantList: []
+            merchantList: [],
+            showStoreId: '',
+            storeDetails: '',
         };
         this.getMerchantAccounts = this.getMerchantAccounts.bind(this);
         this.setSelectList = this.setSelectList.bind(this);
+        this.getStore = this.getStore.bind(this);
+        this.getStoresInfo = this.getStoresInfo.bind(this);
     }
 
     setSelectList(userInfo) {
@@ -30,13 +34,50 @@ export default class Merchants extends React.Component {
             userInfo: userInfo
         });
 
-        this.getStorsInfo(userInfo.userId);
+        this.getStoresInfo(userInfo.userId);
+        this.showStoreInfo();
     }
 
-    getStorsInfo(merchantId) {
+    getStore(){
+    	this.setState({
+    		showStoreId : $('#selectStore').find(':selected').val()
+    	});
+
+    	this.getStoreInfo($('#selectStore').find(':selected').val());
+    	this.showStoreInfo();
+    }
+
+    showStoreInfo() {
+    	if(($('#selectStore').find(':selected').val() != 0) && ($('#selectStore').find(':selected').val() != "")) {
+    		$("#showSelectedStoreId").show();
+    	} else {
+    		$("#showSelectedStoreId").hide();
+    	}
+    }
+
+    getStoreInfo(storeId) {
 
     	var requestData = {
-			url: Config.getStoreInfo+merchantId,
+			url: Config.getStoreInfo+storeId,
+			type: 'GET',
+			dataType: 'JSON',
+			contentType: 'application/json'
+		};
+        var reqData = Service.buildRequestdata(requestData);
+        Service.executeRequest(reqData, function(response) {
+        	response.id = this.state.showStoreId;
+        	response.userId = this.state.userInfo.userId; 
+            this.setState({storeDetails: response});            
+        }.bind(this), function(xhr, status, err) {
+           console.log(err);
+           this.setState({storeDetails: ""});
+        }.bind(this));
+    }
+
+    getStoresInfo(merchantId) {
+
+    	var requestData = {
+			url: Config.getStoresInfo+merchantId,
 			type: 'GET',
 			dataType: 'JSON',
 			contentType: 'application/json'
@@ -48,49 +89,25 @@ export default class Merchants extends React.Component {
         		response.push({"id":0,"storeId":"0","name":"All"});
         	}
             this.setState({storeInfo: response});
-            this.sortSelect('#selectStore', 'text', 'asc');
+            this.setState({storeId: $('#selectStore').find(':selected').val()});
+        	this.getStore();           
         }.bind(this), function(xhr, status, err) {
            console.log(err);
-           var response = [{"id":null,"storeId":"0","name":"No Stores"}];
-
+           var response = [{"id":"","storeId":"0","name":"No Stores"}];
            this.setState({storeInfo: response});
+           this.getStore();
 
         }.bind(this));
     }
 
-    //, attr, order
-
-	 sortSelect(select, attr, order) {
-	    if(attr === 'text'){
-	        if(order === 'asc'){
-	            $(select).html($(select).children('option').sort(function (x, y) {
-	                return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
-	            }));
-	            $(select).get(0).selectedIndex = 0;
-	            e.preventDefault();
-	        }// end asc
-	        if(order === 'desc'){
-	            $(select).html($(select).children('option').sort(function (y, x) {
-	                return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
-	            }));
-	            $(select).get(0).selectedIndex = 0;
-	            e.preventDefault();
-	        }// end desc
-	    }
-
-	}
-
     getMerchantAccounts(info) {
-
 		this.refs.child.getListOfMerchant(info);
-
 		var accountNo = info.accountNo;
     	var reqData = Service.buildRequestdata(Config.getMerchant+accountNo, 'GET');
         Service.executeRequest(reqData, function(response) {
            this.setState({userInfo: response});
         }.bind(this), function(xhr, status, err) {
-           console.log(err);           
-          
+           console.log(err);      
         }.bind(this));
     }
 
@@ -113,24 +130,28 @@ export default class Merchants extends React.Component {
  		}
 
  		if(this.state.storeInfo) {
- 			console.log("test", stores.length);
 	 		showStoreInfo = (
 	 			<div class="row">
 	 			<div class="btn-padding">
-	 			<Col sm={4} class="col-padding">
-	 			<select className="form-control" id="selectStore">	 			
+	 			<Col sm={3} class="col-padding">
+	 			<select className="form-control selectedFont" onClick={this.getStore} id="selectStore">	 			
 				{
 					stores.map(function (store) {
-        				return <option value={store.id } key={store.id}>{store.name}</option>;
+
+        				return <option value={store.id } data={store} key={store.id}>{store.name}</option>;
     				}) 
     			}
 	 			</select>
 	 			</Col>
-					<div class="col-md-6 col-xs-6">
-						<button type="button" class="btn btn-primary storebtn" onClick={this.addStore}>
-							<i class="fa fa-plus"> Add Store</i>
-						</button>
-					</div>
+				<AddStore data={this.state.userInfo.userId}/>		
+				<div class="row" >
+				<div class="col-md-12 col-xs-12 pad-top-10 storeMargin" id="showSelectedStoreId">
+	              <div class="col-md-4 col-xs-4 auto-div ">
+	              <span>Store #: {this.state.storeDetails.storeId}</span>  
+	              </div>
+	              <EditStore ref="editStoreChild" data={this.state.storeDetails} onUpdateStore= {this.getStoresInfo}/>
+	            </div>
+	            </div>		   
 				</div>	 			
 	 			</div>
 	 		)
@@ -142,9 +163,7 @@ export default class Merchants extends React.Component {
 
 			<div class="dashboard-container" id="main">
 			   	{showAccountInfo}
-			   	{showStoreInfo}
-			   	<AddStore data={this.state.userInfo.userId}/>
-	            <EditStore/>
+			   	{showStoreInfo}	
 	        </div>
 		</div>
 	);

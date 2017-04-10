@@ -27,7 +27,9 @@ import {
 export default class EditStore extends React.Component {
     constructor(props) {
     super(props);
-    this.state = {
+    this.state = {      
+      edituserId: "",
+      editId: "",
       editStoreId : "",
       editName : "",
       editNickname : "",
@@ -45,23 +47,6 @@ export default class EditStore extends React.Component {
       editPriceCategory : "",
       editPosSystem : "",
       editStoreCastAdminName : "",
-      /*
-      editName : this.props.name,
-      editNickname : this.props.nickName,
-      editManagerPoc : this.props.managerOrPOC,
-      editPhoneNo : this.props.phone,
-      editCountry : this.props.country,
-      editState : this.props.state,
-      editCity : this.props.city,
-      editZipCode : this.props.zipCode,
-      editStreetAddress : this.props.street,
-      editControllerNo : this.props.controllerNumber,
-      editControllerPlacement : this.props.controllerPlacement,
-      editStoreCategory : this.props.category,
-      editStoreSubCategory : this.props.subCategory,
-      editPriceCategory : this.props.priceCategory,
-      editPosSystem : this.props.posSystem,
-      editStoreCastAdminName : this.props.storecastAdminName,*/
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -70,7 +55,7 @@ export default class EditStore extends React.Component {
     this.resetForm = this.resetForm.bind(this);
   }
 
-  openModal = () => {
+  openModal = () => {    
     this.setState({
       isOpen: true,
     }); 
@@ -79,6 +64,8 @@ export default class EditStore extends React.Component {
   resetForm() {
        // Clear state
     this.setState({
+      edituserId: "",
+      editId: "",
       editStoreId : "",
       editName : "",
       editNickname : "",
@@ -116,7 +103,7 @@ export default class EditStore extends React.Component {
     $("#editPosSystemError").html("");
     $("#editStoreCastAdminNameError").html("");
     $("input").removeClass("active");
-   }
+  }
 
   hideModal = () => {
      this.setState({
@@ -141,7 +128,7 @@ export default class EditStore extends React.Component {
 
     let isFormValid = true;
     if (this.showFormErrors()) {
-    var storeId = 3;
+    var storeId = this.state.editId;
 
     var updateStoreData = {
     "name": this.state.editName,
@@ -165,7 +152,8 @@ export default class EditStore extends React.Component {
     if (this.showFormErrors()) {
 
       Service.editStore(Config.editStore+storeId,updateStoreData, function(data) {
-        this.successAlert();        
+        this.successAlert(); 
+        this.props.onUpdateStore(this.state.edituserId);         
         this.hideModal();
       }.bind(this), function(xhr, status, err) {      
         this.errorAlert();
@@ -237,9 +225,27 @@ export default class EditStore extends React.Component {
   }
 
   showEditForm() {
-
     this.setState({
       isOpen: true,
+      edituserId:this.props.data.userId,
+      editId: this.props.data.id,
+      editStoreId : this.props.data.storeId,
+      editName : this.props.data.name,
+      editNickname : this.props.data.nickName,
+      editManagerPoc : this.props.data.managerOrPOC,
+      editPhoneNo : this.props.data.phone,
+      editCountry : this.props.data.country,
+      editState : this.props.data.state,
+      editCity : this.props.data.city,
+      editZipCode : this.props.data.zipCode,
+      editStreetAddress : this.props.data.street,
+      editControllerNo : this.props.data.controllerNumber,
+      editControllerPlacement : this.props.data.controllerPlacement,
+      editStoreCategory : this.props.data.category,
+      editStoreSubCategory : this.props.data.subCategory,
+      editPriceCategory : this.props.data.priceCategory,
+      editPosSystem : this.props.data.posSystem,
+      editStoreCastAdminName : this.props.data.storecastAdminName,
     });   
   }
   
@@ -280,24 +286,9 @@ export default class EditStore extends React.Component {
   render() {
     return (
       <div id="editStorepanel">
-            <div class="btn-padding">
-            
-            <div class="storeMargin">
-              <span>Store #: A3382910 </span> <i class="fa fa-pencil ml-10" onClick={this.showEditForm}></i>  
-              
-              <nav class="pills">
-                  <ul class="nav nav-pills">
-                    <li class="nav-pills-custom">
-                      <a>STORE INFO</a>
-                    </li>
-                    <li class="nav-pills-custom">
-                      <a>STORE DATA</a>
-                    </li>
-                  </ul>
-              </nav>
-            </div>
-
-            </div>            
+            <div class="col-md-6 col-xs-6 storeMargin">
+            <i class="fa fa-pencil ml-10" onClick={this.showEditForm}></i>     
+            </div>     
             <div>
               <ToastContainer ref="container"
                               toastMessageFactory={ToastMessageFactory}
@@ -465,7 +456,7 @@ export default class EditStore extends React.Component {
                     required > 
                     <option value="">Select</option>
                     <option value="Back">Back</option>
-                    <option value="Middle">Middle</option>
+                    <option value="Center">Center</option>
                     <option value="Front">Front</option>
                     </select>
                   <div className="error" id="editControllerPlacementError" />
@@ -483,7 +474,7 @@ export default class EditStore extends React.Component {
                       <option value="">Select</option>
                       <option value="Quick Foods & Cafes">Quick Foods & Cafes</option>
                       <option value="Fast Food Restaurants">Fast Food Restaurants</option>
-                      <option value="Fast-casual Restaurants">Fast-casual Restaurants</option>
+                      <option value="Fast-Casual Restaurants">Fast-casual Restaurants</option>
                       <option value="Full-service Restaurants">Full-service Restaurants</option>
                       <option value="Nightlife">Nightlife</option>
                       <option value="Recreation & Fitness">Recreation & Fitness</option>
@@ -504,7 +495,7 @@ export default class EditStore extends React.Component {
                     required>
                       <option value="">Select</option>
                       <option value="Quick Foods & Cafes">Quick Foods & Cafes</option>
-                      <option value="Fast Food Restaurants">Fast Food Restaurants</option>
+                      <option value="Seafood">Seafood</option>
                       <option value="Fast-casual Restaurants">Fast-casual Restaurants</option>
                     </select>
                   <div className="error" id="editStoreSubCategoryError" />

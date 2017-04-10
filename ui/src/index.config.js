@@ -8,7 +8,9 @@ const Config = {
     addStore: BaseUrl + '/storecast/api/admin/store/',
     getMerchant: BaseUrl + '/storecast/api/admin/merchant/',
 	editStore: BaseUrl + '/storecast/api/admin/store/',
-	getStoreInfo: BaseUrl + '/storecast/api/admin/store/list/',
+	getStoresInfo: BaseUrl + '/storecast/api/admin/store/list/',
+	getStoreInfo: BaseUrl + '/storecast/api/admin/store/',	
+
 };
 
 export default Config;
