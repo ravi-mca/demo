@@ -18,6 +18,14 @@
   font-weight: bold !important;
 }
 
+.font-semibold {
+  font-family: 'Source Sans Pro Semibold';
+}
+
+.font-regular {
+  font-family: 'Source Sans Pro';
+}
+
 /* text-colors */
 .text-gray {
    color: #727b89;

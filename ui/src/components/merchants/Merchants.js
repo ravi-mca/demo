@@ -116,40 +116,48 @@ export default class Merchants extends React.Component {
 
     getStoresInfo(merchantId) {
 
-    	var requestData = {
-			url: Config.getStoresInfo+merchantId,
-			type: 'GET',
-			dataType: 'JSON',
-			contentType: 'application/json'
-		};
-        var reqData = Service.buildRequestdata(requestData);
-        Service.executeRequest(reqData, function(response) {
+       let selectedStoreVal = $('#selectStore').find(':selected').val();
 
-        	if(response.length > 1){
-        		response.push({"id":0,"storeId":"0","name":"All"});
-        	}
-            this.setState({storeInfo: response});
-            this.setState({storeId: $('#selectStore').find(':selected').val()});
-        	this.getStore();
-        }.bind(this), function(xhr, status, err) {
-           console.log(err);
-           var response = [{"id":-1,"storeId":"","name":"No Stores"}];
+       var requestData = {
+            url: Config.getStoresInfo+merchantId,
+            type: 'GET',
+            dataType: 'JSON',
+            contentType: 'application/json'
+        };
+       var reqData = Service.buildRequestdata(requestData);
+       Service.executeRequest(reqData, function(response) {
+
+           if(response.length > 1){
+               response.push({"id":0,"storeId":"0","name":"All"});
+           }
            this.setState({storeInfo: response});
+
+            $("#selectStore").html($("#selectStore option").sort(function (a, b) {
+                return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
+            }))
+           this.setState({storeId: selectedStoreVal});
+           $('#selectStore option:eq(1)').prop('selected', true);
            this.getStore();
 
-        }.bind(this));
-    }
+       }.bind(this), function(xhr, status, err) {
+          console.log(err);
+          var response = [{"id":-1,"storeId":"","name":"No Stores"}];
+          this.setState({storeInfo: response});
+          this.getStore();
+
+       }.bind(this));
+   }
 
     getMerchantAccounts(info) {
-		this.refs.child.getListOfMerchant(info);
-		var accountNo = info.accountNo;
+    	this.refs.child.getListOfMerchant(info);
+    	var accountNo = info.accountNo;
 
-		var requestData = {
-			url: Config.getMerchant+accountNo,
-			type: 'GET',
-			dataType: 'JSON',
-			contentType: 'application/json'
-		};
+    	var requestData = {
+    		url: Config.getMerchant+accountNo,
+    		type: 'GET',
+    		dataType: 'JSON',
+    		contentType: 'application/json'
+    	};
         var reqData = Service.buildRequestdata(requestData);
         Service.executeRequest(reqData, function(response) {
 
@@ -163,6 +171,7 @@ export default class Merchants extends React.Component {
 		let showAccountInfo;
 		let showStoreTabs;
 		let showStoreInfo;
+        var i = 0;
 		var stores = this.state.storeInfo;
 		if(this.state.userInfo) {
 			showAccountInfo = (
@@ -208,7 +217,8 @@ export default class Merchants extends React.Component {
 	 						<select className="form-control selectedFont" onClick={this.getStore} id="selectStore">	 			
 								{
 									stores.map(function (store) {
-        								return <option value={store.id } data={store} key={store.id}>{store.name}</option>;
+                                        i++;
+        								return <option value={store.id } data={store} key={i}>{store.name}</option>;
     								})
     							}
 	 						</select>

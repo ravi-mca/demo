@@ -30,70 +30,70 @@ export default class StoreInfo extends React.Component {
     render() {
 
         return (
-        	<div class="acc-info">
+        	<div class="info-store">
                 <div class="col-md-12 mb-10 no-padding">
-            	    <div class="col-md-3 col-xs-6">Store Name</div>
-            	    <div class="col-md-3 col-xs-6">{this.state.storeList.name}</div>
+            	    <div class="col-md-3 col-xs-6 font-semibold">Store Name</div>
+            	    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.name}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Nickname</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.nickName}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Nickname</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.nickName}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Manager/POC</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.managerOrPOC}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Manager/POC</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.managerOrPOC}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Phone Number</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.phone}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Phone Number</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.phone}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Country</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.country}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Country</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.country}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store City</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.city}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store City</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.city}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Street Address</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.street}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Street Address</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.street}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store State</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.state}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store State</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.state}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Zip Code</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.zipCode}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Zip Code</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.zipCode}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Controller Number</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.controllerNumber}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Controller Number</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.controllerNumber}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Controller Placement</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.controllerPlacement}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Controller Placement</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.controllerPlacement}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Category</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.category}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Category</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.category}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Subcategory</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.subCategory}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Subcategory</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.subCategory}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Price Category</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.priceCategory}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Price Category</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.priceCategory}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">POS System</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.posSystem}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">POS System</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.posSystem}</div>
                 </div>
                 <div class="col-md-12 mb-20 no-padding">
-                    <div class="col-md-3 col-xs-6">Storecast Admin Name</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.storecastAdminName}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Storecast Admin Name</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.storecastAdminName}</div>
                 </div>
           	</div>
         );
