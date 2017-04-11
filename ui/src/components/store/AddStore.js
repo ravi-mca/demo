@@ -24,7 +24,6 @@ var ToastMessageFactory = React.createFactory(ReactToastr.ToastMessage.animation
 export default class AddStore extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log("ghhgfgh", this.props.data);
 		this.getInitialState = this.getInitialState.bind(this);
 		this.addStore = this.addStore.bind(this);
 		this.inputChange = this.inputChange.bind(this);
@@ -139,6 +138,7 @@ export default class AddStore extends React.Component {
             var reqData = Service.buildRequestdata(requestData);
 
 			Service.executeRequest(reqData, function(data) {
+				this.props.onUpdateStore(this.props.data);
 				this.successAlert();
 				this.hideModal();
 			}.bind(this), function(xhr, status, err) {
@@ -371,7 +371,7 @@ export default class AddStore extends React.Component {
 											ref="zipCode"
 											value={ this.state.zipCode }
 											onChange={ this.inputChange }
-											pattern="[a-zA-Z0-9]{5}"
+											pattern="[a-zA-Z0-9]{4,6}"
 											required />
 				  					<div className="error" id="zipCodeError" />
 				 				</Col>
@@ -392,13 +392,16 @@ export default class AddStore extends React.Component {
 				 			<FormGroup row>
 				  				<Label id="controllerPlacementLabel" class="form-label" for="controllerPlacement" sm={4}>Controller Placement</Label>
 				   				<Col sm={7} class="col-padding">
-					 				<input className="form-control"
-											type="text"
-											name="controllerPlacement"
+									<select name="controllerPlacement"
 											ref="controllerPlacement"
 											value={ this.state.controllerPlacement }
-											onChange={ this.inputChange }
-											required />
+											class="form-control"
+											onChange={ this.inputChange } required>
+										<option value=''>Select controller placement</option>
+										<option value='Back'>Back</option>
+										<option value='Middle'>Middle</option>
+										<option value='Front'>Front</option>
+									</select>
 				  					<div className="error" id="controllerPlacementError" />
 				  				</Col>
 							</FormGroup>

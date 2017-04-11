@@ -30,12 +30,19 @@ export default class Merchants extends React.Component {
             merchantList: [],
             showStoreId: '',
             storeDetails: '',
+            disableData: true,
+            disableInfo:false,
+            defaultActiveKey: "storeInfoTab"
         };
         this.getMerchantAccounts = this.getMerchantAccounts.bind(this);
         this.setSelectList = this.setSelectList.bind(this);
         this.getStore = this.getStore.bind(this);
         this.getStoresInfo = this.getStoresInfo.bind(this);
+        this.setActiveTabs = this.setActiveTabs.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
+
+	handleSelect(key) { }
 
     setSelectList(userInfo) {
         this.setState({
@@ -50,9 +57,10 @@ export default class Merchants extends React.Component {
     	this.setState({
     		showStoreId : $('#selectStore').find(':selected').val()
     	});
-
+        this.refs.storeInfoChild.getStoreInfo($('#selectStore').find(':selected').val());
     	this.getStoreInfo($('#selectStore').find(':selected').val());
     	this.showStoreInfo();
+    	this.setActiveTabs();
     }
 
     showStoreInfo() {
@@ -60,6 +68,25 @@ export default class Merchants extends React.Component {
     		$("#showSelectedStoreId").show();
     	} else {
     		$("#showSelectedStoreId").hide();
+    	}
+    }
+
+    setActiveTabs() {
+    	if($('#selectStore').find(':selected').text() == 'All') {
+    		this.setState({
+    			disableData:false,
+    			disableInfo:true,
+    			defaultActiveKey: "storeDataTab"
+    		});
+    	} else if($('#selectStore').find(':selected').text() == 'No Stores') {
+    		$("#storeInfo").hide();
+    	} else {
+    		$("#storeInfo").show();
+    		this.setState({
+    			disableData:true,
+    			disableInfo:false,
+    			defaultActiveKey: "storeInfoTab"
+    		});
     	}
     }
 
@@ -74,8 +101,8 @@ export default class Merchants extends React.Component {
         var reqData = Service.buildRequestdata(requestData);
         Service.executeRequest(reqData, function(response) {
         	response.id = this.state.showStoreId;
-        	response.userId = this.state.userInfo.userId; 
-            this.setState({storeDetails: response});            
+        	response.userId = this.state.userInfo.userId;
+            this.setState({storeDetails: response});
         }.bind(this), function(xhr, status, err) {
            console.log(err);
            this.setState({storeDetails: ""});
@@ -98,7 +125,7 @@ export default class Merchants extends React.Component {
         	}
             this.setState({storeInfo: response});
             this.setState({storeId: $('#selectStore').find(':selected').val()});
-        	this.getStore();           
+        	this.getStore();
         }.bind(this), function(xhr, status, err) {
            console.log(err);
            var response = [{"id":"","storeId":"0","name":"No Stores"}];
@@ -138,18 +165,18 @@ export default class Merchants extends React.Component {
 	  		);
 
 	  		showStoreTabs = (
-				<Tab.Container id="storeInfo" defaultActiveKey="storeInfoTab" >
+				<Tab.Container id="storeInfo" onSelect={this.handleSelect} activeKey={this.state.defaultActiveKey} >
     				<Row className="clearfix">
       					<Col sm={12}>
        						<Nav bsStyle="pills">
-          						<NavItem eventKey="storeInfoTab" class="pad-right-10">STORE INFO</NavItem>
-          						<NavItem eventKey="storeDataTab" disabled>STORE DATA</NavItem>
+          						<NavItem eventKey="storeInfoTab"  class="pad-right-10" disabled={this.state.disableInfo}>STORE INFO</NavItem>
+          						<NavItem eventKey="storeDataTab"  disabled={this.state.disableData}>STORE DATA</NavItem>
         					</Nav>
       					</Col>
       					<Col sm={12} class="no-padding">
         					<Tab.Content animation class="mt-20">
           						<Tab.Pane eventKey="storeInfoTab">
-           							<StoreInfo data={this.state.storeList}/>
+           							<StoreInfo ref="storeInfoChild" data={this.state.storeDetails}/>
           						</Tab.Pane>
           						<Tab.Pane eventKey="storeDataTab">
           						</Tab.Pane>
@@ -163,27 +190,26 @@ export default class Merchants extends React.Component {
  		if(this.state.storeInfo) {
 	 		showStoreInfo = (
 	 			<div class="row">
-	 			<div class="btn-padding">
-	 			<Col sm={3} class="col-padding">
-	 			<select className="form-control selectedFont" onClick={this.getStore} id="selectStore">	 			
-				{
-					stores.map(function (store) {
-
-        				return <option value={store.id } data={store} key={store.id}>{store.name}</option>;
-    				}) 
-    			}
-	 			</select>
-	 			</Col>
-				<AddStore data={this.state.userInfo.userId}/>		
-				<div class="row" >
-				<div class="col-md-12 col-xs-12 pad-top-10 storeMargin" id="showSelectedStoreId">
-	              <div class="col-md-4 col-xs-4 auto-div ">
-	              <span>Store #: {this.state.storeDetails.storeId}</span>  
-	              </div>
-	              <EditStore ref="editStoreChild" data={this.state.storeDetails} onUpdateStore= {this.getStoresInfo}/>
-	            </div>
-	            </div>		   
-				</div>	 			
+	 				<div class="btn-padding">
+	 					<Col sm={3} class="col-padding">
+	 						<select className="form-control selectedFont" onClick={this.getStore} id="selectStore">	 			
+								{
+									stores.map(function (store) {
+        								return <option value={store.id } data={store} key={store.id}>{store.name}</option>;
+    								})
+    							}
+	 						</select>
+	 					</Col>
+						<AddStore data={this.state.userInfo.userId} onUpdateStore= {this.getStoresInfo}/>
+						<div class="row" >
+							<div class="col-md-12 col-xs-12 pad-top-10 storeMargin" id="showSelectedStoreId">
+	              				<div class="col-md-4 col-xs-4 auto-div ">
+	              					<span>Store #: {this.state.storeDetails.storeId}</span>
+	              				</div>
+	              				<EditStore ref="editStoreChild" data={this.state.storeDetails} onUpdateStore= {this.getStoresInfo}/>
+	            			</div>
+	           			 </div>
+					</div>
 	 			</div>
 	 		)
  		}

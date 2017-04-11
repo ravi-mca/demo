@@ -12,16 +12,18 @@ export default class StoreInfo extends React.Component {
         };
     }
 
-    componentDidMount() {
-        this.getStoreInfo();
-    }
+     getStoreInfo(id) {
+        var requestData = {
+                url: Config.getStoreInfo + id,
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json'
+            };
 
-     getStoreInfo() {
-        var reqData = Service.buildRequestdata(Config.getStoreInfo+26, 'GET');
+        var reqData = Service.buildRequestdata(requestData);
         Service.executeRequest(reqData, function(response) {
             this.setState({storeList:response});
         }.bind(this), function(xhr, status, err) {
-           console.log(err);
         }.bind(this));
     }
 
@@ -46,20 +48,20 @@ export default class StoreInfo extends React.Component {
                     <div class="col-md-3 col-xs-6">{this.state.storeList.phone}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Street Address</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.street}</div>
+                    <div class="col-md-3 col-xs-6">Store Country</div>
+                    <div class="col-md-3 col-xs-6">{this.state.storeList.country}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
                     <div class="col-md-3 col-xs-6">Store City</div>
                     <div class="col-md-3 col-xs-6">{this.state.storeList.city}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store State</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.state}</div>
+                    <div class="col-md-3 col-xs-6">Store Street Address</div>
+                    <div class="col-md-3 col-xs-6">{this.state.storeList.street}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6">Store Country</div>
-                    <div class="col-md-3 col-xs-6">{this.state.storeList.country}</div>
+                    <div class="col-md-3 col-xs-6">Store State</div>
+                    <div class="col-md-3 col-xs-6">{this.state.storeList.state}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
                     <div class="col-md-3 col-xs-6">Store Zip Code</div>
