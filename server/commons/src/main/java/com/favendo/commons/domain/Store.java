@@ -3,7 +3,10 @@ package com.favendo.commons.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "sc_store")
+@Table(name = "sc_store", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"name"}),
+        @UniqueConstraint(columnNames = {"nickName"})
+})
 public class Store {
 
     @Id
