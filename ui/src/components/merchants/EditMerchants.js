@@ -61,9 +61,9 @@ export default class EditMerchant extends React.Component {
   hideModal = () => {
     this.setState({
       isOpen: false, 
-      editFirstName: this.props.data.firstname,
-      editLastName: this.props.data.lastname,      
-      editEmail: this.props.data.username,      
+      editFirstName: this.props.data.firstName,
+      editLastName: this.props.data.lastName,      
+      editEmail: this.props.data.email,      
       editPhone: this.props.data.phone,
       editAccountName: this.props.data.accountName,
       accountNo: this.props.data.accountNo,
@@ -116,14 +116,21 @@ export default class EditMerchant extends React.Component {
     newData.email = this.state.editEmail;
     if (this.showFormErrors()) {
 
-      Service.editMerchant(Config.editMerchant+merchantId,newData, function(data) {
-       
+      var requestData = {
+            url: Config.editMerchant + merchantId,
+            type: 'PUT',
+            data: JSON.stringify(newData),
+            dataType: 'text',
+            contentType: 'application/json'
+        };
+
+            var reqData = Service.buildRequestdata(requestData);
+
+      Service.executeRequest(reqData, function(data) {
         this.props.onUpdateAccount(this.state);  
         this.successAlert();        
         this.hideModal();
-
       }.bind(this), function(xhr, status, err) {
-      
         this.errorAlert();
         var statusObj = xhr;
         var obj=JSON.parse(xhr.responseText);
@@ -141,7 +148,6 @@ export default class EditMerchant extends React.Component {
         }
 
         isFormValid = false;
-
       }.bind(this));
     }
   }
@@ -186,9 +192,9 @@ export default class EditMerchant extends React.Component {
 
     this.setState({
       isOpen: true,
-      editFirstName: this.props.data.firstname,
-      editLastName: this.props.data.lastname,      
-      editEmail: this.props.data.username,      
+      editFirstName: this.props.data.firstName,
+      editLastName: this.props.data.lastName,      
+      editEmail: this.props.data.email,      
       editPhone: this.props.data.phone,
       editAccountName: this.props.data.accountName,
       accountNo: this.props.data.accountNo,

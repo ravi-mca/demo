@@ -138,11 +138,19 @@ export default class Merchants extends React.Component {
     getMerchantAccounts(info) {
 		this.refs.child.getListOfMerchant(info);
 		var accountNo = info.accountNo;
-    	var reqData = Service.buildRequestdata(Config.getMerchant+accountNo, 'GET');
+
+		var requestData = {
+			url: Config.getMerchant+accountNo,
+			type: 'GET',
+			dataType: 'JSON',
+			contentType: 'application/json'
+		};
+        var reqData = Service.buildRequestdata(requestData);
         Service.executeRequest(reqData, function(response) {
-           this.setState({userInfo: response});
+
+        	 this.setState({userInfo: response});
         }.bind(this), function(xhr, status, err) {
-           console.log(err);
+            console.log(err);
         }.bind(this));
     }
 

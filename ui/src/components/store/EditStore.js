@@ -301,8 +301,8 @@ export default class EditStore extends React.Component {
               <form id="editStore" method="post" noValidate>
               <ModalBody>
                 <FormGroup row>
-                  <Label id="editStoreIdLabel" class="form-label" for="editStoreId" sm={3}> Store ID </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editStoreIdLabel" class="form-label" for="editStoreId" sm={4}> Store ID </Label><span></span>
+                  <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
                     name="editStoreId"
@@ -314,8 +314,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editNameLabel" class="form-label" for="editName" sm={3}> Store Name </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editNameLabel" class="form-label" for="editName" sm={4}> Store Name </Label><span></span>
+                  <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
                     name="editName"
@@ -327,8 +327,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editNicknameLabel" class="form-label" for="editNickname" sm={3}> Store Nickname </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editNicknameLabel" class="form-label" for="editNickname" sm={4}> Store Nickname </Label><span></span>
+                  <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
                     name="editNickname"
@@ -340,8 +340,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editManagerPocLabel" class="form-label" for="editManagerPoc" sm={3}> Store Manager/POC </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editManagerPocLabel" class="form-label" for="editManagerPoc" sm={4}> Store Manager/POC </Label><span></span>
+                  <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
                     name="editManagerPoc"
@@ -353,8 +353,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editPhoneNoLabel" class="form-label" for="editPhoneNo" sm={3}> Store Phone Number </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editPhoneNoLabel" class="form-label" for="editPhoneNo" sm={4}> Store Phone Number </Label><span></span>
+                  <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
                     name="editPhoneNo"
@@ -367,8 +367,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editCountryLabel" class="form-label" for="editCountry" sm={3}> Store Country </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editCountryLabel" class="form-label" for="editCountry" sm={4}> Store Country </Label><span></span>
+                  <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
                     name="editCountry"
@@ -380,8 +380,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editStateLabel" class="form-label" for="editState" sm={3}> Store State </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editStateLabel" class="form-label" for="editState" sm={4}> Store State </Label><span></span>
+                  <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
                     name="editState"
@@ -393,8 +393,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editCityLabel" class="form-label" for="editCity" sm={3}> Store City </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editCityLabel" class="form-label" for="editCity" sm={4}> Store City </Label><span></span>
+                  <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
                     name="editCity"
@@ -406,8 +406,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editStreetAddressLabel" class="form-label" for="editStreetAddress" sm={3}> Store Street Address </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editStreetAddressLabel" class="form-label" for="editStreetAddress" sm={4}> Store Street Address </Label><span></span>
+                  <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
                     name="editStreetAddress"
@@ -419,8 +419,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editZipCodeLabel" class="form-label" for="editZipCode" sm={3}> Store Zip Code </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editZipCodeLabel" class="form-label" for="editZipCode" sm={4}> Store Zip Code </Label><span></span>
+                  <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
                     name="editZipCode"
@@ -433,8 +433,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editControllerNoLabel" class="form-label" for="editControllerNo" sm={3}> Controller Number </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editControllerNoLabel" class="form-label" for="editControllerNo" sm={4}> Controller Number </Label><span></span>
+                  <Col sm={7} class="col-padding">
                     <input className="form-control"
                     type="text"
                     name="editControllerNo"
@@ -446,8 +446,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editControllerPlacementLabel" class="form-label" for="editControllerPlacement" sm={3}> Controller Placement </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editControllerPlacementLabel" class="form-label" for="editControllerPlacement" sm={4}> Controller Placement </Label><span></span>
+                  <Col sm={7} class="col-padding">
                     <select className="form-control"
                     name="editControllerPlacement"
                     ref="editControllerPlacement"
@@ -463,8 +463,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editStoreCategoryLabel" class="form-label" for="editStoreCategory" sm={3}> Store Category </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editStoreCategoryLabel" class="form-label" for="editStoreCategory" sm={4}> Store Category </Label><span></span>
+                  <Col sm={7} class="col-padding">
                     <select className="form-control"
                     name="editStoreCategory"
                     ref="editStoreCategory"
@@ -485,8 +485,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editStoreSubCategoryLabel" class="form-label" for="editStoreSubCategory" sm={3}> Store Subcategory </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editStoreSubCategoryLabel" class="form-label" for="editStoreSubCategory" sm={4}> Store Subcategory </Label><span></span>
+                  <Col sm={7} class="col-padding">
                     <select className="form-control"
                     name="editStoreSubCategory"
                     ref="editStoreSubCategory"
@@ -502,8 +502,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editPriceCategoryLabel" class="form-label" for="editPriceCategory" sm={3}> Price Category </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editPriceCategoryLabel" class="form-label" for="editPriceCategory" sm={4}> Price Category </Label><span></span>
+                  <Col sm={7} class="col-padding">
                     <select className="form-control"
                     name="editPriceCategory"
                     ref="editPriceCategory"
@@ -520,8 +520,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editPosSystemLabel" class="form-label" for="editPosSystem" sm={3}> POS System </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editPosSystemLabel" class="form-label" for="editPosSystem" sm={4}> POS System </Label><span></span>
+                  <Col sm={7} class="col-padding">
                     <input className="form-control"
                     type="text"
                     name="editPosSystem"
@@ -532,8 +532,8 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editStoreCastAdminNameLabel" class="form-label" for="editStoreCastAdminName" sm={3}> Storecast Admin </Label><span></span>
-                  <Col sm={8} class="col-padding">
+                  <Label id="editStoreCastAdminNameLabel" class="form-label" for="editStoreCastAdminName" sm={4}> Storecast Admin </Label><span></span>
+                  <Col sm={7} class="col-padding">
                     <input className="form-control"
                     type="text"
                     name="editStoreCastAdminName"
