@@ -39,6 +39,11 @@
   color: red;
 }
 
+.text-white {
+  color: white;
+}
+
+
 /* set-padding */
 .no-padding {
     padding: 0px !important;

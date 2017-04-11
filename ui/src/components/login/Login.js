@@ -138,7 +138,7 @@ export default class Login extends React.Component {
                         <div class="error" id="passwordError" />
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg full-width font-18 font-bold" onClick={ this.handleSubmit }>LOGIN</button>
+                        <button type="submit" class="btn btn-lg full-width font-18 font-bold" onClick={ this.handleSubmit }>LOGIN</button>
                     </div>
                     <div class="form-group font-18 text-gray">
                         <div class="col-md-6 col-xs-6 no-padding">

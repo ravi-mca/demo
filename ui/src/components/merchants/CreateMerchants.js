@@ -93,7 +93,7 @@ export default class MerchantForm extends React.Component {
         this.errorAlert();
         var statusObj = xhr;
         var obj=JSON.parse(xhr.responseText);
-
+console.log('obj',obj);
         const error = document.getElementById(`emailError`);
         const accountNameError = document.getElementById(`accountNameError`);
 
