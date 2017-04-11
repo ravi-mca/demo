@@ -30,8 +30,7 @@ export default class Merchants extends React.Component {
             merchantList: [],
             showStoreId: '',
             storeDetails: '',
-            disableData: true,
-            disableInfo:false,
+            disableTabs: true,
             defaultActiveKey: "storeInfoTab"
         };
         this.getMerchantAccounts = this.getMerchantAccounts.bind(this);
@@ -53,60 +52,66 @@ export default class Merchants extends React.Component {
         this.showStoreInfo();
     }
 
-    getStore(){
+    getStore() {
+    	let selectedStoreVal = $('#selectStore').find(':selected').val();
     	this.setState({
-    		showStoreId : $('#selectStore').find(':selected').val()
+    		showStoreId : selectedStoreVal
     	});
-        this.refs.storeInfoChild.getStoreInfo($('#selectStore').find(':selected').val());
-    	this.getStoreInfo($('#selectStore').find(':selected').val());
+
+    	// storeInfo child method call
+        this.refs.storeInfoChild.getStoreInfo(selectedStoreVal);
+
+    	this.getStoreInfo(selectedStoreVal);
     	this.showStoreInfo();
     	this.setActiveTabs();
     }
 
     showStoreInfo() {
-    	if(($('#selectStore').find(':selected').val() != 0) && ($('#selectStore').find(':selected').val() != "")) {
+    	let selectedStoreVal = $('#selectStore').find(':selected').val();
+    	if((selectedStoreVal != 0) && (selectedStoreVal != -1)) {
     		$("#showSelectedStoreId").show();
     	} else {
     		$("#showSelectedStoreId").hide();
     	}
     }
 
+    //Set active tabs based on selected dropdown stores
     setActiveTabs() {
-    	if($('#selectStore').find(':selected').text() == 'All') {
+    	let selectedStoreVal = $('#selectStore').find(':selected').val();
+    	if(selectedStoreVal == 0) {
     		this.setState({
-    			disableData:false,
-    			disableInfo:true,
+    			disableTabs: false,
     			defaultActiveKey: "storeDataTab"
     		});
-    	} else if($('#selectStore').find(':selected').text() == 'No Stores') {
+    	} else if(selectedStoreVal == -1) {
     		$("#storeInfo").hide();
     	} else {
     		$("#storeInfo").show();
     		this.setState({
-    			disableData:true,
-    			disableInfo:false,
+    			disableTabs: true,
     			defaultActiveKey: "storeInfoTab"
     		});
     	}
     }
 
     getStoreInfo(storeId) {
-
-    	var requestData = {
-			url: Config.getStoreInfo+storeId,
-			type: 'GET',
-			dataType: 'JSON',
-			contentType: 'application/json'
-		};
-        var reqData = Service.buildRequestdata(requestData);
-        Service.executeRequest(reqData, function(response) {
-        	response.id = this.state.showStoreId;
-        	response.userId = this.state.userInfo.userId;
-            this.setState({storeDetails: response});
-        }.bind(this), function(xhr, status, err) {
-           console.log(err);
-           this.setState({storeDetails: ""});
-        }.bind(this));
+		if((storeId != 0) && (storeId != -1)) {
+				var requestData = {
+					url: Config.getStoreInfo+storeId,
+					type: 'GET',
+					dataType: 'JSON',
+					contentType: 'application/json'
+				};
+	        	var reqData = Service.buildRequestdata(requestData);
+	        	Service.executeRequest(reqData, function(response) {
+	        		response.id = this.state.showStoreId;
+	        		response.userId = this.state.userInfo.userId;
+	            	this.setState({storeDetails: response});
+	        }.bind(this), function(xhr, status, err) {
+	          		console.log(err);
+	           		this.setState({storeDetails: ""});
+	        }.bind(this));
+		}
     }
 
     getStoresInfo(merchantId) {
@@ -128,7 +133,7 @@ export default class Merchants extends React.Component {
         	this.getStore();
         }.bind(this), function(xhr, status, err) {
            console.log(err);
-           var response = [{"id":"","storeId":"0","name":"No Stores"}];
+           var response = [{"id":-1,"storeId":"","name":"No Stores"}];
            this.setState({storeInfo: response});
            this.getStore();
 
@@ -177,14 +182,14 @@ export default class Merchants extends React.Component {
     				<Row className="clearfix">
       					<Col sm={12}>
        						<Nav bsStyle="pills">
-          						<NavItem eventKey="storeInfoTab"  class="pad-right-10" disabled={this.state.disableInfo}>STORE INFO</NavItem>
-          						<NavItem eventKey="storeDataTab"  disabled={this.state.disableData}>STORE DATA</NavItem>
+          						<NavItem eventKey="storeInfoTab"  class="pad-right-10" disabled={!this.state.disableTabs}>STORE INFO</NavItem>
+          						<NavItem eventKey="storeDataTab"  disabled={this.state.disableTabs}>STORE DATA</NavItem>
         					</Nav>
       					</Col>
       					<Col sm={12} class="no-padding">
         					<Tab.Content animation class="mt-20">
           						<Tab.Pane eventKey="storeInfoTab">
-           							<StoreInfo ref="storeInfoChild" data={this.state.storeDetails}/>
+           							<StoreInfo ref="storeInfoChild"/>
           						</Tab.Pane>
           						<Tab.Pane eventKey="storeDataTab">
           						</Tab.Pane>

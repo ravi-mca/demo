@@ -40,7 +40,6 @@ export default class Login extends React.Component {
         e.preventDefault();
 
         if (this.showFormErrors()) {
-            console.log('form is valid: submit');
             var requestData = {
                 url: Config.login,
                 type: 'POST',
