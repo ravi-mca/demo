@@ -22,62 +22,6 @@ const Service = {
         return headers;
     },
 
-    createMerchant(url, data, successHandler, errorHandler) {
-
-        delete data.isOpen;
-        delete data.showResults;
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            dataType : "text",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            headers: {
-                'Authorization': 'Bearer '+localStorage.accessToken,
-            },
-            success: successHandler,
-            error: errorHandler,
-        });
-    },
-
-    editMerchant(url, data, successHandler, errorHandler) {
-
-        delete data.isOpen;
-        delete data.showResults;
-
-        $.ajax({
-            type: 'PUT',
-            url: url,
-            dataType : "text",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            headers: {
-                'Authorization': 'Bearer '+localStorage.accessToken,
-            },
-            success: successHandler,
-            error: errorHandler,
-        });
-    },
-
-    editStore(url, data, successHandler, errorHandler) {
-
-        delete data.isOpen;
-        delete data.showResults;
-
-        $.ajax({
-            type: 'PUT',
-            url: url,
-            dataType : "text",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            headers: {
-                'Authorization': 'Bearer '+localStorage.accessToken,
-            },
-            success: successHandler,
-            error: errorHandler,
-        });
-    },
 
     getStores(url, data, successHandler, errorHandler) {
 

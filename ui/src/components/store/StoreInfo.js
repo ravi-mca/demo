@@ -14,7 +14,7 @@ export default class StoreInfo extends React.Component {
 
      getStoreInfo(id) {
         var requestData = {
-                url: Config.getStoreInfo + id,
+                url: Config.storeAPIPath + id,
                 type: 'GET',
                 dataType: 'json',
                 contentType: 'application/json'
@@ -46,22 +46,22 @@ export default class StoreInfo extends React.Component {
                 <div class="col-md-12 mb-10 no-padding">
                     <div class="col-md-3 col-xs-6 font-semibold">Store Phone Number</div>
                     <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.phone}</div>
-                </div>
+                </div>                
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6 font-semibold">Store Country</div>
-                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.country}</div>
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Street Address</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.street}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
                     <div class="col-md-3 col-xs-6 font-semibold">Store City</div>
                     <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.city}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
-                    <div class="col-md-3 col-xs-6 font-semibold">Store Street Address</div>
-                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.street}</div>
-                </div>
-                <div class="col-md-12 mb-10 no-padding">
                     <div class="col-md-3 col-xs-6 font-semibold">Store State</div>
                     <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.state}</div>
+                </div>
+                <div class="col-md-12 mb-10 no-padding">
+                    <div class="col-md-3 col-xs-6 font-semibold">Store Country</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.country}</div>
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
                     <div class="col-md-3 col-xs-6 font-semibold">Store Zip Code</div>

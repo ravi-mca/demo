@@ -97,7 +97,7 @@ export default class Merchants extends React.Component {
     getStoreInfo(storeId) {
 		if((storeId != 0) && (storeId != -1)) {
 				var requestData = {
-					url: Config.getStoreInfo+storeId,
+					url: Config.storeAPIPath+storeId,
 					type: 'GET',
 					dataType: 'JSON',
 					contentType: 'application/json'
@@ -153,7 +153,7 @@ export default class Merchants extends React.Component {
     	var accountNo = info.accountNo;
 
     	var requestData = {
-    		url: Config.getMerchant+accountNo,
+    		url: Config.merchantAPIPath+'/'+accountNo,
     		type: 'GET',
     		dataType: 'JSON',
     		contentType: 'application/json'

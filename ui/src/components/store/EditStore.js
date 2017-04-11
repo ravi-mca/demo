@@ -8,6 +8,7 @@ import Validation, {Validator} from 'rc-form-validation';
 
 import Service from "../Service";
 import Config from "../../index.config";
+import AlertMessage from "../AlertMessage";
 
 var ReactToastr = require("react-toastr");
 var {ToastContainer} = ReactToastr; // This is a React Element.
@@ -151,15 +152,24 @@ export default class EditStore extends React.Component {
     
     if (this.showFormErrors()) {
 
-      Service.editStore(Config.editStore+storeId,updateStoreData, function(data) {
-        this.successAlert();        
+      var requestData = {
+            url: Config.storeAPIPath + storeId,
+            type: 'PUT',
+            data: JSON.stringify(updateStoreData),
+            dataType: 'text',
+            contentType: 'application/json'
+      };
+
+      var reqData = Service.buildRequestdata(requestData);
+
+      Service.executeRequest(reqData, function(data) {
+        this.refs.alertMessageChild.successAlert("Store updated successfully.");    
         this.props.onUpdateStore(this.state.edituserId);         
         this.hideModal();
-      }.bind(this), function(xhr, status, err) {      
-        this.errorAlert();
+      }.bind(this), function(xhr, status, err) {
+        this.refs.alertMessageChild.errorAlert("Something is wrong."); 
         var statusObj = xhr;
         var obj=JSON.parse(xhr.responseText);
-
         const editNameError = document.getElementById(`editNameError`);
         const editNicknameError = document.getElementById(`editNicknameError`);
         var editNameErrorMessage = "Store with name already exist. Please provide different store name.";
@@ -172,28 +182,9 @@ export default class EditStore extends React.Component {
         }
 
         isFormValid = false;
-
       }.bind(this));
     }
   }
-  }
-
-  successAlert () {
-    this.refs.container.success(
-      "Success!!",
-      "Store Updated successfully.", {
-      timeOut: 2000,
-      extendedTimeOut: 1000
-    });
-  }
-
-  errorAlert () {
-    this.refs.container.error(
-      "Error!!",
-      "Something is wrong.", {
-      timeOut: 2000,
-      extendedTimeOut: 1000
-    });
   }
   
   showFormErrors() {
@@ -285,15 +276,13 @@ export default class EditStore extends React.Component {
 
   render() {
     return (
-      <div id="editStorepanel">
+          <div id="editStorepanel">
             <div class="col-md-6 col-xs-6 storeMargin">
-           <i class="fa fa-pencil ml-10" onClick={this.showEditForm}></i>    
-           </div>    
-           <div>
-             <ToastContainer ref="container"
-                             toastMessageFactory={ToastMessageFactory}
-                             className="toast-top-right" />
-           </div>      
+            <i class="fa fa-pencil ml-10" onClick={this.showEditForm}></i>    
+            </div>    
+            <div>
+              <AlertMessage ref="alertMessageChild"/>
+            </div>     
             <Modal isOpen={this.state.isOpen}>
               <div class="modal-header">
                 <h4 class="modal-title font-20">Edit Store</h4>
@@ -367,18 +356,31 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editCountryLabel" class="form-label" for="editCountry" sm={4}> Store Country </Label><span></span>
+                  <Label id="editStreetAddressLabel" class="form-label" for="editStreetAddress" sm={4}> Store Street Address </Label><span></span>
                   <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
-                    name="editCountry"
-                    ref="editCountry"
-                    value={ this.state.editCountry } 
+                    name="editStreetAddress"
+                    ref="editStreetAddress"
+                    value={ this.state.editStreetAddress } 
                     onChange={ this.handleChange }
                     required />
-                  <div className="error" id="editCountryError" />
+                  <div className="error" id="editStreetAddressError" />
                   </Col>
-                </FormGroup>
+                </FormGroup>                    
+                <FormGroup row>
+                  <Label id="editCityLabel" class="form-label" for="editCity" sm={4}> Store City </Label><span></span>
+                  <Col sm={7} class="col-padding">
+                     <input className="form-control"
+                    type="text"
+                    name="editCity"
+                    ref="editCity"
+                    value={ this.state.editCity } 
+                    onChange={ this.handleChange }
+                    required />
+                  <div className="error" id="editCityError" />
+                  </Col>
+                </FormGroup>           
                 <FormGroup row>
                   <Label id="editStateLabel" class="form-label" for="editState" sm={4}> Store State </Label><span></span>
                   <Col sm={7} class="col-padding">
@@ -393,29 +395,16 @@ export default class EditStore extends React.Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label id="editCityLabel" class="form-label" for="editCity" sm={4}> Store City </Label><span></span>
+                  <Label id="editCountryLabel" class="form-label" for="editCountry" sm={4}> Store Country </Label><span></span>
                   <Col sm={7} class="col-padding">
                      <input className="form-control"
                     type="text"
-                    name="editCity"
-                    ref="editCity"
-                    value={ this.state.editCity } 
+                    name="editCountry"
+                    ref="editCountry"
+                    value={ this.state.editCountry } 
                     onChange={ this.handleChange }
                     required />
-                  <div className="error" id="editCityError" />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label id="editStreetAddressLabel" class="form-label" for="editStreetAddress" sm={4}> Store Street Address </Label><span></span>
-                  <Col sm={7} class="col-padding">
-                     <input className="form-control"
-                    type="text"
-                    name="editStreetAddress"
-                    ref="editStreetAddress"
-                    value={ this.state.editStreetAddress } 
-                    onChange={ this.handleChange }
-                    required />
-                  <div className="error" id="editStreetAddressError" />
+                  <div className="error" id="editCountryError" />
                   </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -427,7 +416,7 @@ export default class EditStore extends React.Component {
                     ref="editZipCode"
                     value={ this.state.editZipCode } 
                     onChange={ this.handleChange }
-                    pattern="[a-zA-Z0-9]{5}"
+                    pattern="[a-zA-Z0-9]{4,6}"
                     required />
                   <div className="error" id="editZipCodeError" />
                   </Col>
@@ -454,10 +443,10 @@ export default class EditStore extends React.Component {
                     value={ this.state.editControllerPlacement } 
                     onChange={ this.handleChange }
                     required > 
-                    <option value="">Select</option>
-                    <option value="Back">Back</option>
-                    <option value="Center">Center</option>
-                    <option value="Front">Front</option>
+                    <option value=''>Select controller placement</option>
+                    <option value='Back'>Back</option>
+                    <option value='Middle'>Middle</option>
+                    <option value='Front'>Front</option>
                     </select>
                   <div className="error" id="editControllerPlacementError" />
                   </Col>
@@ -471,15 +460,10 @@ export default class EditStore extends React.Component {
                     value={ this.state.editStoreCategory } 
                     onChange={ this.handleChange }
                     required >
-                      <option value="">Select</option>
-                      <option value="Quick Foods & Cafes">Quick Foods & Cafes</option>
-                      <option value="Fast Food Restaurants">Fast Food Restaurants</option>
-                      <option value="Fast-Casual Restaurants">Fast-casual Restaurants</option>
-                      <option value="Full-service Restaurants">Full-service Restaurants</option>
-                      <option value="Nightlife">Nightlife</option>
-                      <option value="Recreation & Fitness">Recreation & Fitness</option>
-                      <option value="Retail Shops">Retail Shops</option>
-                      <option value="Services">Services</option>
+                    <option value=''>Select catagory</option>
+                    <option value='Fast-Casual Restaurants'>Fast-Casual Restaurants</option>
+                    <option value='Fast-Food Restaurants'>Fast-Food Restaurants</option>
+                    <option value='Fast-Service Restaurants'>Fast-Service Restaurants</option>
                     </select>
                   <div className="error" id="editStoreCategoryError" />
                   </Col>
@@ -493,10 +477,10 @@ export default class EditStore extends React.Component {
                     value={ this.state.editStoreSubCategory } 
                     onChange={ this.handleChange }
                     required>
-                      <option value="">Select</option>
-                      <option value="Quick Foods & Cafes">Quick Foods & Cafes</option>
-                      <option value="Seafood">Seafood</option>
-                      <option value="Fast-casual Restaurants">Fast-casual Restaurants</option>
+                    <option value=''>Select Subcategory</option>
+                    <option value="Quick Foods & Cafes">Quick Foods & Cafes</option>
+                    <option value="Seafood">Seafood</option>
+                    <option value="Fast-casual Restaurants">Fast-casual Restaurants</option>
                     </select>
                   <div className="error" id="editStoreSubCategoryError" />
                   </Col>

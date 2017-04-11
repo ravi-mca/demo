@@ -36,7 +36,7 @@ export default class Sidebar extends React.Component {
 
     getListOfMerchant(info) {
         var requestData = {
-            url: Config.getMerchantList,
+            url: Config.merchantAPIPath,
             type: 'GET',
             dataType: 'json',
             contentType: 'application/json'
