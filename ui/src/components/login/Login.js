@@ -114,7 +114,7 @@ export default class Login extends React.Component {
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
-                                <i class="fa fa-user"></i>
+                                <i class="fa fa-user login-font"></i>
                             </div>
                             <input type="email" name="username" ref="username"
                             class="form-control input-lg font-16 text-gray-dark" placeholder="Username"
@@ -126,7 +126,7 @@ export default class Login extends React.Component {
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
-                                <i class="fa fa-lock"></i>
+                                <i class="fa fa-lock login-font"></i>
                             </div>
                             <input type="password" name="password" class="form-control input-lg font-16 text-gray-dark"
                                 placeholder="Password"
