@@ -178,9 +178,18 @@ export default class Merchants extends React.Component {
 				<div class="col-md-12 mt-10 mb-20 acc-border no-padding">
 					<div class="col-md-6 col-xs-6 auto-div no-padding">
 						<div class="acc-heading">{this.state.userInfo.firstName} </div>
-						<div class="acc-info">Account#: {this.state.userInfo.accountNo}</div>
-						<div class="acc-info">{this.state.userInfo.phone}</div>
-						<div class="acc-info mb-20">{this.state.userInfo.email}</div>
+						<div>
+                            <span class="acc-labels">Account#: </span>
+                            <span class="acc-info">{this.state.userInfo.accountNo}</span>
+                        </div>
+						<div class="acc-info">
+                            <span class="acc-labels">Contact: </span>
+                            <span class="acc-info">{this.state.userInfo.phone}</span>
+                        </div>
+						<div class="acc-info mb-20">
+                            <span class="acc-labels">Email: </span>
+                            <span class="acc-info">{this.state.userInfo.email}</span>
+                        </div>
 					</div>
 					<EditMerchants ref="editMerchantChild" data={this.state.userInfo} onUpdateAccount={this.getMerchantAccounts} />				
 				</div>
@@ -192,7 +201,7 @@ export default class Merchants extends React.Component {
       					<Col sm={12}>
        						<Nav bsStyle="pills">
           						<NavItem eventKey="storeInfoTab"  class="pad-right-10" disabled={!this.state.disableTabs}>STORE INFO</NavItem>
-          						<NavItem eventKey="storeDataTab"  disabled={this.state.disableTabs}>STORE DATA</NavItem>
+          						<NavItem eventKey="storeDataTab"   disabled={this.state.disableTabs}>STORE DATA</NavItem>
         					</Nav>
       					</Col>
       					<Col sm={12} class="no-padding">
@@ -226,8 +235,9 @@ export default class Merchants extends React.Component {
 						<AddStore data={this.state.userInfo.userId} onUpdateStore= {this.getStoresInfo}/>
 						<div class="row" >
 							<div class="col-md-12 col-xs-12 pad-top-10 storeMargin" id="showSelectedStoreId">
-	              				<div class="col-md-4 col-xs-4 auto-div ">
-	              					<span>Store #: {this.state.storeDetails.storeId}</span>
+	              				<div class="col-md-4 col-xs-4 auto-div pad-bottom-10">
+                                    <span class="acc-labels">Store#: </span>
+                                    <span class="acc-info">{this.state.storeDetails.storeId}</span>
 	              				</div>
 	              				<EditStore ref="editStoreChild" data={this.state.storeDetails} onUpdateStore= {this.getStoresInfo}/>
 	            			</div>

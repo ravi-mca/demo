@@ -236,16 +236,16 @@ export default class EditMerchant extends React.Component {
   render() {
     return (
       <div id="editpanel">
-            <div class="btn-padding">
+            <div class="">
             <div class="col-md-6 col-xs-6">
-              <i class="fa fa-pencil" onClick={this.showEditForm}></i>  
+              <i class="fa fa-pencil" onClick={this.showEditForm}></i>
             </div>
-            </div>            
+            </div>
             <div>
               <ToastContainer ref="container"
                               toastMessageFactory={ToastMessageFactory}
                               className="toast-top-right" />
-            </div>           
+            </div>
             <Modal isOpen={this.state.isOpen}>
               <div class="modal-header">
                 <h4 class="modal-title font-20">Edit New Merchant</h4>

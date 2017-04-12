@@ -61,9 +61,13 @@
       color: rgba(0, 0, 0, .0001) !important;
     }
 
-      .headerLogo {
-     text-align: center;
-     min-height: 50px;
+    .headerLogo {
+        text-align: center;
+        min-height: 50px;
+    }
+
+    .headerLogo img {
+        height: 25px;
     }
 
     /* Fixed position */
