@@ -2,6 +2,8 @@ package com.favendo.store.ws.rest.constant;
 
 public class StoreConstant {
 
+    public static final String ID = "Id";
+
     public static final String STORE_NAME = "Store Name";
 
     public static final String STORE_NICKNAME = "Store Nickname";

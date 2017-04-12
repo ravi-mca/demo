@@ -8,11 +8,13 @@ public interface StoreService {
 
     void save(Store store);
 
-    Store getById(Long storeId);
+    void delete(Long id);
+
+    Store getById(Long id);
 
     Store getByNameOrNickName(String name,String nickName);
 
     Store getByNameOrNickNameAndId(String name,String nickName,Long id);
     
-    List<Store> getAllByMerchantId(Long storeId);
+    List<Store> getAllByMerchantId(Long merchantId);
 }
