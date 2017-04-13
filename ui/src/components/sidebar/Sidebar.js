@@ -35,6 +35,8 @@ export default class Sidebar extends React.Component {
     }
 
     getListOfMerchant(info) {
+        console.log("info", info);
+
         var requestData = {
             url: Config.merchantAPIPath,
             type: 'GET',
@@ -46,8 +48,13 @@ export default class Sidebar extends React.Component {
         Service.executeRequest(reqData, function(response) {
            this.setState({merchantList: response});
 
+           console.log(this.state.merchantList);
            if( (info !== undefined) && (info !== null) ) {
                this.setState({selected  : info.editFirstName});
+           } else {
+            $('#menu-content li').first().addClass('activeList');
+            $('#menu-content li' ).first().trigger('click');
+      
            }
 
         }.bind(this), function(xhr, status, err) {

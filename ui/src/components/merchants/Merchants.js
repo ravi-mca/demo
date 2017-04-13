@@ -19,6 +19,7 @@ import AddStore from '../store/AddStore';
 import Service from "../Service";
 import Config from "../../index.config";
 import EditStore from "../store/EditStore";
+import DeletePopUp from "../DeletePopUp";
 
 export default class Merchants extends React.Component {
     constructor(props) {
@@ -121,7 +122,7 @@ export default class Merchants extends React.Component {
        var requestData = {
             url: Config.getStoresInfo+merchantId,
             type: 'GET',
-            dataType: 'JSON',
+            dataType: 'text',
             contentType: 'application/json'
         };
        var reqData = Service.buildRequestdata(requestData);
@@ -150,21 +151,25 @@ export default class Merchants extends React.Component {
 
     getMerchantAccounts(info) {
     	this.refs.child.getListOfMerchant(info);
-    	var accountNo = info.accountNo;
 
-    	var requestData = {
-    		url: Config.merchantAPIPath+'/'+accountNo,
-    		type: 'GET',
-    		dataType: 'JSON',
-    		contentType: 'application/json'
-    	};
-        var reqData = Service.buildRequestdata(requestData);
-        Service.executeRequest(reqData, function(response) {
+      if((info !== undefined) && (info !== null)) {
 
-        	 this.setState({userInfo: response});
-        }.bind(this), function(xhr, status, err) {
-            console.log(err);
-        }.bind(this));
+        var accountNo = info.accountNo;
+
+        var requestData = {
+          url: Config.merchantAPIPath+'/'+accountNo,
+          type: 'GET',
+          dataType: 'JSON',
+          contentType: 'application/json'
+        };
+          var reqData = Service.buildRequestdata(requestData);
+          Service.executeRequest(reqData, function(response) {
+
+             this.setState({userInfo: response});
+          }.bind(this), function(xhr, status, err) {
+              console.log(err);
+          }.bind(this));
+      }
     }
 
   	render() {
@@ -183,7 +188,8 @@ export default class Merchants extends React.Component {
 						<div class="acc-info mb-20">{this.state.userInfo.email}</div>
 					</div>
 					<EditMerchants ref="editMerchantChild" data={this.state.userInfo} onUpdateAccount={this.getMerchantAccounts} />				
-				</div>
+				  
+        </div>
 	  		);
 
 	  		showStoreTabs = (
@@ -229,7 +235,8 @@ export default class Merchants extends React.Component {
 	              				<div class="col-md-4 col-xs-4 auto-div ">
 	              					<span>Store #: {this.state.storeDetails.storeId}</span>
 	              				</div>
-	              				<EditStore ref="editStoreChild" data={this.state.storeDetails} onUpdateStore= {this.getStoresInfo}/>
+	              				<EditStore ref="
+                        " data={this.state.storeDetails} onUpdateStore= {this.getStoresInfo}/>
 	            			</div>
 	           			 </div>
 					</div>

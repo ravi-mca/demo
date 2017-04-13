@@ -8,6 +8,7 @@ import Validation, {Validator} from 'rc-form-validation';
 import Service from "../Service";
 import Config from "../../index.config";
 import AlertMessage from "../AlertMessage";
+import DeletePopUp from "../DeletePopUp";
 
 var ReactToastr = require("react-toastr");
 var {ToastContainer} = ReactToastr; // This is a React Element.
@@ -39,6 +40,8 @@ export default class EditMerchant extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showEditForm = this.showEditForm.bind(this);
+    this.onUpdateMerchantAccount = this.onUpdateMerchantAccount.bind(this);
+    
   }
 
   openModal = () => {
@@ -176,6 +179,10 @@ export default class EditMerchant extends React.Component {
     return isFormValid;
   }
 
+  onUpdateMerchantAccount() {
+    this.props.onUpdateAccount();
+  }
+
   showEditForm() {
 
     this.setState({
@@ -225,8 +232,17 @@ export default class EditMerchant extends React.Component {
     return (
       <div id="editpanel">
             <div class="btn-padding">
-            <div class="col-md-6 col-xs-6">
-              <i class="fa fa-pencil" onClick={this.showEditForm}></i>  
+            <div class="col-md-2 col-xs-2">
+              <div class="col-md-1 col-xs-1">
+                <i class="fa fa-pencil" onClick={this.showEditForm}></i>  
+              </div> 
+              <div class="col-md-1 col-xs-1 pad-left-9 pad-right-0">
+                <span>|</span>
+              </div>
+              <div class="col-md-1 col-xs-1">              
+                <DeletePopUp data={this.props.data} onUpdateAccount={this.onUpdateMerchantAccount}/>
+              </div>
+             
             </div>
             </div>            
             <div>
