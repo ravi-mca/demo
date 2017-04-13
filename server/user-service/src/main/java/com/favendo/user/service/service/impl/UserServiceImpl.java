@@ -22,6 +22,9 @@ public class UserServiceImpl implements UserService {
     
     @Value("${merchant.not.found.error.message}")
     private String merchantNotFoundErrorMessage;
+    
+    @Value("${invalid.merchant.id.error.message}")
+    private String merchantIdNotNullErrorMessage;
 
     @Autowired
     private UserDao userDao;
@@ -64,6 +67,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void deleteById(Long userId) {
+        if(Objects.isNull(userId)) {
+            throw new IllegalArgumentException(merchantIdNotNullErrorMessage);
+        }
         userDao.delete(getAndValidateUserByUserIdAndRole(userId, RoleEnum.MERCHANT.getRole()));
     }
     
