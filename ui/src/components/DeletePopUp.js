@@ -73,7 +73,7 @@ export default class DeletePopUp extends React.Component {
           </div>        
           <Modal isOpen={this.state.isOpen}>
             <div class="modal-header">
-              <h4 class="modal-title font-20">Delete {this.props.data.name}</h4>
+              <h4 class="modal-title font-20">Delete {this.props.data.deleteName}</h4>
             </div>
             <ModalBody>
               <div class="modal-padding">Do you want to Delete this {this.props.data.deleteMessage} ?</div>

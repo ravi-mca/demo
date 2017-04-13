@@ -47,7 +47,7 @@ export default class Merchants extends React.Component {
     setSelectList(userInfo) {
         userInfo.successAlert = Config.successAlert.deleteMerchant;
         userInfo.APIUrl = Config.deleteAPIPath+ userInfo.userId;
-        userInfo.name = userInfo.firstName; 
+        userInfo.deleteName = userInfo.firstName; 
         userInfo.deleteMessage = "merchant"; 
         this.setState({
             userInfo: userInfo
@@ -121,37 +121,37 @@ export default class Merchants extends React.Component {
 
     getStoresInfo(merchantId) {
 
-       let selectedStoreVal = $('#selectStore').find(':selected').val();
+      let selectedStoreVal = $('#selectStore').find(':selected').val();
 
-       var requestData = {
-            url: Config.getStoresInfo+merchantId,
-            type: 'GET',
-            dataType: 'text',
-            contentType: 'application/json'
-        };
-       var reqData = Service.buildRequestdata(requestData);
-       Service.executeRequest(reqData, function(response) {
+      var requestData = {
+           url: Config.getStoresInfo+merchantId,
+           type: 'GET',
+           dataType: 'JSON',
+           contentType: 'application/json'
+       };
+      var reqData = Service.buildRequestdata(requestData);
+      Service.executeRequest(reqData, function(response) {
 
-           if(response.length > 1){
-               response.push({"id":0,"storeId":"0","name":"All"});
-           }
-           this.setState({storeInfo: response});
-
-            $("#selectStore").html($("#selectStore option").sort(function (a, b) {
-                return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
-            }))
-           this.setState({storeId: selectedStoreVal});
-           $('#selectStore option:eq(1)').prop('selected', true);
-           this.getStore();
-
-       }.bind(this), function(xhr, status, err) {
-          console.log(err);
-          var response = [{"id":-1,"storeId":"","name":"No Stores"}];
+          if(response.length > 1){
+              response.push({"id":0,"storeId":"0","name":"All"});
+          }
           this.setState({storeInfo: response});
+
+           $("#selectStore").html($("#selectStore option").sort(function (a, b) {
+               return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
+           }))
+          this.setState({storeId: selectedStoreVal});
+          $('#selectStore option:eq(1)').prop('selected', true);
           this.getStore();
 
-       }.bind(this));
-   }
+      }.bind(this), function(xhr, status, err) {
+         console.log(err);
+         var response = [{"id":-1,"storeId":"","name":"No Stores"}];
+         this.setState({storeInfo: response});
+         this.getStore();
+
+      }.bind(this));
+  }
 
     getMerchantAccounts(info) {
     	this.refs.child.getListOfMerchant(info);

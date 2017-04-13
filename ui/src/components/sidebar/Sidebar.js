@@ -35,7 +35,6 @@ export default class Sidebar extends React.Component {
     }
 
     getListOfMerchant(info) {
-        console.log("info", info);
 
         var requestData = {
             url: Config.merchantAPIPath,
@@ -48,7 +47,6 @@ export default class Sidebar extends React.Component {
         Service.executeRequest(reqData, function(response) {
            this.setState({merchantList: response});
 
-           console.log(this.state.merchantList);
            if( (info !== undefined) && (info !== null) ) {
                this.setState({selected  : info.editFirstName});
            } else {
