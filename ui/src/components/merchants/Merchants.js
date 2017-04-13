@@ -45,6 +45,10 @@ export default class Merchants extends React.Component {
 	handleSelect(key) { }
 
     setSelectList(userInfo) {
+        userInfo.successAlert = Config.successAlert.deleteMerchant;
+        userInfo.APIUrl = Config.deleteAPIPath+ userInfo.userId;
+        userInfo.name = userInfo.firstName; 
+        userInfo.deleteMessage = "merchant"; 
         this.setState({
             userInfo: userInfo
         });

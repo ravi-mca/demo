@@ -24,7 +24,6 @@ export default class DeletePopUp extends React.Component {
 
      this.state = {
      isOpen: false,
-     merchantFname : ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,7 +46,7 @@ export default class DeletePopUp extends React.Component {
   handleSubmit(e) {    
     e.preventDefault();
     var requestData = {
-            url: Config.deleteAPIPath+ this.state.merchantId,
+            url: this.props.data.APIUrl,
             type: 'DELETE',
             dataType: 'text',
             contentType: 'application/json'
@@ -57,7 +56,7 @@ export default class DeletePopUp extends React.Component {
 
       Service.executeRequest(reqData, function(data) {
         this.props.onUpdateAccount();   
-        this.refs.alertMessageChild.successAlert("Merchant Delete successfully.");         
+        this.refs.alertMessageChild.successAlert(this.props.data.successAlert);         
         this.hideModal();
       }.bind(this), function(xhr, status, err) {
         this.refs.alertMessageChild.errorAlert("Something is wrong."); 
@@ -74,10 +73,10 @@ export default class DeletePopUp extends React.Component {
           </div>        
           <Modal isOpen={this.state.isOpen}>
             <div class="modal-header">
-              <h4 class="modal-title font-20">Delete {this.state.merchantFname}</h4>
+              <h4 class="modal-title font-20">Delete {this.props.data.name}</h4>
             </div>
             <ModalBody>
-              <div class="modal-padding">Do you want to Delete this merchant?</div>
+              <div class="modal-padding">Do you want to Delete this {this.props.data.deleteMessage} ?</div>
             </ModalBody>
             <div>
             <hr class="modal-footer-hr"/>
