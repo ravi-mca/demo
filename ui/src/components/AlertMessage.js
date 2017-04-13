@@ -21,7 +21,7 @@ export default class AlertMessage extends React.Component {
 
   successAlert (message) {
     this.refs.container.success(
-      "Success!!",
+      "",
       message, {
       timeOut: 2000,
       extendedTimeOut: 1000
@@ -30,7 +30,7 @@ export default class AlertMessage extends React.Component {
 
   errorAlert (message) {
     this.refs.container.error(
-      "Error!!",
+      "",
       message, {
       timeOut: 2000,
       extendedTimeOut: 1000
