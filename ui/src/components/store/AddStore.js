@@ -64,6 +64,7 @@ export default class AddStore extends React.Component {
 		this.setState({
 			isOpen: false
 		});
+		window.scrollTo(0, 0);
 		this.resetForm();
 
 	};
@@ -241,8 +242,8 @@ export default class AddStore extends React.Component {
 		return (
 			<div id="storepanel">
 			<div class="col-md-6 col-xs-6">
-						<button type="button" class="btn btn-primary storebtn" onClick={this.addStore}>
-							<i class="fa fa-plus"> Add Store</i>
+						<button type="button" class="btn btn-primary" onClick={this.addStore}>
+							<i class="fa fa-plus"><span class="storebtn"> Add Store</span></i>
 						</button>
 					</div>
 				<div>

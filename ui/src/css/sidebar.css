@@ -4,16 +4,17 @@
     max-height: calc(100% - 120px);
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0px 2% !important;
+    padding: 0px 30px !important;
     margin-top: 52px !important;
     height: 550px;
 }
+
 .dashboard-container:hover {
     overflow-y: auto;
 }
 
 .nav-side-menu {
-  font-family: Source Sans Pro Semibold;
+  font-family: 'Source Sans Pro Semibold';
   font-size: 15px ;
   position: fixed;
   top: 51px;
@@ -39,10 +40,13 @@
   margin-top: 15px;
   overflow-y: hidden;
   height: 400px;
+  width: 275px;
 }
 
 .nav-side-menu .menu-list:hover {
     overflow-y: auto;
+    padding-right: 3px;
+    width: 270px;
 }
 
 
@@ -63,6 +67,7 @@
 
 .right-inner-addon {
     position: relative;
+    padding: 25px 15px 15px 15px;
 }
 
 .right-inner-addon input {

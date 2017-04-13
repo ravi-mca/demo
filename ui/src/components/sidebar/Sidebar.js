@@ -82,7 +82,7 @@ export default class Sidebar extends React.Component {
 
     return (
         <div class="nav-side-menu">
-           <div class="right-inner-addon pad-15">
+           <div class="right-inner-addon">
                 <i class="fa fa-search"></i>
                     <SearchInput class="search-box" placeholder="Search" onChange={this.searchUpdated} />
             </div>

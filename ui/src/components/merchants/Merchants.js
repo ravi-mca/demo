@@ -175,7 +175,7 @@ export default class Merchants extends React.Component {
 		var stores = this.state.storeInfo;
 		if(this.state.userInfo) {
 			showAccountInfo = (
-				<div class="col-md-12 mt-10 mb-20 acc-border no-padding">
+				<div class="col-md-12 mt-25 mb-20 acc-border no-padding">
 					<div class="col-md-6 col-xs-6 auto-div no-padding">
 						<div class="acc-heading">{this.state.userInfo.firstName} </div>
 						<div>

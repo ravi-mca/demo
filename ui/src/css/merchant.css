@@ -20,23 +20,20 @@
   background-color: #edf0f2;
 }
 
-
-
 .modal-footer {
-	padding: 0px 11px 16px 16px !important;
-  text-align: right !important;
-  margin: 0 30px !important;
-  border-top: 0px solid #e5e5e5;
+    padding: 0px 11px 16px 16px !important;
+    text-align: right !important;
+    margin: 0 36px !important;
+    border-top: 0px solid #e5e5e5;
 }
 
 .modal-footer-hr {
-	margin: 0px 43px !important;
+	margin: 0px 50px 0px 43px !important;
   margin-bottom: 20px !important;
   border-bottom: 0.5px solid #474b54 ;
 }
 
 .form-label {
-
   color: #4e4e4e !important;
   font-size: 15px !important;
   font-family: 'Source Sans Pro' !important;
