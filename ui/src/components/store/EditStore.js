@@ -9,6 +9,7 @@ import Validation, {Validator} from 'rc-form-validation';
 import Service from "../Service";
 import Config from "../../index.config";
 import AlertMessage from "../AlertMessage";
+import DeletePopUp from "../DeletePopUp";
 
 var ReactToastr = require("react-toastr");
 var {ToastContainer} = ReactToastr; // This is a React Element.
@@ -48,12 +49,18 @@ export default class EditStore extends React.Component {
       editPriceCategory : "",
       editPosSystem : "",
       editStoreCastAdminName : "",
+      deleteName: this.props.data.name,
+      successAlert: Config.successAlert.deleteStore,
+      APIUrl: Config.storeAPIPath+ this.props.data.id,
+      deleteMessage: "store", 
+      info: this.props.data,
     };
     
     this.handleChange = this.handleChange.bind(this);
     this.handleEditStoreSubmit = this.handleEditStoreSubmit.bind(this);
     this.showEditForm = this.showEditForm.bind(this);
     this.resetForm = this.resetForm.bind(this);
+    this.onUpdateStoreAccount = this.onUpdateStoreAccount.bind(this);
   }
 
   openModal = () => {
@@ -240,6 +247,10 @@ export default class EditStore extends React.Component {
     });   
   }
   
+  onUpdateStoreAccount() {
+    this.props.onUpdateStore(this.props.data.userId);
+  }
+
   showInputError(refName, type) {
    
     var isControlValid = true;
@@ -277,10 +288,18 @@ export default class EditStore extends React.Component {
   render() {
     return (
           <div id="editStorepanel">
-            <div class="col-md-6 col-xs-6 storeMargin">
+           <div class="col-md-2 col-xs-2">
+            <div class="col-md-1 col-xs-1 storeMargin">
             <i class="fa fa-pencil ml-10" onClick={this.showEditForm}></i>    
-            </div>    
+            </div>   
+            <div class="col-md-1 col-xs-1 pad-left-19 pad-right-2">
+              <span>|</span>
+            </div>
+            <div class="col-md-1 col-xs-1">              
+              <DeletePopUp data={this.props.data} onUpdate={this.onUpdateStoreAccount}/>
+            </div>
             <div>
+            </div>
               <AlertMessage ref="alertMessageChild"/>
             </div>     
             <Modal isOpen={this.state.isOpen}>

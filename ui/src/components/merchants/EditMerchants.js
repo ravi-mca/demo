@@ -28,13 +28,19 @@ import {
 export default class EditMerchant extends React.Component {
     constructor(props) {
     super(props);
+
     this.state = {
       editFirstName: this.props.data.firstName,
       editLastName: this.props.data.lastName,      
       editEmail: this.props.data.email,      
       editPhone: this.props.data.phone,
       editAccountName: this.props.data.accountName,
-      accountNo: this.props.data.accountNo,
+      accountNo: this.props.data.accountNo,      
+      deleteName: this.props.data.firstName,
+      successAlert: Config.successAlert.deleteMerchant,
+      APIUrl: Config.deleteAPIPath+ this.props.data.userId,
+      deleteMessage: "merchant", 
+      info: this.props.data,
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -240,7 +246,7 @@ export default class EditMerchant extends React.Component {
                 <span>|</span>
               </div>
               <div class="col-md-1 col-xs-1">              
-                <DeletePopUp data={this.props.data} onUpdateAccount={this.onUpdateMerchantAccount}/>
+                <DeletePopUp data={this.state} onUpdate={this.onUpdateMerchantAccount}/>
               </div>
              
             </div>

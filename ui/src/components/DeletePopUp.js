@@ -32,8 +32,6 @@ export default class DeletePopUp extends React.Component {
   openModal = () => {
     this.setState({
       isOpen: true,
-      merchantId : this.props.data.userId,
-      merchantFname : this.props.data.firstName
     });
   };
 
@@ -55,7 +53,8 @@ export default class DeletePopUp extends React.Component {
       var reqData = Service.buildRequestdata(requestData);
 
       Service.executeRequest(reqData, function(data) {
-        this.props.onUpdateAccount();   
+
+        this.props.onUpdate(); 
         this.refs.alertMessageChild.successAlert(this.props.data.successAlert);         
         this.hideModal();
       }.bind(this), function(xhr, status, err) {

@@ -45,10 +45,6 @@ export default class Merchants extends React.Component {
 	handleSelect(key) { }
 
     setSelectList(userInfo) {
-        userInfo.successAlert = Config.successAlert.deleteMerchant;
-        userInfo.APIUrl = Config.deleteAPIPath+ userInfo.userId;
-        userInfo.deleteName = userInfo.firstName; 
-        userInfo.deleteMessage = "merchant"; 
         this.setState({
             userInfo: userInfo
         });
@@ -111,6 +107,13 @@ export default class Merchants extends React.Component {
 	        	Service.executeRequest(reqData, function(response) {
 	        		response.id = this.state.showStoreId;
 	        		response.userId = this.state.userInfo.userId;
+
+                response.deleteName = response.name,
+                response.successAlert = Config.successAlert.deleteStore,
+                response.APIUrl = Config.storeAPIPath+ response.id,
+                response.deleteMessage = "store", 
+                response.info = response,
+
 	            	this.setState({storeDetails: response});
 	        }.bind(this), function(xhr, status, err) {
 	          		console.log(err);
@@ -120,7 +123,7 @@ export default class Merchants extends React.Component {
     }
 
     getStoresInfo(merchantId) {
-
+      
       let selectedStoreVal = $('#selectStore').find(':selected').val();
 
       var requestData = {
