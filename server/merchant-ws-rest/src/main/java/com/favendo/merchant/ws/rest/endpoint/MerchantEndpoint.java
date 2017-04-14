@@ -1,5 +1,33 @@
 package com.favendo.merchant.ws.rest.endpoint;
 
+import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
+import static com.favendo.commons.exception.ErrorKey.SERVER_ERROR;
+import static com.favendo.commons.utils.Routes.ACCOUNT_NO;
+import static com.favendo.commons.utils.Routes.ADMIN;
+import static com.favendo.commons.utils.Routes.MERCHANT;
+import static com.favendo.commons.utils.Routes.PATH_PARAM_ACCOUNT_NO;
+import static com.favendo.commons.utils.Routes.PATH_PARAM_MERCHANT_ID;
+import static com.favendo.user.service.constant.UserConstant.MERCHANT_ID;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
+import java.util.Objects;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.favendo.commons.domain.User;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.ErrorKey;
@@ -9,32 +37,13 @@ import com.favendo.merchant.ws.rest.builder.MerchantBuilder;
 import com.favendo.merchant.ws.rest.convertor.MerchantDtoConverter;
 import com.favendo.merchant.ws.rest.dto.MerchantDto;
 import com.favendo.merchant.ws.rest.validator.MerchantValidator;
-import com.favendo.user.service.service.RoleService;
 import com.favendo.user.service.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import java.util.Objects;
-
-import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
-import static com.favendo.commons.exception.ErrorKey.SERVER_ERROR;
-import static com.favendo.commons.utils.Routes.*;
-import static com.favendo.user.service.constant.UserConstant.MERCHANT_ID;
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Component
 @Path(ADMIN + MERCHANT)
 @Produces(value = {APPLICATION_JSON})
 @Consumes(value = {APPLICATION_JSON})
 public class MerchantEndpoint {
-
-    @Autowired
-    private RoleService roleService;
 
     @Autowired
     private UserService userService;
@@ -104,6 +113,14 @@ public class MerchantEndpoint {
         } catch (BusinessException exception) {
             throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
         }
+    }
+    
+    @DELETE
+    @Path(PATH_PARAM_MERCHANT_ID)
+    public Response deleteById(@PathParam(MERCHANT_ID) Long merchantId) {
+        getAndValidateUserByMerchantId(merchantId);
+        userService.deleteById(merchantId);
+        return Response.status(Status.OK).build();
     }
 
     private User getAndValidateUserByMerchantId(Long merchantId) {

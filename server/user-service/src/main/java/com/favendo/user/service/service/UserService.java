@@ -20,4 +20,6 @@ public interface UserService {
     User getByUsernameOrAccountName(String username,String accountName,String firstName);
     
     User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId,String firstName);
+    
+    void deleteById(Long userId);
 }

@@ -19,6 +19,7 @@ import AddStore from '../store/AddStore';
 import Service from "../Service";
 import Config from "../../index.config";
 import EditStore from "../store/EditStore";
+import DeletePopUp from "../DeletePopUp";
 
 export default class Merchants extends React.Component {
     constructor(props) {
@@ -44,6 +45,10 @@ export default class Merchants extends React.Component {
 	handleSelect(key) { }
 
     setSelectList(userInfo) {
+        userInfo.successAlert = Config.successAlert.deleteMerchant;
+        userInfo.APIUrl = Config.deleteAPIPath+ userInfo.userId;
+        userInfo.deleteName = userInfo.firstName; 
+        userInfo.deleteMessage = "merchant"; 
         this.setState({
             userInfo: userInfo
         });
@@ -97,7 +102,7 @@ export default class Merchants extends React.Component {
     getStoreInfo(storeId) {
 		if((storeId != 0) && (storeId != -1)) {
 				var requestData = {
-					url: Config.getStoreInfo+storeId,
+					url: Config.storeAPIPath+storeId,
 					type: 'GET',
 					dataType: 'JSON',
 					contentType: 'application/json'
@@ -116,55 +121,59 @@ export default class Merchants extends React.Component {
 
     getStoresInfo(merchantId) {
 
-       let selectedStoreVal = $('#selectStore').find(':selected').val();
+      let selectedStoreVal = $('#selectStore').find(':selected').val();
 
-       var requestData = {
-            url: Config.getStoresInfo+merchantId,
-            type: 'GET',
-            dataType: 'JSON',
-            contentType: 'application/json'
-        };
-       var reqData = Service.buildRequestdata(requestData);
-       Service.executeRequest(reqData, function(response) {
+      var requestData = {
+           url: Config.getStoresInfo+merchantId,
+           type: 'GET',
+           dataType: 'JSON',
+           contentType: 'application/json'
+       };
+      var reqData = Service.buildRequestdata(requestData);
+      Service.executeRequest(reqData, function(response) {
 
-           if(response.length > 1){
-               response.push({"id":0,"storeId":"0","name":"All"});
-           }
-           this.setState({storeInfo: response});
-
-            $("#selectStore").html($("#selectStore option").sort(function (a, b) {
-                return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
-            }))
-           this.setState({storeId: selectedStoreVal});
-           $('#selectStore option:eq(1)').prop('selected', true);
-           this.getStore();
-
-       }.bind(this), function(xhr, status, err) {
-          console.log(err);
-          var response = [{"id":-1,"storeId":"","name":"No Stores"}];
+          if(response.length > 1){
+              response.push({"id":0,"storeId":"0","name":"All"});
+          }
           this.setState({storeInfo: response});
+
+           $("#selectStore").html($("#selectStore option").sort(function (a, b) {
+               return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
+           }))
+          this.setState({storeId: selectedStoreVal});
+          $('#selectStore option:eq(1)').prop('selected', true);
           this.getStore();
 
-       }.bind(this));
-   }
+      }.bind(this), function(xhr, status, err) {
+         console.log(err);
+         var response = [{"id":-1,"storeId":"","name":"No Stores"}];
+         this.setState({storeInfo: response});
+         this.getStore();
+
+      }.bind(this));
+  }
 
     getMerchantAccounts(info) {
     	this.refs.child.getListOfMerchant(info);
-    	var accountNo = info.accountNo;
 
-    	var requestData = {
-    		url: Config.getMerchant+accountNo,
-    		type: 'GET',
-    		dataType: 'JSON',
-    		contentType: 'application/json'
-    	};
-        var reqData = Service.buildRequestdata(requestData);
-        Service.executeRequest(reqData, function(response) {
+      if((info !== undefined) && (info !== null)) {
 
-        	 this.setState({userInfo: response});
-        }.bind(this), function(xhr, status, err) {
-            console.log(err);
-        }.bind(this));
+        var accountNo = info.accountNo;
+
+        var requestData = {
+          url: Config.merchantAPIPath+'/'+accountNo,
+          type: 'GET',
+          dataType: 'JSON',
+          contentType: 'application/json'
+        };
+          var reqData = Service.buildRequestdata(requestData);
+          Service.executeRequest(reqData, function(response) {
+
+             this.setState({userInfo: response});
+          }.bind(this), function(xhr, status, err) {
+              console.log(err);
+          }.bind(this));
+      }
     }
 
   	render() {
@@ -183,7 +192,8 @@ export default class Merchants extends React.Component {
 						<div class="acc-info mb-20">{this.state.userInfo.email}</div>
 					</div>
 					<EditMerchants ref="editMerchantChild" data={this.state.userInfo} onUpdateAccount={this.getMerchantAccounts} />				
-				</div>
+				  
+        </div>
 	  		);
 
 	  		showStoreTabs = (
@@ -229,7 +239,8 @@ export default class Merchants extends React.Component {
 	              				<div class="col-md-4 col-xs-4 auto-div ">
 	              					<span>Store #: {this.state.storeDetails.storeId}</span>
 	              				</div>
-	              				<EditStore ref="editStoreChild" data={this.state.storeDetails} onUpdateStore= {this.getStoresInfo}/>
+	              				<EditStore ref="
+                        " data={this.state.storeDetails} onUpdateStore= {this.getStoresInfo}/>
 	            			</div>
 	           			 </div>
 					</div>

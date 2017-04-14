@@ -35,8 +35,9 @@ export default class Sidebar extends React.Component {
     }
 
     getListOfMerchant(info) {
+
         var requestData = {
-            url: Config.getMerchantList,
+            url: Config.merchantAPIPath,
             type: 'GET',
             dataType: 'json',
             contentType: 'application/json'
@@ -48,6 +49,10 @@ export default class Sidebar extends React.Component {
 
            if( (info !== undefined) && (info !== null) ) {
                this.setState({selected  : info.editFirstName});
+           } else {
+            $('#menu-content li').first().addClass('activeList');
+            $('#menu-content li' ).first().trigger('click');
+      
            }
 
         }.bind(this), function(xhr, status, err) {
