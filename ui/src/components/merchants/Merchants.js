@@ -182,11 +182,11 @@ export default class Merchants extends React.Component {
                             <span class="acc-labels">Account#: </span>
                             <span class="acc-info">{this.state.userInfo.accountNo}</span>
                         </div>
-						<div class="acc-info">
+						<div>
                             <span class="acc-labels">Contact: </span>
                             <span class="acc-info">{this.state.userInfo.phone}</span>
                         </div>
-						<div class="acc-info mb-20">
+						<div class="mb-20">
                             <span class="acc-labels">Email: </span>
                             <span class="acc-info">{this.state.userInfo.email}</span>
                         </div>
