@@ -14,7 +14,6 @@
 }
 
 .nav-side-menu {
-  font-family: 'Source Sans Pro Semibold';
   font-size: 15px ;
   position: fixed;
   top: 51px;
@@ -26,6 +25,7 @@
 }
 
 .list-nav  {
+  font-family: 'Source Sans Pro Semibold' !important;
   color: #fff !important;
 }
 
@@ -33,6 +33,7 @@
   border-left: 10px solid #c91c49 !important;
   background-color: #eBecef !important;
   color: #c91c49 !important;
+  font-family: 'Source Sans Pro bold' !important;
 }
 
 
