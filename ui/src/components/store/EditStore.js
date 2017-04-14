@@ -427,7 +427,7 @@ export default class EditStore extends React.Component {
                     ref="editZipCode"
                     value={ this.state.editZipCode } 
                     onChange={ this.handleChange }
-                    pattern="[a-zA-Z0-9]{5}"
+                    pattern="[0-9]{4,6}"
                     required />
                   <div className="error" id="editZipCodeError" />
                   </Col>
