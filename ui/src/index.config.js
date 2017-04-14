@@ -6,12 +6,12 @@ const Config = {
     storeAPIPath:  BaseUrl + '/storecast/api/admin/store/',
 	getStoresInfo: BaseUrl + '/storecast/api/admin/store/list/',
 	deleteAPIPath: BaseUrl + '/storecast/api/admin/merchant/',
-
+	adminAPIPath : BaseUrl +'/storecast/api/admin/credentials',
+	
 	successAlert : {
 		deleteMerchant : "Merchant deleted successfully.",
 		deleteStore : "Store deleted successfully."
 	}
-
 };
 
 export default Config;
