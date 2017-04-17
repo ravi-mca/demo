@@ -8,7 +8,7 @@ import CreateMerchants from "../merchants/CreateMerchants";
 import $ from 'jquery';
 import SearchInput, {createFilter} from 'react-search-input';
 
-const KEYS_TO_FILTERS = ['firstname','accountNo'];
+const KEYS_TO_FILTERS = ['firstName','accountNo'];
 
 export default class Sidebar extends React.Component {
     constructor(props) {
