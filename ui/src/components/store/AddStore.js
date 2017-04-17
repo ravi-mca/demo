@@ -16,6 +16,7 @@ import {
 
 import Service from "../Service";
 import Config from "../../index.config";
+import AlertMessage from "../AlertMessage";
 
 var ReactToastr = require("react-toastr");
 var {ToastContainer} = ReactToastr;
@@ -65,6 +66,7 @@ export default class AddStore extends React.Component {
 		});
 
 		this.resetForm();
+
 	};
 
 	resetForm() {
@@ -127,7 +129,7 @@ export default class AddStore extends React.Component {
   			};
 
       		var requestData = {
-      			url: Config.addStore + this.props.data,
+      			url: Config.storeAPIPath + this.props.data,
       			type: 'POST',
       			data: JSON.stringify(storeData),
       			dataType: 'text',
@@ -138,10 +140,10 @@ export default class AddStore extends React.Component {
 
 			Service.executeRequest(reqData, function(data) {
 				this.props.onUpdateStore(this.props.data);
-				this.successAlert();
+				this.refs.alertMessageChild.successAlert("Store created successfully."); 
 				this.hideModal();
 			}.bind(this), function(xhr, status, err) {
-				this.errorAlert();
+				this.refs.alertMessageChild.errorAlert("Something is wrong."); 
 				var statusObj = xhr;
 				if(statusObj.status == 409) {
 					var errorStatus= JSON.parse(statusObj.responseText);
@@ -212,25 +214,6 @@ export default class AddStore extends React.Component {
 		return isControlValid;
 	}
 
-	successAlert () {
-		this.refs.container.success(
-			"",
-			"Store created successfully.", {
-				timeOut: 2000,
-				extendedTimeOut: 1000
-		});
-	}
-
-	errorAlert () {
-		this.refs.container.error(
-			"",
-			"Something is wrong.", {
-			timeOut: 2000,
-			extendedTimeOut: 1000
-		});
-	}
-
-
 	render() {
 		return (
 			<div id="storepanel">
@@ -240,10 +223,8 @@ export default class AddStore extends React.Component {
 						</button>
 					</div>
 				<div>
-					<ToastContainer ref="container"
-							  toastMessageFactory={ToastMessageFactory}
-							  className="toast-top-right" />
-				</div>
+	              <AlertMessage ref="alertMessageChild"/>
+	            </div>   
 				<Modal isOpen={this.state.isOpen}>
 					<div class="modal-header">
 						<h4 class="modal-title font-20">New Store Set-up</h4>
@@ -303,33 +284,7 @@ export default class AddStore extends React.Component {
 											required />
 									<div className="error" id="storePhoneError" />
 								</Col>
-							</FormGroup>
-							<FormGroup row>
-				  				<Label id="countryLabel" class="form-label" for="country" sm={4}>Store Country</Label>
-				   				<Col sm={7} class="col-padding">
-					 				<input className="form-control"
-											type="text"
-											name="country"
-											ref="country"
-											value={ this.state.country }
-											onChange={ this.inputChange }
-											required />
-				  					<div className="error" id="countryError" />
-				  				</Col>
-							</FormGroup>
-							<FormGroup row>
-				  				<Label id="cityLabel" class="form-label" for="city" sm={4}>Store City</Label>
-				   				<Col sm={7} class="col-padding">
-					 				<input className="form-control"
-											type="text"
-											name="city"
-											ref="city"
-											value={ this.state.city }
-											onChange={ this.inputChange }
-											required />
-				  					<div className="error" id="cityError" />
-				  				</Col>
-							</FormGroup>
+							</FormGroup>							
 							<FormGroup row>
 				  				<Label id="streetLabel" class="form-label" for="street" sm={4}>Store Street Address</Label>
 				   				<Col sm={7} class="col-padding">
@@ -342,7 +297,20 @@ export default class AddStore extends React.Component {
 											required />
 				  					<div className="error" id="streetError" />
 				  				</Col>
-							</FormGroup>
+							</FormGroup>							
+							<FormGroup row>
+				  				<Label id="cityLabel" class="form-label" for="city" sm={4}>Store City</Label>
+				   				<Col sm={7} class="col-padding">
+					 				<input className="form-control"
+											type="text"
+											name="city"
+											ref="city"
+											value={ this.state.city }
+											onChange={ this.inputChange }
+											required />
+				  					<div className="error" id="cityError" />
+				  				</Col>
+							</FormGroup>							
 							<FormGroup row>
 				  				<Label id="stateLabel" class="form-label" for="state" sm={4}>Store State</Label>
 				   				<Col sm={7} class="col-padding">
@@ -354,6 +322,19 @@ export default class AddStore extends React.Component {
 											onChange={ this.inputChange }
 											required />
 				  					<div className="error" id="stateError" />
+				  				</Col>
+							</FormGroup>
+							<FormGroup row>
+				  				<Label id="countryLabel" class="form-label" for="country" sm={4}>Store Country</Label>
+				   				<Col sm={7} class="col-padding">
+					 				<input className="form-control"
+											type="text"
+											name="country"
+											ref="country"
+											value={ this.state.country }
+											onChange={ this.inputChange }
+											required />
+				  					<div className="error" id="countryError" />
 				  				</Col>
 							</FormGroup>
 							<FormGroup row>
@@ -424,8 +405,9 @@ export default class AddStore extends React.Component {
 											class="form-control"
 											onChange={ this.inputChange } required>
 										<option value=''>Select Subcategory</option>
-										<option value='seafood'>seafood</option>
-										<option value='Vegetarian'>Vegetarian</option>
+										<option value="Quick Foods & Cafes">Quick Foods & Cafes</option>
+					                    <option value="Seafood">Seafood</option>
+					                    <option value="Fast-casual Restaurants">Fast-casual Restaurants</option>
 									</select>
 				  					<div className="error" id="subCategoryError" />
 				  				</Col>

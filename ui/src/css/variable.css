@@ -53,8 +53,28 @@
   padding: 15px;
 }
 
+.pad-left-9 {
+  padding-left: 9px !important;;
+}
+
+.pad-left-17 {
+  padding-left: 17px !important;;
+}
+
+.pad-left-19 {
+  padding-left: 19px !important;;
+}
+
+.pad-right-2 {
+  padding-right: 2px !important;;
+}
+
 .pad-right-10 {
-  padding-right: 10px;
+  padding-right: 10px !important;;
+}
+
+.pad-right-0 {
+  padding-right: 0px !important;;
 }
 
 .pad-top-10 {

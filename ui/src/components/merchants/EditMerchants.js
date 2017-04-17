@@ -7,6 +7,8 @@ import Validation, {Validator} from 'rc-form-validation';
 
 import Service from "../Service";
 import Config from "../../index.config";
+import AlertMessage from "../AlertMessage";
+import DeletePopUp from "../DeletePopUp";
 
 var ReactToastr = require("react-toastr");
 var {ToastContainer} = ReactToastr; // This is a React Element.
@@ -26,18 +28,26 @@ import {
 export default class EditMerchant extends React.Component {
     constructor(props) {
     super(props);
+
     this.state = {
       editFirstName: this.props.data.firstName,
       editLastName: this.props.data.lastName,      
       editEmail: this.props.data.email,      
       editPhone: this.props.data.phone,
       editAccountName: this.props.data.accountName,
-      accountNo: this.props.data.accountNo,
+      accountNo: this.props.data.accountNo,      
+      deleteName: this.props.data.firstName,
+      successAlert: Config.successAlert.deleteMerchant,
+      APIUrl: Config.deleteAPIPath+ this.props.data.userId,
+      deleteMessage: "merchant", 
+      info: this.props.data,
     };
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showEditForm = this.showEditForm.bind(this);
+    this.onUpdateMerchantAccount = this.onUpdateMerchantAccount.bind(this);
+    
   }
 
   openModal = () => {
@@ -117,28 +127,33 @@ export default class EditMerchant extends React.Component {
     if (this.showFormErrors()) {
 
       var requestData = {
-            url: Config.editMerchant + merchantId,
+            url: Config.merchantAPIPath+'/'+ merchantId,
             type: 'PUT',
             data: JSON.stringify(newData),
             dataType: 'text',
             contentType: 'application/json'
-        };
+      };
 
-            var reqData = Service.buildRequestdata(requestData);
+      var reqData = Service.buildRequestdata(requestData);
 
       Service.executeRequest(reqData, function(data) {
         this.props.onUpdateAccount(this.state);  
-        this.successAlert();        
+        this.refs.alertMessageChild.successAlert("Merchant Updated successfully.");         
         this.hideModal();
       }.bind(this), function(xhr, status, err) {
-        this.errorAlert();
+        this.refs.alertMessageChild.errorAlert("Something is wrong."); 
         var statusObj = xhr;
         var obj=JSON.parse(xhr.responseText);
 
+        const editMerchantNameError = document.getElementById(`editFirstNameError`);
         const editEmailError = document.getElementById(`editEmailError`);
         const editAccountNameError = document.getElementById(`editAccountNameError`);
 
-        if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
+        if(obj["error_description"] == "Merchant with first name already exist. Please provide different first name.") {
+          
+          editMerchantNameError.textContent = `Merchant with first name already exist`; 
+        
+        }else if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
 
           editEmailError.textContent = `Merchant with email address already exist`;          
          
@@ -151,24 +166,6 @@ export default class EditMerchant extends React.Component {
       }.bind(this));
     }
   }
-  }
-
-  successAlert () {
-    this.refs.container.success(
-      "Success!!",
-      "Merchant Updated successfully.", {
-      timeOut: 2000,
-      extendedTimeOut: 1000
-    });
-  }
-
-  errorAlert () {
-    this.refs.container.error(
-      "Error!!",
-      "Something is wrong.", {
-      timeOut: 2000,
-      extendedTimeOut: 1000
-    });
   }
   
   showFormErrors() {
@@ -186,6 +183,10 @@ export default class EditMerchant extends React.Component {
     });
     
     return isFormValid;
+  }
+
+  onUpdateMerchantAccount() {
+    this.props.onUpdateAccount();
   }
 
   showEditForm() {
@@ -237,15 +238,21 @@ export default class EditMerchant extends React.Component {
     return (
       <div id="editpanel">
             <div class="">
-            <div class="col-md-6 col-xs-6">
-              <i class="fa fa-pencil" onClick={this.showEditForm}></i>
-            </div>
-            </div>
-            <div>
-              <ToastContainer ref="container"
-                              toastMessageFactory={ToastMessageFactory}
-                              className="toast-top-right" />
-            </div>
+        <div class="col-md-2 col-xs-2">
+        <div class="col-md-1 col-xs-1">
+           <i class="fa fa-pencil" onClick={this.showEditForm}></i>
+        </div>
+        <div class="col-md-1 col-xs-1 pad-left-9 pad-right-0">
+           <span>|</span>
+        </div>
+        <div class="col-md-1 col-xs-1">
+            <DeletePopUp data={this.state} onUpdate={this.onUpdateMerchantAccount}/>
+        </div>
+    </div>
+    </div>
+    <div>
+              <AlertMessage ref="alertMessageChild"/>
+            </div>          
             <Modal isOpen={this.state.isOpen}>
               <div class="modal-header">
                 <h4 class="modal-title font-20">Edit New Merchant</h4>

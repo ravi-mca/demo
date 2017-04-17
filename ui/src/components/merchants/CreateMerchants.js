@@ -7,6 +7,8 @@ import Validation, {Validator} from 'rc-form-validation';
 
 import Service from "../Service";
 import Config from "../../index.config";
+import AlertMessage from "../AlertMessage";
+
 
 var ReactToastr = require("react-toastr");
 var {ToastContainer} = ReactToastr; // This is a React Element.
@@ -83,50 +85,44 @@ export default class MerchantForm extends React.Component {
 
     if (this.showFormErrors()) {
 
-      Service.createMerchant(Config.createMerchant,this.state, function(data) {
-       
-        this.successAlert();        
+      var requestData = {
+            url: Config.merchantAPIPath,
+            type: 'POST',
+            data: JSON.stringify(this.state),
+            dataType: 'text',
+            contentType: 'application/json'
+        };
+
+      var reqData = Service.buildRequestdata(requestData);
+
+      Service.executeRequest(reqData, function(data) {
+        this.refs.alertMessageChild.successAlert("Merchant created successfully.");         
         this.hideModal();   
         this.props.onUpdateList();    
       }.bind(this), function(xhr, status, err) {
-      
-        this.errorAlert();
+        this.refs.alertMessageChild.errorAlert("Something is wrong."); 
         var statusObj = xhr;
         var obj=JSON.parse(xhr.responseText);
+
+        const merchantNameError = document.getElementById(`firstNameError`);
         const error = document.getElementById(`emailError`);
         const accountNameError = document.getElementById(`accountNameError`);
 
-        if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
-
-          error.textContent = `Merchant with email address already exist`;          
+        if(obj["error_description"] == "Merchant with first name already exist. Please provide different first name.") {
          
-         } else if(obj["error_description"] == "Merchant with account name already exist. Please provide different account name.") {
+          merchantNameError.textContent = `Merchant with first name already exist`; 
+        
+        }else if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
           
+          error.textContent = `Merchant with email address already exist`;   
+        } else if(obj["error_description"] == "Merchant with account name already exist. Please provide different account name.") {
+         
           accountNameError.textContent = `Merchant with account name already exist`;
         }
 
         isFormValid = false;
-
       }.bind(this));
     }
-  }
-
-  successAlert () {
-    this.refs.container.success(
-      "Success!!",
-      "Merchant created successfully.", {
-      timeOut: 2000,
-      extendedTimeOut: 1000
-    });
-  }
-
-  errorAlert () {
-    this.refs.container.error(
-      "Error!!",
-      "Something is wrong.", {
-      timeOut: 2000,
-      extendedTimeOut: 1000
-    });
   }
   
   showFormErrors() {
@@ -187,9 +183,7 @@ export default class MerchantForm extends React.Component {
               </button>
             </div>            
             <div>
-              <ToastContainer ref="container"
-                              toastMessageFactory={ToastMessageFactory}
-                              className="toast-top-right" />
+              <AlertMessage ref="alertMessageChild"/>
             </div>           
             <Modal isOpen={this.state.isOpen}>
               <div class="modal-header">

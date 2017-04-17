@@ -1,15 +1,16 @@
 var BaseUrl = 'http://localhost:8080';
 
 const Config = {
-    createMerchant : BaseUrl +'/storecast/api/admin/merchant',
-    editMerchant : BaseUrl +'/storecast/api/admin/merchant/',
-    login : BaseUrl +'/storecast/api/admin/login',
-    getMerchantList: BaseUrl + '/storecast/api/admin/merchant',
-    getStoreInfo:  BaseUrl + '/storecast/api/admin/store/',
-    addStore: BaseUrl + '/storecast/api/admin/store/',
-    getMerchant: BaseUrl + '/storecast/api/admin/merchant/',
-	editStore: BaseUrl + '/storecast/api/admin/store/',
-	getStoresInfo: BaseUrl + '/storecast/api/admin/store/list/'
+	login : BaseUrl +'/storecast/api/admin/login',
+    merchantAPIPath : BaseUrl +'/storecast/api/admin/merchant',   
+    storeAPIPath:  BaseUrl + '/storecast/api/admin/store/',
+	getStoresInfo: BaseUrl + '/storecast/api/admin/store/list/',
+	deleteAPIPath: BaseUrl + '/storecast/api/admin/merchant/',
+
+	successAlert : {
+		deleteMerchant : "Merchant deleted successfully.",
+		deleteStore : "Store deleted successfully."
+	}
 
 };
 

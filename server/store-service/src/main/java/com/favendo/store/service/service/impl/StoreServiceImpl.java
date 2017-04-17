@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.favendo.commons.domain.Store;
 import com.favendo.store.service.dao.StoreDao;
 import com.favendo.store.service.service.StoreService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("storeService")
 public class StoreServiceImpl implements StoreService {
@@ -21,13 +22,20 @@ public class StoreServiceImpl implements StoreService {
     private StoreDao storeDao;
 
     @Override
+    @Transactional
     public void save(Store store) {
         storeDao.save(store);
     }
 
     @Override
-    public Store getById(Long storeId) {
-        return storeDao.findOne(storeId);
+    @Transactional
+    public void delete(Long id) {
+        storeDao.delete(id);
+    }
+
+    @Override
+    public Store getById(Long id) {
+        return storeDao.findOne(id);
     }
 
     @Override

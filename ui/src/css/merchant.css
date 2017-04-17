@@ -20,6 +20,10 @@
   background-color: #edf0f2;
 }
 
+.modal-padding {
+ padding: 35px 0px 34px 29px  !important;
+}
+
 .modal-footer {
     padding: 0px 11px 16px 16px !important;
     text-align: right !important;
@@ -34,6 +38,7 @@
 }
 
 .form-label {
+
   color: #4e4e4e !important;
   font-size: 15px !important;
   font-family: 'Source Sans Pro' !important;
@@ -147,3 +152,10 @@ select.active:invalid {
   padding: 15px 0px 0px 0px;
 }
 
+
+
+.left-icon {
+    margin-top: -15px !important;
+    margin-left: -97px !important;
+    float: left !important;
+}
