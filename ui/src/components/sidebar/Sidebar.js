@@ -8,7 +8,7 @@ import CreateMerchants from "../merchants/CreateMerchants";
 import $ from 'jquery';
 import SearchInput, {createFilter} from 'react-search-input';
 
-const KEYS_TO_FILTERS = ['firstname','accountNo'];
+const KEYS_TO_FILTERS = ['firstName','accountNo'];
 
 export default class Sidebar extends React.Component {
     constructor(props) {
@@ -87,7 +87,7 @@ export default class Sidebar extends React.Component {
 
     return (
         <div class="nav-side-menu">
-           <div class="right-inner-addon pad-15">
+           <div class="right-inner-addon">
                 <i class="fa fa-search"></i>
                     <SearchInput class="search-box" placeholder="Search" onChange={this.searchUpdated} />
             </div>

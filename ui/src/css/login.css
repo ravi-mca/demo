@@ -16,8 +16,9 @@ body {
 }
 
 .input-group-addon {
-	background-color: #ffffff !important;
+	background-color: #40444e !important;
     padding: 6px 18px !important;
+    border-radius: 10px;
 }
 
 .logo {
@@ -40,6 +41,24 @@ input.active:invalid {
 
 .error {
     color: red;
-    font-size: 12px;
+    font-size: 13px;
     margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.login-content input {
+    background-color: #40444e;
+}
+
+.input-group-addon i {
+    color: #c4c6cc;
+}
+
+.login-content button {
+    background: #0099da;
+    color: white !important;
+}
+
+.login-font {
+    font-size: 1.5em;
 }

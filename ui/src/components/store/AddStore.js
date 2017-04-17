@@ -26,7 +26,6 @@ export default class AddStore extends React.Component {
 	constructor(props) {
 		super(props);
 		this.getInitialState = this.getInitialState.bind(this);
-		this.addStore = this.addStore.bind(this);
 		this.inputChange = this.inputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.resetForm = this.resetForm.bind(this);
@@ -65,6 +64,7 @@ export default class AddStore extends React.Component {
 		this.setState({
 			isOpen: false
 		});
+
 		this.resetForm();
 
 	};
@@ -214,18 +214,12 @@ export default class AddStore extends React.Component {
 		return isControlValid;
 	}
 
-	addStore() {
-		this.setState({
-			isOpen: true
-		});
-	}
-
 	render() {
 		return (
 			<div id="storepanel">
 			<div class="col-md-6 col-xs-6">
-						<button type="button" class="btn btn-primary storebtn" onClick={this.addStore}>
-							<i class="fa fa-plus"> Add Store</i>
+						<button type="button" class="btn btn-primary" onClick={this.openModal}>
+							<i class="fa fa-plus"><span class="storebtn"> Add Store</span></i>
 						</button>
 					</div>
 				<div>
@@ -352,7 +346,7 @@ export default class AddStore extends React.Component {
 											ref="zipCode"
 											value={ this.state.zipCode }
 											onChange={ this.inputChange }
-											pattern="[a-zA-Z0-9]{4,6}"
+											pattern="[0-9]{4,6}"
 											required />
 				  					<div className="error" id="zipCodeError" />
 				 				</Col>
