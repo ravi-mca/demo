@@ -240,7 +240,7 @@ export default class EditMerchant extends React.Component {
             <div class="">
         <div class="col-md-2 col-xs-2">
         <div class="col-md-1 col-xs-1">
-           <i class="fa fa-pencil" onClick={this.showEditForm}></i>
+           <i class="fa fa-pencil pointer" onClick={this.showEditForm}></i>
         </div>
         <div class="col-md-1 col-xs-1 pad-left-9 pad-right-0">
            <span>|</span>

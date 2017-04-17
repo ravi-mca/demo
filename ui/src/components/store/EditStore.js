@@ -290,7 +290,7 @@ export default class EditStore extends React.Component {
           <div id="editStorepanel">
            <div class="col-md-2 col-xs-2">
             <div class="col-md-1 col-xs-1 storeMargin">
-            <i class="fa fa-pencil ml-10" onClick={this.showEditForm}></i>    
+            <i class="fa fa-pencil ml-10 pointer" onClick={this.showEditForm}></i>    
             </div>   
             <div class="col-md-1 col-xs-1 pad-left-19 pad-right-2">
               <span>|</span>
