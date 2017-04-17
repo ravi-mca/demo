@@ -23,6 +23,8 @@ export default class AlertMessage extends React.Component {
     this.refs.container.success(
       "",
       message, {
+      showAnimation: `fadeIn`, // or other animations from animate.css
+      hideAnimation: `fadeOut`,
       timeOut: 2000,
       extendedTimeOut: 1000
     });
@@ -32,6 +34,8 @@ export default class AlertMessage extends React.Component {
     this.refs.container.error(
       "",
       message, {
+      showAnimation: `fadeIn`, // or other animations from animate.css
+      hideAnimation: `fadeOut`,
       timeOut: 2000,
       extendedTimeOut: 1000
     });
