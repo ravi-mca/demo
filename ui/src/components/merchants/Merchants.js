@@ -45,6 +45,14 @@ export default class Merchants extends React.Component {
 	handleSelect(key) { }
 
     setSelectList(userInfo) {
+
+        /*Set delete merchant data*/
+        userInfo.deleteName = userInfo.firstName;
+        userInfo.successAlert = Config.successAlert.deleteMerchant;
+        userInfo.APIUrl = Config.deleteAPIPath+ userInfo.userId;
+        userInfo.deleteMessage = "merchant";
+        userInfo.info = userInfo;
+
         this.setState({
             userInfo: userInfo
         });
@@ -123,17 +131,16 @@ export default class Merchants extends React.Component {
     }
 
     getStoresInfo(merchantId) {
-      
-      let selectedStoreVal = $('#selectStore').find(':selected').val();
+        let selectedStoreVal = $('#selectStore').find(':selected').val();
 
-      var requestData = {
+        var requestData = {
            url: Config.getStoresInfo+merchantId,
            type: 'GET',
            dataType: 'JSON',
            contentType: 'application/json'
        };
-      var reqData = Service.buildRequestdata(requestData);
-      Service.executeRequest(reqData, function(response) {
+        var reqData = Service.buildRequestdata(requestData);
+        Service.executeRequest(reqData, function(response) {
 
           if(response.length > 1){
               response.push({"id":0,"storeId":"0","name":"All"});
@@ -169,10 +176,17 @@ export default class Merchants extends React.Component {
           dataType: 'JSON',
           contentType: 'application/json'
         };
-          var reqData = Service.buildRequestdata(requestData);
-          Service.executeRequest(reqData, function(response) {
+        var reqData = Service.buildRequestdata(requestData);
+        Service.executeRequest(reqData, function(response) {
 
-             this.setState({userInfo: response});
+            /*Set delete merchant data*/
+            response.deleteName = response.firstName;
+            response.successAlert = Config.successAlert.deleteMerchant;
+            response.APIUrl = Config.storeAPIPath+ response.userId;
+            response.deleteMessage = "merchant";
+            response.info = response;
+
+            this.setState({userInfo: response});
           }.bind(this), function(xhr, status, err) {
               console.log(err);
           }.bind(this));

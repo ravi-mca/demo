@@ -246,7 +246,7 @@ export default class EditMerchant extends React.Component {
            <span>|</span>
         </div>
         <div class="col-md-1 col-xs-1">
-            <DeletePopUp data={this.state} onUpdate={this.onUpdateMerchantAccount}/>
+            <DeletePopUp data={this.props.data} onUpdate={this.onUpdateMerchantAccount}/>
         </div>
     </div>
     </div>
