@@ -2,7 +2,7 @@ package com.favendo.portal.security;
 
 
 import com.favendo.commons.utils.JsonMapper;
-import com.favendo.user.service.builder.AccessDeniedBuilder;
+import com.favendo.user.ws.rest.builder.AccessDeniedBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;

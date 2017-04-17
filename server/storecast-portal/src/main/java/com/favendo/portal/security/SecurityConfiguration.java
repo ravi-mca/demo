@@ -19,10 +19,10 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import static com.favendo.commons.utils.Routes.*;
 import static com.favendo.commons.utils.StringConstants.FORWARD_SLASH;
+import static com.favendo.user.service.constant.RoleConstant.HAS_ADMIN_ROLE;
 import static com.favendo.user.service.constant.RoleConstant.HAS_MERCHANT_ROLE;
 import static com.favendo.user.service.constant.UserConstant.PASSWORD;
 import static com.favendo.user.service.constant.UserConstant.USERNAME;
-import static com.favendo.user.service.constant.RoleConstant.HAS_ADMIN_ROLE;
 
 @Configuration
 @EnableWebSecurity

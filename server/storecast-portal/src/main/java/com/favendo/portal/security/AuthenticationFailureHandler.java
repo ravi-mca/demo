@@ -1,7 +1,7 @@
 package com.favendo.portal.security;
 
 import com.favendo.commons.utils.JsonMapper;
-import com.favendo.user.service.builder.AuthenticationBuilder;
+import com.favendo.user.ws.rest.builder.AuthenticationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.AuthenticationException;

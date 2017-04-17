@@ -1,7 +1,7 @@
 package com.favendo.portal.security;
 
 import com.favendo.commons.utils.JsonMapper;
-import com.favendo.user.service.dto.AuthenticationFailureDto;
+import com.favendo.user.ws.rest.dto.AuthenticationFailureDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
