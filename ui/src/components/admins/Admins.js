@@ -45,7 +45,7 @@ export default class Admins extends React.Component {
         <div class="dashboard-container" id="main">
           <div class="col-md-12 mt-10 mb-20 no-padding">
             <div class="col-md-6 col-xs-6 auto-div no-padding">
-              <div class="acc-heading">Admin Name</div>
+              <div class="acc-heading">{this.state.adminIfo.firstName}</div>
               <div>
                  <span class="acc-labels">Username: </span>
                  <span class="acc-info">{this.state.adminIfo.username}</span>
