@@ -38,4 +38,6 @@ public class Routes {
 	
 	public static final String LIST = "/list";
 
+	public static final String CREDENTIALS = "/credentials";
+
 }
