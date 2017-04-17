@@ -1,9 +1,9 @@
-package com.favendo.user.service.builder;
+package com.favendo.user.ws.rest.builder;
 
 import com.favendo.commons.domain.Role;
-import com.favendo.user.service.dto.AuthenticationFailureDto;
-import com.favendo.user.service.dto.AuthenticationSuccessDto;
-import com.favendo.user.service.dto.RoleDto;
+import com.favendo.user.ws.rest.dto.AuthenticationFailureDto;
+import com.favendo.user.ws.rest.dto.AuthenticationSuccessDto;
+import com.favendo.user.ws.rest.dto.RoleDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

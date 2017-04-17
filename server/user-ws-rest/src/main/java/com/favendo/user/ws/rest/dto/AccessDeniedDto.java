@@ -1,4 +1,4 @@
-package com.favendo.user.service.dto;
+package com.favendo.user.ws.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AuthenticationFailureDto {
+public class AccessDeniedDto {
 
 	@JsonProperty("errorMesesag")
 	private String errorMesesag;

@@ -2,10 +2,10 @@ package com.favendo.portal.security;
 
 import com.favendo.commons.domain.User;
 import com.favendo.commons.utils.JsonMapper;
-import com.favendo.user.service.builder.AuthenticationBuilder;
-import com.favendo.user.service.dto.AuthenticationSuccessDto;
 import com.favendo.user.service.jwt.TokenGenerator;
 import com.favendo.user.service.utils.UserContextHolder;
+import com.favendo.user.ws.rest.builder.AuthenticationBuilder;
+import com.favendo.user.ws.rest.dto.AuthenticationSuccessDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;

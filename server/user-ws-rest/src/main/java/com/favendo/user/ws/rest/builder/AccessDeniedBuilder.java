@@ -1,6 +1,6 @@
-package com.favendo.user.service.builder;
+package com.favendo.user.ws.rest.builder;
 
-import com.favendo.user.service.dto.AccessDeniedDto;
+import com.favendo.user.ws.rest.dto.AccessDeniedDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

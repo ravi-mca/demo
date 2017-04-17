@@ -18,6 +18,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.favendo.user.ws.rest.dto.AuthenticationFailureDto;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,7 +29,6 @@ import org.springframework.web.filter.GenericFilterBean;
 
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.utils.JsonMapper;
-import com.favendo.user.service.dto.AuthenticationFailureDto;
 import com.favendo.user.service.jwt.TokenUtils;
 import com.favendo.user.service.utils.UserContextHolder;
 
