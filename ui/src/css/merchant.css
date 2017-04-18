@@ -38,7 +38,6 @@
 }
 
 .form-label {
-
   color: #4e4e4e !important;
   font-size: 15px !important;
   font-family: 'Source Sans Pro' !important;
@@ -51,6 +50,7 @@
   font-size: 15px !important;
   color: white !important;
   background-color: #646f84 !important;
+  border-radius: 5px;
 }
 
 .btn-blue {
@@ -149,10 +149,8 @@ select.active:invalid {
 }
 
 .marchant-btn {
-  padding: 15px 0px 0px 0px;
+  padding: 15px 10px 0px 10px;
 }
-
-
 
 .left-icon {
     margin-top: -15px !important;

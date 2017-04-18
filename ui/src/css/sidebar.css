@@ -30,12 +30,10 @@
 }
 
 .activeList {
-  border-left: 10px solid #c91c49 !important;
   background-color: #eBecef !important;
   color: #c91c49 !important;
   font-family: 'Source Sans Pro bold' !important;
 }
-
 
 .nav-side-menu .menu-list {
   margin-top: 15px;
