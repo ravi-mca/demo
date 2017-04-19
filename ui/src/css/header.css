@@ -72,13 +72,12 @@
 
     /* Fixed position */
     .fixed-top {
-      position: fixed !important;
-      top: 0 !important;
-      width: 100% !important; 
+        top: 0 !important;
+        width: 100% !important;
+        margin-bottom: 0px !important;
     }
 
     .fixed {
-      position: fixed !important;
       width: 100% !important; 
     }
 
@@ -140,17 +139,6 @@
 			padding-left: 0px !important;  
 		}
 
-		/* Fixed position */
-		.fixed-top {
-			position: fixed !important;
-			top: 0 !important;
-			width: 100% !important; 
-		}
-
-		.fixed {
-			position: fixed !important;
-			width: 100% !important; 
-		}
 
 		@media screen and (max-width: 784px) {
       .sidenav {

@@ -116,11 +116,6 @@ select.active:invalid {
     box-shadow: 0 0 5px 1px red;
 }
 
-.storeMargin {
-  margin-left: -15px !important;
-  font-family: 'Source Sans Pro Bold';
-}
-
 .selectedFont {
   font-weight: bold !important;
 }

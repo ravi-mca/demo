@@ -23,8 +23,8 @@ import Login from "./components/login/Login";
 import Admins from "./components/admins/Admins";
 import Dashboard from "./components/dashboard/Dashboard";
 import Merchants from "./components/merchants/Merchants";
-import Dataportal from "./components/Data-Portal/Dataportal";
-import Account from "./components/Account/Account";
+import Dataportal from "./components/data-Portal/Dataportal";
+import Account from "./components/account/Account";
 
 
 const app = document.getElementById('app');
