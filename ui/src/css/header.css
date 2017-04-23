@@ -7,28 +7,34 @@
       text-align: right !important;
     }
 
-    .container {
-      margin-left: -16px !important;
-
-    }
-
     .container-fluid {
       background-color: #fff !important;
     }
 
     /* selected link */
-		.navbar .active {
+    .navbar .active {
      background-color: #292e35 !important;
      color: #ffffff !important;
-     padding: 13px !important;
     }
 
-    .navbar-nav a a:active  {
-      background-color: #292e35 !important;
+    .navbar-toggle {
+      margin-top: 0px !important;
+      padding: 3px 10px !important;
+      color: white !important;
     }
-    .navbar-nav li a:active  {
-      background-color: #292e35 !important;
+
+    .navbar-collapse.in {
+      overflow-y: initial;
     }
+
+    .navbar-collapse {
+      overflow-y: initial;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
     /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
@@ -54,8 +60,7 @@
     }
     .navbar-header {
       background-color: #272b33 !important;
-      //height: 50px !important;
-      width: 275px;
+      height: 50px !important;
       margin-top: 0px;
       padding-top: 5px;
     }
@@ -69,67 +74,8 @@
       font-size: 18px !important;
     }
 
-    .navbar-toggle {
-      margin-top: 0px !important;
-      padding: 3px 10px !important;
-      color: white !important;
-    }
-
-    .navbar-collapse {
-      padding-right: 0px !important;
-      padding-left: 0px !important;
-    }
-
-    .collapse {
-      overflow-y: initial !important;
-    }
-
-    .collapse span{
-      content: "\f0c9" !important;
-      font-family: FontAwesome !important;
-      font-style: normal;
-      font-weight: normal;
-      text-decoration: inherit;
-  /*--adjust as necessary--*/
-      color: #000;
-      font-size: 18px;
-      padding-right: 0.5em;
-      position: absolute;
-      top: 10px;
-      left: 0;  
-    }
-
-    /*.collapse span:before, .collapse span:before, .collapse span:before {
-      content: "\f000";
-      font-family: FontAwesome;
-      font-style: normal;
-      font-weight: normal;
-      text-decoration: inherit;
-      color: #000;
-      font-size: 18px;
-      padding-right: 0.5em;
-      position: absolute;
-      top: 10px;
-      left: 0;
-    }
-
-    .navbar-toggle .collapsed span:before, .navbar-toggle .collapsed span:before, .navbar-toggle .collapsed span:before {
-      content: "\F0C9" !important;
-      color: white !important;
-      font-family: FontAwesome;
-      font-style: normal;
-      font-weight: normal;
-      text-decoration: inherit;
-      font-size: 18px;
-      padding-right: 0.5em;
-      position: absolute;
-      top: 10px;
-      left: 0;
-    }*/
-
     li {
       color: rgba(0, 0, 0, .0001) !important;
-      text-align: center !important;
     }
 
     .headerLogo {
@@ -143,118 +89,193 @@
 
     /* Fixed position */
     .fixed-top {
-      position: fixed !important;
-      top: 0 !important;
-      width: 100% !important; 
+        top: 0 !important;
+        width: 100% !important;
+        margin-bottom: 0px !important;
     }
 
     .fixed {
-      position: fixed !important;
       width: 100% !important; 
     }
 
-		.navbar a {
-      text-decoration: none !important; 
-      color: white !important;
-		} 
-
-		@media screen and (max-width: 767px) {
-			.sidenav {
-				height: auto;
-				padding: 15px;
-			}
-			.row.content {height: auto;} 
-		}
-
-		 @media screen and (max-width: 773px) {
-			
-			.pull-right {
-				float: left !important;
-			}
-		}
-		
-		.navbar {
-			background-color: #40444e !important;
-			border-radius: 0px !important;
-			text-align: text-center !important;
-		}
-		.navbar-inverse {
-			background-color: #40444e !important;
-			border-color: none !important;
-			border-color: #40444e !important;      
-		}
-
-		.navbar-inverse .navbar-nav > .active > a,
-		.navbar-inverse .navbar-nav > .active > a:hover,
-		.navbar-inverse .navbar-nav > .active > a:focus {
-			color: #fff !important;
-		}
-
-    .pull-nav {
-        float: right;
-        padding: 0px;
-        margin-right: 45px;
-        margin-top: 10px;
+    .navbar a {
+      color: white !important; 
     }
 
-		.nav > li > a {
-			position: relative;
-			display: block;
-			padding: 15px 27px !important;
-		}
-
-		.container-fluid {
-			padding-right: 15px !important;
-			padding-left: 0px !important;  
-		}
-
-		/* Fixed position */
-		.fixed-top {
-			position: fixed !important;
-			top: 0 !important;
-			width: 100% !important; 
-		}
-
-		.fixed {
-			position: fixed !important;
-			width: 100% !important; 
-		}
-
-		@media screen and (max-width: 784px) {
+    @media screen and (max-width: 767px) {
       .sidenav {
         height: auto;
         padding: 15px;
       }
-			.navbar-nav {
-				margin: 3px !important; 
-			}
+      .row.content {height: auto;} 
+    }
+
+    .navbar {
+      background-color: #40444e !important;
+      border-radius: 0px !important;
+      text-align: text-center !important;
+    }
+    .navbar-inverse {
+      background-color: #40444e !important;
+      border-color: none !important;
+      border-color: #40444e !important;      
+    }
+    .navbar-header {
+      background-color: #272b33 !important;
+    }
+
+    .navbar-inverse .navbar-nav > .active > a,
+    .navbar-inverse .navbar-nav > .active > a:hover,
+    .navbar-inverse .navbar-nav > .active > a:focus {
+      color: #fff !important;
+      background-color: #292e35 !important;
+    }
+
+    .pull-nav {
+        float: right;
+    }
+
+    .nav > li > a {
+      position: relative;
+      display: block;
+      padding: 15px 27px !important;
+    }
+
+    .container-fluid {
+      padding-right: 15px !important;
+      padding-left: 0px !important;  
+    }
+
+
+    @media screen and (max-width: 784px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .navbar-nav {
+        margin: 3px !important; 
+      }
       .row.content {height: auto;}
 
-			.footer-align {
+      .footer-align {
         float: left !important;
       }
 
-			.pull-nav {
-				float: left;
-				margin-left: 30px;
-    }
-
-		.container-fluid {
-
-			margin-top: 140px !important;
-		}
-
-    .navbar-header {
-      width: 100% !important;
-    }
-		}
-
-		@media (min-width: 768px) and (max-width: 991px) {
-
-			.footer-align {
-				float: right !important;
-			}
-      .navbar-header {
-       width: 100% !important;
+      .pull-nav {
+        float: none;
       }
-		}
+
+      .container-fluid {
+
+        margin-top: 140px !important;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+
+      .footer-align {
+        float: right !important;
+      }
+    }
+
+    .navbar-toggle .button-label {
+    display: inline-block;
+    float: left;
+    font-weight: bold;
+    line-height: 14px;
+    padding-right: 10px;
+}
+.button-bars {
+    display: inline-block;
+    float: left;
+}
+
+/* #### Mobile Phones Portrait #### */
+@media screen and (max-device-width: 480px) and (orientation: portrait){
+  /* some CSS here */
+  .navbar-header {
+    width: 100% !important;
+  }
+  .pull-right {
+    float: none;
+  }
+}
+
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-device-width: 640px) and (orientation: landscape){
+  /* some CSS here */
+   .navbar-header {
+    width: 100% !important;
+  }
+  .pull-right {
+    float: none;
+  }
+}
+
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-device-width: 640px){
+  /* some CSS here */
+   .navbar-header {
+    width: 100% !important;
+  }
+  .pull-nav {
+    float: none;
+  }
+}
+
+/* #### iPhone 4+ Portrait or Landscape #### */
+@media screen and (min-device-width: 320px) and (-webkit-min-device-pixel-ratio: 2){
+  /* some CSS here */
+   .navbar-header {    
+      width: 100%;
+  }
+  .pull-nav {
+    float: none;
+  }
+}
+
+/* #### iPhone 5 Portrait or Landscape #### */
+@media (device-height: 568px) and (device-width: 320px) and (-webkit-min-device-pixel-ratio: 2){
+  /* some CSS here */
+   .navbar-header {    
+      width: 288px;
+  }
+  .pull-nav {
+    float: none;
+  }
+}
+
+/* #### iPhone 6 and 6 plus Portrait or Landscape #### */
+@media (min-device-height: 667px) and (min-device-width: 375px) and (-webkit-min-device-pixel-ratio: 3){
+  /* some CSS here */
+   .navbar-header {    
+      width: 288px;
+  } 
+
+  .pull-nav {
+    float: none;
+  }
+}
+
+/* #### Tablets Portrait or Landscape #### */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px){
+  /* some CSS here */
+   .navbar-header {    
+      width: 288px;
+  }
+
+  .pull-nav {
+    float: right;
+  }
+}
+
+/* #### Desktops #### */
+@media screen and (min-width: 1024px){
+  /* some CSS here */
+   .navbar-header {    
+      width: 288px;
+  }
+  .pull-nav {
+    float: right;
+  }
+}

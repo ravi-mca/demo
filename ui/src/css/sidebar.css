@@ -4,7 +4,7 @@
     max-height: calc(100% - 120px);
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0px 30px !important;
+    padding: 20px 30px !important;
     margin-top: -20px !important;
     height: 550px;
 }
