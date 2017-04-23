@@ -7,6 +7,11 @@
       text-align: right !important;
     }
 
+    .container {
+      margin-left: -16px !important;
+
+    }
+
     .container-fluid {
       background-color: #fff !important;
     }
@@ -15,8 +20,15 @@
 		.navbar .active {
      background-color: #292e35 !important;
      color: #ffffff !important;
+     padding: 13px !important;
     }
 
+    .navbar-nav a a:active  {
+      background-color: #292e35 !important;
+    }
+    .navbar-nav li a:active  {
+      background-color: #292e35 !important;
+    }
     /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
@@ -42,8 +54,8 @@
     }
     .navbar-header {
       background-color: #272b33 !important;
-      height: 50px !important;
-      width: 288px;
+      //height: 50px !important;
+      width: 275px;
       margin-top: 0px;
       padding-top: 5px;
     }
@@ -57,8 +69,67 @@
       font-size: 18px !important;
     }
 
+    .navbar-toggle {
+      margin-top: 0px !important;
+      padding: 3px 10px !important;
+      color: white !important;
+    }
+
+    .navbar-collapse {
+      padding-right: 0px !important;
+      padding-left: 0px !important;
+    }
+
+    .collapse {
+      overflow-y: initial !important;
+    }
+
+    .collapse span{
+      content: "\f0c9" !important;
+      font-family: FontAwesome !important;
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+  /*--adjust as necessary--*/
+      color: #000;
+      font-size: 18px;
+      padding-right: 0.5em;
+      position: absolute;
+      top: 10px;
+      left: 0;  
+    }
+
+    /*.collapse span:before, .collapse span:before, .collapse span:before {
+      content: "\f000";
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+      color: #000;
+      font-size: 18px;
+      padding-right: 0.5em;
+      position: absolute;
+      top: 10px;
+      left: 0;
+    }
+
+    .navbar-toggle .collapsed span:before, .navbar-toggle .collapsed span:before, .navbar-toggle .collapsed span:before {
+      content: "\F0C9" !important;
+      color: white !important;
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+      font-size: 18px;
+      padding-right: 0.5em;
+      position: absolute;
+      top: 10px;
+      left: 0;
+    }*/
+
     li {
       color: rgba(0, 0, 0, .0001) !important;
+      text-align: center !important;
     }
 
     .headerLogo {
@@ -83,8 +154,9 @@
     }
 
 		.navbar a {
-			color: white !important; 
-		}
+      text-decoration: none !important; 
+      color: white !important;
+		} 
 
 		@media screen and (max-width: 767px) {
 			.sidenav {
@@ -111,15 +183,11 @@
 			border-color: none !important;
 			border-color: #40444e !important;      
 		}
-		.navbar-header {
-			background-color: #272b33 !important;
-		}
 
 		.navbar-inverse .navbar-nav > .active > a,
 		.navbar-inverse .navbar-nav > .active > a:hover,
 		.navbar-inverse .navbar-nav > .active > a:focus {
 			color: #fff !important;
-			background-color: #292e35 !important;
 		}
 
     .pull-nav {
@@ -171,10 +239,14 @@
 				margin-left: 30px;
     }
 
-			.container-fluid {
+		.container-fluid {
 
-				margin-top: 140px !important;
-			}
+			margin-top: 140px !important;
+		}
+
+    .navbar-header {
+      width: 100% !important;
+    }
 		}
 
 		@media (min-width: 768px) and (max-width: 991px) {
@@ -182,4 +254,7 @@
 			.footer-align {
 				float: right !important;
 			}
+      .navbar-header {
+       width: 100% !important;
+      }
 		}

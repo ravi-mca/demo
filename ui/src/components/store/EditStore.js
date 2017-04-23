@@ -288,7 +288,7 @@ export default class EditStore extends React.Component {
   render() {
     return (
           <div id="editStorepanel">
-           <div class="col-md-2 col-xs-2">
+           <div class="col-md-2 col-xs-2 ml-16">
             <div class="col-md-1 col-xs-1 storeMargin">
             <i class="fa fa-pencil ml-10 pointer" onClick={this.showEditForm}></i>    
             </div>   
