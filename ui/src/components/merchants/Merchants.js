@@ -39,7 +39,6 @@ export default class Merchants extends React.Component {
         this.toggle = this.toggle.bind(this);
     }
     toggle () {
-        console.log('toggle');
         if ($('.sidebar-offcanvas').css('background-color') == 'rgb(255, 255, 255)') {
             $('.list-group-item').attr('tabindex', '-1');
         } else {
@@ -67,7 +66,10 @@ export default class Merchants extends React.Component {
             showStoreId : selectedStoreVal
         });
         // storeInfo child method call
-        this.refs.storeInfoChild.getStoreInfo(selectedStoreVal);
+
+        if (this.refs.storeInfoChild) {           
+            this.refs.storeInfoChild.getStoreInfo(selectedStoreVal);
+        }
         this.getStoreInfo(selectedStoreVal);
         this.showStoreInfo();
         this.setActiveTabs();
