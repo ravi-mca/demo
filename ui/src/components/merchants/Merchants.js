@@ -8,6 +8,7 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 import Col from 'react-bootstrap/lib/Col';
 import Nav from 'react-bootstrap/lib/Nav';
 import $ from 'jquery';
+
 import CreateMerchants from "./CreateMerchants";
 import EditMerchants from "./EditMerchants";
 import Sidebar from '../sidebar/Sidebar';
@@ -17,6 +18,7 @@ import Service from "../Service";
 import Config from "../../index.config";
 import EditStore from "../store/EditStore";
 import DeletePopUp from "../DeletePopUp";
+
 export default class Merchants extends React.Component {
     constructor(props) {
         super(props);
@@ -38,15 +40,15 @@ export default class Merchants extends React.Component {
         this.handleSelect = this.handleSelect.bind(this);
         this.toggle = this.toggle.bind(this);
     }
-    toggle () {
-        if ($('.sidebar-offcanvas').css('background-color') == 'rgb(255, 255, 255)') {
-            $('.list-group-item').attr('tabindex', '-1');
-        } else {
-            $('.list-group-item').attr('tabindex', '');
-        }
-    $('.row-offcanvas').toggleClass('active');
-}
+
     handleSelect(key) { }
+
+    toggle () {
+        console.log('toggle');
+        $('.side-icon').toggleClass('fa-angle-right fa-angle-left');
+        $('.row-offcanvas').toggleClass('active');
+    }
+
     setSelectList(userInfo) {
         /*Set delete merchant data*/
         userInfo.deleteName = userInfo.firstName;
@@ -67,7 +69,7 @@ export default class Merchants extends React.Component {
         });
         // storeInfo child method call
 
-        if (this.refs.storeInfoChild) {           
+        if (this.refs.storeInfoChild) {
             this.refs.storeInfoChild.getStoreInfo(selectedStoreVal);
         }
         this.getStoreInfo(selectedStoreVal);
@@ -224,14 +226,15 @@ export default class Merchants extends React.Component {
                 </Tab.Container>
             )
         }
-        if(this.state.storeInfo) {
-            showStoreInfo = (
-                <div class="row">
-                    <div class="btn-padding">
-                        <Col sm={3} class="col-padding">
-                            <select className="form-control selectedFont" onClick={this.getStore} id="selectStore">               
-                                {
-                                    stores.map(function (store) {
+
+ 		if(this.state.storeInfo) {
+	 		showStoreInfo = (
+	 			<div class="row">
+	 				<div class="btn-padding">
+	 					<Col sm={3} class="col-padding">
+	 						<select className="form-control selectedFont" onClick={this.getStore} id="selectStore">	 			
+								{
+									stores.map(function (store) {
                                         i++;
                                         return <option value={store.id } data={store} key={i}>{store.name}</option>;
                                     })
@@ -255,14 +258,32 @@ export default class Merchants extends React.Component {
         }
 
 	return (
-		<div>
+   <div class="merchant-dashboard">
+      <div class="row row-offcanvas row-offcanvas-left">
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="list-group">
+            <Sidebar ref= "child" onSelectList={this.setSelectList} />
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-9 content">
+            <button type="button" class="btn btn-default btn-xs" data-toggle="offcanvas" onClick={this.toggle}><i class="fa fa-angle-right side-icon"></i></button>
+        </div>
+        <div>
+            {showAccountInfo}
+            {showStoreInfo}
+            {showStoreTabs}
+        </div>
+    </div>
+</div>
+		/*<div>
 			<Sidebar ref= "child" onSelectList={this.setSelectList} />
 			<div class="dashboard-container" id="main">
 			   	{showAccountInfo}
-			   	{showStoreInfo}	
+			   	{showStoreInfo}
 	            {showStoreTabs}
 	        </div>
-		</div>
+		</div>*/
 	);
   }
 }

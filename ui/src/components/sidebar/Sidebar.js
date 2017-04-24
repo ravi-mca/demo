@@ -52,7 +52,6 @@ export default class Sidebar extends React.Component {
            } else {
             $('#menu-content li').first().addClass('activeList');
             $('#menu-content li' ).first().trigger('click');
-      
            }
 
         }.bind(this), function(xhr, status, err) {
