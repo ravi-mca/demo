@@ -1,81 +1,90 @@
 package com.favendo.portal.filter;
 
+import com.favendo.commons.utils.JsonMapper;
+import com.favendo.user.service.jwt.TokenUtils;
+import com.favendo.user.service.utils.UserContextHolder;
+import com.favendo.user.ws.rest.dto.AuthenticationFailureDto;
+import org.apache.commons.lang3.BooleanUtils;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
+import java.io.IOException;
+import java.util.Objects;
+
 import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
-import static com.favendo.commons.exception.ErrorKey.UNAUTHORIZED;
 import static com.favendo.user.service.constant.MessageConstant.INVALID_USER_TOKEN_ERROR_MESSAGE;
 import static com.favendo.user.service.constant.MessageConstant.USER_TOKEN_NOT_FOUND_ERROR_MESSAGE;
 import static com.favendo.user.service.jwt.TokenConstant.AUTHORIZATION;
 import static com.favendo.user.service.jwt.TokenConstant.BEARER;
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-import java.io.IOException;
-import java.util.Objects;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.favendo.user.ws.rest.dto.AuthenticationFailureDto;
-import org.apache.commons.lang3.BooleanUtils;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.web.filter.GenericFilterBean;
-
-import com.favendo.commons.exception.BusinessException;
-import com.favendo.commons.utils.JsonMapper;
-import com.favendo.user.service.jwt.TokenUtils;
-import com.favendo.user.service.utils.UserContextHolder;
-
-public class AuthenticationFilter extends GenericFilterBean {
-
+public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     private final UserDetailsService userService;
 
-    public AuthenticationFilter(UserDetailsService userService) {
+    public AuthenticationFilter(UserDetailsService userService, RequestMatcher matcher) {
+        super(matcher);
         this.userService = userService;
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, BusinessException,
-            ServletException {
-        HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
-        httpServletResponse.setContentType(APPLICATION_JSON);
-        processTokenAuthentication(httpServletRequest, httpServletResponse, getAuthToken(httpServletRequest.getHeader(AUTHORIZATION)));
-        chain.doFilter(servletRequest, servletResponse);
-    }
-
-    private void processTokenAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String authToken) throws IOException {
+    public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
+        String authToken = getAuthToken(httpServletRequest.getHeader(AUTHORIZATION));
         if (Objects.isNull(authToken)) {
-            buildAuthenticationFailure(httpServletResponse, USER_TOKEN_NOT_FOUND_ERROR_MESSAGE, BAD_REQUEST.getHttpStatus());
+            httpServletResponse.setStatus(BAD_REQUEST.getHttpStatus());
+            throw new AuthenticationCredentialsNotFoundException(USER_TOKEN_NOT_FOUND_ERROR_MESSAGE);
         } else {
             try {
                 TokenUtils tokenUtils = new TokenUtils();
-                UserDetails userDetails = userService.loadUserByUsername(tokenUtils.getUsernameByToken(authToken));
-                UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                UsernamePasswordAuthenticationToken authentication = getAuthenticationByAuthToken(authToken, httpServletRequest);
                 if (BooleanUtils.isFalse(tokenUtils.validateToken(authToken, UserContextHolder.getLoggedInUser()))) {
-                    buildAuthenticationFailure(httpServletResponse, INVALID_USER_TOKEN_ERROR_MESSAGE, UNAUTHORIZED.getHttpStatus());
+                    throw new AuthenticationCredentialsNotFoundException(INVALID_USER_TOKEN_ERROR_MESSAGE);
                 }
+                return authentication;
             } catch (Exception exception) {
-                buildAuthenticationFailure(httpServletResponse, INVALID_USER_TOKEN_ERROR_MESSAGE, UNAUTHORIZED.getHttpStatus());
+                throw new AuthenticationCredentialsNotFoundException(INVALID_USER_TOKEN_ERROR_MESSAGE);
             }
         }
     }
 
-    private void buildAuthenticationFailure(HttpServletResponse httpServletResponse, String errorMessage, Integer statusCode) throws IOException {
+    @Override
+    public void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
+            throws IOException, ServletException {
+        SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
+        securityContext.setAuthentication(authResult);
+        SecurityContextHolder.setContext(securityContext);
+        chain.doFilter(request, response);
+    }
+
+    @Override
+    public void unsuccessfulAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                                           AuthenticationException authenticationException) throws IOException, ServletException {
         AuthenticationFailureDto authenticationFailureDto = new AuthenticationFailureDto();
-        httpServletResponse.setStatus(statusCode);
-        authenticationFailureDto.setErrorMesesag(errorMessage);
-        httpServletResponse.getWriter().write(JsonMapper.objectToJSON(errorMessage));
-        httpServletResponse.getWriter().close();
+        authenticationFailureDto.setErrorMesesag(authenticationException.getMessage());
+        httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        httpServletResponse.setContentType(MediaType.APPLICATION_JSON);
+        httpServletResponse.getWriter().append(JsonMapper.objectToJSON(authenticationFailureDto));
+    }
+
+    private UsernamePasswordAuthenticationToken getAuthenticationByAuthToken(String authToken, HttpServletRequest httpServletRequest) throws Exception {
+        TokenUtils tokenUtils = new TokenUtils();
+        UserDetails userDetails = userService.loadUserByUsername(tokenUtils.getUsernameByToken(authToken));
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return authentication;
     }
 
     private String getAuthToken(String authenticationHeader) {
