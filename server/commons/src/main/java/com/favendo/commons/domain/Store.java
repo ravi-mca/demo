@@ -11,7 +11,7 @@ public class Store {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "sc_store_id")
     private Long id;
 
     @Column(name = "storeId")
@@ -82,7 +82,11 @@ public class Store {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "merchant_id", nullable = false)
-    private User merchant;
+    private Merchant merchant;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
     public Long getId() {
         return id;
@@ -268,11 +272,19 @@ public class Store {
         this.storecastAdminName = storecastAdminName;
     }
 
-    public User getMerchant() {
+    public Merchant getMerchant() {
         return merchant;
     }
 
-    public void setMerchant(User merchant) {
+    public void setMerchant(Merchant merchant) {
         this.merchant = merchant;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

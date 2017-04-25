@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Role implements Serializable {
 
     @Id
-    @Column(name = "role_id")
+    @Column(name = "sc_role_id")
     private Long roleId;
 
     @NotBlank

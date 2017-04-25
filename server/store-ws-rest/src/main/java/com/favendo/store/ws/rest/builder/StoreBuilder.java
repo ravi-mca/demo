@@ -12,7 +12,7 @@ public class StoreBuilder {
 
     public Store buildStore(StoreDto storeDto, User user) {
         Store store = new Store();
-        store.setMerchant(user);
+        //store.setMerchant(user);
         store.setStoreId(UniqueIdGenerator.generateUUID());
         buildBasicInformation(storeDto, store);
         buildContactInformation(storeDto, store);
