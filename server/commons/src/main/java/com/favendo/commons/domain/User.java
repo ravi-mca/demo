@@ -40,16 +40,16 @@ public class User implements Serializable {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
-    private Customer customerId;
+    private Customer customer;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "merchant_id")
-    private Merchant merchantId;
+    private Merchant merchant;
     
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "sc_user_role",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "sc_user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "sc_role_id")})
     List<Role> roles = new ArrayList<>();
 
     public Long getUser_id() {
@@ -125,18 +125,18 @@ public class User implements Serializable {
     }
 
     public Customer getCustomerId() {
-        return customerId;
+        return customer;
     }
 
     public void setCustomerId(Customer customerId) {
-        this.customerId = customerId;
+        this.customer = customerId;
     }
 
     public Merchant getMerchantId() {
-        return merchantId;
+        return merchant;
     }
 
     public void setMerchantId(Merchant merchantId) {
-        this.merchantId = merchantId;
+        this.merchant = merchantId;
     }
 }

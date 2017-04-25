@@ -34,7 +34,7 @@ public class Merchant implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "merchant", cascade = CascadeType.ALL)
     private List<Store> stores;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "merchantId", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "merchant", cascade = CascadeType.ALL)
     private List<User> merchantUsers;
 
 
