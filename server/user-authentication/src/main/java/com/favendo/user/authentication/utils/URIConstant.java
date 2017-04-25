@@ -1,4 +1,4 @@
-package com.favendo.portal.utils;
+package com.favendo.user.authentication.utils;
 
 public class URIConstant {
 

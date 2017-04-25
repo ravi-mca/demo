@@ -1,4 +1,4 @@
-package com.favendo.portal.utils;
+package com.favendo.user.authentication.utils;
 
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;

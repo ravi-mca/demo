@@ -1,4 +1,4 @@
-package com.favendo.portal.security;
+package com.favendo.user.authentication.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;

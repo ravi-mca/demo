@@ -1,4 +1,4 @@
-package com.favendo.portal.filter;
+package com.favendo.user.authentication.filter;
 
 import org.springframework.util.StringUtils;
 

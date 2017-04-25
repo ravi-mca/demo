@@ -1,7 +1,7 @@
-package com.favendo.portal.security;
+package com.favendo.user.authentication.security;
 
-import com.favendo.portal.filter.AuthenticationFilter;
-import com.favendo.portal.utils.PathRequestMatcher;
+import com.favendo.user.authentication.filter.AuthenticationFilter;
+import com.favendo.user.authentication.utils.PathRequestMatcher;
 import com.favendo.user.service.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.favendo.commons.utils.Routes.*;
-import static com.favendo.portal.utils.URIConstant.FORM_BASED_LOGIN_ENTRY_POINT;
-import static com.favendo.portal.utils.URIConstant.TOKEN_BASED_AUTH_ENTRY_POINT;
+import static com.favendo.user.authentication.utils.URIConstant.FORM_BASED_LOGIN_ENTRY_POINT;
+import static com.favendo.user.authentication.utils.URIConstant.TOKEN_BASED_AUTH_ENTRY_POINT;
 import static com.favendo.user.service.constant.RoleConstant.HAS_ADMIN_ROLE;
 import static com.favendo.user.service.constant.RoleConstant.HAS_MERCHANT_ROLE;
 import static com.favendo.user.service.constant.UserConstant.PASSWORD;

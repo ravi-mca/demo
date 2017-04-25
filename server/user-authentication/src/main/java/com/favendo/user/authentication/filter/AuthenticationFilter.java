@@ -1,4 +1,4 @@
-package com.favendo.portal.filter;
+package com.favendo.user.authentication.filter;
 
 import com.favendo.commons.utils.JsonMapper;
 import com.favendo.user.service.jwt.TokenUtils;
