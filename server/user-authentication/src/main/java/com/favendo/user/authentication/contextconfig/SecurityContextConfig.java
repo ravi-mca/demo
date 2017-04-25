@@ -1,6 +1,6 @@
-package com.favendo.portal.contextconfig;
+package com.favendo.user.authentication.contextconfig;
 
-import com.favendo.portal.security.SecurityConfiguration;
+import com.favendo.user.authentication.security.SecurityConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
