@@ -10,6 +10,8 @@ export default class StoreInfo extends React.Component {
         this.state = {
             storeList: ''
         };
+
+        this.getStoreInfo = this.getStoreInfo.bind(this);
     }
 
      getStoreInfo(id) {
@@ -22,7 +24,9 @@ export default class StoreInfo extends React.Component {
 
         var reqData = Service.buildRequestdata(requestData);
         Service.executeRequest(reqData, function(response) {
-            this.setState({storeList:response});
+            if(this._mounted) {
+                this.setState({storeList:response});
+            }
         }.bind(this), function(xhr, status, err) {
         }.bind(this));
     }
