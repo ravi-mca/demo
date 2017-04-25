@@ -1,4 +1,4 @@
-package com.favendo.portal.filter;
+package com.favendo.user.authentication.filter;
 
 import org.springframework.util.StringUtils;
 
@@ -31,7 +31,6 @@ public class CORSFilter implements Filter {
         httpResponse.setHeader("Access-Control-Max-Age", config.getInitParameter("Access-Control-Max-Age"));
         if (config.getInitParameter("Access-Control-Allow-Headers").equals("*")) {
             String reqHead = httpRequest.getHeader("Access-Control-Request-Headers");
-
             if (!StringUtils.isEmpty(reqHead)) {
                 httpResponse.addHeader("Access-Control-Allow-Headers", reqHead);
             }

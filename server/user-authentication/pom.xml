@@ -15,7 +15,21 @@
     <name>Application Configuration</name>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.storecast.server</groupId>
+            <artifactId>commons</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.storecast.server</groupId>
+            <artifactId>user-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.storecast.server</groupId>
+            <artifactId>user-ws-rest</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 

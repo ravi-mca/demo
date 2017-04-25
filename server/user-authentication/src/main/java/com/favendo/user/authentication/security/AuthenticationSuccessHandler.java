@@ -1,4 +1,4 @@
-package com.favendo.portal.security;
+package com.favendo.user.authentication.security;
 
 import com.favendo.commons.domain.User;
 import com.favendo.commons.utils.JsonMapper;
