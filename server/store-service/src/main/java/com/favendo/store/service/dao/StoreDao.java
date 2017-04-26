@@ -26,6 +26,6 @@ public interface StoreDao extends JpaRepository<Store, Long> {
     Store findByNameOrNickNameAndId(@Param("name") String username, @Param("nickName")
             String accountName, @Param("id") Long id);
     
-    @Query("select store from Store as store join store.merchant as merchant where merchant.user_id = :merchantId ORDER BY store.name ASC")
+    @Query("select store from Store as store join store.merchant as merchant where merchant.merchantId = :merchantId ORDER BY store.name ASC")
     List<Store> findAllByMerchantId(@Param("merchantId") Long merchantId);
 }

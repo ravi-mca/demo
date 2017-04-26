@@ -8,6 +8,8 @@
         <class>com.favendo.commons.domain.User</class>
         <class>com.favendo.commons.domain.Role</class>
         <class>com.favendo.commons.domain.Store</class>
+        <class>com.favendo.commons.domain.Customer</class>
+        <class>com.favendo.commons.domain.Merchant</class>
         <exclude-unlisted-classes/>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>

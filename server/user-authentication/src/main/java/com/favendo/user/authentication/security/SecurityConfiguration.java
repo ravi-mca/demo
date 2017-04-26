@@ -1,12 +1,12 @@
-package com.favendo.portal.security;
+package com.favendo.user.authentication.security;
 
-import com.favendo.portal.filter.AuthenticationFilter;
+import com.favendo.user.authentication.filter.AuthenticationFilter;
+import com.favendo.user.authentication.utils.PathRequestMatcher;
 import com.favendo.user.service.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,14 +15,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static com.favendo.commons.utils.Routes.*;
-import static com.favendo.commons.utils.StringConstants.FORWARD_SLASH;
+import static com.favendo.user.authentication.utils.URIConstant.FORM_BASED_LOGIN_ENTRY_POINT;
+import static com.favendo.user.authentication.utils.URIConstant.TOKEN_BASED_AUTH_ENTRY_POINT;
 import static com.favendo.user.service.constant.RoleConstant.HAS_ADMIN_ROLE;
 import static com.favendo.user.service.constant.RoleConstant.HAS_MERCHANT_ROLE;
 import static com.favendo.user.service.constant.UserConstant.PASSWORD;
 import static com.favendo.user.service.constant.UserConstant.USERNAME;
+import static org.springframework.http.HttpMethod.OPTIONS;
 
 @Configuration
 @EnableWebSecurity
@@ -35,9 +40,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AuthenticationProvider authenticationProvider;
-
-    @Autowired
-    private AuthenticationEntryPointHandler authenticationEntryPointHandler;
 
     @Autowired
     private AuthenticationSuccessHandler authenticationSuccessHandler;
@@ -72,29 +74,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, ALL_REQUEST).permitAll()
+                .antMatchers(OPTIONS, ALL_REQUEST).permitAll()
                 .antMatchers(ADMIN_REQUEST).access(HAS_ADMIN_ROLE)
                 .antMatchers(MERCHANT_REQUEST).access(HAS_MERCHANT_ROLE)
-                .and()
-                .authorizeRequests().antMatchers(FORWARD_SLASH).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .authenticationProvider(authenticationProvider).userDetailsService(userDetailsService)
+                .authenticationProvider(authenticationProvider)
+                .userDetailsService(userDetailsService)
                 .exceptionHandling()
-                .authenticationEntryPoint(authenticationEntryPointHandler)
                 .accessDeniedHandler(accessDeniedHandler)
                 .and()
                 .formLogin()
-                .permitAll()
                 .loginProcessingUrl(LOGIN_REQUEST)
                 .usernameParameter(USERNAME)
                 .passwordParameter(PASSWORD)
                 .successHandler(authenticationSuccessHandler)
-                .failureHandler(authenticationFailureHandler)
+                .failureHandler(authenticationFailureHandler).permitAll()
                 .and()
-                .logout()
-                .permitAll();
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(new AuthenticationFilter(userDetailsService), BasicAuthenticationFilter.class);
+                .logout().permitAll()
+                .and()
+                .addFilterBefore(buildAuthTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    }
+
+    private AuthenticationFilter buildAuthTokenFilter() throws Exception {
+        List<String> pathsToSkip = Arrays.asList(FORM_BASED_LOGIN_ENTRY_POINT);
+        PathRequestMatcher pathRequestMatcher = new PathRequestMatcher(pathsToSkip, TOKEN_BASED_AUTH_ENTRY_POINT);
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter(this.userDetailsService,pathRequestMatcher);
+        authenticationFilter.setAuthenticationManager(authenticationManager());
+        return authenticationFilter;
     }
 }

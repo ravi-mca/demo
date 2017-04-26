@@ -14,7 +14,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @Column(name = "sc_user_id")
     private Long user_id;
 
     @Column(name = "username")
@@ -37,15 +37,20 @@ public class User implements Serializable {
 
     @Column(name = "phone")
     private String phone;
-
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "merchant_id")
+    private Merchant merchant;
+    
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "sc_user_role",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "sc_user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "sc_role_id")})
     List<Role> roles = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "merchant", cascade = CascadeType.ALL)
-    private List<Store> stores;
 
     public Long getUser_id() {
         return user_id;
@@ -119,11 +124,19 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public List<Store> getStores() {
-        return stores;
+    public Customer getCustomerId() {
+        return customer;
     }
 
-    public void setStores(List<Store> stores) {
-        this.stores = stores;
+    public void setCustomerId(Customer customerId) {
+        this.customer = customerId;
+    }
+
+    public Merchant getMerchantId() {
+        return merchant;
+    }
+
+    public void setMerchantId(Merchant merchantId) {
+        this.merchant = merchantId;
     }
 }
