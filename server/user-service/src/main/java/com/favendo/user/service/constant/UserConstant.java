@@ -37,4 +37,14 @@ public class UserConstant {
     public static final String DEFAULT_USER_NAME = "admin@storecast.io";
 
     public static final String DEFAULT_ACCOUNT_NO = "c36c9073-0fa4-451e-b685-dc67c7ba1710";
+    
+    public static final String CUSTOMER_STREET = "Customer Street";
+
+    public static final String CUSTOMER_CITY = "Customer City";
+
+    public static final String CUSTOMER_COUNTRY = "Customer Country";
+
+    public static final String CUSTOMER_STATE = "Customer State";
+
+    public static final String CUSTOMER_ZIP_CODE = "Customer ZipCode";
 }

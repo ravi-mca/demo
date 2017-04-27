@@ -74,6 +74,8 @@
         <module>store-ws-rest</module>
         <module>storecast-portal</module>
 		<module>storecast-database</module>
+		<module>customer-ws-rest</module>
+		<module>customer-service</module>
     </modules>
 
     <dependencies>
