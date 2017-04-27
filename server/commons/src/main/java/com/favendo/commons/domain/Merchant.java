@@ -3,16 +3,7 @@ package com.favendo.commons.domain;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "sc_merchant", uniqueConstraints = {
@@ -37,6 +28,9 @@ public class Merchant implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "merchant", cascade = CascadeType.ALL)
     private List<User> merchantUsers;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     public Long getMerchantId() {
         return merchantId;
@@ -76,5 +70,13 @@ public class Merchant implements Serializable {
 
     public void setMerchantUsers(List<User> merchantUsers) {
         this.merchantUsers = merchantUsers;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

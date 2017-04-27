@@ -49,6 +49,9 @@ public class Customer implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
     private List<User> customerUsers;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Merchant> merchants;
+
     public Long getCustomerId() {
         return customerId;
     }
@@ -119,5 +122,13 @@ public class Customer implements Serializable {
 
     public void setCustomerUsers(List<User> customerUsers) {
         this.customerUsers = customerUsers;
+    }
+
+    public List<Merchant> getMerchants() {
+        return merchants;
+    }
+
+    public void setMerchants(List<Merchant> merchants) {
+        this.merchants = merchants;
     }
 }

@@ -41,8 +41,6 @@ public class InitBean implements InitializingBean {
     private User setUser() {
         if (userDao.count() <= 0) {
             User user = new User();
-            user.setAccountNo(DEFAULT_ACCOUNT_NO);
-            user.setAccountName(DEFAULT_ACCOUNT_NAME);
             user.setFirstName(DEFAULT_FIRSTNAME);
             user.setLastName(DEFAULT_LASTAME);
             user.setPassword(DEFAULT_PASSWORD);

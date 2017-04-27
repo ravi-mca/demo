@@ -1,10 +1,12 @@
 package com.favendo.merchant.service.service.impl;
 
+import com.favendo.commons.domain.Merchant;
 import com.favendo.commons.domain.Role;
 import com.favendo.commons.domain.User;
 import com.favendo.commons.enums.RoleEnum;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.StorecastApiException;
+import com.favendo.merchant.service.dao.MerchantDao;
 import com.favendo.merchant.service.service.MerchantService;
 import com.favendo.user.service.service.RoleService;
 import com.favendo.user.service.service.UserService;
@@ -30,12 +32,20 @@ public class MerchantServiceImpl implements MerchantService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MerchantDao merchantDao;
+
     @Value("${merchant.not.found.by.account.no.error.message}")
     private String merchantNotFoundByAccountNoErrorMessage;
 
     @Override
-    public List<User> getAll() throws BusinessException {
-        List<User> merchants = userService.getAll();
+    public Merchant getById(Long merchantId)throws BusinessException{
+        return merchantDao.findById(merchantId);
+    }
+
+    @Override
+    public List<Merchant> getAll() throws BusinessException {
+        List<Merchant> merchants = merchantDao.findAll();
         if (CollectionUtils.isEmpty(merchants)) {
             throw new StorecastApiException(NOT_FOUND);
         }
@@ -43,8 +53,8 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
-    public User getByAccountNo(String accountNo) throws BusinessException {
-        User merchant = userService.getByAccountNo(accountNo);
+    public Merchant getByAccountNo(String accountNo) throws BusinessException {
+        Merchant merchant = merchantDao.findByAccountNo(accountNo);
         if (Objects.isNull(merchant)) {
             throw new StorecastApiException(NOT_FOUND, merchantNotFoundByAccountNoErrorMessage, ACCOUNT_NO);
         }
@@ -53,20 +63,30 @@ public class MerchantServiceImpl implements MerchantService {
 
     @Override
     @Transactional
-    public void save(User merchant) throws BusinessException {
-        userService.save(setRoles(merchant));
+    public void save(Merchant merchant,User user) throws BusinessException {
+        merchant = merchantDao.save(merchant);
+        setRoles(user);
+        user.setMerchant(merchant);
+        userService.save(user);
     }
 
     @Override
     @Transactional
-    public void update(User merchant) throws BusinessException {
-        userService.save(merchant);
+    public void update(Merchant merchant,User user) throws BusinessException {
+        merchantDao.save(merchant);
+        userService.save(user);
     }
 
-    private User setRoles(User merchant) {
+    @Override
+    @Transactional
+    public void deleteById(Long merchantId) {
+        merchantDao.delete(merchantId);
+    }
+
+    private User setRoles(User user) {
         List<Role> roles = new ArrayList<>();
         roles.add(roleService.getByName(RoleEnum.MERCHANT.getRole()));
-        merchant.setRoles(roles);
-        return merchant;
+        user.setRoles(roles);
+        return user;
     }
 }

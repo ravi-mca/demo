@@ -46,13 +46,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByUsernameOrAccountName(String username, String accountName,String firstName) {
-        return userDao.findByUsernameOrAccountName(username, accountName,firstName);
+    public User getByUsernameFirstNameOrAccountName(String username,String firstName,String accountName) {
+        return userDao.findByUsernameFirstNameOrAccountName(username,firstName,accountName);
     }
 
     @Override
-    public User getByUsernameOrAccountNameAndUserId(String username, String accountName, Long userId,String firstName) {
-        return userDao.findByUsernameOrAccountNameAndUserId(username, accountName, userId,firstName);
+    public User getByUsernameFirstNameOrAccountNameAndMerchantId(String username,String firstName,String accountName,
+                                                                 Long merchantId) {
+        return userDao.findByUsernameFirstNameOrAccountNameAndMerchantId(username,firstName,accountName,merchantId);
     }
 
     public List<User> getAll() throws BusinessException {

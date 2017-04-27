@@ -1,32 +1,29 @@
 package com.favendo.store.ws.rest.endpoint;
 
-import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
-import static com.favendo.commons.utils.Routes.*;
-import static com.favendo.user.service.constant.UserConstant.MERCHANT_ID;
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-
-import java.util.List;
-import java.util.Objects;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
+import com.favendo.commons.domain.Merchant;
+import com.favendo.commons.domain.Store;
+import com.favendo.commons.exception.StorecastApiException;
+import com.favendo.merchant.service.service.MerchantService;
+import com.favendo.store.service.service.StoreService;
+import com.favendo.store.ws.rest.builder.StoreBuilder;
+import com.favendo.store.ws.rest.convertor.StoreDtoConverter;
+import com.favendo.store.ws.rest.dto.StoreDto;
+import com.favendo.store.ws.rest.validator.StoreValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.favendo.commons.domain.Store;
-import com.favendo.commons.domain.User;
-import com.favendo.commons.exception.StorecastApiException;
-import com.favendo.store.service.service.StoreService;
-import com.favendo.store.ws.rest.builder.StoreBuilder;
-import com.favendo.store.ws.rest.convertor.StoreDtoConverter;
-import com.favendo.store.ws.rest.dto.StoreDto;
-import com.favendo.store.ws.rest.validator.StoreValidator;
-import com.favendo.user.service.service.UserService;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.Objects;
+
+import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
+import static com.favendo.commons.utils.Routes.*;
+import static com.favendo.user.service.constant.UserConstant.MERCHANT_ID;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Component
 @Path(ADMIN + STORE)
@@ -35,10 +32,10 @@ import com.favendo.user.service.service.UserService;
 public class StoreEndpoint {
 
     @Autowired
-    private UserService userService;
+    private StoreService storeService;
 
     @Autowired
-    private StoreService storeService;
+    private MerchantService merchantService;
 
     @Autowired
     private StoreBuilder storeBuilder;
@@ -58,11 +55,11 @@ public class StoreEndpoint {
     @POST
     @Path(PATH_PARAM_MERCHANT_ID)
     public Response save(@RequestBody StoreDto storeDto, @PathParam(MERCHANT_ID) Long merchantId) {
-        User user = getAndValidateUserByMerchantId(merchantId);
+        Merchant merchant = getAndValidateMerchantById(merchantId);
         storeValidator.validateStore(storeDto);
         storeValidator.validateDuplication(storeDto, storeService.getByNameOrNickName(storeDto.getName(),
                 storeDto.getNickName()));
-        storeService.save(storeBuilder.buildStore(storeDto, user));
+        storeService.save(storeBuilder.buildStore(storeDto, merchant));
         return Response.status(Response.Status.CREATED).build();
     }
 
@@ -86,10 +83,10 @@ public class StoreEndpoint {
     @GET
     @Path(LIST + PATH_PARAM_MERCHANT_ID)
     public Response getAllByMerchantId(@PathParam(MERCHANT_ID) Long merchantId) {
-        getAndValidateUserByMerchantId(merchantId);
+        getAndValidateMerchantById(merchantId);
         List<Store> stores = storeService.getAllByMerchantId(merchantId);
         if (CollectionUtils.isEmpty(stores)) {
-            return Response.status(Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NO_CONTENT).build();
         }
         return Response.ok().entity(storeDtoConverter.convertStores(stores)).build();
     }
@@ -102,12 +99,12 @@ public class StoreEndpoint {
         return Response.status(Response.Status.OK).build();
     }
 
-    private User getAndValidateUserByMerchantId(Long merchantId) {
-        User user = userService.getByUserId(merchantId);
-        if (Objects.isNull(user)) {
+    private Merchant getAndValidateMerchantById(Long merchantId) {
+        Merchant merchant = merchantService.getById(merchantId);
+        if (Objects.isNull(merchant)) {
             throw new StorecastApiException(BAD_REQUEST, merchantNotFoundErrorMessage, MERCHANT_ID);
         }
-        return user;
+        return merchant;
     }
 
     private Store getAndValidateStore(Long storeId) {

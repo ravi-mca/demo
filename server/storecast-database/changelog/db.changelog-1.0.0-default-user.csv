@@ -1,2 +1,2 @@
-'user_id','account_name','account_no','firstname','lastname','password','phone','username'
-'1','Storecast-Admin','c36c9073-0fa4-451e-b685-dc67c7ba1710','Storecast','Admin','$2a$10$ldk1bJIFOVkoTA5ktL9k6OJWbOwVrehsEq6K2G8OQhGpx.CtUzHYu','1234567811','admin@storecast.io'
+'sc_user_id','firstname','lastname','password','phone','username', customer_id, merchant_id
+'1','Storecast','Admin','$2a$10$ldk1bJIFOVkoTA5ktL9k6OJWbOwVrehsEq6K2G8OQhGpx.CtUzHYu','1234567811','admin@storecast.io','NULL','NULL'

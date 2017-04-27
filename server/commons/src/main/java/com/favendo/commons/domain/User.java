@@ -6,10 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "sc_user", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"username"}),
-        @UniqueConstraint(columnNames = {"account_name"})
-})
+@Table(name = "sc_user", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User implements Serializable {
 
     @Id
@@ -29,23 +26,17 @@ public class User implements Serializable {
     @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "account_no")
-    private String accountNo;
-
-    @Column(name = "account_name")
-    private String accountName;
-
     @Column(name = "phone")
     private String phone;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "merchant_id")
     private Merchant merchant;
-    
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "sc_user_role",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "sc_user_id")},
@@ -62,6 +53,22 @@ public class User implements Serializable {
 
     public String getUsername() {
         return username;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
     }
 
     public void setUsername(String username) {
@@ -92,22 +99,6 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getAccountNo() {
-        return accountNo;
-    }
-
-    public void setAccountNo(String accountNo) {
-        this.accountNo = accountNo;
-    }
-
-    public String getAccountName() {
-        return accountName;
-    }
-
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -124,19 +115,5 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public Customer getCustomerId() {
-        return customer;
-    }
 
-    public void setCustomerId(Customer customerId) {
-        this.customer = customerId;
-    }
-
-    public Merchant getMerchantId() {
-        return merchant;
-    }
-
-    public void setMerchantId(Merchant merchantId) {
-        this.merchant = merchantId;
-    }
 }

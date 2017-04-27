@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MerchantDto {
 
-    @JsonProperty("userId")
-    private Long userId;
+    @JsonProperty("merchantId")
+    private Long merchantId;
 
     @JsonProperty("firstName")
     private String firstName;
@@ -29,12 +29,12 @@ public class MerchantDto {
     @JsonProperty("email")
     private String email;
 
-    public Long getUserId() {
-        return userId;
+    public Long getMerchantId() {
+        return merchantId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setMerchantId(Long merchantId) {
+        this.merchantId = merchantId;
     }
 
     public String getFirstName() {

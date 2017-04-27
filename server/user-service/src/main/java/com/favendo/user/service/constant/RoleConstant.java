@@ -4,5 +4,7 @@ public class RoleConstant {
 
     public static final String HAS_ADMIN_ROLE = "hasRole('ADMIN')";
 
+    public static final String HAS_CUSTOMER_ROLE = "hasRole('CUSTOMER')";
+
     public static final String HAS_MERCHANT_ROLE = "hasRole('MERCHANT')";
 }

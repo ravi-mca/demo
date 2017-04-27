@@ -1,5 +1,7 @@
 package com.favendo.merchant.ws.rest.builder;
 
+import com.favendo.commons.domain.Customer;
+import com.favendo.commons.domain.Merchant;
 import com.favendo.commons.domain.Role;
 import com.favendo.commons.domain.User;
 import com.favendo.commons.utils.UniqueIdGenerator;
@@ -13,18 +15,24 @@ import java.util.List;
 @Component
 public class MerchantBuilder {
 
-    public User buildMerchant(MerchantDto merchantDto) {
+    public User buildMerchantUser(MerchantDto merchantDto) {
         User user = new User();
         user.setFirstName(merchantDto.getFirstName());
         user.setLastName(merchantDto.getLastName());
         user.setUsername(merchantDto.getEmail());
         user.setPhone(merchantDto.getPhone());
-        user.setAccountNo(UniqueIdGenerator.generateUUID());
-        user.setAccountName(merchantDto.getAccountName());
         return user;
     }
 
-    public User buildMerchant(MerchantDto merchantDto, User user) {
+    public Merchant buildMerchant(MerchantDto merchantDto, Customer customer) {
+        Merchant merchant = new Merchant();
+        merchant.setAccountNo(UniqueIdGenerator.generateUUID());
+        merchant.setAccountName(merchantDto.getAccountName());
+        merchant.setCustomer(customer);
+        return merchant;
+    }
+
+    public User buildMerchantUser(MerchantDto merchantDto, User user) {
         if (StringUtils.isNotEmpty(merchantDto.getFirstName())) {
             user.setFirstName(merchantDto.getFirstName());
         }
@@ -37,15 +45,13 @@ public class MerchantBuilder {
         if (StringUtils.isNotEmpty(merchantDto.getPhone())) {
             user.setPhone(merchantDto.getPhone());
         }
-        if (StringUtils.isNotEmpty(merchantDto.getAccountName())) {
-            user.setAccountName(merchantDto.getAccountName());
-        }
         return user;
     }
 
-    private List<Role> buildRoles(Role role) {
-        List<Role> roles = new ArrayList<>();
-        roles.add(role);
-        return roles;
+    public Merchant buildMerchant(MerchantDto merchantDto, Merchant merchant) {
+        if (StringUtils.isNotBlank(merchantDto.getAccountName())) {
+            merchant.setAccountName(merchantDto.getAccountName());
+        }
+        return merchant;
     }
 }

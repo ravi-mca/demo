@@ -1,5 +1,6 @@
 package com.favendo.merchant.ws.rest.validator;
 
+import com.favendo.commons.domain.Merchant;
 import com.favendo.commons.domain.User;
 import com.favendo.commons.validator.*;
 import com.favendo.merchant.ws.rest.dto.MerchantDto;
@@ -96,12 +97,13 @@ public class MerchantValidator {
 
     public void validateDuplication(MerchantDto merchantDto, User user) {
         if (Objects.nonNull(user)) {
+            Merchant merchant = user.getMerchant();
             equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getFirstName(), user.getFirstName(), ALREADY_EXISTS,
                     duplicateMerchantFirstNameErrorMessage);
             equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
                     duplicateMerchantEmailErrorMessage);
-            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getAccountName(), user.getAccountName(), ALREADY_EXISTS,
-                    duplicateMerchantAccountNameErrorMessage);
+            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getAccountName(), merchant.getAccountName(),
+                    ALREADY_EXISTS, duplicateMerchantAccountNameErrorMessage);
         }
     }
 
