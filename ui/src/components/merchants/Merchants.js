@@ -32,22 +32,17 @@ export default class Merchants extends React.Component {
             disableTabs: true,
             defaultActiveKey: "storeInfoTab"
         };
+
         this.getMerchantAccounts = this.getMerchantAccounts.bind(this);
         this.setSelectList = this.setSelectList.bind(this);
         this.getStore = this.getStore.bind(this);
         this.getStoresInfo = this.getStoresInfo.bind(this);
         this.setActiveTabs = this.setActiveTabs.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
-        this.toggle = this.toggle.bind(this);
     }
 
     handleSelect(key) { }
 
-    toggle () {
-        console.log('toggle');
-        $('.side-icon').toggleClass('fa-angle-right fa-angle-left');
-        $('.row-offcanvas').toggleClass('active');
-    }
 
     setSelectList(userInfo) {
         /*Set delete merchant data*/
@@ -62,13 +57,14 @@ export default class Merchants extends React.Component {
         this.getStoresInfo(userInfo.userId);
         this.showStoreInfo();
     }
+
     getStore() {
         let selectedStoreVal = $('#selectStore').find(':selected').val();
         this.setState({
             showStoreId : selectedStoreVal
         });
-        // storeInfo child method call
 
+        // storeInfo child method call
         if (this.refs.storeInfoChild) {
             this.refs.storeInfoChild.getStoreInfo(selectedStoreVal);
         }
@@ -76,6 +72,7 @@ export default class Merchants extends React.Component {
         this.showStoreInfo();
         this.setActiveTabs();
     }
+
     showStoreInfo() {
         let selectedStoreVal = $('#selectStore').find(':selected').val();
         if((selectedStoreVal != 0) && (selectedStoreVal != -1)) {
@@ -84,6 +81,7 @@ export default class Merchants extends React.Component {
             $("#showSelectedStoreId").hide();
         }
     }
+
     //Set active tabs based on selected dropdown stores
     setActiveTabs() {
         let selectedStoreVal = $('#selectStore').find(':selected').val();
@@ -102,6 +100,7 @@ export default class Merchants extends React.Component {
             });
         }
     }
+
     getStoreInfo(storeId) {
         if((storeId != 0) && (storeId != -1)) {
                 var requestData = {
@@ -114,11 +113,11 @@ export default class Merchants extends React.Component {
                 Service.executeRequest(reqData, function(response) {
                     response.id = this.state.showStoreId;
                     response.userId = this.state.userInfo.userId;
-                response.deleteName = response.name,
-                response.successAlert = Config.successAlert.deleteStore,
-                response.APIUrl = Config.storeAPIPath+ response.id,
-                response.deleteMessage = "store", 
-                response.info = response,
+                response.deleteName = response.name;
+                response.successAlert = Config.successAlert.deleteStore;
+                response.APIUrl = Config.storeAPIPath+ response.id;
+                response.deleteMessage = "store";
+                response.info = response;
                     this.setState({storeDetails: response});
             }.bind(this), function(xhr, status, err) {
                     console.log(err);
@@ -126,6 +125,7 @@ export default class Merchants extends React.Component {
             }.bind(this));
         }
     }
+
     getStoresInfo(merchantId) {
         let selectedStoreVal = $('#selectStore').find(':selected').val();
         var requestData = {
@@ -152,31 +152,34 @@ export default class Merchants extends React.Component {
          this.setState({storeInfo: response});
          this.getStore();
       }.bind(this));
-  }
+    }
+
     getMerchantAccounts(info) {
         this.refs.child.getListOfMerchant(info);
-      if((info !== undefined) && (info !== null)) {
-        var accountNo = info.accountNo;
-        var requestData = {
-          url: Config.merchantAPIPath+'/'+accountNo,
-          type: 'GET',
-          dataType: 'JSON',
-          contentType: 'application/json'
-        };
-        var reqData = Service.buildRequestdata(requestData);
-        Service.executeRequest(reqData, function(response) {
-            /*Set delete merchant data*/
-            response.deleteName = response.firstName;
-            response.successAlert = Config.successAlert.deleteMerchant;
-            response.APIUrl = Config.storeAPIPath+ response.userId;
-            response.deleteMessage = "merchant";
-            response.info = response;
-            this.setState({userInfo: response});
-          }.bind(this), function(xhr, status, err) {
-              console.log(err);
-          }.bind(this));
-      }
+        if((info !== undefined) && (info !== null)) {
+            var accountNo = info.accountNo;
+            var requestData = {
+                url: Config.merchantAPIPath+'/'+accountNo,
+                type: 'GET',
+                dataType: 'JSON',
+                contentType: 'application/json'
+            };
+
+            var reqData = Service.buildRequestdata(requestData);
+            Service.executeRequest(reqData, function(response) {
+                /*Set delete merchant data*/
+                response.deleteName = response.firstName;
+                response.successAlert = Config.successAlert.deleteMerchant;
+                response.APIUrl = Config.storeAPIPath+ response.userId;
+                response.deleteMessage = "merchant";
+                response.info = response;
+                this.setState({userInfo: response});
+            }.bind(this), function(xhr, status, err) {
+                console.log(err);
+            }.bind(this));
+        }
     }
+
     render() {
         let showAccountInfo;
         let showStoreTabs;
@@ -258,32 +261,20 @@ export default class Merchants extends React.Component {
         }
 
 	return (
-   <div class="merchant-dashboard">
-      <div class="row row-offcanvas row-offcanvas-left">
-
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-          <div class="list-group">
-            <Sidebar ref= "child" onSelectList={this.setSelectList} />
-          </div>
+        <div class="merchant-dashboard">
+            <div class="row row-offcanvas row-offcanvas-left">
+                <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                    <div class="list-group">
+                        <Sidebar ref= "child" onSelectList={this.setSelectList} />
+                    </div>
+                </div>
+                <div>
+                    {showAccountInfo}
+                    {showStoreInfo}
+                    {showStoreTabs}
+                </div>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-9 content">
-            <button type="button" class="btn btn-default btn-xs" data-toggle="offcanvas" onClick={this.toggle}><i class="fa fa-angle-right side-icon"></i></button>
-        </div>
-        <div>
-            {showAccountInfo}
-            {showStoreInfo}
-            {showStoreTabs}
-        </div>
-    </div>
-</div>
-		/*<div>
-			<Sidebar ref= "child" onSelectList={this.setSelectList} />
-			<div class="dashboard-container" id="main">
-			   	{showAccountInfo}
-			   	{showStoreInfo}
-	            {showStoreTabs}
-	        </div>
-		</div>*/
 	);
   }
 }
