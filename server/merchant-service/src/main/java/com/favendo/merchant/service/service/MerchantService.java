@@ -1,5 +1,6 @@
 package com.favendo.merchant.service.service;
 
+import com.favendo.commons.domain.Merchant;
 import com.favendo.commons.domain.User;
 import com.favendo.commons.exception.BusinessException;
 
@@ -7,12 +8,15 @@ import java.util.List;
 
 public interface MerchantService {
 
-    List<User> getAll() throws BusinessException;
+    Merchant getById(Long id)throws BusinessException;
 
-    User getByAccountNo(String accountNo) throws BusinessException;
+    List<Merchant> getAll()throws BusinessException;
 
-    void save(User merchant) throws BusinessException;
+    Merchant getByAccountNo(String accountNo) throws BusinessException;
 
-    void update(User merchant) throws BusinessException;
+    void save(Merchant merchant,User user) throws BusinessException;
 
+    void update(Merchant merchant,User user) throws BusinessException;
+
+    void deleteById(Long userId);
 }

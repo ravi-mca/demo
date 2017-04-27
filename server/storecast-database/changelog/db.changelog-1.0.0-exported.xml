@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="kunjan.s (generated)" id="1491483737837-1">
+    <changeSet author="kunjan.s (generated)" id="1493127196562-1">
         <createSequence sequenceName="hibernate_sequence" startValue="2"/>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-2">
+    <changeSet author="kunjan.s (generated)" id="1493127196562-2">
+        <createTable tableName="sc_customer">
+            <column name="sc_customer_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR(255)"/>
+            <column name="country" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state" type="VARCHAR(255)"/>
+            <column name="street" type="VARCHAR(255)"/>
+            <column name="zipcode" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-3">
+        <createTable tableName="sc_merchant">
+            <column name="sc_merchant_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_name" type="VARCHAR(255)"/>
+            <column name="account_no" type="VARCHAR(255)"/>
+            <column name="customer_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-4">
         <createTable tableName="sc_role">
-            <column name="role_id" type="BIGINT">
+            <column name="sc_role_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="role_name" type="VARCHAR(255)">
@@ -13,9 +40,9 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-3">
+    <changeSet author="kunjan.s (generated)" id="1493127196562-5">
         <createTable tableName="sc_store">
-            <column name="id" type="BIGINT">
+            <column name="sc_store_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="brandid" type="VARCHAR(255)"/>
@@ -40,26 +67,29 @@
             <column name="wifiname" type="VARCHAR(255)"/>
             <column name="wifipassword" type="VARCHAR(255)"/>
             <column name="zipcode" type="VARCHAR(255)"/>
+            <column name="customer_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
             <column name="merchant_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-4">
+    <changeSet author="kunjan.s (generated)" id="1493127196562-6">
         <createTable tableName="sc_user">
-            <column name="user_id" type="BIGINT">
+            <column name="sc_user_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="account_name" type="VARCHAR(255)"/>
-            <column name="account_no" type="VARCHAR(255)"/>
             <column name="firstname" type="VARCHAR(255)"/>
             <column name="lastname" type="VARCHAR(255)"/>
             <column name="password" type="VARCHAR(255)"/>
             <column name="phone" type="VARCHAR(255)"/>
             <column name="username" type="VARCHAR(255)"/>
+            <column name="customer_id" type="BIGINT"/>
+            <column name="merchant_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-5">
+    <changeSet author="kunjan.s (generated)" id="1493127196562-7">
         <createTable tableName="sc_user_role">
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -69,38 +99,52 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-6">
-        <addPrimaryKey columnNames="role_id" constraintName="sc_role_pkey" tableName="sc_role"/>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-8">
+        <addPrimaryKey columnNames="sc_customer_id" constraintName="sc_customer_pkey" tableName="sc_customer"/>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-7">
-        <addPrimaryKey columnNames="id" constraintName="sc_store_pkey" tableName="sc_store"/>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-9">
+        <addPrimaryKey columnNames="sc_merchant_id" constraintName="sc_merchant_pkey" tableName="sc_merchant"/>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-8">
-        <addPrimaryKey columnNames="user_id" constraintName="sc_user_pkey" tableName="sc_user"/>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-10">
+        <addPrimaryKey columnNames="sc_role_id" constraintName="sc_role_pkey" tableName="sc_role"/>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-9">
-        <addUniqueConstraint columnNames="account_name" constraintName="uk_5y3pce1d3c6y2uh08b2r8civ" tableName="sc_user"/>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-11">
+        <addPrimaryKey columnNames="sc_store_id" constraintName="sc_store_pkey" tableName="sc_store"/>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-10">
+    <changeSet author="kunjan.s (generated)" id="1493127196562-12">
+        <addPrimaryKey columnNames="sc_user_id" constraintName="sc_user_pkey" tableName="sc_user"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-13">
         <addUniqueConstraint columnNames="username" constraintName="uk_go1t547rwvn83f9b2iqcexdbj" tableName="sc_user"/>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-11">
-        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="sc_user_role" constraintName="fk_390h8k5qklutporgyul3rxstv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="role_id" referencedTableName="sc_role"/>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-14">
+        <addUniqueConstraint columnNames="name" constraintName="uk_i3mxnw88tio62xwnoa9o0lkmv" tableName="sc_store"/>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-12">
-        <addForeignKeyConstraint baseColumnNames="merchant_id" baseTableName="sc_store" constraintName="fk_80w7yk55k6c283dch5erdwjom" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="sc_user"/>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-15">
+        <addUniqueConstraint columnNames="nickname" constraintName="uk_m27v90esayvvfibk39vou9q38" tableName="sc_store"/>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-13">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="sc_user_role" constraintName="fk_hwcw90gc4uc8ka1xffu8lomdj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="sc_user"/>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-16">
+        <addUniqueConstraint columnNames="account_name" constraintName="uk_q11rnqhbslny3av4y9741f2jo" tableName="sc_merchant"/>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-14">
-        <addUniqueConstraint columnNames="firstname" constraintName="uk_sc_user_first_name" tableName="sc_user"/>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-17">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="sc_user_role" constraintName="fk_390h8k5qklutporgyul3rxstv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="sc_role_id" referencedTableName="sc_role"/>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-15">
-        <addUniqueConstraint columnNames="name" constraintName="uk_sc_store_name" tableName="sc_store"/>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-18">
+        <addForeignKeyConstraint baseColumnNames="merchant_id" baseTableName="sc_store" constraintName="fk_80w7yk55k6c283dch5erdwjom" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="sc_merchant_id" referencedTableName="sc_merchant"/>
     </changeSet>
-    <changeSet author="kunjan.s (generated)" id="1491483737837-16">
-        <addUniqueConstraint columnNames="nickname" constraintName="uk_sc_store_nick_name" tableName="sc_store"/>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-19">
+        <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="sc_user" constraintName="fk_9i5ifsmgbl6lgjc3116bcghc5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="sc_customer_id" referencedTableName="sc_customer"/>
     </changeSet>
-
+    <changeSet author="kunjan.s (generated)" id="1493127196562-20">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="sc_user_role" constraintName="fk_hwcw90gc4uc8ka1xffu8lomdj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="sc_user_id" referencedTableName="sc_user"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-21">
+        <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="sc_store" constraintName="fk_jfx905f54pnujq1i8cm7vcu9c" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="sc_customer_id" referencedTableName="sc_customer"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-22">
+        <addForeignKeyConstraint baseColumnNames="merchant_id" baseTableName="sc_user" constraintName="fk_qm3wh4imlbj1slyp43stxm5j" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="sc_merchant_id" referencedTableName="sc_merchant"/>
+    </changeSet>
+    <changeSet author="kunjan.s (generated)" id="1493127196562-23">
+        <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="sc_merchant" constraintName="fk_merchant_customer" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="sc_customer_id" referencedTableName="sc_customer"/>
+    </changeSet>
 </databaseChangeLog>

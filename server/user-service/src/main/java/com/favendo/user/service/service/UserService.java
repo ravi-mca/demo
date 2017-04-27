@@ -17,9 +17,10 @@ public interface UserService {
 
     User getByUsername(String username);
 
-    User getByUsernameOrAccountName(String username,String accountName,String firstName);
+    User getByUsernameFirstNameOrAccountName(String username,String accountName,String firstName);
     
-    User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId,String firstName);
+    User getByUsernameFirstNameOrAccountNameAndMerchantId(String username,String firstName,String accountName,
+                                                          Long merchantId);
     
     void deleteById(Long userId);
 }

@@ -1,5 +1,6 @@
 package com.favendo.store.ws.rest.builder;
 
+import com.favendo.commons.domain.Merchant;
 import com.favendo.commons.domain.Store;
 import com.favendo.commons.domain.User;
 import com.favendo.commons.utils.UniqueIdGenerator;
@@ -10,9 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class StoreBuilder {
 
-    public Store buildStore(StoreDto storeDto, User user) {
+    public Store buildStore(StoreDto storeDto, Merchant merchant) {
         Store store = new Store();
-        //store.setMerchant(user);
+        store.setMerchant(merchant);
+        store.setCustomer(merchant.getCustomer());
         store.setStoreId(UniqueIdGenerator.generateUUID());
         buildBasicInformation(storeDto, store);
         buildContactInformation(storeDto, store);

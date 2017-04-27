@@ -1,10 +1,10 @@
 package com.favendo.merchant.ws.rest.converter;
 
+import com.favendo.commons.domain.Merchant;
 import com.favendo.commons.domain.User;
 import com.favendo.merchant.ws.rest.convertor.MerchantDtoConverter;
 import com.favendo.merchant.ws.rest.dto.MerchantDto;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -12,68 +12,64 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import static  org.junit.Assert.assertNotNull;
+import static  org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MerchantAccountDtoConverterTest {
 
-    private List<User> merchantList;
-
     @InjectMocks
     private MerchantDtoConverter merchantDtoConverter;
 
-    private static final String MERCHANT1_FIRSTNAME = "Storecast";
-    private static final String MERCHANT1_LASNAME = "Admin";
-    private static final String MERCHANT1_USERNAME = "test-admin1@storecast.io";
-    private static final Long MERCHANT1_USERID = 1l;
-    private static final String MERCHANT1_ACCOUNT_NO = "ABCD1234";
-    private static final String MERCHANT1_PHONE = "12345676";
-    private static final String MERCHANT1_ACCOUNT_NAME = "Merchant1-Account";
-    private static final String MERCHANT2_FIRSTNAME = "Storecast1";
-    private static final String MERCHANT2_LASNAME = "Admin1";
-    private static final String MERCHANT2_USERNAME = "test-admin2@storecast.io";
-    private static final Long MERCHANT2_USERID = 2l;
-    private static final String MERCHANT2_ACCOUNT_NO = "ABCD1235";
-    private static final String MERCHANT2_PHONE = "12345676";
-    private static final String MERCHANT2_ACCOUNT_NAME = "Merchant2-Account";
-
-    @Before
-    public void startup(){
-        merchantList = buildMerchantList();
-    }
+    private static final Long MERCHANT_USERID = 1l;
+    private static final String MERCHANT_FIRSTNAME = "Storecast";
+    private static final String MERCHANT_LASNAME = "Admin";
+    private static final String MERCHANT_USERNAME = "test-admin1@storecast.io";
+    private static final String MERCHANT_PHONE = "12345676";
+    private static final String MERCHANT_ACCOUNT_NO = "ABCD1234";
+    private static final String MERCHANT_ACCOUNT_NAME = "Merchant1-Account";
 
     @Test
-    public void testMerchantDtoConverter() {
+    public void buildMerchantDto_WithAllDetails_ReturnsMerchantDto() {
+        List<Merchant> merchantList = buildMerchantList();
         List<MerchantDto> merchantDtoList = merchantDtoConverter.convertMerchants(merchantList);
-        Assert.assertNotNull(merchantDtoList);
-        Assert.assertEquals(2, merchantDtoList.size());
-        Assert.assertEquals("test-admin1@storecast.io", merchantDtoList.get(0).getEmail());
-        Assert.assertEquals("ABCD1234", merchantDtoList.get(0).getAccountNo());
-        Assert.assertEquals(2, merchantDtoList.get(1).getUserId().longValue());
-        Assert.assertEquals("12345676", merchantDtoList.get(1).getPhone());
+        assertNotNull(merchantDtoList);
+        assertEquals(MERCHANT_USERNAME, merchantDtoList.stream().findFirst().get().getEmail());
+        assertEquals(MERCHANT_ACCOUNT_NO, merchantDtoList.stream().findFirst().get().getAccountNo());
+        assertEquals(MERCHANT_ACCOUNT_NAME, merchantDtoList.stream().findFirst().get().getAccountName());
+        assertEquals(MERCHANT_FIRSTNAME, merchantDtoList.stream().findFirst().get().getFirstName());
+        assertEquals(MERCHANT_LASNAME,merchantDtoList.stream().findFirst().get().getLastName());
+        assertEquals(MERCHANT_PHONE,merchantDtoList.stream().findFirst().get().getPhone());
     }
 
-    private List<User> buildMerchantList() {
-        List<User> merchants = new ArrayList<>();
-        User merchant1 = new User();
-        merchant1.setAccountNo(MERCHANT1_ACCOUNT_NO);
-        merchant1.setUser_id(MERCHANT1_USERID);
-        merchant1.setUsername(MERCHANT1_USERNAME);
-        merchant1.setFirstName(MERCHANT1_FIRSTNAME);
-        merchant1.setLastName(MERCHANT1_LASNAME);
-        merchant1.setPhone(MERCHANT1_PHONE);
-        merchant1.setAccountName(MERCHANT1_ACCOUNT_NAME);
-
-        User merchant2 = new User();
-        merchant2.setAccountNo(MERCHANT2_ACCOUNT_NO);
-        merchant2.setUser_id(MERCHANT2_USERID);
-        merchant2.setUsername(MERCHANT2_USERNAME);
-        merchant2.setFirstName(MERCHANT2_FIRSTNAME);
-        merchant2.setLastName(MERCHANT2_LASNAME);
-        merchant2.setPhone(MERCHANT2_PHONE);
-        merchant2.setAccountName(MERCHANT2_ACCOUNT_NAME);
-
-        merchants.add(merchant1);
-        merchants.add(merchant2);
+    private List<Merchant> buildMerchantList() {
+        List<Merchant> merchants = new ArrayList<>();
+        Merchant merchant = buildMerchant();
+        merchant.setMerchantUsers(buildMerchantUsers());
+        merchants.add(merchant);
         return merchants;
+    }
+
+    private Merchant buildMerchant(){
+        Merchant merchant = new Merchant();
+        merchant.setAccountNo(MERCHANT_ACCOUNT_NO);
+        merchant.setAccountName(MERCHANT_ACCOUNT_NAME);
+        return merchant;
+    }
+
+    private List<User> buildMerchantUsers(){
+        List<User> merchantUsers = new ArrayList<>();
+        merchantUsers.add(buildMerchantUser());
+        return merchantUsers;
+    }
+
+    private User buildMerchantUser() {
+        User user = new User();
+        user.setUser_id(MERCHANT_USERID);
+        user.setUsername(MERCHANT_USERNAME);
+        user.setFirstName(MERCHANT_FIRSTNAME);
+        user.setLastName(MERCHANT_LASNAME);
+        user.setPhone(MERCHANT_PHONE);
+        return user;
     }
 }
