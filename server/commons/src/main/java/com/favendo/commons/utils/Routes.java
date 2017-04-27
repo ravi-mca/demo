@@ -28,6 +28,8 @@ public class Routes {
 
 	public static final String STORE = "/store";
 
+	public static final String CUSTOMER = "/customer";
+
 	public static final String ID = "id";
 
 	public static final String STORE_ID = "storeId";
