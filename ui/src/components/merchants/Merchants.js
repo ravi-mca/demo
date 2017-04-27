@@ -234,7 +234,7 @@ export default class Merchants extends React.Component {
 	 		showStoreInfo = (
 	 			<div class="row">
 	 				<div class="btn-padding">
-	 					<Col sm={3} class="col-padding">
+	 					<Col sm={3} class="col-padding col-xs-8">
 	 						<select className="form-control selectedFont" onClick={this.getStore} id="selectStore">	 			
 								{
 									stores.map(function (store) {
@@ -246,8 +246,8 @@ export default class Merchants extends React.Component {
                         </Col>
                         <AddStore data={this.state.userInfo.userId} onUpdateStore= {this.getStoresInfo}/>
                         <div class="row" >
-                            <div class="col-md-12 col-xs-12 pad-top-10 storeMargin" id="showSelectedStoreId">
-                                <div class="col-md-4 col-xs-4 auto-div pad-bottom-10">
+                            <div class="col-md-12 col-xs-12 pad-top-10 pad-left-0" id="showSelectedStoreId">
+                                <div class="col-md-6 col-xs-6 auto-div pad-bottom-10">
                                     <span class="acc-labels">Store#: </span>
                                     <span class="acc-info">{this.state.storeDetails.storeId}</span>
                                 </div>

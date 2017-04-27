@@ -252,6 +252,16 @@ body {
 
     .row-offcanvas-left {
         left: 0;
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+
+    .merchant-dashboard {
+        height: 641px;
+    }
+
+    .auto-div {
+        width: 66% !important;
     }
 
     .row-offcanvas-right

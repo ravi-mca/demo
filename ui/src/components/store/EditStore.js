@@ -52,7 +52,7 @@ export default class EditStore extends React.Component {
       deleteName: this.props.data.name,
       successAlert: Config.successAlert.deleteStore,
       APIUrl: Config.storeAPIPath+ this.props.data.id,
-      deleteMessage: "store", 
+      deleteMessage: "store",
       info: this.props.data,
     };
     
@@ -288,8 +288,8 @@ export default class EditStore extends React.Component {
   render() {
     return (
           <div id="editStorepanel">
-           <div class="col-md-2 col-xs-2 ml-16">
-            <div class="col-md-1 col-xs-1 storeMargin">
+           <div class="col-md-2 col-xs-4">
+            <div class="col-md-1 col-xs-1">
             <i class="fa fa-pencil ml-10 pointer" onClick={this.showEditForm}></i>    
             </div>   
             <div class="col-md-1 col-xs-1 pad-left-19 pad-right-2">
