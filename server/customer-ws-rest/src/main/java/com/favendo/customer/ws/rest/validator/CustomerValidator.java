@@ -1,5 +1,7 @@
 package com.favendo.customer.ws.rest.validator;
 
+import com.favendo.commons.domain.Customer;
+import com.favendo.commons.domain.User;
 import com.favendo.commons.validator.*;
 import com.favendo.customer.ws.rest.dto.CustomerDto;
 import org.apache.commons.lang3.StringUtils;
@@ -7,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
+import static com.favendo.commons.exception.ErrorKey.ALREADY_EXISTS;
 import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
 import static com.favendo.customer.ws.rest.constant.CustomerConstant.*;
 import static com.favendo.user.service.constant.UserConstant.*;
@@ -74,6 +79,15 @@ public class CustomerValidator {
     @Value("${invalid.customer.zipcode.error.message}")
     private String invalidCustomerZipCodeErrorMessage;
 
+    @Value("${duplicate.customer.name.error.message}")
+    private String duplicateCustomerNameErrorMessage;
+
+    @Value("${duplicate.customer.firstname.error.message}")
+    private String duplicateCustomerFirstNameErrorMessage;
+
+    @Value("${duplicate.customer.email.error.message}")
+    private String duplicateCustomerEmailErrorMessage; 
+
     public void validateRequest(CustomerDto customerDto) {
         emptyOrNullValidator.validateIfNull(customerDto, BAD_REQUEST, invalidCustomerRequestErrorMessage);
         emptyOrNullValidator.validateFieldIfNull(customerDto.getFirstName(), BAD_REQUEST,
@@ -119,15 +133,15 @@ public class CustomerValidator {
         }
     }
 
-   /* public void validateDuplication(CustomerDto customerDto, User user) {
+    public void validateDuplication(CustomerDto customerDto, User user) {
         if (Objects.nonNull(user)) {
-            Merchant merchant = user.getMerchant();
-            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getFirstName(), user.getFirstName(), ALREADY_EXISTS,
-                    duplicateMerchantFirstNameErrorMessage);
-            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
-                    duplicateMerchantEmailErrorMessage);
-            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getAccountName(), merchant.getAccountName(),
-                    ALREADY_EXISTS, duplicateMerchantAccountNameErrorMessage);
+            Customer customer = user.getCustomer();
+            equalsValidator.validateIfEqualsIgnoreCase(customerDto.getName(), customer.getName(), ALREADY_EXISTS,
+                    duplicateCustomerNameErrorMessage);
+            equalsValidator.validateIfEqualsIgnoreCase(customerDto.getFirstName(), user.getFirstName(), ALREADY_EXISTS,
+                    duplicateCustomerFirstNameErrorMessage);
+            equalsValidator.validateIfEqualsIgnoreCase(customerDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
+                    duplicateCustomerEmailErrorMessage);
         }
-    }*/
+    }
 }

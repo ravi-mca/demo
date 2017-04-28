@@ -4,6 +4,7 @@ import com.favendo.customer.service.service.CustomerService;
 import com.favendo.customer.ws.rest.builder.CustomerBuilder;
 import com.favendo.customer.ws.rest.dto.CustomerDto;
 import com.favendo.customer.ws.rest.validator.CustomerValidator;
+import com.favendo.user.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,9 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 public class CustomerEndpoint {
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private CustomerService customerService;
 
     @Autowired
@@ -36,6 +40,8 @@ public class CustomerEndpoint {
     @POST
     public Response save(@RequestBody CustomerDto customerDto) {
         customerValidator.validateRequest(customerDto);
+        customerValidator.validateDuplication(customerDto, userService.getByUsernameOrFirstName(customerDto.getEmail(),
+                customerDto.getFirstName()));
         customerService.save(customerBuilder.buildCustomer(customerDto), customerBuilder.buildCustomerUser(customerDto));
         return Response.status(Response.Status.CREATED).build();
     }

@@ -25,6 +25,14 @@ public interface UserDao extends JpaRepository<User, Long> {
     User findByUserIdAndRole(@Param("userId") Long userId, @Param("role") String role);
 
     @Query("select user " +
+            "from User user join fetch user.customer as customer " +
+            "where  user.customer.customerId = customer.customerId AND  " +
+            "upper(user.username) = upper(:username) OR " +
+            "upper(user.firstName) = upper(:firstName) ")
+    User findByUsernameOrFirstName(@Param("username") String username,
+                                   @Param("firstName") String firstName);
+
+    @Query("select user " +
             "from User user join fetch user.merchant as merchant " +
             "where  user.merchant.merchantId = merchant.merchantId AND  " +
             "upper(user.username) = upper(:username) OR " +
