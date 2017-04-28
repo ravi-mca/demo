@@ -6,6 +6,8 @@ public class UserConstant {
 
     public static final String MERCHANT_ID = "merchantId";
 
+    public static final String CUSTOMER_ID = "customerId";
+
     public static final String USERNAME = "username";
 
     public static final String PASSWORD = "password";

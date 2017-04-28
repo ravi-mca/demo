@@ -29,12 +29,22 @@ public class CustomerServiceImpl implements CustomerService {
     private RoleService roleService;
 
     @Override
+    public Customer getById(Long customerId) {
+        return customerDao.findOne(customerId);
+    }
+
+    @Override
     @Transactional
     public void save(Customer customer, User user) {
         customer = customerDao.save(customer);
         setRoles(user);
         user.setCustomer(customer);
         userService.save(user);
+    }
+
+    @Override
+    public void delete(Long customerId) {
+        customerDao.delete(customerId);
     }
 
     private User setRoles(User user) {
