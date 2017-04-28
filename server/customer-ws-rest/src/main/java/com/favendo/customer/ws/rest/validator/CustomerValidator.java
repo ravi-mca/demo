@@ -71,7 +71,7 @@ public class CustomerValidator {
     @Value("${invalid.customer.email.error.message}")
     private String invalidCustomerPhoneErrorMessage;
 
-    @Value("${  invalid.customer.zipcode.error.message}")
+    @Value("${invalid.customer.zipcode.error.message}")
     private String invalidCustomerZipCodeErrorMessage;
 
     public void validateRequest(CustomerDto customerDto) {
