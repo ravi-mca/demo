@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
+import java.util.List;
 
 import static com.favendo.commons.exception.ErrorKey.ALREADY_EXISTS;
 import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
@@ -86,7 +86,7 @@ public class CustomerValidator {
     private String duplicateCustomerFirstNameErrorMessage;
 
     @Value("${duplicate.customer.email.error.message}")
-    private String duplicateCustomerEmailErrorMessage; 
+    private String duplicateCustomerEmailErrorMessage;
 
     public void validateRequest(CustomerDto customerDto) {
         emptyOrNullValidator.validateIfNull(customerDto, BAD_REQUEST, invalidCustomerRequestErrorMessage);
@@ -112,7 +112,6 @@ public class CustomerValidator {
                 emptyCustomerZipCodeErrorMessage, ZIPCODE);
         validateZipCode(customerDto.getZipcode());
         validateContactDetails(customerDto.getEmail(), customerDto.getPhone());
-
     }
 
     public void validateContactDetails(String email, String phone) {
@@ -133,8 +132,8 @@ public class CustomerValidator {
         }
     }
 
-    public void validateDuplication(CustomerDto customerDto, User user) {
-        if (Objects.nonNull(user)) {
+    public void validateDuplication(CustomerDto customerDto, List<User> users) {
+        users.forEach(user -> {
             Customer customer = user.getCustomer();
             equalsValidator.validateIfEqualsIgnoreCase(customerDto.getName(), customer.getName(), ALREADY_EXISTS,
                     duplicateCustomerNameErrorMessage);
@@ -142,6 +141,6 @@ public class CustomerValidator {
                     duplicateCustomerFirstNameErrorMessage);
             equalsValidator.validateIfEqualsIgnoreCase(customerDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
                     duplicateCustomerEmailErrorMessage);
-        }
+        });
     }
 }

@@ -40,8 +40,8 @@ public class CustomerEndpoint {
     @POST
     public Response save(@RequestBody CustomerDto customerDto) {
         customerValidator.validateRequest(customerDto);
-        customerValidator.validateDuplication(customerDto, userService.getByUsernameOrFirstName(customerDto.getEmail(),
-                customerDto.getFirstName()));
+        customerValidator.validateDuplication(customerDto, userService.getByUsernameOrFirstNameOrCustomerName(
+                customerDto.getEmail(), customerDto.getFirstName(), customerDto.getName()));
         customerService.save(customerBuilder.buildCustomer(customerDto), customerBuilder.buildCustomerUser(customerDto));
         return Response.status(Response.Status.CREATED).build();
     }

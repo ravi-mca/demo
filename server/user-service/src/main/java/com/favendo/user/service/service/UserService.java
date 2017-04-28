@@ -11,10 +11,10 @@ public interface UserService {
 
     User getByUsername(String username);
 
-    User getByUsernameOrFirstName(String username,String firstName);
+    List<User> getByUsernameOrFirstNameOrCustomerName(String username,String firstName,String name);
 
-    User getByUsernameFirstNameOrAccountName(String username,String accountName,String firstName);
-    
-    User getByUsernameFirstNameOrAccountNameAndMerchantId(String username,String firstName,String accountName,
+    List<User> getByUsernameFirstNameOrAccountName(String username,String accountName,String firstName);
+
+    List<User> getByUsernameFirstNameOrAccountNameAndMerchantId(String username,String firstName,String accountName,
                                                           Long merchantId);
 }

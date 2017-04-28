@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
@@ -32,17 +34,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByUsernameOrFirstName(String username, String firstName) {
-        return userDao.findByUsernameOrFirstName(username, firstName);
+    public List<User> getByUsernameOrFirstNameOrCustomerName(String username, String firstName, String name) {
+        return userDao.findByUsernameOrFirstNameOrCustomerName(username, firstName,name);
     }
 
     @Override
-    public User getByUsernameFirstNameOrAccountName(String username, String firstName, String accountName) {
+    public List<User> getByUsernameFirstNameOrAccountName(String username, String firstName, String accountName) {
         return userDao.findByUsernameFirstNameOrAccountName(username, firstName, accountName);
     }
 
     @Override
-    public User getByUsernameFirstNameOrAccountNameAndMerchantId(String username, String firstName, String accountName,
+    public List<User> getByUsernameFirstNameOrAccountNameAndMerchantId(String username, String firstName, String accountName,
                                                                  Long merchantId) {
         return userDao.findByUsernameFirstNameOrAccountNameAndMerchantId(username, firstName, accountName, merchantId);
     }

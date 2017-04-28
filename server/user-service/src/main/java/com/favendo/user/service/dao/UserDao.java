@@ -28,9 +28,11 @@ public interface UserDao extends JpaRepository<User, Long> {
             "from User user join fetch user.customer as customer " +
             "where  user.customer.customerId = customer.customerId AND  " +
             "upper(user.username) = upper(:username) OR " +
-            "upper(user.firstName) = upper(:firstName) ")
-    User findByUsernameOrFirstName(@Param("username") String username,
-                                   @Param("firstName") String firstName);
+            "upper(user.firstName) = upper(:firstName) OR " +
+            "upper(user.customer.name) = upper(:name) ")
+    List<User> findByUsernameOrFirstNameOrCustomerName(@Param("username") String username,
+                                                 @Param("firstName") String firstName,
+                                                 @Param("name") String name);
 
     @Query("select user " +
             "from User user join fetch user.merchant as merchant " +
@@ -38,7 +40,7 @@ public interface UserDao extends JpaRepository<User, Long> {
             "upper(user.username) = upper(:username) OR " +
             "upper(user.firstName) = upper(:firstName) OR " +
             "upper(merchant.accountName) = upper(:accountName) ")
-    User findByUsernameFirstNameOrAccountName(@Param("username") String username,
+    List<User> findByUsernameFirstNameOrAccountName(@Param("username") String username,
                                                   @Param("firstName") String firstName,
                                                   @Param("accountName") String accountName);
 
@@ -49,7 +51,7 @@ public interface UserDao extends JpaRepository<User, Long> {
             "upper(user.firstName) = upper(:firstName) OR " +
             "upper(merchant.accountName) = upper(:accountName) AND " +
             "user.merchant.merchantId <> :merchantId")
-    User findByUsernameFirstNameOrAccountNameAndMerchantId(@Param("username") String username,
+    List<User> findByUsernameFirstNameOrAccountNameAndMerchantId(@Param("username") String username,
                                                            @Param("firstName") String firstName,
                                                            @Param("accountName") String accountName,
                                                            @Param("merchantId") Long merchantId);
