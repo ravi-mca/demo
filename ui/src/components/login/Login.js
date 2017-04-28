@@ -51,9 +51,14 @@ export default class Login extends React.Component {
             var reqData = Service.buildRequestdata(requestData);
 
             Service.executeRequest(reqData, function(data) {
-                  this.setState({ showResults: false });
-                  this.setAuthToken(data.accessToken);
-                  browserHistory.push('/merchants');
+
+                this.setState({ showResults: false });
+                this.setAuthToken(data.accessToken);
+                if(data.roles[0].role == "ROLE_ADMIN") {
+                    browserHistory.push('/customers');
+                }else {
+                    browserHistory.push('/merchants');
+                }                  
            }.bind(this), function(xhr, status, err) {
                this.setState({ showResults: true });
                   console.log('err',err);
