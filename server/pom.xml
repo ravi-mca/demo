@@ -66,10 +66,12 @@
         <module>commons</module>
         <module>user-authentication</module>
         <module>merchant-service</module>
+        <module>customer-service</module>
         <module>user-service</module>
         <module>store-service</module>
         <module>statistics-service</module>
         <module>merchant-ws-rest</module>
+        <module>customer-ws-rest</module>
         <module>user-ws-rest</module>
         <module>store-ws-rest</module>
         <module>storecast-portal</module>

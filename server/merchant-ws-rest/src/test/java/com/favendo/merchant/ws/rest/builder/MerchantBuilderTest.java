@@ -5,7 +5,6 @@ import com.favendo.commons.domain.Merchant;
 import com.favendo.commons.domain.User;
 import com.favendo.commons.utils.UniqueIdGenerator;
 import com.favendo.merchant.ws.rest.dto.MerchantDto;
-import org.junit.Assert;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.testng.MockitoTestNGListener;
@@ -13,8 +12,8 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNotNull;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotNull;
 
 @Listeners(MockitoTestNGListener.class)
 public class MerchantBuilderTest {

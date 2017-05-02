@@ -23,9 +23,7 @@ import java.util.List;
 import static com.favendo.commons.utils.Routes.*;
 import static com.favendo.user.authentication.utils.URIConstant.FORM_BASED_LOGIN_ENTRY_POINT;
 import static com.favendo.user.authentication.utils.URIConstant.TOKEN_BASED_AUTH_ENTRY_POINT;
-import static com.favendo.user.service.constant.RoleConstant.HAS_ADMIN_ROLE;
-import static com.favendo.user.service.constant.RoleConstant.HAS_CUSTOMER_ROLE;
-import static com.favendo.user.service.constant.RoleConstant.HAS_MERCHANT_ROLE;
+import static com.favendo.user.service.constant.RoleConstant.*;
 import static com.favendo.user.service.constant.UserConstant.PASSWORD;
 import static com.favendo.user.service.constant.UserConstant.USERNAME;
 import static org.springframework.http.HttpMethod.OPTIONS;
@@ -77,7 +75,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(OPTIONS, ALL_REQUEST).permitAll()
                 .antMatchers(ADMIN_REQUEST).access(HAS_ADMIN_ROLE)
-                .antMatchers(ADMIN_REQUEST).access(HAS_CUSTOMER_ROLE)
+                .antMatchers(CUSTOMER_REQUEST).access(HAS_CUSTOMER_ROLE)
                 .antMatchers(MERCHANT_REQUEST).access(HAS_MERCHANT_ROLE)
                 .anyRequest().authenticated()
                 .and()
@@ -102,7 +100,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private AuthenticationFilter buildAuthTokenFilter() throws Exception {
         List<String> pathsToSkip = Arrays.asList(FORM_BASED_LOGIN_ENTRY_POINT);
         PathRequestMatcher pathRequestMatcher = new PathRequestMatcher(pathsToSkip, TOKEN_BASED_AUTH_ENTRY_POINT);
-        AuthenticationFilter authenticationFilter = new AuthenticationFilter(this.userDetailsService,pathRequestMatcher);
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter(this.userDetailsService, pathRequestMatcher);
         authenticationFilter.setAuthenticationManager(authenticationManager());
         return authenticationFilter;
     }

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
+import java.util.List;
 
 import static com.favendo.commons.exception.ErrorKey.ALREADY_EXISTS;
 import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
@@ -95,8 +95,8 @@ public class MerchantValidator {
         }
     }
 
-    public void validateDuplication(MerchantDto merchantDto, User user) {
-        if (Objects.nonNull(user)) {
+    public void validateDuplication(MerchantDto merchantDto, List<User> users) {
+        users.forEach(user -> {
             Merchant merchant = user.getMerchant();
             equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getFirstName(), user.getFirstName(), ALREADY_EXISTS,
                     duplicateMerchantFirstNameErrorMessage);
@@ -104,7 +104,7 @@ public class MerchantValidator {
                     duplicateMerchantEmailErrorMessage);
             equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getAccountName(), merchant.getAccountName(),
                     ALREADY_EXISTS, duplicateMerchantAccountNameErrorMessage);
-        }
+        });
     }
 
     public void validateAccountNo(String accountNo) {
