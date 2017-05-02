@@ -16,4 +16,6 @@ public interface UserService {
     List<User> getByUsernameFirstNameOrAccountName(String username,String accountName,String firstName);
 
     List<User> getByUsernameFirstNameOrAccountNameAndMerchantId(String username,String firstName,String accountName, Long merchantId);
+    
+    List<User> findByUsernameOrNameAndCustomerId(String username, String name, Long customerId);
 }

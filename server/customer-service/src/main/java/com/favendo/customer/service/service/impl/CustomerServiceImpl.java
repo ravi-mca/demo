@@ -68,4 +68,11 @@ public class CustomerServiceImpl implements CustomerService {
         user.setRoles(roles);
         return user;
     }
+    
+    @Override
+    @Transactional
+    public void update(Customer customer, User user) {
+        customerDao.save(customer);
+        userService.save(user);
+    }
 }

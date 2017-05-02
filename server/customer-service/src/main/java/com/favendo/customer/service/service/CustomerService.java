@@ -13,6 +13,8 @@ public interface CustomerService {
     Customer getById(Long customerId);
 
     void save(Customer customer, User user);
+    
+    void update(Customer customer, User user);
 
     void delete(Long customerId);
 }

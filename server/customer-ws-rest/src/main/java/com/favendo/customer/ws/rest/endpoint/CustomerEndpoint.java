@@ -1,6 +1,7 @@
 package com.favendo.customer.ws.rest.endpoint;
 
 import com.favendo.commons.domain.Customer;
+import com.favendo.commons.domain.User;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.StorecastApiException;
 import com.favendo.customer.service.service.CustomerService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Objects;
+import java.util.Optional;
 
 import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
 import static com.favendo.commons.exception.ErrorKey.SERVER_ERROR;
@@ -65,6 +67,16 @@ public class CustomerEndpoint {
         customerService.save(customerBuilder.buildCustomer(customerDto), customerBuilder.buildCustomerUser(customerDto));
         return Response.status(Response.Status.CREATED).build();
     }
+    
+    @PUT
+    @Path(PATH_PARAM_CUSTOMER_ID)
+    public Response update(@RequestBody CustomerDto customerDto, @PathParam(CUSTOMER_ID) Long customerId) {
+        Customer customer = getAndValidateCustomerById(customerId);
+        Optional<User> optional = customer.getCustomerUsers().stream().findFirst();
+        validateUpdateRequest(customerDto, customer);
+        customerService.update(customerBuilder.buildCustomer(customerDto, customer),customerBuilder.buildCustomerUser(customerDto, optional.get()));
+        return Response.status(Response.Status.OK).build();
+    }
 
     @DELETE
     @Path(PATH_PARAM_CUSTOMER_ID)
@@ -80,5 +92,11 @@ public class CustomerEndpoint {
             throw new StorecastApiException(BAD_REQUEST, customerNotFoundErrorMessage, CUSTOMER_ID);
         }
         return customer;
+    }
+    
+    private void validateUpdateRequest(@RequestBody CustomerDto customerDto, Customer customer) {
+        customerValidator.validateContactDetails(customerDto.getEmail(), customerDto.getPhone());
+        customerValidator.validateDuplication(customerDto, userService.findByUsernameOrNameAndCustomerId(
+                customerDto.getEmail(), customerDto.getName(), customer.getCustomerId()));
     }
 }
