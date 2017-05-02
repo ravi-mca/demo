@@ -1,21 +1,6 @@
 package com.favendo.customer.ws.rest.endpoint;
 
-import static com.favendo.commons.exception.ErrorKey.SERVER_ERROR;
-import static com.favendo.commons.utils.Routes.ADMIN;
-import static com.favendo.commons.utils.Routes.CUSTOMER;
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-
+import com.favendo.commons.domain.Customer;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.StorecastApiException;
 import com.favendo.customer.service.service.CustomerService;
@@ -24,6 +9,20 @@ import com.favendo.customer.ws.rest.converter.CustomerDtoConverter;
 import com.favendo.customer.ws.rest.dto.CustomerDto;
 import com.favendo.customer.ws.rest.validator.CustomerValidator;
 import com.favendo.user.service.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+import java.util.Objects;
+
+import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
+import static com.favendo.commons.exception.ErrorKey.SERVER_ERROR;
+import static com.favendo.commons.utils.Routes.*;
+import static com.favendo.customer.ws.rest.constant.CustomerConstant.CUSTOMER_ID;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Component
 @Path(ADMIN + CUSTOMER)
@@ -45,6 +44,9 @@ public class CustomerEndpoint {
     
     @Autowired
     private CustomerDtoConverter customerDtoConverter;
+
+    @Value("${customer.not.found.error.message}")
+    private String customerNotFoundErrorMessage;
     
     @GET
     public Response getAll() {
@@ -62,5 +64,21 @@ public class CustomerEndpoint {
                 customerDto.getEmail(), customerDto.getFirstName(), customerDto.getName()));
         customerService.save(customerBuilder.buildCustomer(customerDto), customerBuilder.buildCustomerUser(customerDto));
         return Response.status(Response.Status.CREATED).build();
+    }
+
+    @DELETE
+    @Path(PATH_PARAM_CUSTOMER_ID)
+    public Response deleteById(@PathParam(CUSTOMER_ID) Long customerId) {
+        getAndValidateCustomerById(customerId);
+        customerService.delete(customerId);
+        return Response.status(Response.Status.OK).build();
+    }
+
+    private Customer getAndValidateCustomerById(Long customerId) {
+        Customer customer = customerService.getById(customerId);
+        if (Objects.isNull(customer)) {
+            throw new StorecastApiException(BAD_REQUEST, customerNotFoundErrorMessage, CUSTOMER_ID);
+        }
+        return customer;
     }
 }

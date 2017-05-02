@@ -32,8 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private RoleService roleService;
-
-    @Override
+    
     public List<Customer> getAll() throws BusinessException {
         List<Customer> customers = customerDao.findAll();
         if (CollectionUtils.isEmpty(customers)) {
@@ -43,12 +42,22 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Customer getById(Long customerId) {
+        return customerDao.findOne(customerId);
+    }
+
+    @Override
     @Transactional
     public void save(Customer customer, User user) {
         customer = customerDao.save(customer);
         setRoles(user);
         user.setCustomer(customer);
         userService.save(user);
+    }
+
+    @Override
+    public void delete(Long customerId) {
+        customerDao.delete(customerId);
     }
 
     private User setRoles(User user) {

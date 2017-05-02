@@ -10,5 +10,9 @@ public interface CustomerService {
     
     List<Customer> getAll() throws BusinessException;
 
+    Customer getById(Long customerId);
+
     void save(Customer customer, User user);
+
+    void delete(Long customerId);
 }

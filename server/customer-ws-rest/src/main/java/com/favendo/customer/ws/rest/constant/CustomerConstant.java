@@ -2,6 +2,8 @@ package com.favendo.customer.ws.rest.constant;
 
 public class CustomerConstant {
 
+    public static final String CUSTOMER_ID = "customerId";
+
     public static final String NAME = "name";
 
     public static final String STREET = "street";
