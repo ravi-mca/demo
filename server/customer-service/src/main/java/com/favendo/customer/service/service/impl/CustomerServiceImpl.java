@@ -1,20 +1,25 @@
 package com.favendo.customer.service.service.impl;
 
-import com.favendo.commons.domain.Customer;
-import com.favendo.commons.domain.Role;
-import com.favendo.commons.domain.User;
-import com.favendo.customer.service.dao.CustomerDao;
-import com.favendo.customer.service.service.CustomerService;
-import com.favendo.user.service.service.RoleService;
-import com.favendo.user.service.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import static com.favendo.commons.enums.RoleEnum.CUSTOMER;
+import static com.favendo.commons.exception.ErrorKey.NOT_FOUND;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.favendo.commons.enums.RoleEnum.CUSTOMER;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
+import com.favendo.commons.domain.Customer;
+import com.favendo.commons.domain.Role;
+import com.favendo.commons.domain.User;
+import com.favendo.commons.exception.BusinessException;
+import com.favendo.commons.exception.StorecastApiException;
+import com.favendo.customer.service.dao.CustomerDao;
+import com.favendo.customer.service.service.CustomerService;
+import com.favendo.user.service.service.RoleService;
+import com.favendo.user.service.service.UserService;
 
 @Service("customerService")
 public class CustomerServiceImpl implements CustomerService {
@@ -27,6 +32,15 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private RoleService roleService;
+
+    @Override
+    public List<Customer> getAll() throws BusinessException {
+        List<Customer> customers = customerDao.findAll();
+        if (CollectionUtils.isEmpty(customers)) {
+            throw new StorecastApiException(NOT_FOUND);
+        }
+        return customers;
+    }
 
     @Override
     @Transactional

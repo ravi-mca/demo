@@ -4,7 +4,6 @@ import com.favendo.commons.domain.Merchant;
 import com.favendo.commons.domain.User;
 import com.favendo.merchant.service.dao.MerchantDao;
 import com.favendo.merchant.service.service.impl.MerchantServiceImpl;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

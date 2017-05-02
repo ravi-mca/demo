@@ -44,8 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getByUsernameFirstNameOrAccountNameAndMerchantId(String username, String firstName, String accountName,
-                                                                 Long merchantId) {
+    public List<User> getByUsernameFirstNameOrAccountNameAndMerchantId(String username, String firstName, String accountName, Long merchantId) {
         return userDao.findByUsernameFirstNameOrAccountNameAndMerchantId(username, firstName, accountName, merchantId);
     }
 }
