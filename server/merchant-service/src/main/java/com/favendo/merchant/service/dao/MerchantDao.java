@@ -23,6 +23,6 @@ public interface MerchantDao extends JpaRepository<Merchant, Long> {
     Merchant findByAccountNo(@Param("accountNo") String accountNo);
 
     @Query("select merchant " +
-            "from  Merchant merchant join fetch merchant.merchantUsers as merchantUsers ")
+            "from  Merchant merchant join fetch merchant.merchantUsers as merchantUsers order by merchant.accountName ASC ")
     List<Merchant> findAll();
 }

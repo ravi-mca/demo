@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.favendo.commons.exception.ErrorKey.NOT_FOUND;
+import static com.favendo.commons.exception.ErrorKey.NO_CONTENT;
 import static com.favendo.user.service.constant.UserConstant.ACCOUNT_NO;
 
 @Service("merchantService")
@@ -47,7 +48,7 @@ public class MerchantServiceImpl implements MerchantService {
     public List<Merchant> getAll() throws BusinessException {
         List<Merchant> merchants = merchantDao.findAll();
         if (CollectionUtils.isEmpty(merchants)) {
-            throw new StorecastApiException(NOT_FOUND);
+            throw new StorecastApiException(NO_CONTENT);
         }
         return merchants;
     }

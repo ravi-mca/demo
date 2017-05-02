@@ -26,7 +26,7 @@ import static com.favendo.user.service.constant.UserConstant.MERCHANT_ID;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Component
-@Path(ADMIN + STORE)
+@Path(CUSTOMER + STORE)
 @Produces(value = {APPLICATION_JSON})
 @Consumes(value = {APPLICATION_JSON})
 public class StoreEndpoint {

@@ -2,6 +2,7 @@ package com.favendo.customer.service.service.impl;
 
 import static com.favendo.commons.enums.RoleEnum.CUSTOMER;
 import static com.favendo.commons.exception.ErrorKey.NOT_FOUND;
+import static com.favendo.commons.exception.ErrorKey.NO_CONTENT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getAll() throws BusinessException {
         List<Customer> customers = customerDao.findAll();
         if (CollectionUtils.isEmpty(customers)) {
-            throw new StorecastApiException(NOT_FOUND);
+            throw new StorecastApiException(NO_CONTENT);
         }
         return customers;
     }
@@ -56,6 +57,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public void delete(Long customerId) {
         customerDao.delete(customerId);
     }

@@ -11,6 +11,8 @@ import com.favendo.commons.domain.Customer;
 @Repository
 public interface CustomerDao extends JpaRepository<Customer,Long> {
 
-    @Query("select customer from Customer customer join fetch customer.customerUsers as customerUsers ORDER BY customer.name ASC ")
+    @Query("select customer " +
+            "from Customer customer join fetch customer.customerUsers as customerUsers " +
+            "ORDER BY customer.name ASC ")
     List<Customer> findAll();
 }

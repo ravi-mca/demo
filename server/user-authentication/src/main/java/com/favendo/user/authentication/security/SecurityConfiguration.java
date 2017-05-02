@@ -21,8 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.favendo.commons.utils.Routes.*;
-import static com.favendo.user.authentication.utils.URIConstant.FORM_BASED_LOGIN_ENTRY_POINT;
-import static com.favendo.user.authentication.utils.URIConstant.TOKEN_BASED_AUTH_ENTRY_POINT;
 import static com.favendo.user.service.constant.RoleConstant.*;
 import static com.favendo.user.service.constant.UserConstant.PASSWORD;
 import static com.favendo.user.service.constant.UserConstant.USERNAME;

@@ -11,7 +11,8 @@ public enum ErrorKey {
     NOT_FOUND("not_found", Response.Status.NOT_FOUND),
     UNAUTHORIZED("unauthorized", Response.Status.UNAUTHORIZED),
     SERVER_ERROR("server_error", Response.Status.INTERNAL_SERVER_ERROR),
-    BAD_REQUEST("bad_request", Response.Status.BAD_REQUEST);
+    BAD_REQUEST("bad_request", Response.Status.BAD_REQUEST),
+    NO_CONTENT("no_content", Response.Status.NO_CONTENT);
 
     private String errorKey;
 

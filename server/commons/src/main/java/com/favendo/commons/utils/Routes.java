@@ -16,7 +16,7 @@ public class Routes {
 
 	public static final String LOGIN = "/login";
 
-	public static final String LOGIN_REQUEST =  ROOT + ADMIN + LOGIN;
+	public static final String LOGIN_REQUEST =  ROOT + LOGIN;
 
 	public static final String MERCHANT = "/merchant";
 	
@@ -45,5 +45,9 @@ public class Routes {
 	public static final String LIST = "/list";
 
 	public static final String CREDENTIALS = "/credentials";
+
+	public static final String FORM_BASED_LOGIN_ENTRY_POINT = "/api/login";
+
+	public static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/api/**";
 
 }
