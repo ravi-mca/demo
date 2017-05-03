@@ -12,8 +12,4 @@ public interface UserService {
     User getByUsername(String username);
 
     List<User> getByUsernameAndUserId(String username,Long userId);
-
-    List<User> getByUsernameOrFirstNameOrCustomerName(String username,String firstName,String name);
-    
-    List<User> findByUsernameOrNameAndCustomerId(String username, String name, Long customerId);
 }

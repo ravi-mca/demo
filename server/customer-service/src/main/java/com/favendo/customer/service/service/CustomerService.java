@@ -12,6 +12,10 @@ public interface CustomerService {
 
     Customer getById(Long customerId);
 
+    Customer getByName(String name);
+
+    Customer getByNameAndCustomerId(String name,Long customerId);
+
     void save(Customer customer, User user);
     
     void update(Customer customer, User user);

@@ -21,4 +21,16 @@ public interface CustomerDao extends JpaRepository<Customer,Long> {
             "from  Customer customer join fetch customer.customerUsers as customerUsers " +
             "where customer.customerId = :customerId ")
     Customer findById(@Param("customerId") Long customerId);
+
+    @Query("select customer " +
+            "from  Customer customer " +
+            "where customer.name = :name ")
+    Customer findByName(@Param("name") String name);
+
+    @Query("select customer " +
+            "from  Customer customer " +
+            "where customer.name = :name AND " +
+            "customer.customerId <> :customerId ")
+    Customer findByNameAndCustomerId(@Param("name") String name,
+                                     @Param("customerId") Long customerId);
 }

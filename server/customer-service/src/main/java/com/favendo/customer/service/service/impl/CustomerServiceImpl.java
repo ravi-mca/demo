@@ -1,17 +1,5 @@
 package com.favendo.customer.service.service.impl;
 
-import static com.favendo.commons.enums.RoleEnum.CUSTOMER;
-import static com.favendo.commons.exception.ErrorKey.NOT_FOUND;
-import static com.favendo.commons.exception.ErrorKey.NO_CONTENT;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
-
 import com.favendo.commons.domain.Customer;
 import com.favendo.commons.domain.Role;
 import com.favendo.commons.domain.User;
@@ -21,6 +9,16 @@ import com.favendo.customer.service.dao.CustomerDao;
 import com.favendo.customer.service.service.CustomerService;
 import com.favendo.user.service.service.RoleService;
 import com.favendo.user.service.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.favendo.commons.enums.RoleEnum.CUSTOMER;
+import static com.favendo.commons.exception.ErrorKey.NO_CONTENT;
 
 @Service("customerService")
 public class CustomerServiceImpl implements CustomerService {
@@ -33,7 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private RoleService roleService;
-    
+
     public List<Customer> getAll() throws BusinessException {
         List<Customer> customers = customerDao.findAll();
         if (CollectionUtils.isEmpty(customers)) {
@@ -44,7 +42,17 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getById(Long customerId) {
-        return customerDao.findOne(customerId);
+        return customerDao.findById(customerId);
+    }
+
+    @Override
+    public Customer getByName(String name) {
+        return customerDao.findByName(name);
+    }
+
+    @Override
+    public Customer getByNameAndCustomerId(String name, Long customerId) {
+        return customerDao.findByNameAndCustomerId(name, customerId);
     }
 
     @Override
@@ -53,6 +61,13 @@ public class CustomerServiceImpl implements CustomerService {
         customer = customerDao.save(customer);
         setRoles(user);
         user.setCustomer(customer);
+        userService.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void update(Customer customer, User user) {
+        customerDao.save(customer);
         userService.save(user);
     }
 
@@ -67,12 +82,5 @@ public class CustomerServiceImpl implements CustomerService {
         roles.add(roleService.getByName(CUSTOMER.getRole()));
         user.setRoles(roles);
         return user;
-    }
-    
-    @Override
-    @Transactional
-    public void update(Customer customer, User user) {
-        customerDao.save(customer);
-        userService.save(user);
     }
 }

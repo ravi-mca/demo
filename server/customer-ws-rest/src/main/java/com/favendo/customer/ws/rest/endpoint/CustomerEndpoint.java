@@ -61,20 +61,19 @@ public class CustomerEndpoint {
 
     @POST
     public Response save(@RequestBody CustomerDto customerDto) {
-        customerValidator.validateRequest(customerDto);
-        customerValidator.validateDuplication(customerDto, userService.getByUsernameOrFirstNameOrCustomerName(
-                customerDto.getEmail(), customerDto.getFirstName(), customerDto.getName()));
+        validateSaveRequest(customerDto);
         customerService.save(customerBuilder.buildCustomer(customerDto), customerBuilder.buildCustomerUser(customerDto));
         return Response.status(Response.Status.CREATED).build();
     }
-    
+
     @PUT
     @Path(PATH_PARAM_CUSTOMER_ID)
     public Response update(@RequestBody CustomerDto customerDto, @PathParam(CUSTOMER_ID) Long customerId) {
         Customer customer = getAndValidateCustomerById(customerId);
         Optional<User> optional = customer.getCustomerUsers().stream().findFirst();
         validateUpdateRequest(customerDto, customer);
-        customerService.update(customerBuilder.buildCustomer(customerDto, customer),customerBuilder.buildCustomerUser(customerDto, optional.get()));
+        customerService.update(customerBuilder.buildCustomer(customerDto, customer),customerBuilder.
+                buildCustomerUser(customerDto, optional.get()));
         return Response.status(Response.Status.OK).build();
     }
 
@@ -93,10 +92,18 @@ public class CustomerEndpoint {
         }
         return customer;
     }
+
+    private void validateSaveRequest(@RequestBody CustomerDto customerDto) {
+        customerValidator.validateRequest(customerDto);
+        customerValidator.validateDuplication(customerService.getByName(customerDto.getName()));
+        customerValidator.validateDuplication(userService.getByUsername(customerDto.getEmail()));
+    }
     
     private void validateUpdateRequest(@RequestBody CustomerDto customerDto, Customer customer) {
         customerValidator.validateContactDetails(customerDto.getEmail(), customerDto.getPhone());
-        customerValidator.validateDuplication(customerDto, userService.findByUsernameOrNameAndCustomerId(
-                customerDto.getEmail(), customerDto.getName(), customer.getCustomerId()));
+        customerValidator.validateDuplication(customerService.getByNameAndCustomerId(customerDto.getName(),
+                customer.getCustomerId()));
+        customerValidator.validateDuplication(userService.getByUsernameAndUserId(customerDto.getEmail(),
+                customer.getCustomerUsers().stream().findFirst().get().getUser_id()));
     }
 }
