@@ -25,4 +25,16 @@ public interface MerchantDao extends JpaRepository<Merchant, Long> {
     @Query("select merchant " +
             "from  Merchant merchant join fetch merchant.merchantUsers as merchantUsers order by merchant.accountName ASC ")
     List<Merchant> findAll();
+
+    @Query("select merchant " +
+            "from  Merchant merchant " +
+            "where upper(merchant.accountName) = upper(:accountName) ")
+    Merchant findByAccountName(@Param("accountName") String accountName);
+
+    @Query("select merchant " +
+            "from  Merchant merchant " +
+            "where upper(merchant.accountName) = upper(:accountName) AND " +
+            "merchant.merchantId <> :merchantId ")
+    Merchant findByAccountNameAndMerchantId(@Param("accountName") String accountName,
+                                            @Param("merchantId") Long merchantId);
 }

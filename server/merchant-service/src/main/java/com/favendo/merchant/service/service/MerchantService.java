@@ -10,6 +10,10 @@ public interface MerchantService {
 
     Merchant getById(Long id)throws BusinessException;
 
+    Merchant getByAccountName(String accountName)throws BusinessException;
+
+    Merchant getByAccountNameAndMerchantId(String accountName,Long merchantId)throws BusinessException;
+
     List<Merchant> getAll()throws BusinessException;
 
     Merchant getByAccountNo(String accountNo) throws BusinessException;

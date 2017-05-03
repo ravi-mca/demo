@@ -108,4 +108,16 @@ public class EmptyOrNullValidator {
             throw new StorecastApiException(errorKey, messageKey, errorField);
         }
     }
+
+    public void validateIfNotNull(Object object, ErrorKey errorKey,String errorMessage) {
+        if (Objects.nonNull(object)) {
+            throw new StorecastApiException(errorKey,errorMessage);
+        }
+    }
+
+    public void validateIfNotNull(Collection<?> collection, ErrorKey errorKey,String errorMessage) {
+        if (!CollectionUtils.isEmpty(collection)) {
+            throw new StorecastApiException(errorKey,errorMessage);
+        }
+    }
 }

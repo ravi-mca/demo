@@ -45,6 +45,16 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
+    public Merchant getByAccountName(String accountName)throws BusinessException{
+        return merchantDao.findByAccountName(accountName);
+    }
+
+    @Override
+    public Merchant getByAccountNameAndMerchantId(String accountName,Long merchantId)throws BusinessException{
+        return merchantDao.findByAccountNameAndMerchantId(accountName,merchantId);
+    }
+
+    @Override
     public List<Merchant> getAll() throws BusinessException {
         List<Merchant> merchants = merchantDao.findAll();
         if (CollectionUtils.isEmpty(merchants)) {
