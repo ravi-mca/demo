@@ -51,6 +51,10 @@
     color: black;
 }
 
+.text-gray-light {
+    color: #40444e;
+}
+
 
 /* set-padding */
 .no-padding {

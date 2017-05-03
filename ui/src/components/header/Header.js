@@ -76,8 +76,8 @@ export default class Header extends React.Component {
 													<i class="fa fa-user-circle-o fa-5x user-icon"></i>
 												</div>
 												<div class="col-md-8 col-xs-8 col-sm-8">
-													<div class="text-black mt-10 font-semibold font-18">Admin</div>
-													<div class="text-black font-light">admin@storecast.io</div>
+													<div class="text-gray-light mt-10 font-semibold font-18">Admin</div>
+													<div class="text-gray-light font-light">admin@storecast.io</div>
 						 							<Link to="" onClick={ this.logOut }>
 						 								<button type="button" class="btn btn-primary btn-block mt-20 mb-20">Sign out</button>
 						 							</Link>
