@@ -192,15 +192,15 @@ export default class Merchants extends React.Component {
                     <div class="col-md-6 col-xs-6 auto-div no-padding">
                         <div class="acc-heading">{this.state.userInfo.firstName} </div>
                         <div>
-                            <span class="acc-labels">Account#: </span>
+                            <i class="fa fa-user-circle-o mr-10" aria-hidden="true"></i>
                             <span class="acc-info">{this.state.userInfo.accountNo}</span>
                         </div>
                         <div>
-                            <span class="acc-labels">Contact: </span>
+                            <i class="fa fa-phone mr-10" aria-hidden="true"></i>
                             <span class="acc-info">{this.state.userInfo.phone}</span>
                         </div>
                         <div class="mb-20">
-                            <span class="acc-labels">Email: </span>
+                            <i class="fa fa-envelope mr-10" aria-hidden="true"></i>
                             <span class="acc-info">{this.state.userInfo.email}</span>
                         </div>
                     </div>

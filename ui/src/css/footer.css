@@ -15,49 +15,50 @@
 
   /* link */
   footer a {
-     color: white;
+    color: white;
   }
 
   /* visited link */
-  footer a:visited {
-      color: white;
-  }
+    footer a:visited {
+        color: white;
+    }
 
   /* mouse over link */
-  footer a:hover {
-      color: white;
-  }
+    footer a:hover {
+        color: white;
+    }
 
   /* selected link */
-  footer a:active {
-      color: white;
-  }
+    footer a:active {
+        color: white;
+    }
 
   /* Fixed position */
-  .fixed-bottom {
-    position: fixed !important;
-    bottom: 0 !important;
-    width: 100% !important; 
-    font-family: Source Sans Pro !important;
-    font-size: 12px !important;
-    color: white !important;
-  }
+    .fixed-bottom {
+        position: fixed !important;
+        bottom: 0 !important;
+        width: 100% !important; 
+        font-family: Source Sans Pro !important;
+        font-size: 12px !important;
+        color: white !important;
+        z-index: 9999;
+    }
 
-  p {
-      margin: 0 25px 10px !important;
-  }
+    p {
+        margin: 0 25px 10px !important;
+    }
 
-  .flex-container {
-    display: -webkit-flex;
-    display: flex;
-    width: 100%;
-    margin-left: 8px;
-  }
+    .flex-container {
+        display: -webkit-flex;
+        display: flex;
+        width: 100%;
+        margin-left: 8px;
+    }
 
-  .flex-item {
-      width: 100%; 
-  }
+    .flex-item {
+        width: 100%; 
+    }
 
-  .right-text {
-    text-align: right;
-  } 
+    .right-text {
+        text-align: right;
+    }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
+import Service from "../Service";
 import Background from '../../images/favendo-logo.png';
 
 export default class Header extends React.Component {
@@ -20,6 +21,7 @@ export default class Header extends React.Component {
         $('.row-offcanvas').toggleClass('active');
     }
 
+   /*show/hide arrow icon */
     setToggle(name,val) {
         if(name == 'merchants') {
             this.setState({showIcon:true});
@@ -30,12 +32,17 @@ export default class Header extends React.Component {
 
     toggleNav() {
         $(".nav-icon").toggleClass('fa-bars fa-close');
-        $("li a:active").css("background-color", "#292e35"); 
+        $("li a:active").css("background-color", "#292e35");
+    }
+
+    logOut() {
+        Service.deleteToken();
+        browserHistory.push('/');
     }
 
     render() {
         return (
-        	<div>
+        	<div class="nav-header">
 			    <nav class="navbar navbar-inverse fixed-top">
 			        <div class="row">
 			            <div class="col-sm-12 col-sx-12 col-md-4 col-lg-3 navbar-header">
@@ -49,7 +56,7 @@ export default class Header extends React.Component {
 			                <div class="headerLogo"> <img src={ Background }/></div>
 			            </div>
 			            <div id="navbarCollapse" class="collapse navbar-collapse">
-			                <div class="col-sm-offset-5 col-md-offset-5 col-lg-offset-5">
+			                <div class="col-sm-5 col-md-5 col-lg-5">
 			                    <ul class="nav navbar-nav">
 			                        <li onClick={this.setToggle.bind(this,'admins')}><Link to="/admins" activeClassName="active" class="text-white">ADMINS</Link></li>
 			                        <li onClick={this.setToggle.bind(this,'merchants')}><Link to="/merchants" activeClassName="active" class="text-white">MERCHANTS</Link></li>
@@ -57,9 +64,28 @@ export default class Header extends React.Component {
 			                   </ul>
 			                </div>
 			                <div>
-			                    <ul class="nav navbar-nav pull-nav">
-			    	                <li onClick={this.setToggle.bind(this,'account')}><Link to="/account" activeClassName="active" class="text-white">ACCOUNT</Link></li> 
-			                    </ul>
+			                    <ul class="nav navbar-nav navbar-right">
+									<li class="dropdown">
+										<Link to="" class="dropdown-toggle" href="#" data-toggle="dropdown" activeClassName="active">
+											<i class="fa fa-user-circle-o"></i> Admin
+											<strong class="caret"></strong>
+										</Link>
+										<div class="dropdown-menu">
+											<div class="col-md-12 col-xs-12 menu-bg">
+												<div class="col-md-4 col-xs-4 col-sm-4 no-padding">
+													<i class="fa fa-user-circle-o fa-5x user-icon"></i>
+												</div>
+												<div class="col-md-8 col-xs-8 col-sm-8">
+													<div class="text-black mt-10 font-semibold font-18">Admin</div>
+													<div class="text-black font-light">admin@storecast.io</div>
+						 							<Link to="" onClick={ this.logOut }>
+						 								<button type="button" class="btn btn-primary btn-block mt-20 mb-20">Sign out</button>
+						 							</Link>
+						 						</div>
+											</div>
+										</div>
+									</li>
+								</ul>
 			                </div>
 			            </div>
 			       </div>
@@ -68,4 +94,3 @@ export default class Header extends React.Component {
         );
     }
 }
-

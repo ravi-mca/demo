@@ -15,32 +15,40 @@
 }
 
 .font-bold {
-  font-weight: bold !important;
+    font-weight: bold !important;
 }
 
 .font-semibold {
-  font-family: 'Source Sans Pro Semibold';
+    font-family: 'Source Sans Pro Semibold';
 }
 
 .font-regular {
-  font-family: 'Source Sans Pro';
+    font-family: 'Source Sans Pro';
+}
+
+.font-light {
+    font-family: 'Source Sans Pro Light';
 }
 
 /* text-colors */
 .text-gray {
-   color: #727b89;
+    color: #727b89;
 }
 
 .text-gray-dark {
-  color: #c4c6cc;
+    color: #c4c6cc;
 }
 
 .text-red {
-  color: red;
+    color: red;
 }
 
 .text-white {
-  color: white;
+    color: white;
+}
+
+.text-black {
+    color: black;
 }
 
 
@@ -50,88 +58,90 @@
 }
 
 .pad-15 {
-  padding: 15px;
+    padding: 15px;
 }
 
 .pad-left-9 {
-  padding-left: 9px !important;;
+    padding-left: 9px !important;;
 }
 
 .pad-left-17 {
-  padding-left: 17px !important;;
+    padding-left: 17px !important;;
 }
 
 .pad-left-19 {
-  padding-left: 19px !important;;
+    padding-left: 19px !important;;
 }
 
 .pad-left-0 {
-  padding-left: 0px !important;
+    padding-left: 0px !important;
 }
 
 .pad-right-2 {
-  padding-right: 2px !important;;
+    padding-right: 2px !important;;
 }
 
 .pad-right-10 {
-  padding-right: 10px !important;;
+    padding-right: 10px !important;;
 }
 
 .pad-right-0 {
-  padding-right: 0px !important;;
+    padding-right: 0px !important;;
 }
 
 .pad-top-10 {
-  padding-top: 10px !important;
+    padding-top: 10px !important;
 }
 
 .pad-bottom-10 {
-  padding-bottom: 10px !important;
+    padding-bottom: 10px !important;
 }
 
 .list-padding {
-  padding: 5px 15px 5px 15px;
+    padding: 5px 15px 5px 15px;
 }
 
 /* set-margin */
 .mb-10 {
-   margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .mt-10 {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 .mt-20 {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .mt-25 {
-  margin-top: 25px;
+    margin-top: 25px;
 }
 
 .ml-10 {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .ml-16 {
-  margin-left: 16px !important;
+    margin-left: 16px !important;
 }
 
 .ml-300 {
-  margin-left: 300px;
+    margin-left: 300px;
 }
 
 .mb-20 {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
-
-
 .mt-lg-20 {
-  margin-top: 20px;
+    margin-top: 20px;
+}
+
+.mr-10 {
+    margin-right: 10px;
 }
 
 .pointer {
-  cursor: pointer;
+    cursor: pointer;
 }
