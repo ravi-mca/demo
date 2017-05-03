@@ -51,11 +51,6 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getByNameAndCustomerId(String name, Long customerId) {
-        return customerDao.findByNameAndCustomerId(name, customerId);
-    }
-
-    @Override
     @Transactional
     public void save(Customer customer, User user) {
         customer = customerDao.save(customer);
@@ -75,6 +70,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public void delete(Long customerId) {
         customerDao.delete(customerId);
+    }
+
+    @Override
+    public Customer getByNameAndCustomerId(String name, Long customerId) {
+        return customerDao.findByNameAndCustomerId(name, customerId);
     }
 
     private User setRoles(User user) {

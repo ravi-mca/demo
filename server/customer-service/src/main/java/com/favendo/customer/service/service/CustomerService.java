@@ -14,11 +14,11 @@ public interface CustomerService {
 
     Customer getByName(String name);
 
-    Customer getByNameAndCustomerId(String name,Long customerId);
-
     void save(Customer customer, User user);
     
     void update(Customer customer, User user);
 
     void delete(Long customerId);
+
+    Customer getByNameAndCustomerId(String name,Long customerId);
 }

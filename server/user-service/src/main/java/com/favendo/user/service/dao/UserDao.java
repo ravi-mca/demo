@@ -12,11 +12,11 @@ import com.favendo.commons.domain.User;
 @Repository
 public interface UserDao extends JpaRepository<User, Long> {
 
-    @Query("select user from User user where user.username = :username")
-    User findByUsername(@Param("username") String username);
-
     @Query("select user from User as user join user.roles as role where role.roleName = 'ROLE_MERCHANT' ORDER BY user.firstName ASC")
     List<User> findAll();
+
+    @Query("select user from User user where user.username = :username")
+    User findByUsername(@Param("username") String username);
 
     @Query("select user from User user where user.username = :username")
     User findByAccountNo(@Param("username") String username);
@@ -34,7 +34,6 @@ public interface UserDao extends JpaRepository<User, Long> {
     List<User> findByUsernameOrFirstNameOrCustomerName(@Param("username") String username,
                                                        @Param("firstName") String firstName,
                                                        @Param("name") String name);
-
     @Query("select user " +
             "from User user join fetch user.merchant as merchant " +
             "where  user.merchant.merchantId = merchant.merchantId AND  " +

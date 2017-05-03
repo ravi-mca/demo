@@ -40,21 +40,6 @@ public class MerchantServiceImpl implements MerchantService {
     private String merchantNotFoundByAccountNoErrorMessage;
 
     @Override
-    public Merchant getById(Long merchantId)throws BusinessException{
-        return merchantDao.findById(merchantId);
-    }
-
-    @Override
-    public Merchant getByAccountName(String accountName)throws BusinessException{
-        return merchantDao.findByAccountName(accountName);
-    }
-
-    @Override
-    public Merchant getByAccountNameAndMerchantId(String accountName,Long merchantId)throws BusinessException{
-        return merchantDao.findByAccountNameAndMerchantId(accountName,merchantId);
-    }
-
-    @Override
     public List<Merchant> getAll() throws BusinessException {
         List<Merchant> merchants = merchantDao.findAll();
         if (CollectionUtils.isEmpty(merchants)) {
@@ -64,12 +49,22 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
+    public Merchant getById(Long merchantId)throws BusinessException{
+        return merchantDao.findById(merchantId);
+    }
+
+    @Override
     public Merchant getByAccountNo(String accountNo) throws BusinessException {
         Merchant merchant = merchantDao.findByAccountNo(accountNo);
         if (Objects.isNull(merchant)) {
             throw new StorecastApiException(NOT_FOUND, merchantNotFoundByAccountNoErrorMessage, ACCOUNT_NO);
         }
         return merchant;
+    }
+
+    @Override
+    public Merchant getByAccountName(String accountName)throws BusinessException{
+        return merchantDao.findByAccountName(accountName);
     }
 
     @Override
@@ -92,6 +87,11 @@ public class MerchantServiceImpl implements MerchantService {
     @Transactional
     public void deleteById(Long merchantId) {
         merchantDao.delete(merchantId);
+    }
+
+    @Override
+    public Merchant getByAccountNameAndMerchantId(String accountName,Long merchantId)throws BusinessException{
+        return merchantDao.findByAccountNameAndMerchantId(accountName,merchantId);
     }
 
     private User setRoles(User user) {

@@ -8,19 +8,19 @@ import java.util.List;
 
 public interface MerchantService {
 
-    Merchant getById(Long id)throws BusinessException;
-
-    Merchant getByAccountName(String accountName)throws BusinessException;
-
-    Merchant getByAccountNameAndMerchantId(String accountName,Long merchantId)throws BusinessException;
-
     List<Merchant> getAll()throws BusinessException;
 
+    Merchant getById(Long id)throws BusinessException;
+
     Merchant getByAccountNo(String accountNo) throws BusinessException;
+
+    Merchant getByAccountName(String accountName)throws BusinessException;
 
     void save(Merchant merchant,User user) throws BusinessException;
 
     void update(Merchant merchant,User user) throws BusinessException;
 
     void deleteById(Long userId);
+
+    Merchant getByAccountNameAndMerchantId(String accountName,Long merchantId)throws BusinessException;
 }
