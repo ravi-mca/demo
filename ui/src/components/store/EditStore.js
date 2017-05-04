@@ -225,7 +225,7 @@ export default class EditStore extends React.Component {
   showEditForm() {
     this.setState({
       isOpen: true,
-      edituserId:this.props.data.userId,
+      edituserId:this.props.data.merchantId,
       editId: this.props.data.id,
       editStoreId : this.props.data.storeId,
       editName : this.props.data.name,
@@ -248,7 +248,7 @@ export default class EditStore extends React.Component {
   }
   
   onUpdateStoreAccount() {
-    this.props.onUpdateStore(this.props.data.userId);
+    this.props.onUpdateStore(this.props.data.merchantId);
   }
 
   showInputError(refName, type) {

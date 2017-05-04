@@ -47,15 +47,15 @@ export default class Merchants extends React.Component {
 
     setSelectList(userInfo) {
         /*Set delete merchant data*/
-        userInfo.deleteName = userInfo.firstName;
+        userInfo.deleteName = userInfo.accountName;
         userInfo.successAlert = Config.successAlert.deleteMerchant;
-        userInfo.APIUrl = Config.deleteAPIPath+ userInfo.userId;
+        userInfo.APIUrl = Config.deleteAPIPath+ userInfo.merchantId;
         userInfo.deleteMessage = "merchant";
         userInfo.info = userInfo;
         this.setState({
             userInfo: userInfo
         });
-        this.getStoresInfo(userInfo.userId);
+        this.getStoresInfo(userInfo.merchantId);
         this.showStoreInfo();
     }
 
@@ -113,12 +113,12 @@ export default class Merchants extends React.Component {
                 var reqData = Service.buildRequestdata(requestData);
                 Service.executeRequest(reqData, function(response) {
                     response.id = this.state.showStoreId;
-                    response.userId = this.state.userInfo.userId;
-                response.deleteName = response.name;
-                response.successAlert = Config.successAlert.deleteStore;
-                response.APIUrl = Config.storeAPIPath+ response.id;
-                response.deleteMessage = "store";
-                response.info = response;
+                    response.merchantId = this.state.userInfo.merchantId;
+                    response.deleteName = response.accountName;
+                    response.successAlert = Config.successAlert.deleteStore;
+                    response.APIUrl = Config.storeAPIPath+ response.id;
+                    response.deleteMessage = "store";
+                    response.info = response;
                     this.setState({storeDetails: response});
             }.bind(this), function(xhr, status, err) {
                     console.log(err);
@@ -130,14 +130,17 @@ export default class Merchants extends React.Component {
     getStoresInfo(merchantId) {
         let selectedStoreVal = $('#selectStore').find(':selected').val();
         var requestData = {
-           url: Config.getStoresInfo+merchantId,
+           url: Config.getStoresInfo + merchantId,
            type: 'GET',
            dataType: 'JSON',
            contentType: 'application/json'
        };
         var reqData = Service.buildRequestdata(requestData);
         Service.executeRequest(reqData, function(response) {
-          if(response.length > 1){
+          if(response == undefined) {
+                var response = [{"id":-1,"storeId":"","name":"No Stores"}];
+                this.getStore();
+          } else if(response.length > 1 ) {
               response.push({"id":0,"storeId":"0","name":"All"});
           }
           this.setState({storeInfo: response});
@@ -149,9 +152,6 @@ export default class Merchants extends React.Component {
           this.getStore();
       }.bind(this), function(xhr, status, err) {
          console.log(err);
-         var response = [{"id":-1,"storeId":"","name":"No Stores"}];
-         this.setState({storeInfo: response});
-         this.getStore();
       }.bind(this));
     }
 
@@ -161,11 +161,11 @@ export default class Merchants extends React.Component {
 
     getMerchantAccounts(info) {
 
-        this.refs.child.getListOfMerchant(info);
+        this.refs.child.getList(info);
         if((info !== undefined) && (info !== null)) {
             var accountNo = info.accountNo;
             var requestData = {
-                url: Config.merchantAPIPath+'/'+accountNo,
+                url: Config.merchantAPIPath + '/' + accountNo,
                 type: 'GET',
                 dataType: 'JSON',
                 contentType: 'application/json'
@@ -174,9 +174,9 @@ export default class Merchants extends React.Component {
             var reqData = Service.buildRequestdata(requestData);
             Service.executeRequest(reqData, function(response) {
                 /*Set delete merchant data*/
-                response.deleteName = response.firstName;
+                response.deleteName = response.accountName;
                 response.successAlert = Config.successAlert.deleteMerchant;
-                response.APIUrl = Config.storeAPIPath+ response.userId;
+                response.APIUrl = Config.storeAPIPath+ response.merchantId;
                 response.deleteMessage = "merchant";
                 response.info = response;
                 this.setState({userInfo: response});
@@ -251,7 +251,7 @@ export default class Merchants extends React.Component {
                                 }
                             </select>
                         </Col>
-                        <AddStore data={this.state.userInfo.userId} onUpdateStore= {this.getStoresInfo}/>
+                        <AddStore data={this.state.userInfo.merchantId} onUpdateStore= {this.getStoresInfo}/>
                         <div class="row" >
                             <div class="col-md-12 col-xs-12 pad-top-10 pad-left-0" id="showSelectedStoreId">
                                 <div class="col-md-6 col-xs-6 auto-div pad-bottom-10 mt-10">

@@ -116,7 +116,7 @@ export default class EditMerchant extends React.Component {
 
     let isFormValid = true;
     if (this.showFormErrors()) {
-    var merchantId = this.props.data.userId;
+    var merchantId = this.props.data.merchantId;
 
     var newData = {};
     newData.firstName = this.state.editFirstName;

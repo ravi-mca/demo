@@ -13,6 +13,7 @@
 
 .modal-content {
     margin-top: 80px !important;
+    text-align: left !important;
 }
 
 .modal-body input{
