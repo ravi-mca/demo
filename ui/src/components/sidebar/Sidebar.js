@@ -9,7 +9,7 @@ import CreateMerchants from "../merchants/CreateMerchants";
 import $ from 'jquery';
 import SearchInput, {createFilter} from 'react-search-input';
 
-const KEYS_TO_FILTERS = ['accountName','accountNo'];
+const KEYS_TO_FILTERS = ['name','accountName','accountNo'];
 var token;
 var tokenObj;
 
