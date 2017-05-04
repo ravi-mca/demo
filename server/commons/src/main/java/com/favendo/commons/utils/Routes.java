@@ -6,6 +6,8 @@ public class Routes {
 
 	public static final String ADMIN_REQUEST = "/api/admin/*";
 
+	public static final String CUSTOMER_REQUEST = "/api/customer/*";
+
 	public static final String MERCHANT_REQUEST = "/api/merchant/*";
 
 	public static final String ROOT = "/api";
@@ -27,6 +29,8 @@ public class Routes {
 	public static final String PATH_PARAM_ACCOUNT_NO = "/{accountNo}";
 
 	public static final String STORE = "/store";
+
+	public static final String CUSTOMER = "/customer";
 
 	public static final String ID = "id";
 

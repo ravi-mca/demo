@@ -1,10 +1,10 @@
 package com.favendo.merchant.service.service;
 
+import com.favendo.commons.domain.Merchant;
 import com.favendo.commons.domain.User;
+import com.favendo.merchant.service.dao.MerchantDao;
 import com.favendo.merchant.service.service.impl.MerchantServiceImpl;
-import com.favendo.user.service.service.UserService;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,17 +15,20 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static  org.junit.Assert.assertNotNull;
+import static  org.junit.Assert.assertEquals;
+
 @RunWith(MockitoJUnitRunner.class)
 public class MerchantServiceTest {
 
-    private List<User> merchantList;
-
     @Mock
-    private UserService userService;
+    private MerchantDao merchantDao;
 
     @InjectMocks
     private MerchantServiceImpl merchantService;
 
+    private static final int MERCHANT_SIZE = 2;
+    private static final int MERCHANT_USERS_SIZE = 1;
     private static final String MERCHANT1_FIRSTNAME = "Storecast";
     private static final String MERCHANT1_LASNAME = "Admin";
     private static final String MERCHANT1_USERNAME = "test-admin1@storecast.io";
@@ -41,59 +44,79 @@ public class MerchantServiceTest {
     private static final String MERCHANT2_PHONE = "12345676";
     private static final String MERCHANT2_ACCOUNT_NAME = "Merchant2-Account";
 
-    @Before
-    public void startup() {
-        merchantList = buildMerchantList();
+    @Test
+    public void getAllMerchants_WithMerchantUsers_ReturnAllMerchantWithUsers() {
+        List<Merchant> merchantList = buildMerchantList();
+        Mockito.when(merchantDao.findAll()).thenReturn(merchantList);
+        List<Merchant> merchants = merchantService.getAll();
+        assertNotNull(merchants);
+        assertEquals(MERCHANT_SIZE, merchants.size());
+        assertEquals(MERCHANT1_ACCOUNT_NO, merchants.stream().findFirst().get().getAccountNo());
+        assertEquals(MERCHANT_USERS_SIZE, merchants.stream().findFirst().get().getMerchantUsers().size());
     }
 
     @Test
-    public void testGetMerchantList() {
-        Mockito.when(userService.getAll()).thenReturn(merchantList);
-        List<User> users = merchantService.getAll();
-        Assert.assertNotNull(users);
-        Assert.assertEquals(2, users.size());
-        Assert.assertEquals("test-admin1@storecast.io", users.get(0).getUsername());
+    public void getMerchantAccountInfo_ReturnMerchantAccountInfo() {
+        Mockito.when(merchantDao.findByAccountNo(MERCHANT1_ACCOUNT_NO)).thenReturn(buildFirstMerchant());
+        Merchant merchant = merchantService.getByAccountNo(MERCHANT1_ACCOUNT_NO);
+        assertNotNull(merchant);
+        assertEquals(MERCHANT1_ACCOUNT_NO, merchant.getAccountNo());
     }
 
-    @Test
-    public void testGetMerchantAccountInfo() {
-        Mockito.when(userService.getByAccountNo(MERCHANT1_ACCOUNT_NO)).thenReturn(buildFirstMerchant());
-        User merchant = userService.getByAccountNo(MERCHANT1_ACCOUNT_NO);
-        Assert.assertNotNull(merchant);
-        Assert.assertEquals("test-admin1@storecast.io", merchant.getUsername());
-        Assert.assertEquals("12345676", merchant.getPhone());
-    }
-
-    private List<User> buildMerchantList() {
-        List<User> merchants = new ArrayList<>();
-        User merchant1 = buildFirstMerchant();
-        User merchant2 = buildSecondMerchant();
+    private List<Merchant> buildMerchantList() {
+        List<Merchant> merchants = new ArrayList<>();
+        Merchant merchant1 = buildFirstMerchant();
+        Merchant merchant2 = buildSecondMerchant();
         merchants.add(merchant1);
         merchants.add(merchant2);
         return merchants;
     }
 
-    private User buildFirstMerchant() {
-        User merchant1 = new User();
-        merchant1.setAccountNo(MERCHANT1_ACCOUNT_NO);
-        merchant1.setUser_id(MERCHANT1_USERID);
-        merchant1.setUsername(MERCHANT1_USERNAME);
-        merchant1.setFirstName(MERCHANT1_FIRSTNAME);
-        merchant1.setLastName(MERCHANT1_LASNAME);
-        merchant1.setPhone(MERCHANT1_PHONE);
-        merchant1.setAccountName(MERCHANT1_ACCOUNT_NAME);
-        return merchant1;
+    private Merchant buildFirstMerchant() {
+        Merchant merchant = new Merchant();
+        merchant.setAccountNo(MERCHANT1_ACCOUNT_NO);
+        merchant.setAccountName(MERCHANT1_ACCOUNT_NAME);
+        merchant.setMerchantUsers(buildFirstMerchantUsers());
+        return merchant;
     }
 
-    private User buildSecondMerchant() {
-        User merchant2 = new User();
-        merchant2.setAccountNo(MERCHANT2_ACCOUNT_NO);
-        merchant2.setUser_id(MERCHANT2_USERID);
-        merchant2.setUsername(MERCHANT2_USERNAME);
-        merchant2.setFirstName(MERCHANT2_FIRSTNAME);
-        merchant2.setLastName(MERCHANT2_LASNAME);
-        merchant2.setPhone(MERCHANT2_PHONE);
-        merchant2.setAccountName(MERCHANT2_ACCOUNT_NAME);
-        return merchant2;
+    private Merchant buildSecondMerchant() {
+        Merchant merchant = new Merchant();
+        merchant.setAccountNo(MERCHANT2_ACCOUNT_NO);
+        merchant.setAccountName(MERCHANT2_ACCOUNT_NAME);
+        merchant.setMerchantUsers(buildSecondMerchantUsers());
+        return merchant;
+    }
+
+    private List<User> buildFirstMerchantUsers() {
+        List<User> merchantUsers = new ArrayList<>();
+        merchantUsers.add(buildFirstMerchantUser());
+        return merchantUsers;
+    }
+
+    private List<User> buildSecondMerchantUsers() {
+        List<User> merchantUsers = new ArrayList<>();
+        merchantUsers.add(buildSecondMerchantUser());
+        return merchantUsers;
+    }
+
+    private User buildFirstMerchantUser() {
+        User user = new User();
+        user.setUser_id(MERCHANT1_USERID);
+        user.setFirstName(MERCHANT1_FIRSTNAME);
+        user.setLastName(MERCHANT1_LASNAME);
+        user.setUsername(MERCHANT1_USERNAME);
+        user.setPhone(MERCHANT1_PHONE);
+        return user;
+    }
+
+    private User buildSecondMerchantUser() {
+        User user = new User();
+        user.setUser_id(MERCHANT2_USERID);
+        user.setFirstName(MERCHANT2_FIRSTNAME);
+        user.setLastName(MERCHANT2_LASNAME);
+        user.setUsername(MERCHANT2_USERNAME);
+        user.setPhone(MERCHANT2_PHONE);
+        return user;
     }
 }

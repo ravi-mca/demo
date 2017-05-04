@@ -231,13 +231,13 @@ export default class Merchants extends React.Component {
         }
 
  		if(this.state.storeInfo) {
-	 		showStoreInfo = (
-	 			<div class="row">
-	 				<div class="btn-padding">
-	 					<Col sm={3} class="col-padding col-xs-8">
-	 						<select className="form-control selectedFont" onClick={this.getStore} id="selectStore">	 			
-								{
-									stores.map(function (store) {
+            showStoreInfo = (
+                <div class="row">
+                    <div class="btn-padding">
+                        <Col sm={3} class="col-padding col-xs-8">
+                            <select className="form-control selectedFont" onClick={this.getStore} id="selectStore">             
+                                {
+                                    stores.map(function (store) {
                                         i++;
                                         return <option value={store.id } data={store} key={i}>{store.name}</option>;
                                     })

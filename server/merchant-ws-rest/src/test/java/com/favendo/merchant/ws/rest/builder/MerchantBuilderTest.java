@@ -1,6 +1,7 @@
 package com.favendo.merchant.ws.rest.builder;
 
-import com.favendo.commons.domain.Role;
+import com.favendo.commons.domain.Customer;
+import com.favendo.commons.domain.Merchant;
 import com.favendo.commons.domain.User;
 import com.favendo.commons.utils.UniqueIdGenerator;
 import com.favendo.merchant.ws.rest.dto.MerchantDto;
@@ -12,105 +13,127 @@ import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotNull;
 
 @Listeners(MockitoTestNGListener.class)
 public class MerchantBuilderTest {
+
     @InjectMocks
     private MerchantBuilder subject;
 
     @Mock
     private UniqueIdGenerator uniqueIdGenerator;
 
+    private static final String MERCHANT_FIRSTNAME = "Storecast";
+    private static final String MERCHANT_LASNAME = "Admin";
+    private static final String MERCHANT_USERNAME = "test-admin1@storecast.io";
+    private static final String MERCHANT_PHONE = "12345676";
+    private static final String MERCHANT_ACCOUNT_NO = "ABCD1235";
+    private static final String MERCHANT_ACCOUNT_NAME = "Merchant2-Account";
+
+    private static final Long CUSTOMER_ID = 1L;
+    private static final String CUSTOMER_NAME = "Customer";
+    private static final String CUSTOMER_STREET = "SGVP";
+    private static final String CUSTOMER_CITY = "Ahmedabad";
+    private static final String CUSTOMER_STATE = "Gujarat";
+    private static final String CUSTOMER_COUNTRY = "India";
+    private static final String CUSTOMER_ZIPCODE = "382405";
+
     @Test
     public void buildMerchant_WithAllDetails_BuildAndReturnsMerchant() {
-        String phone = "9898102525";
-        String firstName = "Storecast";
-        String lastName = "Storecast";
-        String email = "storecast@gmail.com";
-        String accountNo = "ABCD-EFGH-IJCK-LMOP";
-        String accountName = "storecast_account_name";
-
         MerchantDto merchantDto = new MerchantDto();
-        merchantDto.setFirstName(firstName);
-        merchantDto.setLastName(lastName);
-        merchantDto.setEmail(email);
-        merchantDto.setPhone(phone);
-        merchantDto.setAccountNo(accountNo);
-        merchantDto.setAccountName(accountName);
+        merchantDto.setAccountNo(MERCHANT_ACCOUNT_NO);
+        merchantDto.setAccountName(MERCHANT_ACCOUNT_NAME);
+        Customer customer = buildCustomer(CUSTOMER_ID,CUSTOMER_NAME,CUSTOMER_STREET,CUSTOMER_CITY,CUSTOMER_STATE,
+                CUSTOMER_COUNTRY,CUSTOMER_ZIPCODE);
 
-        User result = subject.buildMerchant(merchantDto);
-        User expected = createMerchant(firstName, lastName, accountNo, accountName, phone, email);
+        Merchant result = subject.buildMerchant(merchantDto,customer);
+        Merchant expected = buildMerchant(MERCHANT_ACCOUNT_NO, MERCHANT_ACCOUNT_NAME);
 
-        assertThat(result.getFirstName(), is(expected.getFirstName()));
-        assertThat(result.getLastName(), is(expected.getLastName()));
-        assertThat(result.getUsername(), is(expected.getUsername()));
-        assertThat(result.getPhone(), is(expected.getPhone()));
+        assertNotNull(result.getAccountNo());
+        assertNotNull(result.getCustomer());
         assertThat(result.getAccountName(), is(expected.getAccountName()));
-        assertThat(result.getRoles(), is(expected.getRoles()));
     }
 
     @Test
-    public void buildMerchant_WithRequiredDetailsAndUser_BuildsAndReturnsMerchant() {
-        Long userId = 1l;
-        String phone = "9898102525";
-        String firstName = "Storecast";
-        String lastName = "Storecast";
-        String email = "storecast@gmail.com";
-        String accountNo = "ABCD-EFGH-IJCK-LMOP";
-        String accountName = "storecast_account_name";
-
+    public void buildMerchantUser_WithAllDetails_BuildAndReturnsMerchantUser() {
         MerchantDto merchantDto = new MerchantDto();
-        merchantDto.setFirstName(firstName);
-        merchantDto.setLastName(lastName);
-        merchantDto.setPhone(phone);
+        merchantDto.setFirstName(MERCHANT_FIRSTNAME);
+        merchantDto.setLastName(MERCHANT_LASNAME);
+        merchantDto.setEmail(MERCHANT_USERNAME);
+        merchantDto.setPhone(MERCHANT_PHONE);
 
-        User user = createMerchant(userId, firstName, lastName, accountNo, accountName, phone, email);
-
-        User result = subject.buildMerchant(merchantDto, user);
-        User expected = createMerchant(firstName, lastName, phone);
+        User result = subject.buildMerchantUser(merchantDto);
+        User expected = buildMerchantUser(MERCHANT_FIRSTNAME, MERCHANT_LASNAME, MERCHANT_USERNAME, MERCHANT_PHONE);
 
         assertThat(result.getFirstName(), is(expected.getFirstName()));
         assertThat(result.getLastName(), is(expected.getLastName()));
         assertThat(result.getPhone(), is(expected.getPhone()));
+        assertThat(result.getUsername(), is(expected.getUsername()));
     }
 
-    private User createMerchant(Long userId, String firstName, String lastName, String accountNo, String accountName,
-                                String phone, String email) {
+    @Test
+    public void buildMerchant_WithAccountName_BuildAndReturnsMerchant() {
+        Merchant merchant = new Merchant();
+        MerchantDto merchantDto = new MerchantDto();
+        merchantDto.setAccountName(MERCHANT_ACCOUNT_NAME);
+
+        Merchant result = subject.buildMerchant(merchantDto, merchant);
+        Merchant expected = buildMerchant(MERCHANT_ACCOUNT_NAME);
+
+        assertThat(result.getAccountName(), is(expected.getAccountName()));
+    }
+
+    @Test
+    public void buildMerchantUser_WithMerchantAndAllDetails_BuildAndReturnsMerchantUser() {
         User user = new User();
-        user.setUser_id(userId);
+        MerchantDto merchantDto = new MerchantDto();
+        merchantDto.setFirstName(MERCHANT_FIRSTNAME);
+        merchantDto.setLastName(MERCHANT_LASNAME);
+        merchantDto.setEmail(MERCHANT_USERNAME);
+        merchantDto.setPhone(MERCHANT_PHONE);
+
+        User result = subject.buildMerchantUser(merchantDto, user);
+        User expected = buildMerchantUser(MERCHANT_FIRSTNAME, MERCHANT_LASNAME, MERCHANT_USERNAME, MERCHANT_PHONE);
+
+        assertThat(result.getFirstName(), is(expected.getFirstName()));
+        assertThat(result.getLastName(), is(expected.getLastName()));
+        assertThat(result.getPhone(), is(expected.getPhone()));
+        assertThat(result.getUsername(), is(expected.getUsername()));
+    }
+
+    private Merchant buildMerchant(String accountName) {
+        Merchant merchant = new Merchant();
+        merchant.setAccountName(accountName);
+        return merchant;
+    }
+
+    private Merchant buildMerchant(String accountNo, String accountName) {
+        Merchant merchant = new Merchant();
+        merchant.setAccountNo(accountNo);
+        merchant.setAccountName(accountName);
+        return merchant;
+    }
+
+    private User buildMerchantUser(String firstName, String lastName, String username, String phone) {
+        User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        user.setUsername(email);
+        user.setUsername(username);
         user.setPhone(phone);
-        user.setAccountNo(accountNo);
-        user.setAccountName(accountName);
         return user;
     }
 
-    private User createMerchant(String firstName, String lastName, String accountNo, String accountName,
-                                String phone, String email) {
-        User user = new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setUsername(email);
-        user.setPhone(phone);
-        user.setAccountNo(accountNo);
-        user.setAccountName(accountName);
-        return user;
-    }
-
-    private User createMerchant(String firstName, String lastName, String phone) {
-        User user = new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setPhone(phone);
-        return user;
-    }
-
-    private Role createRole(Long roleId, String roleName) {
-        Role role = new Role();
-        role.setRoleId(roleId);
-        role.setRoleName(roleName);
-        return role;
+    private Customer buildCustomer(Long customerId,String name,String street,String city,String state, String country,
+                                   String zipCode){
+        Customer customer = new Customer();
+        customer.setCustomerId(customerId);
+        customer.setName(name);
+        customer.setStreet(street);
+        customer.setCity(city);
+        customer.setState(state);
+        customer.setCountry(country);
+        customer.setZipcode(zipCode);
+        return customer;
     }
 }

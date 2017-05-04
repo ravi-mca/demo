@@ -6,20 +6,15 @@ import com.favendo.commons.domain.User;
 import java.util.List;
 
 public interface UserService {
-    
-    List<User> getAll();
 
     void save(User user);
 
-    User getByUserId(Long userId);
-
-    User getByAccountNo(String accountNo);
-
     User getByUsername(String username);
 
-    User getByUsernameOrAccountName(String username,String accountName,String firstName);
-    
-    User getByUsernameOrAccountNameAndUserId(String username,String accountName,Long userId,String firstName);
-    
-    void deleteById(Long userId);
+    List<User> getByUsernameOrFirstNameOrCustomerName(String username,String firstName,String name);
+
+    List<User> getByUsernameFirstNameOrAccountName(String username,String accountName,String firstName);
+
+    List<User> getByUsernameFirstNameOrAccountNameAndMerchantId(String username,String firstName,String accountName,
+                                                          Long merchantId);
 }

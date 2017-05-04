@@ -24,11 +24,12 @@ import './css/store.css';
 
 import Layout from "./components/Layout";
 import Login from "./components/login/Login";
+import Customers from "./components/customers/Customers";
 import Admins from "./components/admins/Admins";
 import Dashboard from "./components/dashboard/Dashboard";
 import Merchants from "./components/merchants/Merchants";
-import Dataportal from "./components/Data-Portal/Dataportal";
-import Account from "./components/Account/Account";
+import Dataportal from "./components/data-Portal/Dataportal";
+import Account from "./components/account/Account";
 
 
 const app = document.getElementById('app');
@@ -39,6 +40,7 @@ ReactDOM.render((
 		<IndexRoute  component = {Login} />
 		<Route path = "/" component = {Dashboard} >
 			<IndexRoute component = {Merchants} />
+			<Route path="/customers" component={Customers} />
 			<Route path="/merchants" component={Merchants} />
 			<Route path="/admins" component={Admins} />
 			<Route path="/dataportal" component={Dataportal} />
