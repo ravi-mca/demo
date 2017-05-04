@@ -83,7 +83,7 @@ export default class Sidebar extends React.Component {
 
     setFilter(filter,user) {
         this.setState({selected  : filter});
-        //this.props.onSelectList(user);
+        this.props.onSelectList(user);
     }
 
     isActive(value) {
