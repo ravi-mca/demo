@@ -112,7 +112,7 @@ export default class MerchantForm extends React.Component {
          
           merchantNameError.textContent = `Merchant with first name already exist`; 
         
-        }else if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
+        }else if(obj["error_description"] == "User with email already exist. Please provide different email.") {
           
           error.textContent = `Merchant with email address already exist`;   
         } else if(obj["error_description"] == "Merchant with account name already exist. Please provide different account name.") {
