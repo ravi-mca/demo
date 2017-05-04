@@ -3,12 +3,14 @@ import  'react-bootstrap';
 import ReactDOM from "react-dom";
 import Service from "../Service";
 import Config from "../../index.config";
-import CreateMerchants from "../merchants/CreateMerchants";
+import CreateCustomers from "../Customers/CreateCustomers";
 
 import $ from 'jquery';
 import SearchInput, {createFilter} from 'react-search-input';
 
-const KEYS_TO_FILTERS = ['firstName','accountNo'];
+const KEYS_TO_FILTERS = ['accountName','accountNo'];
+var token;
+var tokenObj;
 
 export default class Sidebar extends React.Component {
     constructor(props) {
@@ -16,15 +18,16 @@ export default class Sidebar extends React.Component {
         this.state = {
             selected :'',
             selectedTerm:'',
-            merchantList: []
+            list: []
         };
 
         this.searchUpdated = this.searchUpdated.bind(this);
-        this.getListOfMerchant = this.getListOfMerchant.bind(this);
+        this.getList = this.getList.bind(this);
     }
 
     componentDidMount() {
-        this.getListOfMerchant();
+
+        this.getList();
     }
 
     componentDidUpdate() {
@@ -34,35 +37,53 @@ export default class Sidebar extends React.Component {
         }
     }
 
-    getListOfMerchant(info) {
+    getList(info) {
 
-        var requestData = {
-            url: Config.merchantAPIPath,
-            type: 'GET',
-            dataType: 'json',
-            contentType: 'application/json'
-        };
+        token = Service.getToken();
+        if(token) {
+            tokenObj = JSON.parse(token);        
+            if(tokenObj.roles[0].role == "ROLE_ADMIN") {
+               var APIUrl = Config.customerAPIPath;
+            } else {
+                var APIUrl = Config.merchantAPIPath;
+            }
 
-        var reqData = Service.buildRequestdata(requestData);
-        Service.executeRequest(reqData, function(response) {
-           this.setState({merchantList: response});
+            var requestData = {
+                url: APIUrl,
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json'
+            };
 
-           if( (info !== undefined) && (info !== null) ) {
-               this.setState({selected  : info.editFirstName});
-           } else {
-            $('#menu-content li').first().addClass('activeList');
-            $('#menu-content li' ).first().trigger('click');
-      
-           }
+            var reqData = Service.buildRequestdata(requestData);
+            Service.executeRequest(reqData, function(response) {
 
-        }.bind(this), function(xhr, status, err) {
-           console.log(err);
-        }.bind(this));
+               this.setState({list: response});
+
+               if( (info !== undefined) && (info !== null) ) {
+                    
+                    if(tokenObj.roles[0].role == "ROLE_ADMIN") {
+
+                        this.setState({selected  : info.name});
+                    } else {
+                        this.setState({selected  : info.accountName});
+                    }
+               } else {
+                $('#menu-content li').first().addClass('activeList');
+                $('#menu-content li' ).first().trigger('click');
+          
+               }
+
+            }.bind(this), function(xhr, status, err) {
+               console.log(err);
+            }.bind(this));
+
+        }
     }
 
     setFilter(filter,user) {
         this.setState({selected  : filter});
-        this.props.onSelectList(user);
+        //this.props.onSelectList(user);
     }
 
     isActive(value) {
@@ -77,16 +98,23 @@ export default class Sidebar extends React.Component {
     }
 
     render() {
-        const filteredList = this.state.merchantList.filter(createFilter(this.state.selectedTerm, KEYS_TO_FILTERS));
+        const filteredList = this.state.list.filter(createFilter(this.state.selectedTerm, KEYS_TO_FILTERS));
         let showList =  filteredList.map(function(user, i) {
-            return (
-                <li  key={i} className={this.isActive(user.firstName)} onClick={this.setFilter.bind(this, user.firstName,user)}>
-                <div class="list-padding">{user.firstName} </div></li>
-           );
+            if(tokenObj.roles[0].role == "ROLE_ADMIN") {
+                return (
+                    <li  key={i} className={this.isActive(user.name)} onClick={this.setFilter.bind(this, user.name,user)}>
+                    <div class="list-padding">{user.name} </div></li>
+                ); 
+            } else {
+                return (
+                    <li  key={i} className={this.isActive(user.accountName)} onClick={this.setFilter.bind(this, user.accountName,user)}>
+                    <div class="list-padding">{user.accountName} </div></li>
+                );
+            }
         }, this);
 
     return (
-        <div class="nav-side-menu">
+        <div>
            <div class="right-inner-addon">
                 <i class="fa fa-search"></i>
                     <SearchInput class="search-box" placeholder="Search" onChange={this.searchUpdated} />
@@ -96,10 +124,7 @@ export default class Sidebar extends React.Component {
                     {showList}
                 </ul>
             </div>
-            <div>
-               <CreateMerchants onUpdateList={this.getListOfMerchant}/>
-            </div>
-        </div>
+         </div>   
     );
   }
 }

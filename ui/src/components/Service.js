@@ -3,7 +3,7 @@ import $ from 'jquery';
 const Service = {
 
     setToken(token) {
-        localStorage.setItem("accessToken", token);
+        localStorage.setItem("accessToken", JSON.stringify(token));
     },
 
     getToken() {
@@ -16,12 +16,13 @@ const Service = {
 
     setAuthHeader(headers) {
         headers = headers || {};
+
         if(localStorage.accessToken) {
-            headers.Authorization  = 'Bearer'+' '+ localStorage.accessToken;
+            var tokenObject = JSON.parse(localStorage.accessToken);
+            headers.Authorization  = 'Bearer'+' '+ tokenObject.accessToken;
         }
         return headers;
     },
-
 
     getStores(url, data, successHandler, errorHandler) {
 

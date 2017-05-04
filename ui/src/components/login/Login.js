@@ -48,12 +48,15 @@ export default class Login extends React.Component {
                 contentType: 'application/x-www-form-urlencoded'
             };
 
+            Service.deleteToken();
+
             var reqData = Service.buildRequestdata(requestData);
 
             Service.executeRequest(reqData, function(data) {
-
-                this.setState({ showResults: false });
-                this.setAuthToken(data.accessToken);
+                //this.setAuthToken(data);
+                Service.setToken(data);
+                this.setState({ showResults: false });       
+                
                 if(data.roles[0].role == "ROLE_ADMIN") {
                     browserHistory.push('/customers');
                 }else {

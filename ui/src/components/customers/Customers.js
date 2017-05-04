@@ -4,6 +4,7 @@ import  'react-bootstrap';
 import $ from 'jquery';
 import Service from "../Service";
 import Config from "../../index.config";
+import Sidebar from '../sidebar/Sidebar';
 import CreateCustomers from "../Customers/CreateCustomers";
 
 export default class Customers extends React.Component {
@@ -11,22 +12,21 @@ export default class Customers extends React.Component {
       super(props);
       this.state = {
       };
+      this.getCustomerList = this.getCustomerList.bind(this);
+  }
+
+  getCustomerList(info) {
+    this.refs.child.getList(info);
   }
 
   render() {
     return (
-        <div>
+      <div>
         <div class="nav-side-menu">
-           <div class="right-inner-addon pad-15">
-            </div>
-            <div class="menu-list">
-                <ul id="menu-content">
-
-                </ul>
-            </div>
-            <div>
-               <CreateCustomers onUpdateList={this.getListOfMerchant}/>
-            </div>
+        <Sidebar ref= "child" onSelectList={this.setSelectList} />
+        <div>
+        <CreateCustomers onUpdateList={this.getCustomerList}/>
+        </div>
         </div>
         <div class="dashboard-container" id="main">
           <div class="col-md-12 mt-10 mb-20 no-padding">
@@ -39,7 +39,7 @@ export default class Customers extends React.Component {
             </div>
           </div>  
         </div>
-        </div>
+       </div> 
     );
   }
 }

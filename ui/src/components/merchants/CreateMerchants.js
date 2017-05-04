@@ -98,7 +98,7 @@ export default class MerchantForm extends React.Component {
       Service.executeRequest(reqData, function(data) {
         this.refs.alertMessageChild.successAlert("Merchant created successfully.");         
         this.hideModal();   
-        this.props.onUpdateList();    
+        this.props.onUpdateList(this.state);    
       }.bind(this), function(xhr, status, err) {
         this.refs.alertMessageChild.errorAlert("Something is wrong."); 
         var statusObj = xhr;

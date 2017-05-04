@@ -40,6 +40,7 @@ export default class Merchants extends React.Component {
         this.getStoresInfo = this.getStoresInfo.bind(this);
         this.setActiveTabs = this.setActiveTabs.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
+        this.getMerchantList = this.getMerchantList.bind(this);
     }
 
 	handleSelect(key) { }
@@ -163,8 +164,14 @@ export default class Merchants extends React.Component {
       }.bind(this));
   }
 
+  getMerchantList(info) {
+    this.refs.child.getList(info);
+  }
+
     getMerchantAccounts(info) {
     	this.refs.child.getListOfMerchant(info);
+
+
 
       if((info !== undefined) && (info !== null)) {
 
@@ -205,17 +212,17 @@ export default class Merchants extends React.Component {
 					<div class="col-md-6 col-xs-6 auto-div no-padding">
 						<div class="acc-heading">{this.state.userInfo.accountName} </div>
 						<div>
-                            <span class="acc-labels">Account#: </span>
-                            <span class="acc-info">{this.state.userInfo.accountNo}</span>
-                        </div>
+                <span class="acc-labels">Account#: </span>
+                <span class="acc-info">{this.state.userInfo.accountNo}</span>
+            </div>
 						<div>
-                            <span class="acc-labels">Contact: </span>
-                            <span class="acc-info">{this.state.userInfo.phone}</span>
-                        </div>
+                <span class="acc-labels">Contact: </span>
+                <span class="acc-info">{this.state.userInfo.phone}</span>
+            </div>
 						<div class="mb-20">
-                            <span class="acc-labels">Email: </span>
-                            <span class="acc-info">{this.state.userInfo.email}</span>
-                        </div>
+                <span class="acc-labels">Email: </span>
+                <span class="acc-info">{this.state.userInfo.email}</span>
+            </div>
 					</div>
 					<EditMerchants ref="editMerchantChild" data={this.state.userInfo} onUpdateAccount={this.getMerchantAccounts} />				
 				  
@@ -276,14 +283,21 @@ export default class Merchants extends React.Component {
  		}
 
 	return (
-		<div>
-			<Sidebar ref= "child" onSelectList={this.setSelectList} />
-			<div class="dashboard-container" id="main">
-			   	{showAccountInfo}
-			   	{showStoreInfo}	
-	            {showStoreTabs}
-	        </div>
-		</div>
+   <div>
+    <div class="nav-side-menu">
+    <Sidebar ref="child" onSelectList={this.setSelectList} />
+    <div>
+    <CreateMerchants onUpdateList={this.getMerchantList}/>
+    </div>
+    </div>
+    <div class="dashboard-container" id="main">
+     
+    </div><div class="dashboard-container" id="main">
+          {showAccountInfo}
+          {showStoreInfo} 
+          {showStoreTabs}
+      </div>
+   </div> 
 	);
   }
 }

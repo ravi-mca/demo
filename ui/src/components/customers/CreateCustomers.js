@@ -123,6 +123,7 @@ export default class CreateCustomers extends React.Component {
       var reqData = Service.buildRequestdata(requestData);
 
       Service.executeRequest(reqData, function(data) {
+        this.props.onUpdateList(newCustomerData); 
         this.refs.alertMessageChild.successAlert("Customer created successfully.");         
         this.hideModal();   
       }.bind(this), function(xhr, status, err) {
