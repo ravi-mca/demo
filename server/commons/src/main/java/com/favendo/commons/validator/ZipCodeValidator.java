@@ -1,6 +1,7 @@
 package com.favendo.commons.validator;
 
 import org.springframework.stereotype.Component;
+
 import static com.favendo.commons.constant.ValidationPatternConstant.ZIPCODE_PATTERN;
 
 @Component

@@ -4,8 +4,8 @@
     max-height: calc(100% - 120px);
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0px 30px !important;
-    //margin-top: 52px !important;
+    padding: 20px 30px !important;
+    margin-top: -20px !important;
     height: 550px;
 }
 
@@ -14,52 +14,50 @@
 }
 
 .nav-side-menu {
-  font-size: 15px ;
-  position: fixed;
-  top: 51px;
-  width: 275px;
-  height: 100%;
-  //background-color: #40444e;
-  opacity: 1;
-  z-index: 999;
+    font-size: 15px;
+    position: fixed;
+    width: 281px;
+    height: 100%;
+    background-color: #40444e;
+    opacity: 1;
+    z-index: 999;
 }
 
 .list-nav  {
-  font-family: 'Source Sans Pro Semibold' !important;
-  color: #fff !important;
+    font-family: 'Source Sans Pro Semibold' !important;
+    color: #fff !important;
 }
 
 .activeList {
-  background-color: #eBecef !important;
-  color: #c91c49 !important;
-  font-family: 'Source Sans Pro bold' !important;
+    background-color: #eBecef !important;
+    color: #c91c49 !important;
+    font-family: 'Source Sans Pro bold' !important;
 }
 
 .nav-side-menu .menu-list {
-  margin-top: 15px;
-  overflow-y: hidden;
-  height: 400px;
-  width: 275px;
+    margin-top: 15px;
+    overflow-y: hidden;
+    height: 380px;
+    width: 281px;
 }
 
 .nav-side-menu .menu-list:hover {
     overflow-y: auto;
     padding-right: 3px;
-    width: 270px;
+    width: 275px;
 }
-
 
 .nav-side-menu ul,
 .nav-side-menu li {
-  list-style: none;
-  padding: 0px;
-  margin: 0px;
-  line-height: 35px;
-  cursor: pointer;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    line-height: 35px;
+    cursor: pointer;
 }
 
 .nav-side-menu li:hover {
-  background-color: #272b33;
+    background-color: #272b33;
 }
 
 /*Search-addon */
@@ -71,6 +69,8 @@
 
 .right-inner-addon input {
     padding-right: 30px;
+    font-family: 'Source Sans Pro Italic';
+    font-size: 18px;
 }
 
 .right-inner-addon i {
@@ -92,25 +92,25 @@
 }
 
 .nav-side-menu input::-webkit-input-placeholder {
-    font-size: 13px !important;
+    font-size: 18px !important;
     color: #abb0b7;
     font-family : Source Sans Pro Italic;
 }
 
 .nav-side-menu input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   font-size: 13px !important;
+    font-size: 18px !important;
     color: #abb0b7;
     font-family : Source Sans Pro Italic;
 }
 
 .nav-side-menu input::-moz-placeholder { /* Mozilla Firefox 19+ */
-    font-size: 13px !important;
+    font-size: 18px !important;
     color: #abb0b7;
     font-family : Source Sans Pro Italic;
 }
 
 .nav-side-menu input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    font-size: 13px !important;
+    font-size: 18px !important;
     color: #abb0b7;
     font-family : Source Sans Pro Italic;
 }
@@ -143,34 +143,165 @@
 }
 
 #mainDash {
-  width:100%;
+    width:100%;
 }
 
 .nav-side-menu i {
     color: #abb0b7;
 }
 
-@media (max-width: 767px) {
-  .nav-side-menu {
-    position: relative;
-    width: 100%;
-    margin-bottom: 10px;
-    height: 200px;
-    overflow-y: auto;
-}
-
-   .nav-side-menu .menu-list {
-        height: 200px;
-    }
-}
-
-@media (min-width: 767px) {
-  .nav-side-menu .menu-list .menu-content {
+/* Responsive sidebar css */
+.hidden {
     display: block;
 }
 
-#main {
-    width:calc(100% - 275px);
-    float: right;
-  }
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+  height: 100%;
+}
+
+.merchant-dashboard {
+    background-color: #fff !important;
+    max-height: calc(100% - 120px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 550px;
+}
+
+@media screen and (min-width: 768px) {
+    .row-offcanvas {
+        position: relative;
+        -webkit-transition: all .25s ease-out;
+        -moz-transition: all .25s ease-out;
+        transition: all .25s ease-out;
+   }
+
+    .row-offcanvas-right {
+        right: 25%;
+    }
+
+    .row-offcanvas-left {
+        left: 25%;
+    }
+
+    .row-offcanvas-right .sidebar-offcanvas {
+        right: -25%;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .row-offcanvas-left .sidebar-offcanvas {
+        left: -25%;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .row-offcanvas-right.active {
+        right: 0;
+    }
+
+    .row-offcanvas-left.active {
+        left: 0;
+    }
+
+    .row-offcanvas .content {
+        width: 75%;
+        display: none;
+        -webkit-transition: all .25s ease-out;
+        -moz-transition: all .25s ease-out;
+        transition: all .25s ease-out;
+    }
+
+    .row-offcanvas.active .content {
+        width: 100%;
+        display: block;
+    }
+
+    .sidebar-offcanvas {
+        position: absolute;
+        top: 0;
+        width: 25%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .nav-side-menu {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .nav-side-menu .menu-list {
+        height: 500px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-side-menu .menu-list:hover {
+        width: 100%;
+    }
+
+    .row-offcanvas {
+        position: relative;
+        -webkit-transition: all .25s ease-out;
+       -moz-transition: all .25s ease-out;
+        transition: all .25s ease-out;
+    }
+
+    .row-offcanvas-right {
+        right: 0;
+    }
+
+    .row-offcanvas-left {
+        left: 0;
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+
+    .merchant-dashboard {
+        height: 629px;
+    }
+
+    .auto-div {
+        width: 66% !important;
+    }
+
+    .row-offcanvas-right
+    .sidebar-offcanvas {
+        right: -50%; /* 6 columns */
+    }
+
+    .row-offcanvas-left
+    .sidebar-offcanvas {
+        left: -93%; /* 6 columns */
+    }
+
+    .row-offcanvas-right.active {
+        right: 50%; /* 6 columns */
+    }
+
+    .row-offcanvas-left.active {
+        left: 100%; /* 6 columns */
+    }
+
+    .sidebar-offcanvas {
+        position: absolute;
+        top: 0;
+        width: 100%; /* 6 columns */
+        z-index: 999;
+        margin-bottom: 25px;
+    }
+
+}
+
+@media (min-width: 767px) {
+    .nav-side-menu .menu-list .menu-content {
+        display: block;
+    }
+
+    #main {
+        width:calc(100% - 281px);
+        float: right;
+    }
 }

@@ -132,15 +132,15 @@ public class CustomerValidator {
         }
     }
 
-    public void validateDuplication(CustomerDto customerDto, List<User> users) {
-        users.forEach(user -> {
-            Customer customer = user.getCustomer();
-            equalsValidator.validateIfEqualsIgnoreCase(customerDto.getName(), customer.getName(), ALREADY_EXISTS,
-                    duplicateCustomerNameErrorMessage);
-            equalsValidator.validateIfEqualsIgnoreCase(customerDto.getFirstName(), user.getFirstName(), ALREADY_EXISTS,
-                    duplicateCustomerFirstNameErrorMessage);
-            equalsValidator.validateIfEqualsIgnoreCase(customerDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
-                    duplicateCustomerEmailErrorMessage);
-        });
+    public void validateDuplication(Customer customer) {
+        emptyOrNullValidator.validateIfNotNull(customer, ALREADY_EXISTS, duplicateCustomerNameErrorMessage);
+    }
+
+    public void validateDuplication(User user) {
+        emptyOrNullValidator.validateIfNotNull(user, ALREADY_EXISTS, duplicateCustomerEmailErrorMessage);
+    }
+
+    public void validateDuplication(List<User> user) {
+        emptyOrNullValidator.validateIfNotNull(user, ALREADY_EXISTS, duplicateCustomerEmailErrorMessage);
     }
 }

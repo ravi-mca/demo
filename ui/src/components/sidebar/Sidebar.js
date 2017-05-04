@@ -77,7 +77,6 @@ export default class Sidebar extends React.Component {
             }.bind(this), function(xhr, status, err) {
                console.log(err);
             }.bind(this));
-
         }
     }
 
@@ -116,7 +115,7 @@ export default class Sidebar extends React.Component {
     return (
         <div>
            <div class="right-inner-addon">
-                <i class="fa fa-search"></i>
+                <i class="fa fa-search login-font"></i>
                     <SearchInput class="search-box" placeholder="Search" onChange={this.searchUpdated} />
             </div>
             <div class="menu-list">

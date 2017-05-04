@@ -10,32 +10,8 @@ import java.util.Objects;
 @Component
 public class EqualsValidator {
 
-    public void validateIfEquals(String value1, String value2, ErrorKey errorKey, String message) {
-        if (StringUtils.equals(value1, value2)) {
-            throw new StorecastApiException(errorKey, message);
-        }
-    }
-
     public void validateIfEqualsIgnoreCase(String value1, String value2, ErrorKey errorKey, String message) {
         if (StringUtils.endsWithIgnoreCase(value1, value2)) {
-            throw new StorecastApiException(errorKey, message);
-        }
-    }
-
-    public void validateIfNotEquals(String value1, String value2, ErrorKey errorKey, String message) {
-        if (!StringUtils.equals(value1, value2)) {
-            throw new StorecastApiException(errorKey, message);
-        }
-    }
-
-    public void validateIfNotEquals(Integer integer1, Integer integer2, ErrorKey errorKey, String message) {
-        if (!Objects.equals(integer1, integer2)) {
-            throw new StorecastApiException(errorKey, message);
-        }
-    }
-
-    public void validateIfEquals(Integer integer1, Integer integer2, ErrorKey errorKey, String message) {
-        if (Objects.equals(integer1, integer2)) {
             throw new StorecastApiException(errorKey, message);
         }
     }

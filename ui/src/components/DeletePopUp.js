@@ -66,7 +66,7 @@ export default class DeletePopUp extends React.Component {
   render() {
     return (
       <div id="deletePopUpPanel">
-          <i class="fa fa-trash pointer" onClick={this.openModal}></i>      
+          <i class="fa fa-trash login-font pointer" onClick={this.openModal}></i>      
           <div>
             <AlertMessage ref="alertMessageChild"/>
           </div>        

@@ -61,7 +61,7 @@ export default class Login extends React.Component {
                     browserHistory.push('/customers');
                 }else {
                     browserHistory.push('/merchants');
-                }                  
+                }
            }.bind(this), function(xhr, status, err) {
                this.setState({ showResults: true });
                   console.log('err',err);

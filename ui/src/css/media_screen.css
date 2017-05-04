@@ -1,0 +1,89 @@
+/* #### Mobile Phones Portrait #### */
+@media screen and (max-device-width: 480px) and (orientation: portrait){
+  /* some CSS here */
+  .navbar-header {
+    width: 100% !important;
+  }
+  .pull-right {
+    float: none;
+  }
+}
+
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-device-width: 640px) and (orientation: landscape){
+  /* some CSS here */
+   .navbar-header {
+    width: 100% !important;
+  }
+  .pull-right {
+    float: none;
+  }
+}
+
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-device-width: 640px){
+  /* some CSS here */
+   .navbar-header {
+    width: 100% !important;
+  }
+  .pull-nav {
+    float: none;
+  }
+}
+
+/* #### iPhone 4+ Portrait or Landscape #### */
+@media screen and (min-device-width: 320px) and (-webkit-min-device-pixel-ratio: 2){
+  /* some CSS here */
+   .navbar-header {    
+      width: 100%;
+  }
+  .pull-nav {
+    float: none;
+  }
+}
+
+/* #### iPhone 5 Portrait or Landscape #### */
+@media (device-height: 568px) and (device-width: 320px) and (-webkit-min-device-pixel-ratio: 2){
+  /* some CSS here */
+   .navbar-header {    
+      width: 288px;
+  }
+  .pull-nav {
+    float: none;
+  }
+}
+
+/* #### iPhone 6 and 6 plus Portrait or Landscape #### */
+@media (min-device-height: 667px) and (min-device-width: 375px) and (-webkit-min-device-pixel-ratio: 3){
+  /* some CSS here */
+   .navbar-header {    
+      width: 288px;
+  } 
+
+  .pull-nav {
+    float: none;
+  }
+}
+
+/* #### Tablets Portrait or Landscape #### */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px){
+  /* some CSS here */
+   .navbar-header {    
+      width: 288px;
+  }
+
+  .pull-nav {
+    float: right;
+  }
+}
+
+/* #### Desktops #### */
+@media screen and (min-width: 1024px){
+  /* some CSS here */
+   .navbar-header {    
+      width: 288px;
+  }
+  .pull-nav {
+    float: right;
+  }
+}

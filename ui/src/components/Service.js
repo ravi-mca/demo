@@ -24,22 +24,6 @@ const Service = {
         return headers;
     },
 
-    getStores(url, data, successHandler, errorHandler) {
-
-        $.ajax({
-            type: 'GET',
-            url: url,
-            dataType : "json",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            headers: {
-                'Authorization': 'Bearer '+localStorage.accessToken,
-            },
-            success: successHandler,
-            error: errorHandler,
-        });
-    },
-
     buildRequestdata(reqInfo, headers) {
 
         var reqData = {

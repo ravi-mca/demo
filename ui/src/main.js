@@ -4,12 +4,16 @@ import ReactDOM from "react-dom";
 
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 
+
+import 'jquery/src/jquery.js';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import 'font-awesome/css/font-awesome.min.css';
 import './css/variable.css';
 import './css/login.css';
 import './css/footer.css';
 import './css/header.css';
+import './css/media_screen.css';
 import './css/sidebar.css';
 import './css/merchant.css';
 import './css/toastr.min.css';

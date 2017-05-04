@@ -12,7 +12,13 @@ public interface CustomerService {
 
     Customer getById(Long customerId);
 
+    Customer getByName(String name);
+
     void save(Customer customer, User user);
+    
+    void update(Customer customer, User user);
 
     void delete(Long customerId);
+
+    Customer getByNameAndCustomerId(String name,Long customerId);
 }

@@ -82,7 +82,7 @@ public class MerchantEndpoint {
     public Response save(@RequestBody MerchantDto merchantDto) {
         try {
             validateSaveRequest(merchantDto);
-            merchantService.save(merchantBuilder.buildMerchant(merchantDto,getCurrentCustomer()), merchantBuilder.
+            merchantService.save(merchantBuilder.buildMerchant(merchantDto, getCurrentCustomer()), merchantBuilder.
                     buildMerchantUser(merchantDto));
             return Response.status(Status.CREATED).build();
         } catch (BusinessException exception) {
@@ -97,8 +97,8 @@ public class MerchantEndpoint {
             Merchant merchant = getAndValidateMerchantById(merchantId);
             Optional<User> optional = merchant.getMerchantUsers().stream().findFirst();
             validateUpdateRequest(merchantDto, merchant);
-            merchantService.update(merchantBuilder.buildMerchant(merchantDto, merchant),merchantBuilder.
-                    buildMerchantUser(merchantDto,optional.get()));
+            merchantService.update(merchantBuilder.buildMerchant(merchantDto, merchant), merchantBuilder.
+                    buildMerchantUser(merchantDto, optional.get()));
             return Response.status(Status.OK).build();
         } catch (BusinessException exception) {
             throw new StorecastApiException(ErrorKey.SERVER_ERROR, exception.getMessage());
@@ -123,18 +123,19 @@ public class MerchantEndpoint {
 
     private void validateSaveRequest(@RequestBody MerchantDto merchantDto) {
         merchantValidator.validateRequest(merchantDto);
-        merchantValidator.validateDuplication(merchantDto, userService.getByUsernameFirstNameOrAccountName(
-                merchantDto.getEmail(),merchantDto.getFirstName(),merchantDto.getAccountName()));
+        merchantValidator.validateDuplication(merchantService.getByAccountName(merchantDto.getAccountName()));
+        merchantValidator.validateDuplication(userService.getByUsername(merchantDto.getEmail()));
     }
 
     private void validateUpdateRequest(@RequestBody MerchantDto merchantDto, Merchant merchant) {
         merchantValidator.validateContactDetails(merchantDto.getEmail(), merchantDto.getPhone());
-        merchantValidator.validateDuplication(merchantDto, userService.
-                getByUsernameFirstNameOrAccountNameAndMerchantId(merchantDto.getEmail(),merchantDto.getFirstName(),
-                        merchantDto.getAccountName(),merchant.getMerchantId()));
+        merchantValidator.validateDuplication(merchantService.getByAccountNameAndMerchantId(merchantDto.getAccountName(),
+                merchant.getMerchantId()));
+        merchantValidator.validateDuplication(userService.getByUsernameAndUserId(merchantDto.getEmail(),
+                merchant.getMerchantUsers().stream().findFirst().get().getUser_id()));
     }
 
-    private Customer getCurrentCustomer(){
+    private Customer getCurrentCustomer() {
         return UserContextHolder.getLoggedInUser().getCustomer();
     }
 }

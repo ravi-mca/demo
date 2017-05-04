@@ -217,7 +217,7 @@ export default class AddStore extends React.Component {
 	render() {
 		return (
 			<div id="storepanel">
-			<div class="col-md-6 col-xs-6">
+			<div class="col-md-6 col-xs-4">
 						<button type="button" class="btn btn-primary" onClick={this.openModal}>
 							<i class="fa fa-plus"><span class="storebtn"> Add Store</span></i>
 						</button>

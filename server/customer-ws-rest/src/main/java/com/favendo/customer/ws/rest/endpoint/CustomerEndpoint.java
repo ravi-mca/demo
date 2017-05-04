@@ -1,6 +1,7 @@
 package com.favendo.customer.ws.rest.endpoint;
 
 import com.favendo.commons.domain.Customer;
+import com.favendo.commons.domain.User;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.StorecastApiException;
 import com.favendo.customer.service.service.CustomerService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Objects;
+import java.util.Optional;
 
 import static com.favendo.commons.exception.ErrorKey.BAD_REQUEST;
 import static com.favendo.commons.exception.ErrorKey.SERVER_ERROR;
@@ -59,11 +61,20 @@ public class CustomerEndpoint {
 
     @POST
     public Response save(@RequestBody CustomerDto customerDto) {
-        customerValidator.validateRequest(customerDto);
-        customerValidator.validateDuplication(customerDto, userService.getByUsernameOrFirstNameOrCustomerName(
-                customerDto.getEmail(), customerDto.getFirstName(), customerDto.getName()));
+        validateSaveRequest(customerDto);
         customerService.save(customerBuilder.buildCustomer(customerDto), customerBuilder.buildCustomerUser(customerDto));
         return Response.status(Response.Status.CREATED).build();
+    }
+
+    @PUT
+    @Path(PATH_PARAM_CUSTOMER_ID)
+    public Response update(@RequestBody CustomerDto customerDto, @PathParam(CUSTOMER_ID) Long customerId) {
+        Customer customer = getAndValidateCustomerById(customerId);
+        Optional<User> optional = customer.getCustomerUsers().stream().findFirst();
+        validateUpdateRequest(customerDto, customer);
+        customerService.update(customerBuilder.buildCustomer(customerDto, customer),customerBuilder.
+                buildCustomerUser(customerDto, optional.get()));
+        return Response.status(Response.Status.OK).build();
     }
 
     @DELETE
@@ -80,5 +91,19 @@ public class CustomerEndpoint {
             throw new StorecastApiException(BAD_REQUEST, customerNotFoundErrorMessage, CUSTOMER_ID);
         }
         return customer;
+    }
+
+    private void validateSaveRequest(@RequestBody CustomerDto customerDto) {
+        customerValidator.validateRequest(customerDto);
+        customerValidator.validateDuplication(customerService.getByName(customerDto.getName()));
+        customerValidator.validateDuplication(userService.getByUsername(customerDto.getEmail()));
+    }
+    
+    private void validateUpdateRequest(@RequestBody CustomerDto customerDto, Customer customer) {
+        customerValidator.validateContactDetails(customerDto.getEmail(), customerDto.getPhone());
+        customerValidator.validateDuplication(customerService.getByNameAndCustomerId(customerDto.getName(),
+                customer.getCustomerId()));
+        customerValidator.validateDuplication(userService.getByUsernameAndUserId(customerDto.getEmail(),
+                customer.getCustomerUsers().stream().findFirst().get().getUser_id()));
     }
 }

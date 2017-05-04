@@ -11,9 +11,5 @@ public interface UserService {
 
     User getByUsername(String username);
 
-    List<User> getByUsernameOrFirstNameOrCustomerName(String username,String firstName,String name);
-
-    List<User> getByUsernameFirstNameOrAccountName(String username,String accountName,String firstName);
-
-    List<User> getByUsernameFirstNameOrAccountNameAndMerchantId(String username,String firstName,String accountName, Long merchantId);
+    List<User> getByUsernameAndUserId(String username,Long userId);
 }

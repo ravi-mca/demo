@@ -89,11 +89,11 @@ export default class StoreInfo extends React.Component {
                 </div>
                 <div class="col-md-12 mb-10 no-padding">
                     <div class="col-md-3 col-xs-6 font-semibold">POS System</div>
-                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.posSystem}</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.posSystem ? this.state.storeList.posSystem:'-'}</div>
                 </div>
                 <div class="col-md-12 mb-20 no-padding">
                     <div class="col-md-3 col-xs-6 font-semibold">Storecast Admin Name</div>
-                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.storecastAdminName}</div>
+                    <div class="col-md-3 col-xs-6 font-regular">{this.state.storeList.storecastAdminName?this.state.storeList.storecastAdminName:'-' }</div>
                 </div>
           	</div>
         );

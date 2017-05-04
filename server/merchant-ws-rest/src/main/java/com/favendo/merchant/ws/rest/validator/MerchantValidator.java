@@ -95,16 +95,16 @@ public class MerchantValidator {
         }
     }
 
-    public void validateDuplication(MerchantDto merchantDto, List<User> users) {
-        users.forEach(user -> {
-            Merchant merchant = user.getMerchant();
-            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getFirstName(), user.getFirstName(), ALREADY_EXISTS,
-                    duplicateMerchantFirstNameErrorMessage);
-            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getEmail(), user.getUsername(), ALREADY_EXISTS,
-                    duplicateMerchantEmailErrorMessage);
-            equalsValidator.validateIfEqualsIgnoreCase(merchantDto.getAccountName(), merchant.getAccountName(),
-                    ALREADY_EXISTS, duplicateMerchantAccountNameErrorMessage);
-        });
+    public void validateDuplication(Merchant merchant) {
+        emptyOrNullValidator.validateIfNotNull(merchant,ALREADY_EXISTS, duplicateMerchantAccountNameErrorMessage);
+    }
+
+    public void validateDuplication(User user) {
+        emptyOrNullValidator.validateIfNotNull(user,ALREADY_EXISTS, duplicateMerchantEmailErrorMessage);
+    }
+
+    public void validateDuplication(List<User> user) {
+        emptyOrNullValidator.validateIfNotNull(user,ALREADY_EXISTS, duplicateMerchantEmailErrorMessage);
     }
 
     public void validateAccountNo(String accountNo) {

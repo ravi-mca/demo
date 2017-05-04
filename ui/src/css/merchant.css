@@ -3,7 +3,7 @@
   padding: 35px 0px 0px 40px !important;
 }
 
-.btn-padding{
+.btn-padding {
   padding: 15px;
 }
 
@@ -12,16 +12,15 @@
 }
 
 .modal-content {
-    //margin: 80px 100px auto 0px !important;
     margin-top: 80px !important;
 }
+
 .modal-body input{
-	//padding: 0px  !important;
-  background-color: #edf0f2;
+    background-color: #edf0f2;
 }
 
 .modal-padding {
- padding: 35px 0px 34px 29px  !important;
+    padding: 35px 0px 34px 29px  !important;
 }
 
 .modal-footer {
@@ -33,58 +32,59 @@
 
 .modal-footer-hr {
 	margin: 0px 50px 0px 43px !important;
-  margin-bottom: 20px !important;
-  border-bottom: 0.5px solid #474b54 ;
+    margin-bottom: 20px !important;
+    border-bottom: 0.5px solid #474b54 ;
 }
 
 .form-label {
-  color: #4e4e4e !important;
-  font-size: 15px !important;
-  font-family: 'Source Sans Pro' !important;
-  font-weight: 500 !important;
-  padding-left: 40px !important;
+    color: #4e4e4e !important;
+    font-size: 15px !important;
+    font-family: 'Source Sans Pro' !important;
+    font-weight: 500 !important;
+    padding-left: 40px !important;
 }
 
 .bottom-btn {
-  font-family: Source Sans Pro Semibold !important;
-  font-size: 15px !important;
-  color: white !important;
-  background-color: #646f84 !important;
-  border-radius: 5px;
+    font-family: Source Sans Pro Semibold !important;
+    font-size: 15px !important;
+    color: white !important;
+    background-color: #646f84 !important;
+    border-radius: 5px;
 }
 
 .btn-blue {
-  font-family: Source Sans Pro Semibold !important;
-  font-size: 15px !important;
-  color: #ffffff !important;
-  background-color: #0099da !important;
+    font-family: Source Sans Pro Semibold !important;
+    font-size: 15px !important;
+    color: #ffffff !important;
+    background-color: #0099da !important;
 }
 
 .form-group {
-  margin-bottom: 15px !important;
+    margin-bottom: 15px !important;
 }
 
 .col-padding {
-  padding: 0px;
+    padding: 0px;
 }
 
 .margin-right-11 {
-  margin-right: 11px !important;
+    margin-right: 11px !important;
 }
 
 .toast {
-  font-size: 15px !important;
+    font-size: 15px !important;
 }
 
 /* Account-info css*/
 .acc-heading {
-    font-size: 20px;
-    font-family: 'Source Sans Pro Bold';
+    font-size: 30px;
+    font-family: 'Source Sans Pro Light';
     color: #4e4e4e;
+    margin-bottom: 10px;
 }
 
 .acc-info {
-    font-size: 15px;
+    font-size: 17px;
     font-family: Source Sans Pro;
     color: #4e4e4e;
 }
@@ -98,8 +98,15 @@
     width: auto;
 }
 
+.info-btn {
+    height: 40px;
+    width: 50px;
+    background: #F3F3F3;
+    border: 1px solid #E0DBDB;
+}
+
 .bgColor {
-  background: white !important;
+    background: white !important;
 }
 
 /* Add store */
@@ -117,7 +124,7 @@ select.active:invalid {
 }
 
 .selectedFont {
-  font-weight: bold !important;
+    font-weight: bold !important;
 }
 
 /* Store Info */
@@ -127,28 +134,40 @@ select.active:invalid {
 }
 
 .acc-labels {
-  font-family: 'Source Sans Pro Bold';
-  font-size: 14px;
+    font-family: 'Source Sans Pro Bold';
+    font-size: 14px;
 }
 
 #editpanel i {
-  padding-top: 7px;
+    padding-top: 7px;
 }
 
 #selectStore {
-  background-color: #edf0f2;
+    background-color: #edf0f2;
 }
 
 #selectStore option {
-  background-color: white;
+    background-color: white;
 }
 
 .marchant-btn {
-  padding: 15px 10px 0px 10px;
+    padding: 15px 10px 0px 10px;
 }
 
 .left-icon {
     margin-top: -15px !important;
     margin-left: -97px !important;
     float: left !important;
+}
+
+.bar {
+    vertical-align: sub !important;
+    font-weight: bold !important;
+}
+
+ @media screen and (max-width: 767px) {
+    .info-btn {
+        width: 38px;
+        margin-top: 10px;
+    }
 }
