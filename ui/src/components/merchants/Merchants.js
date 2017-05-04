@@ -191,6 +191,7 @@ export default class Merchants extends React.Component {
         let showStoreTabs;
         let showStoreInfo;
         var i = 0;
+
         var stores = this.state.storeInfo;
         if(this.state.userInfo) {
             showAccountInfo = (
@@ -272,9 +273,6 @@ export default class Merchants extends React.Component {
                 <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
                     <div class="list-group">
                         <Sidebar ref= "child" onSelectList={this.setSelectList} />
-                        <div>
-                        <CreateMerchants onUpdateList={this.getMerchantList}/>
-                        </div>
                     </div>
                 </div>
                 <div>

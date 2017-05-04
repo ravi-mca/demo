@@ -136,7 +136,7 @@ export default class CreateCustomers extends React.Component {
          const customerNameError = document.getElementById(`customerNameError`);
           customerNameError.textContent = obj["error_description"]; 
         
-        } else if(obj["error_description"] == "Customer with email already exist. Please provide different email.") {
+        } else if(obj["error_description"] == "User with email already exist. Please provide different email.") {
          const customerEmailError = document.getElementById(`customerEmailError`);
           customerEmailError.textContent = obj["error_description"];
         }
@@ -172,6 +172,7 @@ export default class CreateCustomers extends React.Component {
 
     const validEmail = refName.indexOf('customerEmail') !== -1;     
     const isNumber = refName.indexOf('customerPhone') !== -1;
+    const isZipCodeNumber = refName.indexOf('customerZipcode') !== -1;
 
      error.textContent = '';
 
@@ -189,6 +190,9 @@ export default class CreateCustomers extends React.Component {
           } else if (isNumber && validity.patternMismatch) {
           
             error.textContent = `Please enter valid number`;
+          } else if (isZipCodeNumber && validity.patternMismatch) {
+          
+            error.textContent = `Please enter valid zipcode`;
           }
         }
    
@@ -255,7 +259,7 @@ export default class CreateCustomers extends React.Component {
                   <Label id="customerEmailLabel" class="form-label" for="customerEmail" sm={3}>Email </Label>
                   <Col sm={8} class="col-padding">
                      <input className="form-control"
-                    type="customerEmail"
+                    type="text"
                     name="customerEmail"
                     ref="customerEmail"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
@@ -283,7 +287,7 @@ export default class CreateCustomers extends React.Component {
                   <Label id="customerCountryLabel" class="form-label" for="customerCountry" sm={3}> Country </Label>
                    <Col sm={8} class="col-padding">
                      <input className="form-control"
-                    type="customerCountry"
+                    type="text"
                     name="customerCountry"
                     ref="customerCountry"
                     value={ this.state.customerCountry } 
@@ -296,7 +300,7 @@ export default class CreateCustomers extends React.Component {
                   <Label id="customerCityLabel" class="form-label" for="customerCity" sm={3}> City </Label>
                    <Col sm={8} class="col-padding">
                      <input className="form-control"
-                    type="customerCity"
+                    type="text"
                     name="customerCity"
                     ref="customerCity"
                     value={ this.state.customerCity } 
@@ -309,7 +313,7 @@ export default class CreateCustomers extends React.Component {
                   <Label id="customerStateLabel" class="form-label" for="customerState" sm={3}> State </Label>
                    <Col sm={8} class="col-padding">
                      <input className="form-control"
-                    type="customerState"
+                    type="text"
                     name="customerState"
                     ref="customerState"
                     value={ this.state.customerState } 
@@ -322,7 +326,7 @@ export default class CreateCustomers extends React.Component {
                   <Label id="customerStreetLabel" class="form-label" for="customerStreet" sm={3}> Street </Label>
                    <Col sm={8} class="col-padding">
                      <input className="form-control"
-                    type="customerStreet"
+                    type="text"
                     name="customerStreet"
                     ref="customerStreet"
                     value={ this.state.customerStreet } 

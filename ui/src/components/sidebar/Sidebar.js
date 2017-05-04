@@ -3,7 +3,8 @@ import  'react-bootstrap';
 import ReactDOM from "react-dom";
 import Service from "../Service";
 import Config from "../../index.config";
-import CreateCustomers from "../Customers/CreateCustomers";
+import CreateCustomers from "../customers/CreateCustomers";
+import CreateMerchants from "../merchants/CreateMerchants";
 
 import $ from 'jquery';
 import SearchInput, {createFilter} from 'react-search-input';
@@ -78,7 +79,7 @@ export default class Sidebar extends React.Component {
                console.log(err);
             }.bind(this));
         }
-    }
+        }
 
     setFilter(filter,user) {
         this.setState({selected  : filter});
@@ -97,6 +98,19 @@ export default class Sidebar extends React.Component {
     }
 
     render() {
+        let createAccount;
+
+        if(token) {
+            if(tokenObj.roles[0].role == "ROLE_ADMIN") { 
+                createAccount = (
+                    <CreateCustomers onUpdateList={this.getList}/>
+                );
+            } else {
+                createAccount = (
+                   <CreateMerchants onUpdateList={this.getList}/>
+                );
+            }
+        }    
         const filteredList = this.state.list.filter(createFilter(this.state.selectedTerm, KEYS_TO_FILTERS));
         let showList =  filteredList.map(function(user, i) {
             if(tokenObj.roles[0].role == "ROLE_ADMIN") {
@@ -111,9 +125,10 @@ export default class Sidebar extends React.Component {
                 );
             }
         }, this);
+        
 
     return (
-        <div>
+         <div class="nav-side-menu">
            <div class="right-inner-addon">
                 <i class="fa fa-search login-font"></i>
                     <SearchInput class="search-box" placeholder="Search" onChange={this.searchUpdated} />
@@ -123,7 +138,10 @@ export default class Sidebar extends React.Component {
                     {showList}
                 </ul>
             </div>
-         </div>   
+            <div>
+                {createAccount}
+            </div>
+        </div>
     );
   }
 }

@@ -206,16 +206,6 @@ li {
     .menu-bg {
         background: white;
     }
-
-    .dropdown-menu:before {
-        top: 48px;
-        right: 161px;
-    }
-
-    .dropdown-menu:after {
-        top: 48px;
-        right: 161px;
-    }
 }
 
 @media screen and (max-width: 784px) {
