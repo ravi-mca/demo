@@ -150,6 +150,32 @@ li {
     float: left;
 }
 
+.dropdown-menu:before {
+    content: "";
+    border-bottom: 10px solid  #e6eaf2;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    z-index: 10;
+}
+
+.dropdown-menu:after {
+    content: "";
+    border-bottom: 12px solid #e6eaf2;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    position: absolute;
+    top: -12px;
+    right: 14px;
+    z-index: 9;
+}
+
+.dropdown-menu{
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .175);
+}
+
 /* media queries for responsive screens*/
 @media screen and (min-width: 768px) {
     .navbar-right .dropdown-menu {

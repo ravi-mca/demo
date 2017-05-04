@@ -55,7 +55,7 @@ export default class EditStore extends React.Component {
       deleteMessage: "store",
       info: this.props.data,
     };
-    
+
     this.handleChange = this.handleChange.bind(this);
     this.handleEditStoreSubmit = this.handleEditStoreSubmit.bind(this);
     this.showEditForm = this.showEditForm.bind(this);
@@ -66,7 +66,7 @@ export default class EditStore extends React.Component {
   openModal = () => {
     this.setState({
       isOpen: true,
-    }); 
+    });
   };
 
   resetForm() {
@@ -91,8 +91,8 @@ export default class EditStore extends React.Component {
       editPriceCategory : "",
       editPosSystem : "",
       editStoreCastAdminName : "",
-    }); 
-   
+    });
+
     $("#editStoreIdError").html("");
     $("#editNameError").html("");
     $("#editNicknameError").html("");
@@ -115,7 +115,7 @@ export default class EditStore extends React.Component {
 
   hideModal = () => {
      this.setState({
-      isOpen: false, 
+      isOpen: false,
     });
     this.resetForm();
   };
@@ -288,20 +288,20 @@ export default class EditStore extends React.Component {
   render() {
     return (
           <div id="editStorepanel">
-           <div class="col-md-2 col-xs-4">
+           <div class="col-md-2 col-xs-4 mt-10">
             <div class="col-md-1 col-xs-1">
-            <i class="fa fa-pencil ml-10 pointer" onClick={this.showEditForm}></i>    
-            </div>   
+            <i class="fa fa-pencil ml-10 login-font pointer" onClick={this.showEditForm}></i>
+            </div>
             <div class="col-md-1 col-xs-1 pad-left-19 pad-right-2">
               <span>|</span>
             </div>
-            <div class="col-md-1 col-xs-1">              
+            <div class="col-md-1 col-xs-1">
               <DeletePopUp data={this.props.data} onUpdate={this.onUpdateStoreAccount}/>
             </div>
             <div>
             </div>
               <AlertMessage ref="alertMessageChild"/>
-            </div>     
+            </div>
             <Modal isOpen={this.state.isOpen}>
               <div class="modal-header">
                 <h4 class="modal-title font-20">Edit Store</h4>

@@ -190,7 +190,7 @@ export default class Merchants extends React.Component {
             showAccountInfo = (
                 <div class="col-md-12 mt-25 mb-20 acc-border no-padding">
                     <div class="col-md-6 col-xs-6 auto-div no-padding">
-                        <div class="acc-heading">{this.state.userInfo.firstName} </div>
+                        <div class="acc-heading">{this.state.userInfo.firstName}</div>
                         <div>
                             <i class="fa fa-user-circle-o mr-10" aria-hidden="true"></i>
                             <span class="acc-info">{this.state.userInfo.accountNo}</span>
@@ -247,7 +247,7 @@ export default class Merchants extends React.Component {
                         <AddStore data={this.state.userInfo.userId} onUpdateStore= {this.getStoresInfo}/>
                         <div class="row" >
                             <div class="col-md-12 col-xs-12 pad-top-10 pad-left-0" id="showSelectedStoreId">
-                                <div class="col-md-6 col-xs-6 auto-div pad-bottom-10">
+                                <div class="col-md-6 col-xs-6 auto-div pad-bottom-10 mt-10">
                                     <span class="acc-labels">Store#: </span>
                                     <span class="acc-info">{this.state.storeDetails.storeId}</span>
                                 </div>
