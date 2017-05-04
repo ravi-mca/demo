@@ -98,7 +98,7 @@ export default class CreateCustomers extends React.Component {
     e.preventDefault();   
     let isFormValid = true;
 
-    if (this.showFormErrors()) {
+    if (this.checkFormValidation()) {
 
       var newCustomerData = {};
       newCustomerData.name = this.state.customerName;
@@ -125,35 +125,27 @@ export default class CreateCustomers extends React.Component {
       Service.executeRequest(reqData, function(data) {
         this.refs.alertMessageChild.successAlert("Customer created successfully.");         
         this.hideModal();   
-        //this.props.onUpdateList();    
       }.bind(this), function(xhr, status, err) {
         console.log("error", err);
         this.refs.alertMessageChild.errorAlert("Something is wrong."); 
-        /*var statusObj = xhr;
+        var statusObj = xhr;
         var obj=JSON.parse(xhr.responseText);
 
-        const customerFirstNameError = document.getElementById(`customerFirstNameError`);
-        const customerEmailError = document.getElementById(`customerEmailError`);
-        const customerNameError = document.getElementById(`customerNameError`);
-
-        if(obj["error_description"] == "Merchant with first name already exist. Please provide different first name.") {
-         
-          merchantNameError.textContent = `Merchant with first name already exist`; 
+        if(obj["error_description"] == "Customer with name already exist. Please provide different name.") {
+         const customerNameError = document.getElementById(`customerNameError`);
+          customerNameError.textContent = obj["error_description"]; 
         
-        }else if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
-          
-          error.textContent = `Merchant with email address already exist`;   
-        } else if(obj["error_description"] == "Merchant with account name already exist. Please provide different account name.") {
-         
-          accountNameError.textContent = `Merchant with account name already exist`;
-        }*/
+        } else if(obj["error_description"] == "Customer with email already exist. Please provide different email.") {
+         const customerEmailError = document.getElementById(`customerEmailError`);
+          customerEmailError.textContent = obj["error_description"];
+        }
 
         isFormValid = false;
       }.bind(this));
     }
   }
   
-  showFormErrors() {
+  checkFormValidation() {
     
     const inputs = document.querySelectorAll('#customerPanel input');
 
@@ -220,10 +212,10 @@ export default class CreateCustomers extends React.Component {
               <form id="myform" method="post" noValidate onSubmit="">
               <ModalBody>
               <FormGroup row>
-                  <Label id="customerNameLabel" class="form-label" for="customerName" sm={3}> Name </Label><span></span>
+                  <Label id="customerNameLabel" class="form-label" for="customerName" sm={3}> Customer Name </Label><span></span>
                   <Col sm={8} class="col-padding">
                      <input className="form-control"
-                    type="customerName"
+                    type="text"
                     name="customerName"
                     ref="customerName"
                     value={ this.state.customerName } 

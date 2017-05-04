@@ -52,7 +52,6 @@ export default class Sidebar extends React.Component {
            } else {
             $('#menu-content li').first().addClass('activeList');
             $('#menu-content li' ).first().trigger('click');
-      
            }
 
         }.bind(this), function(xhr, status, err) {
@@ -88,7 +87,7 @@ export default class Sidebar extends React.Component {
     return (
         <div class="nav-side-menu">
            <div class="right-inner-addon">
-                <i class="fa fa-search"></i>
+                <i class="fa fa-search login-font"></i>
                     <SearchInput class="search-box" placeholder="Search" onChange={this.searchUpdated} />
             </div>
             <div class="menu-list">
