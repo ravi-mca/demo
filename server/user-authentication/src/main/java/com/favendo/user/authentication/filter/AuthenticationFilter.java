@@ -48,11 +48,10 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
         } else {
             try {
                 TokenUtils tokenUtils = new TokenUtils();
-                UsernamePasswordAuthenticationToken authentication = getAuthenticationByAuthToken(authToken, httpServletRequest);
                 if (BooleanUtils.isFalse(tokenUtils.validateToken(authToken, UserContextHolder.getLoggedInUser()))) {
                     throw new AuthenticationCredentialsNotFoundException(INVALID_USER_TOKEN_ERROR_MESSAGE);
                 }
-                return authentication;
+                return getAuthenticationByAuthToken(authToken, httpServletRequest);
             } catch (Exception exception) {
                 throw new AuthenticationCredentialsNotFoundException(INVALID_USER_TOKEN_ERROR_MESSAGE);
             }
