@@ -14,9 +14,10 @@ export default class Customers extends React.Component {
       this.state = {
       };
       this.setSelectList = this.setSelectList.bind(this);
+      this.getCustomerAccount = this.getCustomerAccount.bind(this);
   }
 
-  setSelectList(userInfo) {
+    setSelectList(userInfo) {
         userInfo.deleteName = userInfo.accountName;
         userInfo.successAlert = Config.successAlert.deleteMerchant;
         userInfo.APIUrl = Config.deleteAPIPath+ userInfo.merchantId;
@@ -25,6 +26,10 @@ export default class Customers extends React.Component {
         this.setState({
             userInfo: userInfo
         });
+    }
+
+    getCustomerAccount(cusData) {
+        this.refs.child.getList(cusData);
     }
 
 
@@ -47,7 +52,7 @@ export default class Customers extends React.Component {
                         </div>
                     </div>
                     <div class="mr-90">
-                    <EditCustomers data={this.state.userInfo}/>
+                    <EditCustomers data={this.state.userInfo} onUpdateCustomer={this.getCustomerAccount} />
                     </div>
                 </div>
             );

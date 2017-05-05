@@ -28,7 +28,6 @@ import {
 export default class EditCustomers extends React.Component {
     constructor(props) {
         super(props);
-console.log('props',this.props.data);
         this.state = {
             editCustomerFirstName: '',
             editCustomerLastName: '',
@@ -118,7 +117,7 @@ console.log('props',this.props.data);
 
             var requestData = {
                 url: Config.customerAPIPath+ '/' + customerId,
-                type: 'POST',
+                type: 'PUT',
                 data: JSON.stringify(newCustomerData),
                 dataType: 'text',
                 contentType: 'application/json'
@@ -192,16 +191,16 @@ console.log('props',this.props.data);
     editCustomerForm() {
         this.setState({
             isOpen: true,
-            editCustomerFirstName: this.props.data.customerFirstName,
-            editCustomerLastName: this.props.data.customerLastName,
-            editCustomerName:this.props.data.customerName,
-            editCustomerEmail: this.props.data.customerEmail,
-            editCustomerPhone: this.props.data.customerPhone,
-            editCustomerCountry: this.props.data.customerCountry,
-            editCustomerStreet: this.props.data.customerStreet,
-            editCustomerCity: this.props.data.customerCity,
-            editCustomerState: this.props.data.customerState,
-            editCustomerZipcode: this.props.data.customerZipcode
+            editCustomerFirstName: this.props.data.firstName,
+            editCustomerLastName: this.props.data.lastName,
+            editCustomerName:this.props.data.name,
+            editCustomerEmail: this.props.data.email,
+            editCustomerPhone: this.props.data.phone,
+            editCustomerCountry: this.props.data.country,
+            editCustomerStreet: this.props.data.street,
+            editCustomerCity: this.props.data.city,
+            editCustomerState: this.props.data.state,
+            editCustomerZipcode: this.props.data.zipcode
         });
     }
 
