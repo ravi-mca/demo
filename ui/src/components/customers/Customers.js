@@ -6,6 +6,7 @@ import Service from "../Service";
 import Config from "../../index.config";
 import Sidebar from '../sidebar/Sidebar';
 import CreateCustomers from "../customers/CreateCustomers";
+import EditCustomers from "../customers/EditCustomers";
 
 export default class Customers extends React.Component {
    constructor(props) {
@@ -46,18 +47,8 @@ export default class Customers extends React.Component {
                         </div>
                     </div>
                     <div class="mr-90">
-                    <div class="col-md-8 col-xs-4">
-                      <div class="pull-right">
-                          <button type="button" class="btn info-btn btn-sm">
-                              <i class="fa fa-pencil pointer login-font" ></i>
-                          </button>
-                          <button type="button" class="btn info-btn btn-sm">
-                              <i class="fa fa-trash login-font pointer"></i>    
-                          </button>
-                      </div>
-                  </div>
+                    <EditCustomers data={this.state.userInfo}/>
                     </div>
-                   
                 </div>
             );
 
