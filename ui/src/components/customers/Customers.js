@@ -9,13 +9,12 @@ import CreateCustomers from "../customers/CreateCustomers";
 import EditCustomers from "../customers/EditCustomers";
 
 export default class Customers extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-      };
-      this.setSelectList = this.setSelectList.bind(this);
-      this.getCustomerAccount = this.getCustomerAccount.bind(this);
-  }
+    constructor(props) {
+        super(props);
+
+        this.setSelectList = this.setSelectList.bind(this);
+        this.getCustomerAccount = this.getCustomerAccount.bind(this);
+    }
 
     setSelectList(userInfo) {
         userInfo.deleteName = userInfo.accountName;
@@ -30,6 +29,22 @@ export default class Customers extends React.Component {
 
     getCustomerAccount(cusData) {
         this.refs.child.getList(cusData);
+        var updatedAccountInfo  = {};
+        updatedAccountInfo.name = cusData.editCustomerName;
+        updatedAccountInfo.firstName = cusData.editCustomerFirstName;
+        updatedAccountInfo.lastName = cusData.editCustomerLastName;
+        updatedAccountInfo.phone = cusData.editCustomerPhone;
+        updatedAccountInfo.email = cusData.editCustomerEmail;
+        updatedAccountInfo.country = cusData.editCustomerCountry;
+        updatedAccountInfo.state = cusData.editCustomerState;
+        updatedAccountInfo.city = cusData.editCustomerCity;
+        updatedAccountInfo.street = cusData.editCustomerStreet;
+        updatedAccountInfo.zipcode = cusData.editCustomerZipcode;
+        updatedAccountInfo.customerId = cusData.info.customerId;
+
+        this.setState({
+            userInfo: updatedAccountInfo
+        });
     }
 
 
@@ -57,13 +72,11 @@ export default class Customers extends React.Component {
                     </div>
                 </div>
             </div>
-               
             );
 
             showAdminInfo = (
               <div class="row">
                 <div class="col-md-9 pad-right-50 pad-left-0"><h1 class="admin-h1">Admin Users</h1>
-                    
                     <div class="row tbl">
                       <div class="col-md-12 tbl-head">
                         <div class="col-xs-3 col-sm-3 col-md-3">
