@@ -33,7 +33,7 @@ public class CustomerDtoConverter {
     private void convertAdminDetails(User user, CustomerDto customerDto) {
         customerDto.setFirstName(user.getFirstName());
         customerDto.setLastName(user.getLastName());
-        customerDto.setEmail(customerDto.getEmail());
+        customerDto.setEmail(user.getUsername());
         customerDto.setPhone(user.getPhone());
     }
 }
