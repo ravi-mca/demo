@@ -22,6 +22,7 @@ public class CustomerDtoConverter {
         Optional<User> optional = customer.getCustomerUsers().stream().findFirst();
         convertCustomerDetails(customer, customerDto);
         convertAdminDetails(optional.get(), customerDto);
+        convertCustomerAddressInformation(customer, customerDto);
         return customerDto;
     }
 
@@ -35,5 +36,13 @@ public class CustomerDtoConverter {
         customerDto.setLastName(user.getLastName());
         customerDto.setEmail(user.getUsername());
         customerDto.setPhone(user.getPhone());
+    }
+    
+    private void convertCustomerAddressInformation(Customer customer, CustomerDto customerDto) {
+        customerDto.setStreet(customer.getStreet());
+        customerDto.setCity(customer.getCity());
+        customerDto.setCountry(customer.getCountry());
+        customerDto.setState(customer.getState());
+        customerDto.setZipcode(customer.getZipcode());
     }
 }
