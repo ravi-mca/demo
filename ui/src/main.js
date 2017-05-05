@@ -16,6 +16,7 @@ import './css/header.css';
 import './css/media_screen.css';
 import './css/sidebar.css';
 import './css/merchant.css';
+import './css/customer.css';
 import './css/toastr.min.css';
 import './fonts/fonts.css';
 import 'animate.css/animate.min.css';
@@ -28,7 +29,7 @@ import Customers from "./components/customers/Customers";
 import Admins from "./components/admins/Admins";
 import Dashboard from "./components/dashboard/Dashboard";
 import Merchants from "./components/merchants/Merchants";
-import Dataportal from "./components/data-Portal/Dataportal";
+import Dataportal from "./components/data-portal/Dataportal";
 import Account from "./components/account/Account";
 
 
