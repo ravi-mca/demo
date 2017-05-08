@@ -176,7 +176,7 @@ export default class Merchants extends React.Component {
                 /*Set delete merchant data*/
                 response.deleteName = response.accountName;
                 response.successAlert = Config.successAlert.deleteMerchant;
-                response.APIUrl = Config.storeAPIPath+ response.merchantId;
+                response.APIUrl = Config.deleteAPIPath + response.merchantId;
                 response.deleteMessage = "merchant";
                 response.info = response;
                 this.setState({userInfo: response});

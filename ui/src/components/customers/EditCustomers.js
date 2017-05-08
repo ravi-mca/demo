@@ -67,7 +67,8 @@ export default class EditCustomers extends React.Component {
             editCustomerStreet: '',
             editCustomerCity: '',
             editCustomerState: '',
-            editCustomerZipcode: ''
+            editCustomerZipcode: '',
+            name:''
         });
 
         $("#editCustomerFirstNameError").html("");
@@ -124,6 +125,7 @@ export default class EditCustomers extends React.Component {
             var reqData = Service.buildRequestdata(requestData);
 
             Service.executeRequest(reqData, function(data) {
+                this.setState({name:this.state.editCustomerName});
                 this.props.onUpdateCustomer(this.state);
                 this.refs.alertMessageChild.successAlert("Customer updated successfully.");
                 this.hideModal();

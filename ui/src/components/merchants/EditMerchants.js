@@ -41,6 +41,7 @@ export default class EditMerchant extends React.Component {
       APIUrl: Config.deleteAPIPath+ this.props.data.userId,
       deleteMessage: "merchant", 
       info: this.props.data,
+      accountName :''
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -137,7 +138,8 @@ export default class EditMerchant extends React.Component {
       var reqData = Service.buildRequestdata(requestData);
 
       Service.executeRequest(reqData, function(data) {
-        this.props.onUpdateAccount(this.state);  
+        this.setState({accountName:this.state.editAccountName});
+        this.props.onUpdateAccount(this.state);
         this.refs.alertMessageChild.successAlert("Merchant Updated successfully.");         
         this.hideModal();
       }.bind(this), function(xhr, status, err) {

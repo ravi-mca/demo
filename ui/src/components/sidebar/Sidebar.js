@@ -99,7 +99,7 @@ export default class Sidebar extends React.Component {
 
     render() {
         let createAccount;
-
+        let showList;
         if(token) {
             if(tokenObj.roles[0].role == "ROLE_ADMIN") { 
                 createAccount = (
@@ -110,9 +110,10 @@ export default class Sidebar extends React.Component {
                    <CreateMerchants onUpdateList={this.getList}/>
                 );
             }
-        }    
-        const filteredList = this.state.list.filter(createFilter(this.state.selectedTerm, KEYS_TO_FILTERS));
-        let showList =  filteredList.map(function(user, i) {
+        }   
+         if(this.state.list) {
+             const filteredList = this.state.list.filter(createFilter(this.state.selectedTerm, KEYS_TO_FILTERS));
+             showList =  filteredList.map(function(user, i) {
             if(tokenObj.roles[0].role == "ROLE_ADMIN") {
                 return (
                     <li  key={i} className={this.isActive(user.name)} onClick={this.setFilter.bind(this, user.name,user)}>
@@ -125,6 +126,8 @@ export default class Sidebar extends React.Component {
                 );
             }
         }, this);
+         }
+       
         
 
     return (
