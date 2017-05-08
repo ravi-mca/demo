@@ -245,7 +245,7 @@ export default class EditMerchant extends React.Component {
                     </button>
                 </div>
                 <div class="col-md-6 col-xs-6 no-padding">
-                    <DeletePopUp data={this.props.data} onUpdate={this.onUpdateMerchantAccount}/>
+                    <DeletePopUp data={this.props.data} onUpdate={this.onUpdateMerchantAccount} setDeleteButton="true"/>
                 </div>
             </div>
         </div>

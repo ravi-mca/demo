@@ -63,11 +63,23 @@ export default class DeletePopUp extends React.Component {
   }
 
   render() {
+    var showdeleteBtn;
+    if(this.props.setDeleteButton == 'true') {
+        showdeleteBtn = (
+            <button type="button" class="btn info-btn btn-sm" onClick={this.openModal}>
+                <i class="fa fa-trash login-font pointer"></i>
+            </button>
+        );
+
+    } else {
+        showdeleteBtn = (
+                <i class="fa fa-trash login-font pointer" onClick={this.openModal}></i>
+        );
+    }
+
     return (
         <div id="deletePopUpPanel">
-            <button type="button" class="btn info-btn btn-sm">
-                <i class="fa fa-trash login-font pointer" onClick={this.openModal}></i>
-            </button>
+            {showdeleteBtn}
             <div>
                 <AlertMessage ref="alertMessageChild"/>
             </div>

@@ -296,7 +296,7 @@ export default class EditStore extends React.Component {
               <span>|</span>
             </div>
             <div class="col-md-1 col-xs-1">
-              <DeletePopUp data={this.props.data} onUpdate={this.onUpdateStoreAccount}/>
+              <DeletePopUp data={this.props.data} onUpdate={this.onUpdateStoreAccount} setDeleteButton="false"/>
             </div>
             <div>
             </div>

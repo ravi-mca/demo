@@ -208,12 +208,12 @@ export default class EditCustomers extends React.Component {
             <div class="col-md-6 col-xs-4">
                 <div class="pull-right">
                     <div class="col-md-6 col-xs-6 no-padding">
-                        <button type="button" class="btn info-btn btn-sm">
-                            <i class="fa fa-pencil pointer login-font" onClick={this.editCustomerForm}></i>
+                        <button type="button" class="btn info-btn btn-sm" onClick={this.editCustomerForm}>
+                            <i class="fa fa-pencil pointer login-font"></i>
                         </button>
                     </div>
                     <div class="col-md-6 col-xs-6 no-padding">
-                        <DeletePopUp data={this.props.data} onUpdate={this.onUpdateMerchantAccount}/>
+                        <DeletePopUp data={this.props.data} onUpdate={this.onUpdateMerchantAccount} setDeleteButton="true"/>
                     </div>
                 </div>
             </div>
