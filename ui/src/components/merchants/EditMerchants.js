@@ -239,12 +239,14 @@ export default class EditMerchant extends React.Component {
       <div id="editpanel">
         <div class="col-md-6 col-xs-4">
             <div class="pull-right">
-                <button type="button" class="btn info-btn btn-sm">
-                    <i class="fa fa-pencil pointer login-font" onClick={this.showEditForm}></i>
-                </button>
-                <button type="button" class="btn info-btn btn-sm">
+                <div class="col-md-6 col-xs-6 no-padding">
+                    <button type="button" class="btn info-btn btn-sm">
+                        <i class="fa fa-pencil pointer login-font" onClick={this.showEditForm}></i>
+                    </button>
+                </div>
+                <div class="col-md-6 col-xs-6 no-padding">
                     <DeletePopUp data={this.props.data} onUpdate={this.onUpdateMerchantAccount}/>
-                </button>
+                </div>
             </div>
         </div>
         <div><AlertMessage ref="alertMessageChild"/></div>

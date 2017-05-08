@@ -11,6 +11,9 @@ import EditCustomers from "../customers/EditCustomers";
 export default class Customers extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            userInfo:''
+        };
 
         this.setSelectList = this.setSelectList.bind(this);
         this.getCustomerAccount = this.getCustomerAccount.bind(this);
@@ -25,6 +28,7 @@ export default class Customers extends React.Component {
         this.setState({
             userInfo: userInfo
         });
+
     }
 
     getCustomerAccount(cusData) {
@@ -67,9 +71,7 @@ export default class Customers extends React.Component {
                             <span class="acc-info">{this.state.userInfo.email}</span>
                         </div>
                     </div>
-                    <div class="mr-90">
-                        <EditCustomers data={this.state.userInfo} onUpdateCustomer={this.getCustomerAccount} />
-                    </div>
+                    <EditCustomers data={this.state.userInfo} onUpdateCustomer={this.getCustomerAccount} />
                 </div>
             </div>
             );
@@ -109,16 +111,16 @@ export default class Customers extends React.Component {
                             <span class="m-5"> | </span>
                           <i class="fa fa-trash pointer"></i> 
                         </div>
-                      </div>                      
+                      </div>
                     </div>
                     <div class="pull-right">
-                    <button type="button" disabled class="btn btn-primary admin-btn disabled">                        
-                        + Add Admin  
+                    <button type="button" disabled class="btn btn-primary admin-btn disabled">
+                        + Add Admin
                     </button>
                     </div>
                   </div>
                 </div>
-              );  
+              );
         }
 
     return (

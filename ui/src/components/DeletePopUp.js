@@ -23,7 +23,7 @@ export default class DeletePopUp extends React.Component {
     super(props);
 
      this.state = {
-     isOpen: false,
+        isOpen: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,17 +31,17 @@ export default class DeletePopUp extends React.Component {
 
   openModal = () => {
     this.setState({
-      isOpen: true,
+        isOpen: true,
     });
   };
 
   hideModal = () => {
     this.setState({
-      isOpen: false, 
-    }); 
+        isOpen: false,
+    });
   };
 
-  handleSubmit(e) {    
+  handleSubmit(e) {
     e.preventDefault();
     var requestData = {
             url: this.props.data.APIUrl,
@@ -54,42 +54,39 @@ export default class DeletePopUp extends React.Component {
 
       Service.executeRequest(reqData, function(data) {
 
-        this.props.onUpdate(); 
-        this.refs.alertMessageChild.successAlert(this.props.data.successAlert);         
+        this.props.onUpdate();
+        this.refs.alertMessageChild.successAlert(this.props.data.successAlert);
         this.hideModal();
       }.bind(this), function(xhr, status, err) {
-        this.refs.alertMessageChild.errorAlert("Something is wrong."); 
-        
+        this.refs.alertMessageChild.errorAlert("Something is wrong.");
       }.bind(this));
   }
 
   render() {
     return (
-      <div id="deletePopUpPanel">
-          <i class="fa fa-trash login-font pointer" onClick={this.openModal}></i>      
-          <div>
-            <AlertMessage ref="alertMessageChild"/>
-          </div>        
-          <Modal isOpen={this.state.isOpen}>
-            <div class="modal-header">
-              <h4 class="modal-title font-20">Delete {this.props.data.deleteName}</h4>
-            </div>
-            <ModalBody>
-              <div class="modal-padding">Do you want to delete this {this.props.data.deleteMessage} ?</div>
-            </ModalBody>
+        <div id="deletePopUpPanel">
+            <button type="button" class="btn info-btn btn-sm">
+                <i class="fa fa-trash login-font pointer" onClick={this.openModal}></i>
+            </button>
             <div>
-            <hr class="modal-footer-hr"/>
-            <ModalFooter>
-              <button type="button" class="btn btn-blue" onClick={this.handleSubmit}>
-                Yes
-              </button>
-              <button type="button" className='btn btn-blue' onClick={this.hideModal}>
-                Cancel
-              </button>
-            </ModalFooter>
+                <AlertMessage ref="alertMessageChild"/>
             </div>
-          </Modal>
-      </div>
+            <Modal isOpen={this.state.isOpen}>
+                <div class="modal-header">
+                    <h4 class="modal-title font-20">Delete {this.props.data.deleteName}</h4>
+                </div>
+                <ModalBody>
+                    <div class="modal-padding">Do you want to delete this {this.props.data.deleteMessage} ?</div>
+                </ModalBody>
+                <div>
+                    <hr class="modal-footer-hr"/>
+                    <ModalFooter>
+                        <button type="button" class="btn btn-blue" onClick={this.handleSubmit}>Yes</button>
+                        <button type="button" className='btn btn-blue' onClick={this.hideModal}>Cancel</button>
+                    </ModalFooter>
+                </div>
+            </Modal>
+        </div>
     );
   }
 }
