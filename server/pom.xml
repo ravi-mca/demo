@@ -76,7 +76,7 @@
         <module>store-ws-rest</module>
         <module>storecast-portal</module>
 		<module>storecast-database</module>
-        <module>notification</module>
+        <module>notification-service</module>
     </modules>
 
     <dependencies>
