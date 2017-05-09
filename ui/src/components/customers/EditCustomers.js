@@ -38,12 +38,7 @@ export default class EditCustomers extends React.Component {
             editCustomerStreet: '',
             editCustomerCity: '',
             editCustomerState: '',
-            editCustomerZipcode: '',
-            deleteName: this.props.data.name,
-            successAlert: Config.successAlert.deleteCustomer,
-            APIUrl: Config.customerAPIPath + '/' + this.props.data.customerId,
-            deleteMessage: "customer",
-            info: this.props.data,
+            editCustomerZipcode: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -207,14 +202,19 @@ export default class EditCustomers extends React.Component {
             editCustomerStreet: this.props.data.street,
             editCustomerCity: this.props.data.city,
             editCustomerState: this.props.data.state,
-            editCustomerZipcode: this.props.data.zipcode
+            editCustomerZipcode: this.props.data.zipcode,
+            deleteName: this.props.data.name,
+            successAlert: Config.successAlert.deleteCustomer,
+            APIUrl: Config.customerAPIPath + '/' + this.props.data.customerId,
+            deleteMessage: "customer",
+            info: this.props.data
         });
     }
 
   render() {
     return (
         <div id="editCustomerPanel">
-            <div class="col-md-6 col-xs-4">
+            <div class="col-md-3 col-xs-4 right-icons">
                 <div class="pull-right">
                     <div class="col-md-6 col-xs-6 no-padding">
                         <button type="button" class="btn info-btn btn-sm" onClick={this.editCustomerForm}>
