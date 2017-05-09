@@ -31,7 +31,7 @@ public class EmailUtil {
     @Value("${mail.smtp.auth}")
     private String mailSmtpAuth;
 
-    @Value("${mailSmtpPort}")
+    @Value("${mail.smtp.port}")
     private String mailSmtpPort;
 
     public void sendEmail(String recipient,String subject,String body){

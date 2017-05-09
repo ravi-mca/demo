@@ -1,1 +1,0 @@
-<p>Hi $firstName $lastName,<br><br>Welcome to the Storecast Portal. Your email for the Storecast Portal is: $emailaddress<br><br>Follow this link to set the password for your account: $link. This link will expire after 2 hours.<br><br>Thanks,<br>Storecast Administrator</p>

@@ -5,11 +5,15 @@ import com.favendo.commons.domain.Role;
 import com.favendo.commons.domain.User;
 import com.favendo.commons.exception.BusinessException;
 import com.favendo.commons.exception.StorecastApiException;
+import com.favendo.customer.service.builder.CustomerEmailContextBuilder;
 import com.favendo.customer.service.dao.CustomerDao;
 import com.favendo.customer.service.service.CustomerService;
+import com.favendo.notification.helper.VelocityTemplatePathHelper;
+import com.favendo.notification.service.EmailService;
 import com.favendo.user.service.service.RoleService;
 import com.favendo.user.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -32,6 +36,22 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private CustomerEmailContextBuilder customerEmailContextBuilder;
+
+    @Autowired
+    private VelocityTemplatePathHelper velocityTemplatePathHelper;
+
+    @Value("${customer.registration.email.subject}")
+    private String customerRegistrationEmailSubject;
+
+    @Value("${customer.registration.email.template}")
+    private String customerRegistrationEmailTemplate;
+
+    @Override
     public List<Customer> getAll() throws BusinessException {
         List<Customer> customers = customerDao.findAll();
         if (CollectionUtils.isEmpty(customers)) {
@@ -57,6 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
         setRoles(user);
         user.setCustomer(customer);
         userService.save(user);
+        sendRegistrationEmail(customer, user);
     }
 
     @Override
@@ -82,5 +103,11 @@ public class CustomerServiceImpl implements CustomerService {
         roles.add(roleService.getByName(CUSTOMER.getRole()));
         user.setRoles(roles);
         return user;
+    }
+
+    private void sendRegistrationEmail(Customer customer, User user) {
+        emailService.sendEmail(user.getUsername(), customerRegistrationEmailSubject, velocityTemplatePathHelper.
+                getCustomerRegistrationEmailTemplatePath(customerRegistrationEmailTemplate), customerEmailContextBuilder.
+                buildSaveCustomerEmailContext(customer, user));
     }
 }

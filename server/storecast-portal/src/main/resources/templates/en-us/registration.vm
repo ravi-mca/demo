@@ -1,0 +1,7 @@
+<p>Hi $firstName $lastName,<br><br>Welcome to the Storecast Portal.
+<br><br>
+    Your email for the Storecast Portal is: $emailAddress
+<br><br>
+    Your password for the Storecast Portal is: $password
+<br><br>
+Thanks,<br>Storecast Administrator</p>
