@@ -132,9 +132,9 @@ export default class EditCustomers extends React.Component {
             var reqData = Service.buildRequestdata(requestData);
 
             Service.executeRequest(reqData, function(data) {
-                //this.setState({name:this.state.editCustomerName});
-                this.props.onUpdateCustomer(this.state);
+                this.setState({name:this.state.editCustomerName});
                 this.refs.alertMessageChild.successAlert("Customer updated successfully.");
+                this.props.onUpdateCustomer(this.state);
                 this.hideModal();
             }.bind(this), function(xhr, status, err) {
                 this.refs.alertMessageChild.errorAlert("Something is wrong.");
@@ -216,14 +216,12 @@ export default class EditCustomers extends React.Component {
         <div id="editCustomerPanel">
             <div class="col-md-6 col-xs-4">
                 <div class="pull-right">
-                     <div class="col-md-6 col-xs-6 no-padding">
-                        <button type="button" class="btn info-btn btn-sm" onClick={this.editCustomerForm}>
-                            <i class="fa fa-pencil pointer login-font"></i>
-                        </button>
-                    </div>
-                    <div class="col-md-6 col-xs-6 no-padding">
-                        <DeletePopUp data={this.props.data} onUpdate={this.getCustomerAccountInfo} setDeleteButton="true"/>
-                    </div>
+                    <button type="button" class="btn info-btn btn-sm">
+                        <i class="fa fa-pencil pointer login-font" onClick={this.editCustomerForm}></i>
+                    </button>
+                    <button type="button" class="btn info-btn btn-sm">
+                        <DeletePopUp data={this.props.data} onUpdate={this.getCustomerAccountInfo}/>
+                    </button>
                 </div>
             </div>
             <div>

@@ -87,21 +87,15 @@ export default class EditMerchant extends React.Component {
     $("input").removeClass("active");
   };
 
-  handleChange(e) {
-    
-    e.target.classList.add('active');
-    
+  handleChange(e) {    
+    e.target.classList.add('active');    
     this.setState({
       [e.target.name]: e.target.value
-
     });
-
     this.showInputError(e.target.name);    
-
   }
 
   updateMerchantState(info){
-
      this.setState({
       firstName: info.firstName,
       lastName: info.lastName,      

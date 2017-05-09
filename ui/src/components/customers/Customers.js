@@ -9,7 +9,7 @@ import CreateCustomers from "../customers/CreateCustomers";
 import EditCustomers from "../customers/EditCustomers";
 
 export default class Customers extends React.Component {
-    constructor(props) {
+   constructor(props) {
       super(props);
       this.state = {
         userInfo : ""
@@ -17,35 +17,42 @@ export default class Customers extends React.Component {
 
       this.setSelectList = this.setSelectList.bind(this);
       this.getCustomerAccount = this.getCustomerAccount.bind(this);
-    }
+  }
 
-    setSelectList(userInfo) {
-        if(userInfo != undefined) {      
-          userInfo.deleteName = userInfo.name;
-          userInfo.successAlert = Config.successAlert.deleteCustomer; 
-          userInfo.APIUrl = Config.customerAPIPath + '/' + userInfo.customerId;
-          userInfo.deleteMessage = "Customer";
-          userInfo.info = userInfo;
-        }    
-        this.setState({
-            userInfo: userInfo
-        });
-    }
+  setSelectList(userInfo) {
+    if(userInfo) {      
+      userInfo.deleteName = userInfo.name;
+      userInfo.successAlert = Config.successAlert.deleteCustomer; 
+      userInfo.APIUrl = Config.customerAPIPath + '/' + userInfo.customerId;
+      userInfo.deleteMessage = "Customer";
+      userInfo.info = userInfo;
+    }    
+    this.setState({
+        userInfo: userInfo
+    });
+  }
 
     getCustomerAccount(cusData) {
         this.refs.child.getList(cusData);
         var updatedAccountInfo  = {};
-        updatedAccountInfo.name = cusData.editCustomerName;
-        updatedAccountInfo.firstName = cusData.editCustomerFirstName;
-        updatedAccountInfo.lastName = cusData.editCustomerLastName;
-        updatedAccountInfo.phone = cusData.editCustomerPhone;
-        updatedAccountInfo.email = cusData.editCustomerEmail;
-        updatedAccountInfo.country = cusData.editCustomerCountry;
-        updatedAccountInfo.state = cusData.editCustomerState;
-        updatedAccountInfo.city = cusData.editCustomerCity;
-        updatedAccountInfo.street = cusData.editCustomerStreet;
-        updatedAccountInfo.zipcode = cusData.editCustomerZipcode;
-        updatedAccountInfo.customerId = cusData.info.customerId;
+        if(cusData){           
+            updatedAccountInfo.name = cusData.editCustomerName;
+            updatedAccountInfo.firstName = cusData.editCustomerFirstName;
+            updatedAccountInfo.lastName = cusData.editCustomerLastName;
+            updatedAccountInfo.phone = cusData.editCustomerPhone;
+            updatedAccountInfo.email = cusData.editCustomerEmail;
+            updatedAccountInfo.country = cusData.editCustomerCountry;
+            updatedAccountInfo.state = cusData.editCustomerState;
+            updatedAccountInfo.city = cusData.editCustomerCity;
+            updatedAccountInfo.street = cusData.editCustomerStreet;
+            updatedAccountInfo.zipcode = cusData.editCustomerZipcode;
+            updatedAccountInfo.customerId = cusData.info.customerId; 
+            updatedAccountInfo.deleteName = cusData.editCustomerName;
+            updatedAccountInfo.successAlert = Config.successAlert.deleteCustomer;
+            updatedAccountInfo.APIUrl = Config.customerAPIPath + '/' + cusData.info.customerId;
+            updatedAccountInfo.deleteMessage = "customer";
+            updatedAccountInfo.info = cusData;
+        }
 
         this.setState({
             userInfo: updatedAccountInfo
@@ -71,8 +78,8 @@ export default class Customers extends React.Component {
                             <span class="acc-info">{this.state.userInfo.email}</span>
                         </div>
                     </div>
-                    <EditCustomers data={this.state.userInfo} onUpdateCustomer={this.getCustomerAccount} />
-                </div>
+                        <EditCustomers data={this.state.userInfo} onUpdateCustomer={this.getCustomerAccount} />
+                 </div>
             </div>
             );
 

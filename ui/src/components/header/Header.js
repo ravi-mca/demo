@@ -70,7 +70,6 @@ export default class Header extends React.Component {
                             <div class="col-sm-5 col-md-5 col-lg-5">
                                 <ul class="nav navbar-nav">
                                     <li onClick={this.setToggle.bind(this,'customers')} id="customers"><Link to="/customers" activeClassName="active" class="text-white">CUSTOMERS</Link></li>
-                                    <li onClick={this.setToggle.bind(this,'admins')} id="admins"><Link to="/admins" activeClassName="active" class="text-white">ADMINS</Link></li>
                                     <li onClick={this.setToggle.bind(this,'merchants')} id="merchants"><Link to="/merchants" activeClassName="active" class="text-white">MERCHANTS</Link></li>
                                     <li onClick={this.setToggle.bind(this,'dataportal')} id="dataportal"><Link to="/dataportal" activeClassName="active" class="text-white">DATA PORTAL</Link></li> 
                                </ul>
@@ -106,3 +105,5 @@ export default class Header extends React.Component {
         );
     }
 }
+
+//<li onClick={this.setToggle.bind(this,'admins')} id="admins"><Link to="/admins" activeClassName="active" class="text-white">ADMINS</Link></li>
