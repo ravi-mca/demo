@@ -160,7 +160,7 @@ export default class Merchants extends React.Component {
   }
 
     getMerchantAccounts(info) {
-
+        
         this.refs.child.getList(info);
         if((info !== undefined) && (info !== null)) {
             var accountNo = info.accountNo;
@@ -183,6 +183,9 @@ export default class Merchants extends React.Component {
             }.bind(this), function(xhr, status, err) {
                 console.log(err);
             }.bind(this));
+        } else {
+            this.setState({userInfo: ''});
+            this.setState({storeInfo: ''});            
         }
     }
 

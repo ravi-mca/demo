@@ -10,25 +10,26 @@ import EditCustomers from "../customers/EditCustomers";
 
 export default class Customers extends React.Component {
     constructor(props) {
-        super(props);
-        this.state = {
-            userInfo:''
-        };
+      super(props);
+      this.state = {
+        userInfo : ""
+      };
 
-        this.setSelectList = this.setSelectList.bind(this);
-        this.getCustomerAccount = this.getCustomerAccount.bind(this);
+      this.setSelectList = this.setSelectList.bind(this);
+      this.getCustomerAccount = this.getCustomerAccount.bind(this);
     }
 
     setSelectList(userInfo) {
-        userInfo.deleteName = userInfo.accountName;
-        userInfo.successAlert = Config.successAlert.deleteMerchant;
-        userInfo.APIUrl = Config.deleteAPIPath+ userInfo.merchantId;
-        userInfo.deleteMessage = "Customer";
-        userInfo.info = userInfo;
+        if(userInfo != undefined) {      
+          userInfo.deleteName = userInfo.name;
+          userInfo.successAlert = Config.successAlert.deleteCustomer; 
+          userInfo.APIUrl = Config.customerAPIPath + '/' + userInfo.customerId;
+          userInfo.deleteMessage = "Customer";
+          userInfo.info = userInfo;
+        }    
         this.setState({
             userInfo: userInfo
         });
-
     }
 
     getCustomerAccount(cusData) {
@@ -50,7 +51,6 @@ export default class Customers extends React.Component {
             userInfo: updatedAccountInfo
         });
     }
-
 
   render() {
 
@@ -113,11 +113,13 @@ export default class Customers extends React.Component {
                         </div>
                       </div>
                     </div>
-                    <div class="pull-right">
-                    <button type="button" disabled class="btn btn-primary admin-btn disabled">
-                        + Add Admin
-                    </button>
-                    </div>
+                    <div class="row">
+                      <div class="pull-right mr-15">
+                      <button type="button" disabled class="btn btn-primary admin-btn disabled">                        
+                          + Add Admin  
+                      </button>
+                      </div>
+                    </div>  
                   </div>
                 </div>
               );

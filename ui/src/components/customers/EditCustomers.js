@@ -40,12 +40,15 @@ export default class EditCustomers extends React.Component {
             editCustomerState: '',
             editCustomerZipcode: '',
             deleteName: this.props.data.name,
+            successAlert: Config.successAlert.deleteCustomer,
+            APIUrl: Config.customerAPIPath + '/' + this.props.data.customerId,
             deleteMessage: "customer",
             info: this.props.data,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.getCustomerAccountInfo = this.getCustomerAccountInfo.bind(this);
         this.editCustomerForm = this.editCustomerForm.bind(this);
     }
 
@@ -83,6 +86,10 @@ export default class EditCustomers extends React.Component {
         $("#editCustomerZipcodeError").html("");
         $("input").removeClass("active");
     };
+
+    getCustomerAccountInfo(cusData) {        
+        this.props.onUpdateCustomer(cusData);
+    }
 
     handleChange(e) {
         e.target.classList.add('active');
@@ -125,7 +132,7 @@ export default class EditCustomers extends React.Component {
             var reqData = Service.buildRequestdata(requestData);
 
             Service.executeRequest(reqData, function(data) {
-                this.setState({name:this.state.editCustomerName});
+                //this.setState({name:this.state.editCustomerName});
                 this.props.onUpdateCustomer(this.state);
                 this.refs.alertMessageChild.successAlert("Customer updated successfully.");
                 this.hideModal();
@@ -209,13 +216,13 @@ export default class EditCustomers extends React.Component {
         <div id="editCustomerPanel">
             <div class="col-md-6 col-xs-4">
                 <div class="pull-right">
-                    <div class="col-md-6 col-xs-6 no-padding">
+                     <div class="col-md-6 col-xs-6 no-padding">
                         <button type="button" class="btn info-btn btn-sm" onClick={this.editCustomerForm}>
                             <i class="fa fa-pencil pointer login-font"></i>
                         </button>
                     </div>
                     <div class="col-md-6 col-xs-6 no-padding">
-                        <DeletePopUp data={this.props.data} onUpdate={this.onUpdateMerchantAccount} setDeleteButton="true"/>
+                        <DeletePopUp data={this.props.data} onUpdate={this.getCustomerAccountInfo} setDeleteButton="true"/>
                     </div>
                 </div>
             </div>

@@ -27,7 +27,6 @@ export default class Sidebar extends React.Component {
     }
 
     componentDidMount() {
-
         this.getList();
     }
 
@@ -40,6 +39,7 @@ export default class Sidebar extends React.Component {
 
     getList(info) {
 
+        //console.log("Info",info);
         token = Service.getToken();
         if(token) {
             tokenObj = JSON.parse(token);        
@@ -60,19 +60,20 @@ export default class Sidebar extends React.Component {
             Service.executeRequest(reqData, function(response) {
 
                this.setState({list: response});
-
                if( (info !== undefined) && (info !== null) ) {
                     
                     if(tokenObj.roles[0].role == "ROLE_ADMIN") {
-
                         this.setState({selected  : info.name});
                     } else {
-                        this.setState({selected  : info.accountName});
+                        this.setState({selected  : info.editAccountName});
                     }
                } else {
                 $('#menu-content li').first().addClass('activeList');
                 $('#menu-content li' ).first().trigger('click');
-          
+               }
+
+               if(this.state.list == undefined) {
+                    this.props.onSelectList(this.state.list);
                }
 
             }.bind(this), function(xhr, status, err) {
@@ -81,7 +82,8 @@ export default class Sidebar extends React.Component {
         }
         }
 
-    setFilter(filter,user) {
+    setFilter(filter,user) {        
+        console.log("user", user);
         this.setState({selected  : filter});
         this.props.onSelectList(user);
     }
@@ -111,24 +113,23 @@ export default class Sidebar extends React.Component {
                 );
             }
         }   
-         if(this.state.list) {
-             const filteredList = this.state.list.filter(createFilter(this.state.selectedTerm, KEYS_TO_FILTERS));
-             showList =  filteredList.map(function(user, i) {
-            if(tokenObj.roles[0].role == "ROLE_ADMIN") {
-                return (
-                    <li  key={i} className={this.isActive(user.name)} onClick={this.setFilter.bind(this, user.name,user)}>
-                    <div class="list-padding">{user.name} </div></li>
-                ); 
-            } else {
-                return (
-                    <li  key={i} className={this.isActive(user.accountName)} onClick={this.setFilter.bind(this, user.accountName,user)}>
-                    <div class="list-padding">{user.accountName} </div></li>
-                );
-            }
-        }, this);
-         }
-       
-        
+
+        if(this.state.list)  {
+            const filteredList = this.state.list.filter(createFilter(this.state.selectedTerm, KEYS_TO_FILTERS));
+            showList =  filteredList.map(function(user, i) {
+                if(tokenObj.roles[0].role == "ROLE_ADMIN") {
+                    return (
+                        <li  key={i} className={this.isActive(user.name)} onClick={this.setFilter.bind(this, user.name,user)}>
+                        <div class="list-padding">{user.name} </div></li>
+                    ); 
+                } else {
+                    return (
+                        <li  key={i} className={this.isActive(user.accountName)} onClick={this.setFilter.bind(this, user.accountName,user)}>
+                        <div class="list-padding">{user.accountName} </div></li>
+                    );
+                }
+            }, this);
+        } 
 
     return (
          <div class="nav-side-menu">

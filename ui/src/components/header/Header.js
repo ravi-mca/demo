@@ -24,7 +24,7 @@ export default class Header extends React.Component {
 
    /*show/hide arrow icon */
     setToggle(name,val) {
-        if(name == 'merchants') {
+        if((name == 'merchants') || (name == 'customers')) {
             this.setState({showIcon:true});
         } else {
             this.setState({showIcon:false});

@@ -10,7 +10,8 @@ const Config = {
 	customerAPIPath : BaseUrl +'/storecast/api/admin/customer',
 	successAlert : {
 		deleteMerchant : "Merchant deleted successfully.",
-		deleteStore : "Store deleted successfully."
+		deleteStore : "Store deleted successfully.",
+		deleteCustomer : "Customer deleted successfully.",
 	}
 };
 

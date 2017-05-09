@@ -25,11 +25,12 @@ export default class DeletePopUp extends React.Component {
      this.state = {
         isOpen: false,
     };
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  openModal = () => {
+  openModal = () => {    
+
+    console.log("this.props.data", this.props.data);
     this.setState({
         isOpen: true,
     });
@@ -51,11 +52,9 @@ export default class DeletePopUp extends React.Component {
       };
 
       var reqData = Service.buildRequestdata(requestData);
-
-      Service.executeRequest(reqData, function(data) {
-
-        this.props.onUpdate();
-        this.refs.alertMessageChild.successAlert(this.props.data.successAlert);
+      Service.executeRequest(reqData, function(data) { 
+        this.refs.alertMessageChild.successAlert(this.props.data.successAlert);  
+        this.props.onUpdate();  
         this.hideModal();
       }.bind(this), function(xhr, status, err) {
         this.refs.alertMessageChild.errorAlert("Something is wrong.");

@@ -155,7 +155,7 @@
 }
 
 .mr-15 {
-    margin-right: 15px;
+    margin-right: 15px !important;
 }
 .mr-90 {
     margin-right: 90px !important;
