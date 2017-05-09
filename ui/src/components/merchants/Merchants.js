@@ -114,7 +114,7 @@ export default class Merchants extends React.Component {
                 Service.executeRequest(reqData, function(response) {
                     response.id = this.state.showStoreId;
                     response.merchantId = this.state.userInfo.merchantId;
-                    response.deleteName = response.accountName;
+                    response.deleteName = response.name;
                     response.successAlert = Config.successAlert.deleteStore;
                     response.APIUrl = Config.storeAPIPath+ response.id;
                     response.deleteMessage = "store";
