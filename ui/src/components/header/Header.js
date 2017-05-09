@@ -15,6 +15,13 @@ export default class Header extends React.Component {
 
     componentDidMount() {
         this.setToggle($('.nav .active').text().toLowerCase());
+        if($("#customers a").hasClass("active")) {
+            $("#admins").hide();
+            $("#merchants").hide();
+            $("#dataportal").hide();
+        } else {
+            $("#customers").hide();
+        }
     }
 
     toggleSidebar() {
@@ -39,16 +46,6 @@ export default class Header extends React.Component {
     logOut() {
         Service.deleteToken();
         browserHistory.push('/');
-    }
-
-	 componentDidMount() {
-        if($("#customers a").hasClass("active")) {
-        	$("#admins").hide();
-        	$("#merchants").hide();
-        	$("#dataportal").hide();
-        } else {
-        	$("#customers").hide();
-        }
     }
 
     render() {
