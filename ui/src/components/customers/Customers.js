@@ -24,7 +24,7 @@ export default class Customers extends React.Component {
       userInfo.deleteName = userInfo.name;
       userInfo.successAlert = Config.successAlert.deleteCustomer; 
       userInfo.APIUrl = Config.customerAPIPath + '/' + userInfo.customerId;
-      userInfo.deleteMessage = "Customer";
+      userInfo.deleteMessage = "customer";
       userInfo.info = userInfo;
     }    
     this.setState({
@@ -67,7 +67,7 @@ export default class Customers extends React.Component {
             showAccountInfo = (
               <div class="row">
                 <div class="col-md-12 mt-25 mb-20 acc-border no-padding">
-                    <div class="col-md-6 col-xs-6 auto-div no-padding">
+                    <div class="col-md-6 col-xs-8 no-padding">
                         <div class="acc-heading">{this.state.userInfo.name}</div>
                         <div>
                             <i class="fa fa-phone mr-10" aria-hidden="true"></i>

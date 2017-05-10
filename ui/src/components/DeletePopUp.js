@@ -28,9 +28,7 @@ export default class DeletePopUp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  openModal = () => {    
-
-    console.log("this.props.data", this.props.data);
+  openModal = () => {
     this.setState({
         isOpen: true,
     });
