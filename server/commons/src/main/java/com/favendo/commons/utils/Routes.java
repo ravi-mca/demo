@@ -9,10 +9,14 @@ public class Routes {
 	public static final String CUSTOMER_REQUEST = "/api/customer/*";
 
 	public static final String MERCHANT_REQUEST = "/api/merchant/*";
+	
+	public static final String USER_INFO_REQUEST = "/api/user/*";
 
 	public static final String ROOT = "/api";
 	
 	public static final String ADMIN = "/admin";
+	
+	public static final String USER = "/user";
 
 	public static final String LOGIN = "/login";
 

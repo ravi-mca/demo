@@ -75,6 +75,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(ADMIN_REQUEST).access(HAS_ADMIN_ROLE)
                 .antMatchers(CUSTOMER_REQUEST).access(HAS_CUSTOMER_ROLE)
                 .antMatchers(MERCHANT_REQUEST).access(HAS_MERCHANT_ROLE)
+                .antMatchers(USER_INFO_REQUEST).access(HAS_ANY_ROLE)
                 .anyRequest().authenticated()
                 .and()
                 .authenticationProvider(authenticationProvider)
