@@ -542,8 +542,7 @@ export default class EditStore extends React.Component {
                     name="editStoreCastAdminName"
                     ref="editStoreCastAdminName"
                     value={ this.state.editStoreCastAdminName } 
-                    onChange={ this.handleChange }
-                     />
+                    onChange={ this.handleChange } />
                   <div className="error" id="editStoreCastAdminNameError" />
                   </Col>
                 </FormGroup>
@@ -552,7 +551,7 @@ export default class EditStore extends React.Component {
               <hr class="modal-footer-hr"/>
               <ModalFooter>
                 <button type="submit" class="btn btn-blue" onClick={ this.handleEditStoreSubmit }>
-                  Save Store Update
+                  Update Store
                 </button>
                 <button type="button" className='btn btn-blue' onClick={this.hideModal} formNoValidate>
                   Cancel

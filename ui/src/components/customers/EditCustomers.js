@@ -373,7 +373,7 @@ export default class EditCustomers extends React.Component {
                         <hr class="modal-footer-hr"/>
                         <ModalFooter>
                             <button type="submit" class="btn btn-blue" onClick={ this.handleSubmit }>
-                                Save Customer Account
+                                Update Customer Account
                             </button>
                             <button type="button" className='btn btn-blue' onClick={this.hideModal} formNoValidate>
                                 Cancel

@@ -248,7 +248,7 @@ export default class EditMerchant extends React.Component {
         <div><AlertMessage ref="alertMessageChild"/></div>
             <Modal isOpen={this.state.isOpen}>
               <div class="modal-header">
-                <h4 class="modal-title font-20">Edit New Merchant</h4>
+                <h4 class="modal-title font-20">Edit Merchant</h4>
               </div>
               <form id="editMerchant" method="post" noValidate>
               <ModalBody>
@@ -324,7 +324,7 @@ export default class EditMerchant extends React.Component {
               <hr class="modal-footer-hr"/>
               <ModalFooter>
                 <button type="submit" class="btn btn-blue" onClick={ this.handleSubmit }>
-                  Save Merchant Update
+                  Update Merchant Account
                 </button>
                 <button type="button" className='btn btn-blue' onClick={this.hideModal} formNoValidate>
                   Cancel
