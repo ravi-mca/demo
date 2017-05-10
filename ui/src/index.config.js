@@ -7,6 +7,7 @@ const Config = {
 	getStoresInfo: BaseUrl + '/storecast/api/customer/store/list/',
 	deleteAPIPath: BaseUrl + '/storecast/api/customer/merchant/',
 	adminAPIPath : BaseUrl +'/storecast/api/customer/merchant/credentials',
+	userCredentials: BaseUrl + '/storecast/api/user/credentials',
 	customerAPIPath : BaseUrl +'/storecast/api/admin/customer',
 	successAlert : {
 		deleteMerchant : "Merchant deleted successfully.",

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 import Service from "../Service";
+import Config from "../../index.config";
 import Background from '../../images/favendo-logo.png';
 import $ from 'jquery';
 
@@ -8,19 +9,49 @@ export default class Header extends React.Component {
 	constructor(props) {
 	    super();
 
-        this.state = {showIcon:false};
+        this.state = {
+            showIcon: false,
+            userDetails : ''
+        };
+
 	    this.toggleNav = this.toggleNav.bind(this);
 	    this.toggleSidebar = this.toggleSidebar.bind(this);
+        this.getUserDetails = this.getUserDetails.bind(this);
 	}
 
     componentDidMount() {
+        this.getUserDetails();
         this.setToggle($('.nav .active').text().toLowerCase());
+        if($("#customers a").hasClass("active")) {
+            $("#admins").hide();
+            $("#merchants").hide();
+            $("#dataportal").hide();
+        } else {
+            $("#customers").hide();
+        }
     }
 
     toggleSidebar() {
         $('.side-icon').toggleClass('fa-angle-right fa-angle-left');
         $('.row-offcanvas').toggleClass('active');
     }
+
+    /*Get logged-in user details*/
+    getUserDetails() {
+      var requestData = {
+        url: Config.userCredentials,
+        type: 'GET',
+        dataType: 'JSON',
+        contentType: 'application/json'
+      };
+
+      var reqData = Service.buildRequestdata(requestData);
+      Service.executeRequest(reqData, function(response) {
+            this.setState({userDetails: response});
+      }.bind(this), function(xhr, status, err) {
+          console.log(err);
+      }.bind(this));
+  }
 
    /*show/hide arrow icon */
     setToggle(name,val) {
@@ -41,15 +72,6 @@ export default class Header extends React.Component {
         browserHistory.push('/');
     }
 
-	 componentDidMount() {
-        if($("#customers a").hasClass("active")) {
-        	$("#admins").hide();
-        	$("#merchants").hide();
-        	$("#dataportal").hide();
-        } else {
-        	$("#customers").hide();
-        }
-    }
 
     render() {
         return (
@@ -78,7 +100,7 @@ export default class Header extends React.Component {
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="dropdown">
                                         <Link to="" class="dropdown-toggle" href="#" data-toggle="dropdown" activeClassName="active">
-                                            <i class="fa fa-user-circle-o"></i> Admin
+                                            <i class="fa fa-user-circle-o"></i> {this.state.userDetails.firstName}
                                             <strong class="caret"></strong>
                                         </Link>
                                         <div class="dropdown-menu">
@@ -87,8 +109,8 @@ export default class Header extends React.Component {
                                                     <i class="fa fa-user-circle-o fa-5x user-icon"></i>
                                                 </div>
                                                 <div class="col-md-8 col-xs-8 col-sm-8">
-                                                    <div class="text-gray-light mt-10 font-semibold font-18">Admin</div>
-                                                    <div class="text-gray-light font-light">admin@storecast.io</div>
+                                                    <div class="text-gray-light mt-10 font-semibold font-18">{this.state.userDetails.firstName}</div>
+                                                    <div class="text-gray-light font-light">{this.state.userDetails.username}</div>
                                                     <Link to="" onClick={ this.logOut }>
                                                         <button type="button" class="btn btn-primary btn-block mt-20 mb-20">Sign out</button>
                                                     </Link>
