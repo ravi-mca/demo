@@ -221,33 +221,6 @@ export default class Merchants extends React.Component {
                  </div>
             </div>
             );
-            showStoreTabs = (
-                <div class="row">
-                    <div class="col-md-9 pad-right-50 pad-left-0">
-                        <Tab.Container id="storeInfo" onSelect={this.handleSelect} activeKey={this.state.defaultActiveKey} >
-                            <Row className="clearfix">
-                                <Col sm={12}>
-                                    <Nav bsStyle="pills">
-                                        <NavItem eventKey="storeInfoTab"  class="pad-right-10" disabled={!this.state.disableTabs}>STORE INFO</NavItem>
-                                        <NavItem eventKey="storeDataTab"   disabled={this.state.disableTabs}>STORE DATA</NavItem>
-                                    </Nav>
-                                </Col>
-                                <Col sm={12} class="no-padding">
-                                    <Tab.Content animation class="mt-20">
-                                        <Tab.Pane eventKey="storeInfoTab">
-                                            <StoreInfo ref="storeInfoChild"/>
-                                        </Tab.Pane>
-                                        <Tab.Pane eventKey="storeDataTab">
-                                        </Tab.Pane>
-                                    </Tab.Content>
-                                </Col>
-                            </Row>
-                        </Tab.Container>                      
-                    </div>
-                </div>
-            )
-        }
-
  		if(this.state.storeInfo) {
             showStoreInfo = (
                 <div class="row">
@@ -278,6 +251,36 @@ export default class Merchants extends React.Component {
                 </div>
             )
         }
+
+        if(this.state.storeInfo) {
+            showStoreTabs = (
+                <div class="row">
+                    <div class="col-md-9 pad-right-50 pad-left-0">
+                        <Tab.Container id="storeInfo" onSelect={this.handleSelect} activeKey={this.state.defaultActiveKey} >
+                            <Row className="clearfix">
+                                <Col sm={12}>
+                                    <Nav bsStyle="pills">
+                                        <NavItem eventKey="storeInfoTab"  class="pad-right-10" disabled={!this.state.disableTabs}>STORE INFO</NavItem>
+                                        <NavItem eventKey="storeDataTab"   disabled={this.state.disableTabs}>STORE DATA</NavItem>
+                                    </Nav>
+                                </Col>
+                                <Col sm={12} class="no-padding">
+                                    <Tab.Content animation class="mt-20">
+                                        <Tab.Pane eventKey="storeInfoTab">
+                                            <StoreInfo ref="storeInfoChild"/>
+                                        </Tab.Pane>
+                                        <Tab.Pane eventKey="storeDataTab">
+                                        </Tab.Pane>
+                                    </Tab.Content>
+                                </Col>
+                            </Row>
+                        </Tab.Container>                      
+                    </div>
+                </div>
+            )
+        }
+        }
+
 
 	return (
         <div class="merchant-dashboard">
