@@ -134,7 +134,7 @@ export default class Sidebar extends React.Component {
                 <i class="fa fa-search login-font"></i>
                     <SearchInput class="search-box" placeholder="Search" onChange={this.searchUpdated} />
             </div>
-            <div class="menu-list">
+            <div class="menu-list custom_scrollbar" >
                 <ul id="menu-content">
                     {showList}
                 </ul>

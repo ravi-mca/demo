@@ -107,12 +107,16 @@ li {
 }
 
 .user-icon {
-    color: black;
-    margin-top: 23px;
+    color: #CDD3E4;
+}
+
+.user-icon-container {    
+    border-right: solid 1px #CDD3E4;
+    margin-top: 25px;
 }
 
 .nav-header .dropdown-menu {
-    width: 230px;
+    min-width: 283px;
     margin-top: 10px !important;
     background: #e6eaf2 !important;
 }
@@ -175,14 +179,6 @@ li {
 .dropdown-menu{
     box-shadow: 0 3px 12px rgba(0, 0, 0, .175);
 }
-
-.btn-logout {
-    width: 110px !important;
-    float: none;
-    margin: 0 auto;
-    height: 35px;
-}
-
 /* media queries for responsive screens*/
 @media screen and (min-width: 768px) {
     .navbar-right .dropdown-menu {
