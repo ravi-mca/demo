@@ -104,16 +104,13 @@ export default class Header extends React.Component {
                                             <strong class="caret"></strong>
                                         </Link>
                                         <div class="dropdown-menu">
-                                            <div class="col-md-12 col-xs-12 menu-bg">
-                                                <div class="col-md-4 col-xs-4 col-sm-4 no-padding">
-                                                    <i class="fa fa-user-circle-o fa-5x user-icon"></i>
-                                                </div>
-                                                <div class="col-md-8 col-xs-8 col-sm-8">
-                                                    <div class="text-gray-light mt-10 font-semibold font-18">{this.state.userDetails.firstName}</div>
-                                                    <div class="text-gray-light font-light">{this.state.userDetails.username}</div>
-                                                    <Link to="" onClick={ this.logOut }>
-                                                        <button type="button" class="btn btn-primary btn-block mt-20 mb-20">Sign out</button>
-                                                    </Link>
+                                            <div class="col-md-12 col-xs-12 menu-bg text-align-center">
+                                                <div class="text-gray-light mt-25 mb-12 font-semibold font-18">{this.state.userDetails.firstName}</div>
+                                                <div class="text-gray-light mb-25 font-light">{this.state.userDetails.username}</div>
+                                                <div class="mb-25">
+                                                <Link to="" onClick={ this.logOut }>
+                                                    <button type="button" class="btn btn-primary btn-block btn-logout mt-20 mb-20">Sign out</button>
+                                                </Link>
                                                 </div>
                                             </div>
                                         </div>

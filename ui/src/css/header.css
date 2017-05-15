@@ -112,7 +112,7 @@ li {
 }
 
 .nav-header .dropdown-menu {
-    min-width: 283px;
+    width: 230px;
     margin-top: 10px !important;
     background: #e6eaf2 !important;
 }
@@ -174,6 +174,13 @@ li {
 
 .dropdown-menu{
     box-shadow: 0 3px 12px rgba(0, 0, 0, .175);
+}
+
+.btn-logout {
+    width: 110px !important;
+    float: none;
+    margin: 0 auto;
+    height: 35px;
 }
 
 /* media queries for responsive screens*/

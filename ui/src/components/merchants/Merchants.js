@@ -200,8 +200,9 @@ export default class Merchants extends React.Component {
         var stores = this.state.storeInfo;
         if(this.state.userInfo) {
             showAccountInfo = (
-                <div class="col-md-12 mt-25 mb-20 acc-border no-padding">
-                    <div class="col-md-6 col-xs-6 auto-div no-padding">
+                <div class="row">
+                <div class="col-md-12 mt-25 mb-20 no-padding">
+                    <div class="col-md-6 col-xs-8 no-padding">
                         <div class="acc-heading">{this.state.userInfo.accountName}</div>
                         <div>
                             <i class="fa fa-user-circle-o mr-10" aria-hidden="true"></i>
@@ -217,56 +218,62 @@ export default class Merchants extends React.Component {
                         </div>
                     </div>
                     <EditMerchants ref="editMerchantChild" data={this.state.userInfo} onUpdateAccount={this.getMerchantAccounts} />
-                </div>
+                 </div>
+            </div>
             );
             showStoreTabs = (
-                <Tab.Container id="storeInfo" onSelect={this.handleSelect} activeKey={this.state.defaultActiveKey} >
-                    <Row className="clearfix">
-                        <Col sm={12}>
-                            <Nav bsStyle="pills">
-                                <NavItem eventKey="storeInfoTab"  class="pad-right-10" disabled={!this.state.disableTabs}>STORE INFO</NavItem>
-                                <NavItem eventKey="storeDataTab"   disabled={this.state.disableTabs}>STORE DATA</NavItem>
-                            </Nav>
-                        </Col>
-                        <Col sm={12} class="no-padding">
-                            <Tab.Content animation class="mt-20">
-                                <Tab.Pane eventKey="storeInfoTab">
-                                    <StoreInfo ref="storeInfoChild"/>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="storeDataTab">
-                                </Tab.Pane>
-                            </Tab.Content>
-                        </Col>
-                    </Row>
-                </Tab.Container>
+                <div class="row">
+                    <div class="col-md-9 pad-right-50 pad-left-0">
+                        <Tab.Container id="storeInfo" onSelect={this.handleSelect} activeKey={this.state.defaultActiveKey} >
+                            <Row className="clearfix">
+                                <Col sm={12}>
+                                    <Nav bsStyle="pills">
+                                        <NavItem eventKey="storeInfoTab"  class="pad-right-10" disabled={!this.state.disableTabs}>STORE INFO</NavItem>
+                                        <NavItem eventKey="storeDataTab"   disabled={this.state.disableTabs}>STORE DATA</NavItem>
+                                    </Nav>
+                                </Col>
+                                <Col sm={12} class="no-padding">
+                                    <Tab.Content animation class="mt-20">
+                                        <Tab.Pane eventKey="storeInfoTab">
+                                            <StoreInfo ref="storeInfoChild"/>
+                                        </Tab.Pane>
+                                        <Tab.Pane eventKey="storeDataTab">
+                                        </Tab.Pane>
+                                    </Tab.Content>
+                                </Col>
+                            </Row>
+                        </Tab.Container>                      
+                    </div>
+                </div>
             )
         }
 
  		if(this.state.storeInfo) {
             showStoreInfo = (
                 <div class="row">
-                    <div class="btn-padding">
-                        <Col sm={3} class="col-padding col-xs-8">
-                            <select className="form-control selectedFont" onClick={this.getStore} id="selectStore">             
-                                {
-                                    stores.map(function (store) {
-                                        i++;
-                                        return <option value={store.id } data={store} key={i}>{store.name}</option>;
-                                    })
-                                }
-                            </select>
-                        </Col>
-                        <AddStore data={this.state.userInfo.merchantId} onUpdateStore= {this.getStoresInfo}/>
-                        <div class="row" >
-                            <div class="col-md-12 col-xs-12 pad-top-10 pad-left-0" id="showSelectedStoreId">
-                                <div class="col-md-6 col-xs-6 auto-div pad-bottom-10 mt-10">
-                                    <span class="acc-labels">Store#: </span>
-                                    <span class="acc-info">{this.state.storeDetails.storeId}</span>
-                                </div>
-                                <EditStore ref="
-                        " data={this.state.storeDetails} onUpdateStore= {this.getStoresInfo}/>
+                    <div class="col-md-9 pad-right-50 pad-left-0">
+                    <hr class="acc-border"/>
+                    <Col sm={3} class="col-padding col-xs-8">
+                        <select className="form-control selectedFont" onClick={this.getStore} id="selectStore">             
+                            {
+                                stores.map(function (store) {
+                                    i++;
+                                    return <option value={store.id } data={store} key={i}>{store.name}</option>;
+                                })
+                            }
+                        </select>
+                    </Col>
+                    <AddStore data={this.state.userInfo.merchantId} onUpdateStore= {this.getStoresInfo}/>
+                    <div class="row" >
+                        <div class="col-md-12 col-xs-12 pad-top-10 pad-left-0" id="showSelectedStoreId">
+                            <div class="col-md-6 col-xs-6 auto-div pad-bottom-10 mt-10">
+                                <span class="acc-labels">Store#: </span>
+                                <span class="acc-info">{this.state.storeDetails.storeId}</span>
                             </div>
-                         </div>
+                            <EditStore ref="
+                    " data={this.state.storeDetails} onUpdateStore= {this.getStoresInfo}/>
+                        </div>
+                     </div>                         
                     </div>
                 </div>
             )

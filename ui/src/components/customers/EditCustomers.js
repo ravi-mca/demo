@@ -236,7 +236,7 @@ export default class EditCustomers extends React.Component {
                 <form id="editCustomer" method="post" noValidate onSubmit="">
                     <ModalBody>
                         <FormGroup row>
-                            <Label id="editCustomerNameLabel" class="form-label" for="editCustomerName" sm={3}> Customer Name </Label><span></span>
+                            <Label id="editCustomerNameLabel" class="form-label" for="editCustomerName" sm={3}> Name </Label><span></span>
                             <Col sm={8} class="col-padding">
                                 <input className="form-control"
                                         type="text"

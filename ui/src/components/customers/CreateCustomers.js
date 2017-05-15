@@ -203,7 +203,7 @@ export default class CreateCustomers extends React.Component {
     return (
       <div id="customerPanel">
             <div class="marchant-btn">
-              <button className='btn bottom-btn btn-block btn-lg' onClick={this.openModal}>
+              <button className='btn bottom-btn btn-block-new btn-lg' onClick={this.openModal}>
               <i class="fa fa-user margin-right-11"> </i>   New Customer Account
               </button>
             </div>            
@@ -217,7 +217,7 @@ export default class CreateCustomers extends React.Component {
               <form id="myform" method="post" noValidate onSubmit="">
               <ModalBody>
               <FormGroup row>
-                  <Label id="customerNameLabel" class="form-label" for="customerName" sm={3}> Customer Name </Label><span></span>
+                  <Label id="customerNameLabel" class="form-label" for="customerName" sm={3}> Name </Label><span></span>
                   <Col sm={8} class="col-padding">
                      <input className="form-control"
                     type="text"
