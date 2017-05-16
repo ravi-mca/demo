@@ -222,7 +222,7 @@ export default class EditMerchant extends React.Component {
     render() {
     return (
       <div id="editpanel">
-        <div class="col-md-6 col-xs-4">
+        <div class="col-md-3 col-xs-4 right-icons">
             <div class="pull-right">
                 <div class="col-md-6 col-xs-6 no-padding">
                     <button type="button" class="btn info-btn btn-sm">

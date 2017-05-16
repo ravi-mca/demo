@@ -163,7 +163,7 @@ export default class MerchantForm extends React.Component {
         return (
           <div id="panel">
                 <div class="marchant-btn">
-                  <button className='btn bottom-btn btn-block btn-lg' onClick={this.openModal}>
+                  <button className='btn bottom-btn btn-block-new btn-lg' onClick={this.openModal}>
                   <i class="fa fa-user margin-right-11"> </i>   New Merchant Account
                   </button>
                 </div>
@@ -237,7 +237,7 @@ export default class MerchantForm extends React.Component {
                         name="email"
                         ref="email"
                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-                        value={ this.state.email }
+                        value={ this.state.email } 
                         onChange={ this.handleChange }
                         required />
                       <div className="error" id="emailError" />
@@ -259,5 +259,5 @@ export default class MerchantForm extends React.Component {
                 </Modal>
           </div>
         );
-    }
+      }
 }

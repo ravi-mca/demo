@@ -107,8 +107,12 @@ li {
 }
 
 .user-icon {
-    color: black;
-    margin-top: 23px;
+    color: #CDD3E4;
+}
+
+.user-icon-container {    
+    border-right: solid 1px #CDD3E4;
+    margin-top: 25px;
 }
 
 .nav-header .dropdown-menu {
@@ -175,7 +179,6 @@ li {
 .dropdown-menu{
     box-shadow: 0 3px 12px rgba(0, 0, 0, .175);
 }
-
 /* media queries for responsive screens*/
 @media screen and (min-width: 768px) {
     .navbar-right .dropdown-menu {

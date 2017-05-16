@@ -8,7 +8,7 @@
     margin-right: 0px;
     margin-left: 0px;
 }
-.tbl-head {
+.tbl-head{
     background-color: #CDD3E4 !important;
     font-family: 'Source Sans Pro Bold' !important;
     font-size: 18px !important;
@@ -48,6 +48,52 @@
     border-top-left-radius: 7px !important;
     border-bottom-left-radius: 7px !important;
     border: none !important;
+}
+
+table {
+    border-collapse: initial !important;
+}
+
+table th {
+    padding-left: 30px !important;
+    border: 1px solid #eaedf4 !important;
+}
+
+table td {
+    padding-left: 30px !important;
+    border: 1px solid #eaedf4 !important;
+}
+
+table td:first-child{
+    border-top-left-radius: 7px !important;
+    border-bottom-left-radius: 7px !important;
+}
+
+table th:first-child {
+    border-top-left-radius: 7px !important;
+    border-bottom-left-radius: 7px !important;
+}
+
+table td:last-child{
+    border-top-right-radius: 7px !important;
+    border-bottom-right-radius: 7px !important;
+    text-align: center !important;
+    padding-left: 0px !important;
+}
+
+table th:last-child {
+    border-top-right-radius: 7px !important;
+    border-bottom-right-radius: 7px !important;
+    text-align: center !important;
+    padding-left: 0px !important;
+}
+
+.table > thead > tr > th {
+    border-bottom: 0 solid #ddd !important;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 0 solid #ddd !important;
 }
 
 .admin-btn {

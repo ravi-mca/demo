@@ -184,29 +184,29 @@ export default class CreateCustomers extends React.Component {
 
     render() {
     return (
-        <div id="customerPanel">
+      <div id="customerPanel">
             <div class="marchant-btn">
-                <button className='btn bottom-btn btn-block btn-lg' onClick={this.openModal}>
-                    <i class="fa fa-user margin-right-11"> </i>   New Customer Account
-                </button>
+              <button className='btn bottom-btn btn-block-new btn-lg' onClick={this.openModal}>
+              <i class="fa fa-user margin-right-11"> </i>   New Customer Account
+              </button>
             </div>
             <div>
-                <AlertMessage ref="alertMessageChild"/>
+              <AlertMessage ref="alertMessageChild"/>
             </div>
             <Modal isOpen={this.state.isOpen}>
-                <div class="modal-header">
-                    <h4 class="modal-title font-20">Create New Customer</h4>
-                </div>
-                <form id="myform" method="post" noValidate onSubmit="">
-                <ModalBody>
+              <div class="modal-header">
+                <h4 class="modal-title font-20">Create New Customer</h4>
+              </div>
+              <form id="myform" method="post" noValidate onSubmit="">
+              <ModalBody>
               <FormGroup row>
-                  <Label id="customerNameLabel" class="form-label" for="customerName" sm={3}> Customer Name </Label><span></span>
+                  <Label id="customerNameLabel" class="form-label" for="customerName" sm={3}> Name </Label><span></span>
                   <Col sm={8} class="col-padding">
                      <input className="form-control"
                     type="text"
                     name="customerName"
                     ref="customerName"
-                    value={ this.state.customerName }
+                    value={ this.state.customerName } 
                     onChange={ this.handleChange }
                     required />
                   <div className="error" id="customerNameError" />
@@ -219,7 +219,7 @@ export default class CreateCustomers extends React.Component {
                     type="text"
                     name="customerFirstName"
                     ref="customerFirstName"
-                    value={ this.state.customerFirstName }
+                    value={ this.state.customerFirstName } 
                     onChange={ this.handleChange }
                     required />
                   <div className="error" id="customerFirstNameError" />
@@ -232,7 +232,7 @@ export default class CreateCustomers extends React.Component {
                     type="text"
                     name="customerLastName"
                     ref="customerLastName"
-                    value={ this.state.customerLastName }
+                    value={ this.state.customerLastName } 
                     onChange={ this.handleChange }
                     required />
                   <div className="error" id="customerLastNameError" />
@@ -246,7 +246,7 @@ export default class CreateCustomers extends React.Component {
                     name="customerEmail"
                     ref="customerEmail"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-                    value={ this.state.customerEmail }
+                    value={ this.state.customerEmail } 
                     onChange={ this.handleChange }
                     required />
                   <div className="error" id="customerEmailError" />
@@ -259,7 +259,7 @@ export default class CreateCustomers extends React.Component {
                     type="text"
                     name="customerPhone"
                     ref="customerPhone"
-                    value={ this.state.customerPhone }
+                    value={ this.state.customerPhone } 
                     onChange={ this.handleChange }
                     pattern="[0-9]{6,10}"
                     required />
@@ -273,7 +273,7 @@ export default class CreateCustomers extends React.Component {
                     type="text"
                     name="customerCountry"
                     ref="customerCountry"
-                    value={ this.state.customerCountry }
+                    value={ this.state.customerCountry } 
                     onChange={ this.handleChange }
                     required />
                   <div className="error" id="customerCountryError" />
@@ -286,7 +286,7 @@ export default class CreateCustomers extends React.Component {
                     type="text"
                     name="customerCity"
                     ref="customerCity"
-                    value={ this.state.customerCity }
+                    value={ this.state.customerCity } 
                     onChange={ this.handleChange }
                     required />
                   <div className="error" id="customerCityError" />
@@ -299,7 +299,7 @@ export default class CreateCustomers extends React.Component {
                     type="text"
                     name="customerState"
                     ref="customerState"
-                    value={ this.state.customerState }
+                    value={ this.state.customerState } 
                     onChange={ this.handleChange }
                     required />
                   <div className="error" id="customerStateError" />
@@ -312,7 +312,7 @@ export default class CreateCustomers extends React.Component {
                     type="text"
                     name="customerStreet"
                     ref="customerStreet"
-                    value={ this.state.customerStreet }
+                    value={ this.state.customerStreet } 
                     onChange={ this.handleChange }
                     required />
                   <div className="error" id="customerStreetError" />
@@ -325,7 +325,7 @@ export default class CreateCustomers extends React.Component {
                     type="text"
                     name="customerZipcode"
                     ref="customerZipcode"
-                    value={ this.state.customerZipcode }
+                    value={ this.state.customerZipcode } 
                     onChange={ this.handleChange }
                     pattern="[0-9]{4,6}"
                     required />
