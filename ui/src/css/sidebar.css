@@ -125,8 +125,8 @@
 }
 
 .custom_scrollbar::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 7px;
+    height: 7px;
 }
 .custom_scrollbar::-webkit-scrollbar-track {
     background-color: rgba(113,112,107,0.1);
