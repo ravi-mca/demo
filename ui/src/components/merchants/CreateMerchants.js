@@ -178,7 +178,7 @@ export default class MerchantForm extends React.Component {
     return (
       <div id="panel">
             <div class="marchant-btn">
-              <button className='btn bottom-btn btn-block btn-lg' onClick={this.openModal}>
+              <button className='btn bottom-btn btn-block-new btn-lg' onClick={this.openModal}>
               <i class="fa fa-user margin-right-11"> </i>   New Merchant Account
               </button>
             </div>            

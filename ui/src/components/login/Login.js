@@ -112,7 +112,7 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <div class="container">
             <div class="login-content">
                 <div class="logo mb-10"> <img src={ Background }/></div>
                 <form class="form-horizontal" noValidate>

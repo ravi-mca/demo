@@ -84,14 +84,16 @@ export default class DeletePopUp extends React.Component {
                 <div class="modal-header">
                     <h4 class="modal-title font-20">Delete {this.props.data.deleteName}</h4>
                 </div>
+                <div>                  
+                    <hr class="modal-header-hr"/>
+                </div>
                 <ModalBody>
-                    <div class="modal-padding">Do you want to delete this {this.props.data.deleteMessage} ?</div>
+                    <div class="modal-padding">Are you sure you want to delete this {this.props.data.deleteMessage} ?</div>
                 </ModalBody>
                 <div>
-                    <hr class="modal-footer-hr"/>
                     <ModalFooter>
-                        <button type="button" class="btn btn-blue" onClick={this.handleSubmit}>Yes</button>
-                        <button type="button" className='btn btn-blue' onClick={this.hideModal}>Cancel</button>
+                        <button type="button" class="btn btn-blue btn-delete" onClick={this.handleSubmit}>Yes</button>
+                        <button type="button" className='btn btn-blue btn-delete' onClick={this.hideModal}>Cancel</button>
                     </ModalFooter>
                 </div>
             </Modal>

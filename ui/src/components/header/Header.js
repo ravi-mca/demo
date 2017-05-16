@@ -105,7 +105,7 @@ export default class Header extends React.Component {
                                         </Link>
                                         <div class="dropdown-menu">
                                             <div class="col-md-12 col-xs-12 menu-bg">
-                                                <div class="col-md-4 col-xs-4 col-sm-4 no-padding">
+                                                <div class="col-md-4 col-xs-4 col-sm-4 user-icon-container no-padding">
                                                     <i class="fa fa-user-circle-o fa-5x user-icon"></i>
                                                 </div>
                                                 <div class="col-md-8 col-xs-8 col-sm-8">

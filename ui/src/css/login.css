@@ -1,7 +1,13 @@
 body {
-	background-color: #40444e !important;
   font-family: Source Sans Pro !important;
   overflow: hidden;
+}
+
+.container{  
+  background-color: #40444e !important;
+  margin:0px !important;
+  width: 100% !important;
+  height: 1200px !important;
 }
 
 .login-content {
