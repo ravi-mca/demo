@@ -3,6 +3,7 @@ import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 import Service from "../Service";
 import Config from "../../index.config";
 import Background from '../../images/favendo-logo.png';
+import TokenExpireMessage from "../TokenExpireMessage";
 import $ from 'jquery';
 
 export default class Header extends React.Component {
@@ -38,20 +39,22 @@ export default class Header extends React.Component {
 
     /*Get logged-in user details*/
     getUserDetails() {
-      var requestData = {
-        url: Config.userCredentials,
-        type: 'GET',
-        dataType: 'JSON',
-        contentType: 'application/json'
-      };
+        var requestData = {
+            url: Config.userCredentials,
+            type: 'GET',
+            dataType: 'JSON',
+            contentType: 'application/json'
+        };
 
-      var reqData = Service.buildRequestdata(requestData);
-      Service.executeRequest(reqData, function(response) {
+        var reqData = Service.buildRequestdata(requestData);
+        Service.executeRequest(reqData, function(response) {
             this.setState({userDetails: response});
-      }.bind(this), function(xhr, status, err) {
-          console.log(err);
-      }.bind(this));
-  }
+        }.bind(this), function(xhr, status, err) {
+            if(xhr.status == 401) {
+                Service.setInvalidSession('invalidSession');
+            }
+        }.bind(this));
+    }
 
    /*show/hide arrow icon */
     setToggle(name,val) {
@@ -69,6 +72,7 @@ export default class Header extends React.Component {
 
     logOut() {
         Service.deleteToken();
+        Service.deleteSessionInfo();
         browserHistory.push('/');
     }
 
@@ -127,5 +131,3 @@ export default class Header extends React.Component {
         );
     }
 }
-
-//<li onClick={this.setToggle.bind(this,'admins')} id="admins"><Link to="/admins" activeClassName="active" class="text-white">ADMINS</Link></li>

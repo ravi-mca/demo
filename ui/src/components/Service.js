@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
+
 
 const Service = {
 
@@ -8,6 +10,19 @@ const Service = {
 
     getToken() {
         return localStorage.accessToken;
+    },
+
+    setInvalidSession(sessionInfo) {
+          localStorage.setItem("sessionInfo",sessionInfo);
+          browserHistory.push('/');
+    },
+
+    getSessionInfo() {
+        return localStorage.sessionInfo;
+    },
+
+    deleteInvalidSession() {
+        localStorage.removeItem("sessionInfo");
     },
 
     deleteToken() {

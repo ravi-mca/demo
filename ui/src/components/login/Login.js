@@ -8,6 +8,7 @@ import Background from '../../images/favendo-logo.png';
 
 import Store from '../../Store';
 import ControlActions from '../../ControlActions';
+import TokenExpireMessage from "../TokenExpireMessage";
 
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 
@@ -24,6 +25,11 @@ export default class Login extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.checkTokenTimeout = this.checkTokenTimeout.bind(this);
+    }
+
+    componentDidMount() {
+        this.checkTokenTimeout();
     }
 
     handleChange(e) {
@@ -48,29 +54,22 @@ export default class Login extends React.Component {
                 contentType: 'application/x-www-form-urlencoded'
             };
 
-            Service.deleteToken();
-
             var reqData = Service.buildRequestdata(requestData);
 
             Service.executeRequest(reqData, function(data) {
-                //this.setAuthToken(data);
                 Service.setToken(data);
-                this.setState({ showResults: false });       
-                
+                this.setState({ showResults: false });
+
                 if(data.roles[0].role == "ROLE_ADMIN") {
                     browserHistory.push('/customers');
                 }else {
                     browserHistory.push('/merchants');
                 }
-           }.bind(this), function(xhr, status, err) {
+            }.bind(this), function(xhr, status, err) {
                this.setState({ showResults: true });
                   console.log('err',err);
-           }.bind(this));
+            }.bind(this));
         }
-    }
-
-    setAuthToken(token) {
-        Service.setToken(token);
     }
 
     showFormErrors() {
@@ -108,6 +107,13 @@ export default class Login extends React.Component {
 
         error.textContent = '';
         return true;
+    }
+
+    checkTokenTimeout() {
+        if(Service.getSessionInfo() == "invalidSession") {
+            this.refs.tokenMessageChild.errorAlert();
+            Service.deleteInvalidSession();
+        }
     }
 
     render() {
@@ -168,6 +174,9 @@ export default class Login extends React.Component {
                         </div>
                     </div>
                </div>
+               <div>
+                    <TokenExpireMessage ref="tokenMessageChild"/>
+                </div>
             </div>
         );
     }

@@ -11,12 +11,6 @@ import Config from "../../index.config";
 import AlertMessage from "../AlertMessage";
 import DeletePopUp from "../DeletePopUp";
 
-var ReactToastr = require("react-toastr");
-var {ToastContainer} = ReactToastr; // This is a React Element.
-// For Non ES6...
-// var ToastContainer = ReactToastr.ToastContainer;
-var ToastMessageFactory = React.createFactory(ReactToastr.ToastMessage.animation);
-
 import {
   Modal,
   ModalHeader,
@@ -170,20 +164,25 @@ export default class EditStore extends React.Component {
       var reqData = Service.buildRequestdata(requestData);
 
       Service.executeRequest(reqData, function(data) {
-        this.refs.alertMessageChild.successAlert("Store updated successfully.");    
-        this.props.onUpdateStore(this.state.edituserId);         
+        this.refs.alertMessageChild.successAlert("Store updated successfully.");
+        this.props.onUpdateStore(this.state.edituserId);
         this.hideModal();
       }.bind(this), function(xhr, status, err) {
-        this.refs.alertMessageChild.errorAlert("Something is wrong."); 
         var statusObj = xhr;
         var obj=JSON.parse(xhr.responseText);
+        if(statusObj.status == 401) {
+            Service.setInvalidSession('invalidSession');
+        } else {
+            this.refs.alertMessageChild.errorAlert("Something is wrong.");
+        }
+
         const editNameError = document.getElementById(`editNameError`);
         const editNicknameError = document.getElementById(`editNicknameError`);
         var editNameErrorMessage = "Store with name already exist. Please provide different store name.";
         var editNicknameErrorMessage = "Store with nickname already exist. Please provide different store nickname.";
 
         if(obj["error_description"] == editNameErrorMessage) {
-          editNameError.textContent = obj["error_description"];   
+          editNameError.textContent = obj["error_description"];
          } else if(obj["error_description"] == editNicknameErrorMessage) {
           editNicknameError.textContent = obj["error_description"];
         }

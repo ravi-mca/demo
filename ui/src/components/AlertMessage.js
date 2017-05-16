@@ -16,7 +16,7 @@ export default class AlertMessage extends React.Component {
     constructor(props) {
     super(props);
     this.successAlert = this.successAlert.bind(this);
-    this.errorAlert = this.errorAlert.bind(this);    
+    this.errorAlert = this.errorAlert.bind(this);
   }
 
   successAlert (message) {

@@ -8,6 +8,7 @@ import Sidebar from '../sidebar/Sidebar';
 import CreateCustomers from "../customers/CreateCustomers";
 import EditCustomers from "../customers/EditCustomers";
 
+
 export default class Customers extends React.Component {
    constructor(props) {
       super(props);
@@ -20,13 +21,13 @@ export default class Customers extends React.Component {
   }
 
   setSelectList(userInfo) {
-    if(userInfo) {      
+    if(userInfo) {
       userInfo.deleteName = userInfo.name;
-      userInfo.successAlert = Config.successAlert.deleteCustomer; 
+      userInfo.successAlert = Config.successAlert.deleteCustomer;
       userInfo.APIUrl = Config.customerAPIPath + '/' + userInfo.customerId;
       userInfo.deleteMessage = "customer";
       userInfo.info = userInfo;
-    }    
+    }
     this.setState({
         userInfo: userInfo
     });
@@ -35,7 +36,7 @@ export default class Customers extends React.Component {
     getCustomerAccount(cusData) {
         this.refs.child.getList(cusData);
         var updatedAccountInfo  = {};
-        if(cusData){           
+        if(cusData){
             updatedAccountInfo.name = cusData.editCustomerName;
             updatedAccountInfo.firstName = cusData.editCustomerFirstName;
             updatedAccountInfo.lastName = cusData.editCustomerLastName;
@@ -46,7 +47,7 @@ export default class Customers extends React.Component {
             updatedAccountInfo.city = cusData.editCustomerCity;
             updatedAccountInfo.street = cusData.editCustomerStreet;
             updatedAccountInfo.zipcode = cusData.editCustomerZipcode;
-            updatedAccountInfo.customerId = cusData.info.customerId; 
+            updatedAccountInfo.customerId = cusData.info.customerId;
             updatedAccountInfo.deleteName = cusData.editCustomerName;
             updatedAccountInfo.successAlert = Config.successAlert.deleteCustomer;
             updatedAccountInfo.APIUrl = Config.customerAPIPath + '/' + cusData.info.customerId;
@@ -114,19 +115,19 @@ export default class Customers extends React.Component {
                           {this.state.userInfo.email}
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3">
-                          <i class="fa fa-pencil pointer"></i> 
+                          <i class="fa fa-pencil pointer"></i>
                             <span class="m-5"> | </span>
-                          <i class="fa fa-trash pointer"></i> 
+                          <i class="fa fa-trash pointer"></i>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="pull-right mr-15">
-                      <button type="button" disabled class="btn btn-primary admin-btn disabled">                        
-                          + Add Admin  
+                      <button type="button" disabled class="btn btn-primary admin-btn disabled">
+                          + Add Admin
                       </button>
                       </div>
-                    </div>  
+                    </div>
                   </div>
                 </div>
               );

@@ -18,10 +18,6 @@ import Service from "../Service";
 import Config from "../../index.config";
 import AlertMessage from "../AlertMessage";
 
-var ReactToastr = require("react-toastr");
-var {ToastContainer} = ReactToastr;
-var ToastMessageFactory = React.createFactory(ReactToastr.ToastMessage.animation);
-
 export default class AddStore extends React.Component {
 	constructor(props) {
 		super(props);
@@ -143,8 +139,12 @@ export default class AddStore extends React.Component {
 				this.refs.alertMessageChild.successAlert("Store created successfully."); 
 				this.hideModal();
 			}.bind(this), function(xhr, status, err) {
-				this.refs.alertMessageChild.errorAlert("Something is wrong."); 
 				var statusObj = xhr;
+				 if(statusObj.status == 401) {
+                    Service.setInvalidSession('invalidSession');
+                }else {
+                    this.refs.alertMessageChild.errorAlert("Something is wrong.");
+                }
 				if(statusObj.status == 409) {
 					var errorStatus= JSON.parse(statusObj.responseText);
 				    const storeNameError = document.getElementById(`storeNameError`);
@@ -224,7 +224,7 @@ export default class AddStore extends React.Component {
 					</div>
 				<div>
 	              <AlertMessage ref="alertMessageChild"/>
-	            </div>   
+	            </div>
 				<Modal isOpen={this.state.isOpen}>
 					<div class="modal-header">
 						<h4 class="modal-title font-20">New Store Set-up</h4>

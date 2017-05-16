@@ -76,6 +76,9 @@ export default class Sidebar extends React.Component {
                }
 
             }.bind(this), function(xhr, status, err) {
+                if(xhr.status == 401) {
+                    Service.setInvalidSession('invalidSession');
+                }
                console.log(err);
             }.bind(this));
         }

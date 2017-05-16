@@ -60,3 +60,7 @@
 .right-icons {
     padding-right:50px;
 }
+
+.toast-message {
+    text-align: center;
+}

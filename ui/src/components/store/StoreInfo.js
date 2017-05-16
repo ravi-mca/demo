@@ -24,6 +24,10 @@ export default class StoreInfo extends React.Component {
         Service.executeRequest(reqData, function(response) {
             this.setState({storeList:response});
         }.bind(this), function(xhr, status, err) {
+            if(xhr.status == 401) {
+                Service.setInvalidSession('invalidSession');
+            }
+            console.log('errs',err);
         }.bind(this));
     }
 

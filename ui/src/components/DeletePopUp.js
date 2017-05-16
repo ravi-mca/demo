@@ -50,12 +50,17 @@ export default class DeletePopUp extends React.Component {
       };
 
       var reqData = Service.buildRequestdata(requestData);
-      Service.executeRequest(reqData, function(data) { 
-        this.refs.alertMessageChild.successAlert(this.props.data.successAlert);  
-        this.props.onUpdate();  
+      Service.executeRequest(reqData, function(data) {
+        this.refs.alertMessageChild.successAlert(this.props.data.successAlert);
+        this.props.onUpdate();
         this.hideModal();
       }.bind(this), function(xhr, status, err) {
-        this.refs.alertMessageChild.errorAlert("Something is wrong.");
+        if(xhr.status == 401) {
+            /* set session as invalid */
+            Service.setInvalidSession('invalidSession');
+        } else {
+            this.refs.alertMessageChild.errorAlert("Something is wrong.");
+        }
       }.bind(this));
   }
 

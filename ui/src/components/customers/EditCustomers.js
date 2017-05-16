@@ -10,12 +10,6 @@ import Config from "../../index.config";
 import AlertMessage from "../AlertMessage";
 import DeletePopUp from "../DeletePopUp";
 
-var ReactToastr = require("react-toastr");
-var {ToastContainer} = ReactToastr; // This is a React Element.
-// For Non ES6...
-// var ToastContainer = ReactToastr.ToastContainer;
-var ToastMessageFactory = React.createFactory(ReactToastr.ToastMessage.animation);
-
 import {
   Modal,
   ModalHeader,
@@ -132,10 +126,13 @@ export default class EditCustomers extends React.Component {
                 this.props.onUpdateCustomer(this.state);
                 this.hideModal();
             }.bind(this), function(xhr, status, err) {
-                this.refs.alertMessageChild.errorAlert("Something is wrong.");
                 var statusObj = xhr;
                 var obj = JSON.parse(xhr.responseText);
-
+                if(statusObj.status == 401) {
+                    Service.setInvalidSession('invalidSession');
+                }else {
+                    this.refs.alertMessageChild.errorAlert("Something is wrong.");
+                }
                 if(obj["error_description"] == "Customer with name already exist. Please provide different name.") {
                     const editCustomerNameError = document.getElementById(`editCustomerNameError`);
                     editCustomerNameError.textContent = obj["error_description"];
@@ -227,7 +224,7 @@ export default class EditCustomers extends React.Component {
                 </div>
             </div>
             <div>
-              <AlertMessage ref="alertMessageChild"/>
+                <AlertMessage ref="alertMessageChild"/>
             </div>
             <Modal isOpen={this.state.isOpen}>
                 <div class="modal-header">

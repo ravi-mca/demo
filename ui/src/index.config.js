@@ -2,7 +2,7 @@ var BaseUrl = 'http://localhost:8080';
 
 const Config = {
 	login : BaseUrl +'/storecast/api/login',
-    merchantAPIPath : BaseUrl +'/storecast/api/customer/merchant',   
+    merchantAPIPath : BaseUrl +'/storecast/api/customer/merchant',
     storeAPIPath:  BaseUrl + '/storecast/api/customer/store/',
 	getStoresInfo: BaseUrl + '/storecast/api/customer/store/list/',
 	deleteAPIPath: BaseUrl + '/storecast/api/customer/merchant/',

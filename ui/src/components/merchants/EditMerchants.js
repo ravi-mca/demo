@@ -10,19 +10,14 @@ import Config from "../../index.config";
 import AlertMessage from "../AlertMessage";
 import DeletePopUp from "../DeletePopUp";
 
-var ReactToastr = require("react-toastr");
-var {ToastContainer} = ReactToastr; // This is a React Element.
-// For Non ES6...
-// var ToastContainer = ReactToastr.ToastContainer;
-var ToastMessageFactory = React.createFactory(ReactToastr.ToastMessage.animation);
 
 import {
-  Modal,
-  ModalHeader,
-  ModalTitle,
-  ModalClose,
-  ModalBody,
-  ModalFooter
+    Modal,
+    ModalHeader,
+    ModalTitle,
+    ModalClose,
+    ModalBody,
+    ModalFooter
 } from 'react-modal-bootstrap';
 
 export default class EditMerchant extends React.Component {
@@ -30,207 +25,201 @@ export default class EditMerchant extends React.Component {
     super(props);
 
     this.state = {
-      editFirstName: this.props.data.firstName,
-      editLastName: this.props.data.lastName,      
-      editEmail: this.props.data.email,      
-      editPhone: this.props.data.phone,
-      editAccountName: this.props.data.accountName,
-      accountNo: this.props.data.accountNo,      
-      deleteName: this.props.data.firstName,
-      successAlert: Config.successAlert.deleteMerchant,
-      APIUrl: Config.deleteAPIPath+ this.props.data.userId,
-      deleteMessage: "merchant", 
-      info: this.props.data,
-      accountName :''
+        editFirstName: this.props.data.firstName,
+        editLastName: this.props.data.lastName,
+        editEmail: this.props.data.email,
+        editPhone: this.props.data.phone,
+        editAccountName: this.props.data.accountName,
+        accountNo: this.props.data.accountNo,
+        deleteName: this.props.data.firstName,
+        successAlert: Config.successAlert.deleteMerchant,
+        APIUrl: Config.deleteAPIPath+ this.props.data.userId,
+        deleteMessage: "merchant",
+        info: this.props.data,
+        accountName :''
     };
-    
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.showEditForm = this.showEditForm.bind(this);
-    this.onUpdateMerchantAccount = this.onUpdateMerchantAccount.bind(this);
-    
-  }
-
-  openModal = () => {
-    this.setState({
-      isOpen: true,
-      editFirstName: this.props.data.firstname,
-      editLastName: this.props.data.lastname,      
-      editEmail: this.props.data.username,      
-      editPhone: this.props.data.phone,
-      editAccountName: this.props.data.accountName,
-      accountNo: this.props.data.accountNo,
-    }); 
-    $("#editFirstNameError").html("");
-    $("#editLastNameError").html("");
-    $("#editEmailError").html("");
-    $("#editPhoneError").html("");
-    $("#editAccountNameError").html("");
-    $("input").removeClass("active");
-  };
-
-  hideModal = () => {
-    this.setState({
-      isOpen: false, 
-      editFirstName: this.props.data.firstName,
-      editLastName: this.props.data.lastName,      
-      editEmail: this.props.data.email,      
-      editPhone: this.props.data.phone,
-      editAccountName: this.props.data.accountName,
-      accountNo: this.props.data.accountNo,
-    }); 
-    $("#editFirstNameError").html("");
-    $("#editLastNameError").html("");
-    $("#editEmailError").html("");
-    $("#editPhoneError").html("");
-    $("#editAccountNameError").html("");
-    $("input").removeClass("active");
-  };
-
-  handleChange(e) {    
-    e.target.classList.add('active');    
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-    this.showInputError(e.target.name);    
-  }
-
-  updateMerchantState(info){
-     this.setState({
-      firstName: info.firstName,
-      lastName: info.lastName,      
-      email: info.email,      
-      phone: info.phone,
-      accountName: info.accountName,
-      accountNo: info.accountNo,
-    }); 
-  }
-
-  handleSubmit(e) {    
-    e.preventDefault();  
-
-    let isFormValid = true;
-    if (this.showFormErrors()) {
-    var merchantId = this.props.data.merchantId;
-
-    var newData = {};
-    newData.firstName = this.state.editFirstName;
-    newData.lastName = this.state.editLastName;
-    newData.phone = this.state.editPhone;
-    newData.accountName = this.state.editAccountName;
-    newData.email = this.state.editEmail;
-    if (this.showFormErrors()) {
-
-      var requestData = {
-            url: Config.merchantAPIPath+'/'+ merchantId,
-            type: 'PUT',
-            data: JSON.stringify(newData),
-            dataType: 'text',
-            contentType: 'application/json'
-      };
-
-      var reqData = Service.buildRequestdata(requestData);
-
-      Service.executeRequest(reqData, function(data) {
-        this.setState({accountName:this.state.editAccountName});
-        this.props.onUpdateAccount(this.state);
-        this.refs.alertMessageChild.successAlert("Merchant Updated successfully.");         
-        this.hideModal();
-      }.bind(this), function(xhr, status, err) {
-        this.refs.alertMessageChild.errorAlert("Something is wrong."); 
-        var statusObj = xhr;
-        var obj=JSON.parse(xhr.responseText);
-
-        const editMerchantNameError = document.getElementById(`editFirstNameError`);
-        const editEmailError = document.getElementById(`editEmailError`);
-        const editAccountNameError = document.getElementById(`editAccountNameError`);
-
-        if(obj["error_description"] == "Merchant with first name already exist. Please provide different first name.") {
-          
-          editMerchantNameError.textContent = `Merchant with first name already exist`; 
-        
-        }else if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
-
-          editEmailError.textContent = `Merchant with email address already exist`;          
-         
-         } else if(obj["error_description"] == "Merchant with account name already exist. Please provide different account name.") {
-          
-          editAccountNameError.textContent = `Merchant with account name already exist`;
-        }
-
-        isFormValid = false;
-      }.bind(this));
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.showEditForm = this.showEditForm.bind(this);
+        this.onUpdateMerchantAccount = this.onUpdateMerchantAccount.bind(this);
     }
-  }
-  }
-  
-  showFormErrors() {
-    
-    const inputs = document.querySelectorAll('#editpanel input');
 
-    let isFormValid = true;
-    inputs.forEach(input => {
-      input.classList.add('active');
-      const isInputValid = this.showInputError(input.name);
-      
-      if (!isInputValid && isFormValid ) {
-        isFormValid = false;
-      }
-    });
-    
-    return isFormValid;
-  }
+    openModal = () => {
+        this.setState({
+            isOpen: true,
+            editFirstName: this.props.data.firstname,
+            editLastName: this.props.data.lastname,
+            editEmail: this.props.data.username,
+            editPhone: this.props.data.phone,
+            editAccountName: this.props.data.accountName,
+            accountNo: this.props.data.accountNo,
+        });
 
-  onUpdateMerchantAccount() {
-    this.props.onUpdateAccount();
-  }
+        $("#editFirstNameError").html("");
+        $("#editLastNameError").html("");
+        $("#editEmailError").html("");
+        $("#editPhoneError").html("");
+        $("#editAccountNameError").html("");
+        $("input").removeClass("active");
+    };
 
-  showEditForm() {
+    hideModal = () => {
+        this.setState({
+            isOpen: false,
+            editFirstName: this.props.data.firstName,
+            editLastName: this.props.data.lastName,
+            editEmail: this.props.data.email,
+            editPhone: this.props.data.phone,
+            editAccountName: this.props.data.accountName,
+            accountNo: this.props.data.accountNo,
+        });
 
-    this.setState({
-      isOpen: true,
-      editFirstName: this.props.data.firstName,
-      editLastName: this.props.data.lastName,      
-      editEmail: this.props.data.email,      
-      editPhone: this.props.data.phone,
-      editAccountName: this.props.data.accountName,
-      accountNo: this.props.data.accountNo,
-    });   
-  }
-  
-  showInputError(refName) {
-   
-    var isControlValid = true;
-    const validity = this.refs[refName].validity;
-    const label = document.getElementById(`${refName}Label`).textContent;
-    const error = document.getElementById(`${refName}Error`);
+        $("#editFirstNameError").html("");
+        $("#editLastNameError").html("");
+        $("#editEmailError").html("");
+        $("#editPhoneError").html("");
+        $("#editAccountNameError").html("");
+        $("input").removeClass("active");
+    };
 
-    const validEmail = refName.indexOf('editEmail') !== -1;     
-    const isNumber = refName.indexOf('editPhone') !== -1;
+    handleChange(e) {
+        e.target.classList.add('active');
+        this.setState({
+          [e.target.name]: e.target.value
+        });
+        this.showInputError(e.target.name);
+    }
 
-     error.textContent = '';
+    updateMerchantState(info) {
+        this.setState({
+            firstName: info.firstName,
+            lastName: info.lastName,
+            email: info.email,
+            phone: info.phone,
+            accountName: info.accountName,
+            accountNo: info.accountNo,
+        });
+    }
 
-        if (!validity.valid) {
-          
-          isControlValid = false;            
-          this.setState({ showResults: false });  
+    handleSubmit(e) {
+        e.preventDefault();
 
-          if (validity.valueMissing) {
-             
-            error.textContent = `Please enter ${label}`;
-          } else if (validEmail && validity.patternMismatch) {
-            
-            error.textContent = `Please enter valid ${label} address`;
-          } else if (isNumber && validity.patternMismatch) {
-          
-            error.textContent = `Please enter valid number`;
-          }
+        let isFormValid = true;
+        if (this.showFormErrors()) {
+            var merchantId = this.props.data.merchantId;
+
+            var newData = {};
+            newData.firstName = this.state.editFirstName;
+            newData.lastName = this.state.editLastName;
+            newData.phone = this.state.editPhone;
+            newData.accountName = this.state.editAccountName;
+            newData.email = this.state.editEmail;
+            if (this.showFormErrors()) {
+
+              var requestData = {
+                    url: Config.merchantAPIPath+'/'+ merchantId,
+                    type: 'PUT',
+                    data: JSON.stringify(newData),
+                    dataType: 'text',
+                    contentType: 'application/json'
+              };
+
+              var reqData = Service.buildRequestdata(requestData);
+
+              Service.executeRequest(reqData, function(data) {
+                this.setState({accountName:this.state.editAccountName});
+                this.props.onUpdateAccount(this.state);
+                this.refs.alertMessageChild.successAlert("Merchant Updated successfully.");
+                this.hideModal();
+              }.bind(this), function(xhr, status, err) {
+                var statusObj = xhr;
+                var obj=JSON.parse(xhr.responseText);
+                if(statusObj.status == 401) {
+                    /* set session as invalid */
+                   Service.setInvalidSession('invalidSession');
+                } else {
+                    this.refs.alertMessageChild.errorAlert("Something is wrong.");
+                }
+
+                const editMerchantNameError = document.getElementById(`editFirstNameError`);
+                const editEmailError = document.getElementById(`editEmailError`);
+                const editAccountNameError = document.getElementById(`editAccountNameError`);
+
+                if(obj["error_description"] == "Merchant with first name already exist. Please provide different first name.") {
+                    editMerchantNameError.textContent = `Merchant with first name already exist`;
+
+                } else if(obj["error_description"] == "Merchant with email address already exist. Please provide different email address.") {
+
+                  editEmailError.textContent = `Merchant with email address already exist`;
+
+                } else if(obj["error_description"] == "Merchant with account name already exist. Please provide different account name.") {
+
+                  editAccountNameError.textContent = `Merchant with account name already exist`;
+                }
+
+                isFormValid = false;
+              }.bind(this));
+            }
         }
-   
-    return isControlValid;
-  }
+    }
 
-  render() {
+    showFormErrors() {
+        const inputs = document.querySelectorAll('#editpanel input');
+
+        let isFormValid = true;
+        inputs.forEach(input => {
+          input.classList.add('active');
+          const isInputValid = this.showInputError(input.name);
+          if (!isInputValid && isFormValid ) {
+            isFormValid = false;
+          }
+        });
+        return isFormValid;
+    }
+
+    onUpdateMerchantAccount() {
+        this.props.onUpdateAccount();
+    }
+
+    showEditForm() {
+        this.setState({
+            isOpen: true,
+            editFirstName: this.props.data.firstName,
+            editLastName: this.props.data.lastName,
+            editEmail: this.props.data.email,
+            editPhone: this.props.data.phone,
+            editAccountName: this.props.data.accountName,
+            accountNo: this.props.data.accountNo,
+        });
+    }
+
+    showInputError(refName) {
+        var isControlValid = true;
+        const validity = this.refs[refName].validity;
+        const label = document.getElementById(`${refName}Label`).textContent;
+        const error = document.getElementById(`${refName}Error`);
+
+        const validEmail = refName.indexOf('editEmail') !== -1;
+        const isNumber = refName.indexOf('editPhone') !== -1;
+
+         error.textContent = '';
+
+            if (!validity.valid) {
+              isControlValid = false;
+              this.setState({ showResults: false });
+
+              if (validity.valueMissing) {
+                error.textContent = `Please enter ${label}`;
+              } else if (validEmail && validity.patternMismatch) {
+                error.textContent = `Please enter valid ${label} address`;
+              } else if (isNumber && validity.patternMismatch) {
+                error.textContent = `Please enter valid number`;
+              }
+            }
+        return isControlValid;
+    }
+
+    render() {
     return (
       <div id="editpanel">
         <div class="col-md-6 col-xs-4">
@@ -245,7 +234,9 @@ export default class EditMerchant extends React.Component {
                 </div>
             </div>
         </div>
-        <div><AlertMessage ref="alertMessageChild"/></div>
+        <div>
+            <AlertMessage ref="alertMessageChild"/>
+        </div>
             <Modal isOpen={this.state.isOpen}>
               <div class="modal-header">
                 <h4 class="modal-title font-20">Edit Merchant</h4>
