@@ -269,7 +269,7 @@ export default class Merchants extends React.Component {
         if(this.state.storeInfo) {
             showStoreTabs = (
                 <div class="row">
-                    <div class="col-md-9 pad-right-50 pad-left-0">
+                    <div class="col-md-9 mt-15 pad-right-50 pad-left-0">
                         <Tab.Container id="storeInfo" onSelect={this.handleSelect} activeKey={this.state.defaultActiveKey} >
                             <Row className="clearfix">
                                 <Col sm={12}>

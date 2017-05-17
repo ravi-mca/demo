@@ -129,6 +129,10 @@
     margin-top: 12px;
 }
 
+.mt-15 {
+    margin-top: 15px !important;
+}
+
 .mb-12 {
     margin-bottom: 12px;
 }
