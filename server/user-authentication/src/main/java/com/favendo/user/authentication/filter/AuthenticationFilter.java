@@ -48,7 +48,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
         } else {
             try {
                 TokenUtils tokenUtils = new TokenUtils();
-                UsernamePasswordAuthenticationToken authentication = getAuthenticationByAuthToken(authToken, httpServletRequest);
+                UsernamePasswordAuthenticationToken authentication = getAuthenticationByAuthToken(authToken, httpServletRequest, tokenUtils);
                 if (BooleanUtils.isFalse(tokenUtils.validateToken(authToken, UserContextHolder.getLoggedInUser()))) {
                     throw new AuthenticationCredentialsNotFoundException(INVALID_USER_TOKEN_ERROR_MESSAGE);
                 }
@@ -78,8 +78,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
         httpServletResponse.getWriter().append(JsonMapper.objectToJSON(authenticationFailureDto));
     }
 
-    private UsernamePasswordAuthenticationToken getAuthenticationByAuthToken(String authToken, HttpServletRequest httpServletRequest) throws Exception {
-        TokenUtils tokenUtils = new TokenUtils();
+    private UsernamePasswordAuthenticationToken getAuthenticationByAuthToken(String authToken, HttpServletRequest httpServletRequest, TokenUtils tokenUtils) throws Exception {
         UserDetails userDetails = userService.loadUserByUsername(tokenUtils.getUsernameByToken(authToken));
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
