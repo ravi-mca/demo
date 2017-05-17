@@ -18,6 +18,7 @@ import Service from "../Service";
 import Config from "../../index.config";
 import EditStore from "../store/EditStore";
 import DeletePopUp from "../DeletePopUp";
+import StoreData from '../store/StoreData';
 
 export default class Merchants extends React.Component {
     constructor(props) {
@@ -284,6 +285,7 @@ export default class Merchants extends React.Component {
                                             <StoreInfo ref="storeInfoChild"/>
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="storeDataTab">
+                                             <StoreData/>
                                         </Tab.Pane>
                                     </Tab.Content>
                                 </Col>
