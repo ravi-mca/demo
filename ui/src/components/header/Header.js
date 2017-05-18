@@ -72,7 +72,7 @@ export default class Header extends React.Component {
 
     logOut() {
         Service.deleteToken();
-        Service.deleteSessionInfo();
+        Service.deleteInvalidSession();
         browserHistory.push('/');
     }
 
